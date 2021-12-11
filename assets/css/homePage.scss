@@ -1,0 +1,179 @@
+//h3 {
+//  font-family: "Menlo", sans-serif;
+//  font-weight: lighter;
+//  font-size: 16px;
+//  color: white;
+//}
+//
+//.container {
+//  position: relative;
+//  width: 100%;
+//  height: 800px;
+//  display: flex;
+//  justify-content: center;
+//  .grid-container {
+//    position: absolute;
+//    width: 85%;
+//    height: 800px;
+//    display: grid;
+//    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+//    grid-template-rows: 1fr 1fr 1fr 1fr;
+//    grid-gap: 20px;
+//    grid-auto-flow: row;
+//    grid-template-areas:
+//    "about about title title title title"
+//    "about about title title title title"
+//    "about about content content content content"
+//    "about about content content content content";
+//
+//    .about {grid-area: about;}
+//
+//    .title {grid-area: title;}
+//
+//    .content {grid-area: content;}
+//
+//    .content-position {
+//      position: relative;
+//      display: flex;
+//      justify-content: center;
+//      align-items: center;
+//    }
+//
+//    .title-container {
+//      position: absolute;
+//      width: 85%;
+//      height: 55%;
+//      border-radius: 15px;
+//      text-align: center;
+//      .home-text {
+//        font-family: "Menlo", sans-serif;
+//        font-weight: lighter;
+//        color: white;
+//        &.big-title {
+//          font-size: 30px;
+//        }
+//        &.medium-title {
+//          font-size: 20px;
+//        }
+//        &.small-title {
+//          font-size: 14px;
+//        }
+//      }
+//    }
+//
+//    .inner-content {
+//      position: absolute;
+//      background: rgba(0,0,0,0.7);
+//      padding: 15px;
+//      width: 80%;
+//      height: 70%;
+//      border-radius: 15px;
+//      &.about-section {
+//        width: 80%;
+//        padding: 15px;
+//      }
+//    }
+//  }
+//}
+
+.code-block {
+  display: inline-block;
+  align-items: center;
+  background-color: #363636;
+  border-radius: 5px;
+  padding: 4px;
+  &.contacts-fields {
+    margin-bottom: 7px;
+  }
+}
+
+p {
+  font-family: "Menlo", sans-serif;
+  color: white;
+  font-size: 15px;
+}
+
+.content {
+  height: 700px;
+  text-align: center;
+  .center-text {
+    padding: 180px 0;
+    h1 {
+      font-size: 50px;
+      font-family: "Heiti SC", sans-serif;
+      font-weight: 200;
+      color: white;
+    }
+    h3 {
+      font-size: 22px;
+      font-family: "Heiti SC", sans-serif;
+      font-weight: 200;
+      color: white;
+    }
+  }
+}
+
+.title {
+  font-family: "Menlo", sans-serif;
+  color: white;
+  font-size: 22px;
+}
+
+.left-about {
+  width: 50%;
+  height: 100%;
+  text-align: left;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.right-about {
+  width: 50%;
+  height: 100%;
+  text-align: left;
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.about {
+  border-radius: 30px;
+  width: 80%;
+  height: 550px;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #191919;
+  margin-bottom: 50px;
+  &.blog {
+    background-color: #212121;
+  }
+}
+
+h1 {
+  font-size: 50px;
+  font-family: "Heiti SC", sans-serif;
+  font-weight: 200;
+  color: white;
+  &.small {
+    font-size: 22px
+  }
+  span.typed-text {
+    color: white;
+  }
+  span.cursor {
+    display: inline-block;
+    margin-left: 3px;
+    width: 2px;
+    background-color: #fff;
+    animation: cursorBlink 1s infinite;
+  }
+  span.cursor.typing {
+    animation: none;
+  }
+}
+@keyframes cursorBlink {
+  49% { background-color: #fff; }
+  50% { background-color: transparent; }
+  99% { background-color: transparent; }
+}

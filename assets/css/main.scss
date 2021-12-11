@@ -1,0 +1,34 @@
+html {
+  background: url("assets/video/background-darked.gif") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  @media only screen and (max-width: 860px) {
+    overflow-y: scroll;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  display: block;
+  width: 100%;
+  height: 80px;
+  .inner-header {
+    display: flex;
+    justify-content: center;
+    padding-top: 45px;
+    h3 {
+      margin: 0 20px 0 20px;
+      font-size: 16px;
+      font-family: "Heiti SC", sans-serif;
+    }
+    h3:hover {
+      color: green;
+      transition: 0.3s;
+    }
+  }
+}
