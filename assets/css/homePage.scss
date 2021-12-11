@@ -1,98 +1,3 @@
-//h3 {
-//  font-family: "Menlo", sans-serif;
-//  font-weight: lighter;
-//  font-size: 16px;
-//  color: white;
-//}
-//
-//.container {
-//  position: relative;
-//  width: 100%;
-//  height: 800px;
-//  display: flex;
-//  justify-content: center;
-//  .grid-container {
-//    position: absolute;
-//    width: 85%;
-//    height: 800px;
-//    display: grid;
-//    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-//    grid-template-rows: 1fr 1fr 1fr 1fr;
-//    grid-gap: 20px;
-//    grid-auto-flow: row;
-//    grid-template-areas:
-//    "about about title title title title"
-//    "about about title title title title"
-//    "about about content content content content"
-//    "about about content content content content";
-//
-//    .about {grid-area: about;}
-//
-//    .title {grid-area: title;}
-//
-//    .content {grid-area: content;}
-//
-//    .content-position {
-//      position: relative;
-//      display: flex;
-//      justify-content: center;
-//      align-items: center;
-//    }
-//
-//    .title-container {
-//      position: absolute;
-//      width: 85%;
-//      height: 55%;
-//      border-radius: 15px;
-//      text-align: center;
-//      .home-text {
-//        font-family: "Menlo", sans-serif;
-//        font-weight: lighter;
-//        color: white;
-//        &.big-title {
-//          font-size: 30px;
-//        }
-//        &.medium-title {
-//          font-size: 20px;
-//        }
-//        &.small-title {
-//          font-size: 14px;
-//        }
-//      }
-//    }
-//
-//    .inner-content {
-//      position: absolute;
-//      background: rgba(0,0,0,0.7);
-//      padding: 15px;
-//      width: 80%;
-//      height: 70%;
-//      border-radius: 15px;
-//      &.about-section {
-//        width: 80%;
-//        padding: 15px;
-//      }
-//    }
-//  }
-//}
-
-.code-block {
-  display: inline-block;
-  align-items: center;
-  background-color: #363636;
-  border-radius: 5px;
-  padding: 4px;
-  &.contacts-fields {
-    margin-bottom: 7px;
-  }
-}
-
-p {
-  font-family: "Menlo", sans-serif;
-  color: white;
-  font-size: 15px;
-}
-
 .content {
   height: 700px;
   text-align: center;
@@ -176,4 +81,21 @@ h1 {
   49% { background-color: #fff; }
   50% { background-color: transparent; }
   99% { background-color: transparent; }
+}
+
+.code-block {
+  display: inline-block;
+  align-items: center;
+  background-color: #363636;
+  border-radius: 5px;
+  padding: 4px;
+  &.contacts-fields {
+    margin-bottom: 7px;
+  }
+}
+
+p {
+  font-family: "Menlo", sans-serif;
+  color: white;
+  font-size: 15px;
 }

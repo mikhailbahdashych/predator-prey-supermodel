@@ -25,10 +25,11 @@ body {
       margin: 0 20px 0 20px;
       font-size: 16px;
       font-family: "Heiti SC", sans-serif;
+      transition: 0.3s;
     }
     h3:hover {
       color: green;
-      transition: 0.3s;
+      font-size: 20px;
     }
   }
 }

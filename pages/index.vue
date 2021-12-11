@@ -70,14 +70,17 @@
       </div>
     </div>
 
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from '~/components/Header';
+import Footer from '~/components/Footer';
 export default {
   components: {
     Header,
+    Footer
   },
   data() {
     return {
@@ -134,51 +137,3 @@ export default {
 <style lang='scss'>
 @import "assets/css/homePage";
 </style>
-
-<!--    <div class="about">-->
-<!--      <div class="right-about"></div>-->
-<!--      <div class="left-about"></div>-->
-<!--    </div>-->
-<!--    <div class='container'>-->
-<!--      <div class='grid-container'>-->
-<!--        <div class='about content-position'>-->
-
-<!--          <div class='about inner-content about-section'>-->
-<!--            <h3>-->
-<!--              Hello &#128075;! Welcome to my personal blog dedicated to computer and information security.-->
-<!--            </h3>-->
-<!--            <h3 style='font-weight: bolder'>About me</h3>-->
-<!--            <h3><span class='code-block'>Mikhail Bahdashych</span> aka <span class='code-block'>bl4drnnr</span> | Pentester / Red Teamer wannabe</h3>-->
-<!--            <h3 style='font-weight: bolder'>About the blog</h3>-->
-<!--            <h3>I like to solve puzzles, maybe that's why I really like hacking.-->
-<!--              Cybersecurity is one of the most hardest thing in IT, but the best way to learn something is to start learn others.-->
-<!--              And this is why you are reading this :)</h3>-->
-<!--            <h3 style='font-weight: bolder'>More</h3>-->
-<!--            <h3>You can find more information in the <nuxt-link to='/about' style='color: #005400'>About me and contact</nuxt-link> section</h3>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class='title content-position'>-->
-<!--          <div class='title title-container'>-->
-<!--            <h1 class='home-text big-title'-->
-<!--            >Welcome to pentester's notes blog!-->
-<!--            </h1>-->
-<!--            <h1 class='home-text medium-title'>Here you can find a lot of interesting staff about IS and, mostly,-->
-<!--              offensive security, like CTF's walk through, IS articles, tips and-->
-<!--              writeups of hacking various machines.-->
-<!--            </h1>-->
-<!--            <h1 class='home-text small-title'>-->
-<!--              Hope, here you'll find what you are looking for! Good luck and happy-->
-<!--              hacking, young whitehat!-->
-<!--            </h1>-->
-<!--            <h1 class='home-text small-title'>May knowledge, law and wisdom be with you! &#129310;</h1>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class='content content-position'>-->
-<!--          <div class='content inner-content'>-->
-<!--            <h3>Latest releases:</h3>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
