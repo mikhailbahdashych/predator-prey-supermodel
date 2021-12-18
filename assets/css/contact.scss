@@ -1,3 +1,91 @@
 .contact {
-  height: 82.8vh;
+  width: 80%;
+  height: 90vh;
+  display: flex;
+  margin: 35px auto 50px;
+
+  .left-side-contact {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .left-side-contact-content {
+      width: 90%;
+      height: 90%;
+      h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 23px;
+      }
+      .contact-fields {
+        .basic {
+          width: 60%;
+          height: 30px;
+          border-radius: 5px;
+          display: block;
+          margin: auto auto 25px;
+          border: 2px solid #004b00;
+          background-color: rgba(0, 0, 0);
+          outline: none;
+          color: white;
+          transition: 0.2s;
+          padding: 20px;
+          font-size: 16px;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+        .basic:focus {
+          border-radius: 12px;
+          box-shadow: 0 0 20px #038a03;
+          width: 80%;
+        }
+        .textarea {
+          display: block;
+          margin: auto auto 25px;
+          width: 60%;
+          height: 150px;
+          padding: 12px 20px;
+          box-sizing: border-box;
+          border: 2px solid #004b00;
+          background-color: rgba(0, 0, 0);
+          border-radius: 5px;
+          resize: none;
+          outline: none;
+          color: white;
+          transition: 0.2s;
+        }
+        .textarea:focus {
+          border-radius: 12px;
+          box-shadow: 0 0 20px #038a03;
+          width: 80%;
+        }
+        p {
+          display: block;
+          width: 80%;
+          margin: auto auto 15px;
+        }
+      }
+    }
+  }
+
+  .right-side-contact {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .right-side-contact-content {
+      width: 90%;
+      height: 90%;
+      h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 23px;
+      }
+    }
+  }
 }

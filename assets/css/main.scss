@@ -1,4 +1,5 @@
-html {
+.main {
+  margin: 0;
   background: url("assets/video/background-darked.gif") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -7,10 +8,6 @@ html {
   @media only screen and (max-width: 860px) {
     overflow-y: scroll;
   }
-}
-
-body {
-  margin: 0;
 }
 
 .header {
