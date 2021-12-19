@@ -4,7 +4,6 @@
     </div>
     <SideBar />
     <div class='blog-page'>
-      <h1 style='color: green; margin: 0'>Here is blog page</h1>
     </div>
     <Footer />
   </div>

@@ -1,7 +1,7 @@
 .side-bar {
   position: fixed;
   height: 100vh;
-  width: 250px;
+  width: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #0e0c0c;
@@ -9,15 +9,73 @@
     width: 100%;
     height: 300px;
     margin-top: 70px;
-    margin-left: 50px;
-    h3 {
-      color: white;
-      font-size: 20px;
-      font-family: "Heiti SC", sans-serif;
+    margin-left: 5px;
+    .link-href, .link-href:link, .link-href:visited {
+      text-decoration: none;
+      color: #fff;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 21px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
     }
-    hr {
-      margin-left: -30px;
-      width: 80%;
+    .link-href:hover, .link-href:active {
+      color: #20C20E;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      display: block;
+      padding: 0 20px;
+      margin-top: 10px;
+    }
+    .underline-text {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+    .underline-text:before, .underline-text:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: 0;
+      margin-top: -0.5px;
+      background: #20C20E;
+    }
+
+    .underline-text:before {
+      left: -2.5px;
+    }
+
+    .underline-text:after {
+      right: 2.5px;
+      background: #fff;
+      transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .underline-text:hover:before {
+      background: #20C20E;
+      width: 100%;
+      transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .underline-text:hover:after {
+      background: transparent;
+      width: 100%;
+      transition: 0s;
+    }
+    .filters {
+      padding: 20px 0 0 20px;
+      button {
+        width: 80%;
+        height: 30px;
+        background-color: #363636;
+        color: white;
+      }
     }
   }
   h1 {
