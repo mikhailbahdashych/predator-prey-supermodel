@@ -4,28 +4,25 @@
   width: 300px;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: #0e0c0c;
+  background-color: #202021;
   .side-bar-menu {
     width: 100%;
     height: 300px;
-    margin-top: 70px;
+    margin-top: 30px;
     margin-left: 5px;
     .link-href, .link-href:link, .link-href:visited {
       text-decoration: none;
       color: #fff;
       font-family: 'Ubuntu', sans-serif;
-      font-size: 21px;
-      font-weight: 300;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      font-size: 19px;
     }
     .link-href:hover, .link-href:active {
       color: #20C20E;
     }
     ul {
       list-style: none;
-      margin: 0;
       padding: 0;
+      margin: 0 0 15px;
     }
     li {
       display: block;
@@ -69,12 +66,25 @@
       transition: 0s;
     }
     .filters {
-      padding: 20px 0 0 20px;
-      button {
-        width: 80%;
-        height: 30px;
-        background-color: #363636;
+      padding: 0 0 0 20px;
+      border-top: 0.5px solid rgba(255,255,255,0.1);
+      .date-pick {
+        width: 230px;
+        background-color: #131312;
+        outline: none;
+        border: 1px solid rgba(255,255,255,0.1);
+        height: 25px;
+        margin-bottom: 10px;
         color: white;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: 0.2s;
+        &.date-pick-active {
+          transform: scale(1.1);
+          border-radius: 6px;
+          box-shadow: 0 0 20px #038a03;
+        }
       }
     }
   }

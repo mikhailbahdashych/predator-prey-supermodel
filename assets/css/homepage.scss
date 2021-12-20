@@ -34,6 +34,18 @@
   margin-top: 30px;
   margin-left: 30px;
   margin-right: 30px;
+  .latest-releases {
+    background-color: #131313;
+    width: 90%;
+    height: 100px;
+    border-radius: 10px;
+    margin: 20px;
+    transition: 0.3s;
+  }
+  .latest-releases:hover {
+    box-shadow: 0 0 20px #ee9004;
+    transform: scale(1.05);
+  }
   img {
     vertical-align: middle;
   }
@@ -70,10 +82,10 @@
   display: flex;
   margin-right: auto;
   margin-left: auto;
-  background-color: #191919;
+  background-color: #181919;
   margin-bottom: 50px;
   &.blog {
-    background-color: #212121;
+    background-color: #181919;
   }
 }
 
@@ -112,6 +124,7 @@ h1 {
   border-radius: 5px;
   padding: 4px 4px 4px 8px;
   font-family: "Menlo", sans-serif;
+  color: white;
   &.contacts-fields {
     margin-bottom: 7px;
   }

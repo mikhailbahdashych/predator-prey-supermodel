@@ -1,9 +1,78 @@
 body {
   margin: 0;
-  background-color: #2c2c2c
+  background-color: #181919;
 }
 .blog-page {
-  height: 150vh;
+  height: 120vh;
   margin-left: 320px;
-  padding-top: 90px;
+  text-align: center;
+  .latest-releases {
+    width: 80%;
+    height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    .container {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 50% 50%;
+      grid-auto-columns: 1fr;
+      gap: 15px 35px;
+      grid-auto-flow: row;
+      grid-template-areas:
+    "first second"
+    "thrid forth";
+    }
+
+    .first {
+      grid-area: first;
+      background-color: #131312;
+      height: 125px;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+    .first:hover {
+      box-shadow: 0 0 20px #ee9004;
+      transform: scale(1.05);
+    }
+
+    .second {
+      grid-area: second;
+      background-color: #131312;
+      height: 125px;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+    .second:hover {
+      box-shadow: 0 0 20px #ee9004;
+      transform: scale(1.05);
+    }
+
+    .third {
+      grid-area: thrid;
+      background-color: #131312;
+      height: 125px;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+    .third:hover {
+      box-shadow: 0 0 20px #ee9004;
+      transform: scale(1.05);
+    }
+
+    .forth {
+      grid-area: forth;
+      background-color: #131312;
+      height: 125px;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+    .forth:hover {
+      box-shadow: 0 0 20px #ee9004;
+      transform: scale(1.05);
+    }
+
+  }
+  h1 {
+    font-size: 35px;
+  }
 }

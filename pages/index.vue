@@ -23,9 +23,9 @@
     <div class="about">
       <div class="left-about">
         <h1 class="title">Latest releases &#128293;</h1>
-        <div style='background-color: grey; width: 90%; height: 100px; border-radius: 10px; margin: 20px'></div>
-        <div style='background-color: grey; width: 90%; height: 100px; border-radius: 10px; margin: 20px'></div>
-        <div style='background-color: grey; width: 90%; height: 100px; border-radius: 10px; margin: 20px'></div>
+        <div class='latest-releases'></div>
+        <div class='latest-releases'></div>
+        <div class='latest-releases'></div>
       </div>
       <div class="right-about">
         <h1 class="title">Let me explain who I am and what I do &#128163;</h1>
@@ -192,5 +192,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "assets/css/homePage";
+@import "../assets/css/homepage";
 </style>
