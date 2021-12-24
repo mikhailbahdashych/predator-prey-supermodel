@@ -41,6 +41,17 @@
     border-radius: 10px;
     margin: 20px;
     transition: 0.3s;
+    display: flex;
+    .latest-release-img {
+      height: 100%;
+      width: 120px;
+      border-radius: 10px 0 0 10px;
+      background-color: #363636;
+    }
+    .latest-release-content {
+      padding: 8px;
+      p { margin: 0 }
+    }
   }
   .latest-releases:hover {
     box-shadow: 0 0 20px #ee9004;

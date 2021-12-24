@@ -21,11 +21,26 @@
     </div>
 
     <div class="about">
-      <div class="left-about">
+      <div v-if='latestReleases.length > 0' class="left-about">
         <h1 class="title">Latest releases &#128293;</h1>
-        <div class='latest-releases'></div>
-        <div class='latest-releases'></div>
-        <div class='latest-releases'></div>
+        <div class='latest-releases'>
+          <div class='latest-release-img'></div>
+          <div class='latest-release-content'>
+            <p>{{ latestReleases[0].title }}</p>
+          </div>
+        </div>
+        <div class='latest-releases'>
+          <div class='latest-release-img'></div>
+          <div class='latest-release-content'>
+            <p>{{ latestReleases[1].title }}</p>
+          </div>
+        </div>
+        <div class='latest-releases'>
+          <div class='latest-release-img'></div>
+          <div class='latest-release-content'>
+            <p>{{ latestReleases[2].title }}</p>
+          </div>
+        </div>
       </div>
       <div class="right-about">
         <h1 class="title">Let me explain who I am and what I do &#128163;</h1>
@@ -104,6 +119,7 @@
 </template>
 
 <script>
+import { getLatestReleases } from '~/api';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 export default {
@@ -142,10 +158,13 @@ export default {
       typeArrayIndexFooter: 0,
       charIndexFooter: 0,
       showCursorFooter: false,
+
+      latestReleases: []
     }
   },
-  created() {
+  async created() {
     setTimeout(this.typeTextMain, this.newTextDelayMain + 200);
+    this.latestReleases = await getLatestReleases(3)
   },
   methods: {
     typeTextMain() {
