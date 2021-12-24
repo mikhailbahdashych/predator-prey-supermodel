@@ -10,6 +10,7 @@
             <input class='basic' placeholder='Email'>
             <input class='basic' placeholder='Title'>
             <textarea class='textarea' placeholder='Your message'/>
+            <button class="btn-hover color-5">SEND MESSAGE</button>
           </div>
         </div>
       </div>

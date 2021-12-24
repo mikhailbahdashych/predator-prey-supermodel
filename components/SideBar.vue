@@ -22,8 +22,9 @@
               @click='showDatePicker = !showDatePicker'
             >
           </div>
-          <v-date-picker v-if='showDatePicker' v-model="range" is-dark is-range />
+          <v-date-picker v-if='showDatePicker' v-model="range" is-dark is-range style='position: absolute' />
         </div>
+        <button class="btn-hover color-5">FILTER</button>
       </div>
     </div>
   </div>
