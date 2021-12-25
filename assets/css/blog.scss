@@ -3,7 +3,7 @@ body {
   background-color: #181919;
 }
 .blog-page {
-  height: 120vh;
+  height: 100vh;
   margin-left: 320px;
   text-align: center;
   .latest-releases {
@@ -69,6 +69,13 @@ body {
     .forth:hover {
       box-shadow: 0 0 20px #ee9004;
       transform: scale(1.05);
+    }
+
+    .content-container {
+      height: 100%;
+      width: 130px;
+      background-color: #202021;
+      border-radius: 12px 0 0 12px;
     }
 
   }

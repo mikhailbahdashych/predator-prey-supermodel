@@ -10,18 +10,14 @@
       <h1>Check out those releases</h1>
       <div class='latest-releases'>
         <div class="container">
-          <div class="first">
-            <div style='height: 100%; width: 20%; background-color: #202021; border-radius: 12px 0 0 12px'></div>
+
+          <div
+            v-for="i in 4"
+            :key="i"
+            :class="listItemStyle(i-1)">
+            <div class='content-container'></div>
           </div>
-          <div class="second">
-            <div style='height: 100%; width: 20%; background-color: #202021; border-radius: 12px 0 0 12px'></div>
-          </div>
-          <div class="third">
-            <div style='height: 100%; width: 20%; background-color: #202021; border-radius: 12px 0 0 12px'></div>
-          </div>
-          <div class="forth">
-            <div style='height: 100%; width: 20%; background-color: #202021; border-radius: 12px 0 0 12px'></div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -37,6 +33,16 @@ export default {
   components: {
     Footer,
     SideBar,
+  },
+  data() {
+    return {
+      grids: ['first', 'second', 'third', 'forth']
+    }
+  },
+  methods: {
+    listItemStyle(i) {
+      return this.grids[i]
+    }
   }
 }
 </script>

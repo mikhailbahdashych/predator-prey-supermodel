@@ -23,24 +23,16 @@
     <div class="about">
       <div v-if='latestReleases.length > 0' class="left-about">
         <h1 class="title">Latest releases &#128293;</h1>
-        <div class='latest-releases'>
-          <div class='latest-release-img'></div>
-          <div class='latest-release-content'>
-            <p>{{ latestReleases[0].title }}</p>
+
+        <div v-for='item of latestReleases' :key='item.id'>
+          <div class='latest-releases'>
+            <div class='latest-release-img'></div>
+            <div class='latest-release-content'>
+              <p>{{ item.title }}</p>
+            </div>
           </div>
         </div>
-        <div class='latest-releases'>
-          <div class='latest-release-img'></div>
-          <div class='latest-release-content'>
-            <p>{{ latestReleases[1].title }}</p>
-          </div>
-        </div>
-        <div class='latest-releases'>
-          <div class='latest-release-img'></div>
-          <div class='latest-release-content'>
-            <p>{{ latestReleases[2].title }}</p>
-          </div>
-        </div>
+
       </div>
       <div class="right-about">
         <h1 class="title">Let me explain who I am and what I do &#128163;</h1>
