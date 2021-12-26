@@ -137,8 +137,10 @@ h1 {
   padding: 4px 4px 4px 8px;
   font-family: "Menlo", sans-serif;
   color: white;
-  &.contacts-fields {
-    margin-bottom: 7px;
+  transition: 0.25s;
+  &.code-block-hover:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #038a03;
   }
 }
 

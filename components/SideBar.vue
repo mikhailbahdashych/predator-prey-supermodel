@@ -24,7 +24,7 @@
           </div>
           <v-date-picker v-if='showDatePicker' v-model="range" is-dark is-range style='position: absolute' />
         </div>
-        <button class="btn-hover color-5">FILTER</button>
+        <button class="send-btn">FILTER</button>
       </div>
     </div>
   </div>

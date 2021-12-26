@@ -30,3 +30,17 @@
     }
   }
 }
+
+.send-btn {
+  width: 250px;
+  height: 25px;
+  border: 1px solid white;
+  background-color: transparent;
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.send-btn:hover {
+  background-color: rgba(#fff, 0.3);
+}

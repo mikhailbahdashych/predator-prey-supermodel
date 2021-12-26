@@ -86,36 +86,6 @@
           box-shadow: 0 0 20px #038a03;
         }
       }
-      .btn-hover {
-        width: 235px;
-        height: 30px;
-        border-radius: 5px;
-        display: block;
-
-        font-size: 16px;
-        font-weight: 200;
-        color: #131313;
-        cursor: pointer;
-        text-align:center;
-        border: none;
-        background-size: 300% 100%;
-
-        moz-transition: all .4s ease-in-out;
-        -o-transition: all .4s ease-in-out;
-        -webkit-transition: all .4s ease-in-out;
-        transition: all .4s ease-in-out;
-      }
-      .btn-hover:hover {
-        background-position: 100% 0;
-        moz-transition: all .4s ease-in-out;
-        -o-transition: all .4s ease-in-out;
-        -webkit-transition: all .4s ease-in-out;
-        transition: all .4s ease-in-out;
-      }
-      .btn-hover.color-5 {
-        background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
-        box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
-      }
     }
   }
   h1 {
