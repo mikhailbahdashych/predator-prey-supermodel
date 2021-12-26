@@ -25,7 +25,7 @@
         <h1 class="title">Latest releases &#128293;</h1>
 
         <div v-for='item of latestReleases' :key='item.id'>
-          <div class='latest-releases'>
+          <div class='latest-releases' @click='toPost(item.title)'>
             <div class='latest-release-img'></div>
             <div class='latest-release-content'>
               <p>{{ item.title }}</p>

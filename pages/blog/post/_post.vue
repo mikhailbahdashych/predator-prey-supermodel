@@ -7,19 +7,8 @@
       </div>
     </div>
     <div class='blog-page'>
-      <h1>Check out those releases</h1>
-      <div class='latest-releases'>
-        <div class="container">
-
-          <div
-            v-for="i in 4"
-            :key="i"
-            :class="listItemStyle(i-1)">
-            <div class='content-container'></div>
-          </div>
-
-        </div>
-      </div>
+      <h1 v-if='wrongPost'>There is no such post :(</h1>
+      <h1 v-else>{{ $route.params }}</h1>
     </div>
     <Footer />
   </div>
@@ -29,25 +18,24 @@
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 export default {
-  name: 'Blog',
+  name: 'Index',
   components: {
     Footer,
     SideBar,
   },
   data() {
     return {
-      grids: ['first', 'second', 'third', 'forth']
+      wrongPost: false
     }
   },
-  methods: {
-    listItemStyle(i) {
-      return this.grids[i]
+  created() {
+    if (!this.$route.params.post) {
+      this.wrongPost = true
     }
   }
 }
 </script>
 
 <style lang='scss'>
-@import "assets/css/blog";
-@import "../assets/css/blogheader";
+@import "../../../assets/css/post";
 </style>

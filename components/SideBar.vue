@@ -5,7 +5,7 @@
     </nuxt-link>
     <div class='side-bar-menu'>
       <ul>
-        <li><span class="underline-text"><a class='link-href'>Blog main page</a></span></li>
+        <li @click='redirect("bmp")'><span class="underline-text"><a class='link-href'>Blog main page</a></span></li>
         <li><span class="underline-text"><a class='link-href'>Articles</a></span></li>
         <li><span class="underline-text"><a class='link-href'>Write-ups</a></span></li>
         <li><span class="underline-text"><a class='link-href'>Tips</a></span></li>
@@ -64,6 +64,15 @@ export default {
   methods: {
     hideDatePicker() {
       this.showDatePicker = false
+    },
+    redirect(p) {
+      switch (p) {
+        case "bmp":
+          this.$router.push({
+            path: '/blog'
+          })
+          break
+      }
     }
   }
 }
