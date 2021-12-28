@@ -16,7 +16,7 @@
             <input class='basic' placeholder='Email'>
             <input class='basic' placeholder='Title'>
             <textarea class='textarea' placeholder='Your message'/>
-            <button class='send-btn'>SEND</button>
+            <button class='ripple'>SEND</button>
           </div>
         </div>
         <h1 class='footer-note'>The message will be encrypted using my PGP public key
@@ -28,35 +28,36 @@
         <h1>Also, you can find me here. &#128206;</h1>
         <div class='top-items'>
           <div>
-            <div>
-              <span class='code-block code-block-hover'>Discord: bl4drnnr#6177
-                <img src='../assets/pics/Discord-Logo-White.svg' alt='Discord' width='18' height='18'>
+
+            <div v-for='(item) in copyValuesAndStatuses.slice(0, copyValuesAndStatuses.length - 3)' :key='item.name'>
+              <span v-if='item.link' class='code-block code-block-hover tooltip' @click='openInNewTab(`${item.name}`)'>
+                {{item.name}}: {{item.value}}
+                <span class="tooltiptext">Open a new tab</span>
+                <img :src='item.img' :alt="item.name" width='18' height='18'>
+              </span>
+              <span v-else class='code-block code-block-hover tooltip' @click='copyToClipboard(`${item.name.split(" ")[0]}`)'>
+                {{item.name}}: {{item.value}}
+                <input :id='`${item.name.split(" ")[0]}`' type='hidden' :value='item.value'>
+                <span v-if='!item.status' class="tooltiptext">Click to copy</span>
+                <span v-else class="tooltiptext">Copied</span>
+                <img :src='item.img' :alt="item.name" width='18' height='18'>
               </span>
             </div>
-            <div>
-              <span class='code-block code-block-hover'>PGP: A0F3 A1A5 A32E 3378 &#128273;</span>
-            </div>
-            <div>
-              <span class='code-block code-block-hover'>GitHub: github.com/Lain1wakura
-                <img src='../assets/pics/GitHub-Mark-120px-plus.png' alt='GitHub' width='18' height='18'>
-              </span>
-            </div>
-            <div><span class='code-block code-block-hover'>
-              THM: tryhackme.com/p/BL4DERUNNNER
-              <img src='../assets/pics/thm.svg' alt='thm' style='vertical-align: middle'>
-            </span></div>
-            <div><span class='code-block code-block-hover'>Offensive security: BL4DERUNNNER &#128682;</span></div>
-            <div><span class='code-block code-block-hover'>
-              HTB: bl4drnnr#691742
-              <img src='../assets/pics/hack-the-box-svgrepo-com.svg' alt='htb' width='18' height='18' style='vertical-align: middle'>
-            </span></div>
           </div>
         </div>
+
         <div class='bottom-items'>
           <p style='margin-bottom: 25px'>In case if you like what I'm doing &#9749;</p>
-          <p><span class='code-block code-block-hover'>BTC: bc1qmstcqe2k3vgzmx9rkn59fka9krk9p25ecjpqcc</span></p>
-          <p><span class='code-block code-block-hover'>ETH: 0x05A892cc3DD63bDd9258073d8E9fB2512b0ee905</span></p>
-          <p><span class='code-block code-block-hover'>LTC: LaxdwwKB6gBw2qzF8jrKRZwGstWN9UKK9b</span></p>
+          <div v-for='(item, idx) in copyValuesAndStatuses.slice(copyValuesAndStatuses.length - 3)' :key='item.name'>
+            <p>
+              <span class='code-block code-block-hover tooltip' @click='copyToClipboard(`${item.name}`)'>
+                {{item.name}}: {{item.value}}
+                <input :id='`${item.name}`' type='hidden' :value='copyValuesAndStatuses[idx + copyValuesAndStatuses.length - 3].value'>
+                <span v-if='!copyValuesAndStatuses[idx + copyValuesAndStatuses.length - 3].status' class="tooltiptext">Click to copy</span>
+                <span v-else class="tooltiptext">Copied</span>
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -83,6 +84,19 @@ export default {
       newTextDelayMain: 1000,
       typeArrayIndexMain: 0,
       charIndexMain: 0,
+
+      copyValuesAndStatuses: [
+        {name: 'Discord', value: 'bl4drnnr#6177', status: false, link: false, img: require('../assets/pics/Discord.svg')},
+        {name: 'HTB', value: 'bl4drnnr#691742', status: false, link: false, img: require('../assets/pics/hack-the-box-svgrepo-com.svg')},
+        {name: 'PGP', value: 'A0F3 A1A5 A32E 3378', status: false, link: true, img: require('../assets/pics/key.png')},
+        {name: 'GitHub', value: 'github.com/Lain1wakura', status: false, link: true, img: require('../assets/pics/GitHub-Mark-120px-plus.png')},
+        {name: 'Offensive security', value: 'BL4DERUNNNER', status: false, link: false, img: require('../assets/pics/red_door.png')},
+        {name: 'THM', value: 'tryhackme.com/p/BL4DERUNNNER', status: false, link: true, img: require('../assets/pics/thm.svg')},
+
+        {name: 'BTC', value: 'bc1qmstcqe2k3vgzmx9rkn59fka9krk9p25ecjpqcc', status: false},
+        {name: 'ETH', value: '0x05A892cc3DD63bDd9258073d8E9fB2512b0ee905', status: false},
+        {name: 'LTC', value: 'LaxdwwKB6gBw2qzF8jrKRZwGstWN9UKK9b', status: false},
+      ],
     }
   },
   created() {
@@ -99,6 +113,35 @@ export default {
       } else {
         this.typeStatusMain = false;
       }
+    },
+    openInNewTab(link) {
+      switch (link) {
+        case "GitHub":
+          window.open('https://github.com/Lain1wakura', '_blank')
+          break
+        case "PGP":
+          window.open('https://keys.openpgp.org/search?q=A0F3+A1A5+A32E+3378', '_blank')
+          break
+        case "THM":
+          window.open('https://tryhackme.com/p/BL4DERUNNNER', '_blank')
+          break
+      }
+    },
+    copyToClipboard(id) {
+      const copiedText = document.querySelector(`#${id}`)
+      copiedText.setAttribute('type', 'text')
+      copiedText.select()
+      document.execCommand('copy');
+      copiedText.setAttribute('type', 'hidden')
+      window.getSelection().removeAllRanges()
+      this.copyValuesAndStatuses.forEach(item => {
+        item.status = item.name.split(" ")[0] === id;
+      })
+      setTimeout(() => {
+        this.copyValuesAndStatuses.forEach(item => {
+          item.status = false
+        })
+      }, 5000)
     },
   }
 }

@@ -31,16 +31,24 @@
   }
 }
 
-.send-btn {
-  width: 250px;
-  height: 25px;
+/* Ripple effect */
+.ripple {
+  border-radius: 3px;
+  background-position: center;
+  transition: background 0.8s;
+  width: 236px;
+  height: 30px;
   border: 1px solid white;
   background-color: transparent;
   font-family: "Ubuntu", sans-serif;
   color: white;
   cursor: pointer;
-  transition: 0.3s;
 }
-.send-btn:hover {
-  background-color: rgba(#fff, 0.3);
+.ripple:hover {
+  background: rgba(145, 145, 145, 0.33) radial-gradient(circle, transparent 1%, rgba(145, 145, 145, 0.33) 1%) center/15000%;
+}
+.ripple:active {
+  background-color: rgba(213, 213, 213, 0.33);
+  background-size: 100%;
+  transition: background 0s;
 }
