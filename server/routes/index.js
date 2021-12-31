@@ -45,7 +45,7 @@ router.get(`/g-w-u/:id`, async (req, res) => {
   try {
     const { id } = req.params
     const data = await api.get(`/get-write-up/${id}`)
-    res.json(data)
+    res.json(data.data)
   } catch (e) {
     console.log(e)
   }
@@ -55,7 +55,7 @@ router.get(`/g-ctf/:id`, async (req, res) => {
   try {
     const { id } = req.params
     const data = await api.get(`/get-ctf/${id}`)
-    res.json(data)
+    res.json(data.data)
   } catch (e) {
     console.log(e)
   }

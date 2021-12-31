@@ -26,7 +26,7 @@
         </div>
         <button class="ripple">FILTER</button>
       </div>
-    </div>§
+    </div>
   </div>
 </template>
 

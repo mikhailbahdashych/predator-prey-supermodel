@@ -156,7 +156,7 @@ export default {
   },
   async created() {
     setTimeout(this.typeTextMain, this.newTextDelayMain + 200);
-    this.latestReleases = await getLatestReleases(3)
+    this.latestReleases = await getLatestReleases(1)
   },
   methods: {
     toPost(id, type) {
