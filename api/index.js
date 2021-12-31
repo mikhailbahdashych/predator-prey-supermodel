@@ -14,3 +14,13 @@ export const getLatestReleases = async (q) => {
   const { data } =  await api.get(`g-l-r/${q}`)
   return data
 }
+
+export const getArticleById = async (id) => {
+  const { data } = await api.get(`g-a/${id}`)
+  return data
+}
+
+export const getTipById = async (id) => {
+  const { data } = await api.get(`g-t/${id}`)
+  return data
+}

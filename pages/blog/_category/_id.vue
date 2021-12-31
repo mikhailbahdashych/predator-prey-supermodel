@@ -7,14 +7,15 @@
       </div>
     </div>
     <div class='blog-page'>
-      <h1 v-if='wrongPost'>There is no such post :(</h1>
-      <h1 v-else>{{ $route.params }}</h1>
+      <h1>{{ post.title }}</h1>
+      <p v-html='post.text'></p>
     </div>
     <Footer />
   </div>
 </template>
 
 <script>
+import { getArticleById } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 export default {
@@ -25,12 +26,17 @@ export default {
   },
   data() {
     return {
-      wrongPost: false
+      post: {}
     }
   },
-  created() {
-    if (!this.$route.params.post) {
-      this.wrongPost = true
+  async mounted() {
+    await this.getPostByTypeAndId()
+  },
+  methods: {
+    async getPostByTypeAndId() {
+      if (this.$route.params.category === 'article') {
+        this.post = await getArticleById(this.$route.params.id)
+      }
     }
   }
 }

@@ -41,6 +41,9 @@ export default {
       grids: ['first', 'second', 'third', 'forth']
     }
   },
+  async mounted() {
+
+  },
   methods: {
     listItemStyle(i) {
       return this.grids[i]

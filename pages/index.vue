@@ -25,7 +25,7 @@
         <h1 class="title">Latest releases &#128293;</h1>
 
         <div v-for='item of latestReleases' :key='item.id'>
-          <div class='latest-releases'>
+          <div class='latest-releases' @click='toPost(item.id, item.type)'>
             <div class='latest-release-img'></div>
             <div class='latest-release-content'>
               <p>{{ item.title }}</p>
@@ -159,6 +159,11 @@ export default {
     this.latestReleases = await getLatestReleases(3)
   },
   methods: {
+    toPost(id, type) {
+      this.$router.push({
+        path: `blog/${type}/${id}`
+      })
+    },
     typeTextMain() {
       if (this.charIndexMain < this.typeArrayMain[this.typeArrayIndexMain].length) {
         if (!this.typeStatusMain)
