@@ -6,8 +6,8 @@
         <input class='search-field' placeholder='Search...'>
       </div>
     </div>
-    <div class='blog-page'>
-      <h1>{{ post.title }}</h1>
+    <div class='post-content'>
+      <h1 class='big-text post-title'>{{ post.title }}</h1>
       <p v-html='post.text'></p>
     </div>
     <Footer />
