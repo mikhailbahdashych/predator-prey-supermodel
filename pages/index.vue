@@ -33,8 +33,8 @@
             </div>
           </div>
         </div>
-
       </div>
+
       <div class="right-about">
         <h1 class="title">Let me explain who I am and what I do &#128163;</h1>
         <p>Mikhail Bahdashych aka <span class="code-block">bl4drnnr</span> | Pentester / Red Teamer wannabe. &#128165;</p>
