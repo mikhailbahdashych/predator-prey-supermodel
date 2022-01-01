@@ -40,7 +40,7 @@
                 <input :id='`${item.name.split(" ")[0]}`' type='hidden' :value='item.value'>
                 <span v-if='!item.status' class="tooltiptext">Click to copy</span>
                 <span v-else class="tooltiptext">Copied</span>
-                <img :src='item.img' :alt="item.name" width='18' height='18'>
+                <img :src='item.img' :alt="item.name">
               </span>
             </div>
           </div>
@@ -52,7 +52,7 @@
             <p>
               <span class='code-block code-block-hover tooltip' @click='copyToClipboard(`${item.name}`)'>
                 {{item.name}}: {{item.value}}
-                <img :src='item.img' :alt='item.name' width='18' height='18'>
+                <img :src='item.img' :alt='item.name'>
                 <input :id='`${item.name}`' type='hidden' :value='copyValuesAndStatuses[idx + copyValuesAndStatuses.length - 3].value'>
                 <span v-if='!copyValuesAndStatuses[idx + copyValuesAndStatuses.length - 3].status' class="tooltiptext">Click to copy</span>
                 <span v-else class="tooltiptext">Copied</span>

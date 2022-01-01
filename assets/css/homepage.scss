@@ -32,6 +32,7 @@
   vertical-align: center;
   &.blog {
     background-color: #131313;
+    height: 450px;
   }
 }
 
@@ -40,6 +41,18 @@
   text-align: left;
   padding-left: 5%;
   padding-top: 50px;
+  img {
+    width: 22px;
+    height: 22px;
+  }
+  .ex {
+    display: inline-flex;
+    background-color: white;
+    border-radius: 50%;
+    width: 19px;
+    height: 19px;
+    padding: 2px;
+  }
   .latest-releases {
     background-color: #131313;
     width: 90%;
@@ -80,10 +93,19 @@
   .icons {
     display: flex;
     justify-content: center;
+    .set-background {
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      border-radius: 50%;
+      padding: 5px;
+    }
     img {
       transition: 0.3s;
       margin-left: 5px;
       margin-right: 5px;
+      width: 50px;
+      height: 50px;
     }
     img:hover {
       transform: scale(1.2);

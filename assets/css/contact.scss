@@ -116,6 +116,10 @@
     }
     .tooltip {
       position: relative;
+      img {
+        width: 18px;
+        height: 18px;
+      }
     }
 
     .tooltip .tooltiptext {

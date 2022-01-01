@@ -55,13 +55,12 @@
         <p>
           <span class='paragraph-begin'>I</span> decided it would be a good practice for my front-end and DevOps skills from the one side, and from the second side, create page where I can write some staff about IS.
           As a result of my work and my hobby, you can see this blog. &#127919;
-          By the way, this blog was created using JavaScript <img src='../assets/pics/js.svg' alt='JS' width='22' height='22'>
-          (Front-end - Vue.JS <img src='../assets/pics/vuejs.svg' alt='VueJS' width='22' height='22'>
-          + NuxtJS <img src='../assets/pics/nuxtjs.svg' alt='Nuxt.js' width='22' height='22'>
+          By the way, this blog was created using JavaScript
+          <img :src='require("../assets/pics/js.svg")' alt="JS">
+          (Front-end - Vue.JS <img :src='require("../assets/pics/vuejs.svg")' alt='VueJS'>
+          + NuxtJS <img :src='require("../assets/pics/nuxtjs.svg")' alt='Nuxt.js'>
           and back-end - Express.js
-          <span style='display: inline-flex; background-color: white; border-radius: 3px'>
-              <img src='../assets/pics/expressjs.svg' alt='express.js' height='22' width='44'>
-          </span> )
+          <img :src='require("../assets/pics/expressjs.svg")' alt='express.js' class='ex'> )
         </p>
         <p>
           <span class='paragraph-begin'>Why</span> I created this blog? That's a good question! Haven't you found cybersecurity hard? Well, I have.
@@ -74,31 +73,19 @@
         <p>Programming languages, frameworks and technologies:</p>
         <div class='icons'>
           <span v-for='item in pics.slice(0, 5)' :key='item.alt'>
-            <img :src='item.src' :alt='item.alt' width='50' height='50'>
+            <img :src='item.src' :alt='item.alt'>
           </span>
         </div>
         <div class='icons'>
-          <span v-for='item in pics.slice(5)' :key='item.alt'>
-            <img :src='item.src' :alt='item.alt' width='50' height='50'>
+          <span v-for='item in pics.slice(5, 12)' :key='item.alt'>
+            <img v-if='item.alt !=="Express"' :src='item.src' :alt='item.alt'>
+            <img v-else :src='item.src' :alt='item.alt' class='set-background'>
           </span>
         </div>
         <div class='icons'>
-          <img src='../assets/pics/docker.svg' alt='Docker' width='65' height='65'>
-          <img src='../assets/pics/nodejs.svg' alt='Node.js' width='65' height='65'>
-        </div>
-
-        <p style='margin-top: 0'>IDE's and databases I use:</p>
-        <div class='icons ides'>
-          <img src='../assets/pics/datagrip.svg' alt="DataGrip logo." width='65' height='65'>
-          <img src='../assets/pics/Intellij.svg' alt="IntelliJ IDEA logo." width='65' height='65'>
-          <img src='../assets/pics/pycharm.svg' alt="PyCharm logo." width='65' height='65'>
-          <img src='../assets/pics/webstorm.svg' alt="WebStorm logo." width='65' height='65'>
-          <img src='../assets/pics/rider.svg' alt="Rider logo." width='65' height='65'>
-        </div>
-        <div class='icons'>
-          <img src='../assets/pics/mssql.svg' alt='MsSQL' width='65' height='65'>
-          <img src='../assets/pics/mongodb.svg' alt='MongoDB' width='65' height='65'>
-          <img src='../assets/pics/mysql.svg' alt='MySQL' width='65' height='65'>
+          <span v-for='item in pics.slice(12, 18)' :key='item.alt'>
+            <img v-if='item.alt !=="Express"' :src='item.src' :alt='item.alt'>
+          </span>
         </div>
       </div>
     </div>
@@ -154,14 +141,19 @@ export default {
         {src: require('../assets/pics/c-sharp.svg'), alt: 'C#'},
         {src: require('../assets/pics/python.svg'), alt: 'Python'},
         {src: require('../assets/pics/java.svg'), alt: 'Java'},
-
-        {src: require('../assets/pics/springio.svg'), alt: 'Spring'},
         {src: require('../assets/pics/vuejs.svg'), alt: 'VueJS'},
         {src: require('../assets/pics/nuxtjs.svg'), alt: 'Nuxt'},
         {src: require('../assets/pics/reactjs.svg'), alt: 'React'},
+        {src: require('../assets/pics/angular.svg'), alt: 'Angular'},
+        {src: require('../assets/pics/springio.svg'), alt: 'Spring'},
         {src: require('../assets/pics/expressjs.svg'), alt: 'Express'},
-
-        // {src: require()}
+        {src: require('../assets/pics/netcore.svg'), alt: '.NET Core'},
+        {src: require('../assets/pics/docker.svg'), alt: 'Docker'},
+        {src: require('../assets/pics/nodejs.svg'), alt: 'Node.js'},
+        {src: require('../assets/pics/mssql.svg'), alt: 'MsSQL'},
+        {src: require('../assets/pics/mongodb.svg'), alt: 'Mongo'},
+        {src: require('../assets/pics/mysql.svg'), alt: 'MySQL'},
+        {src: require('../assets/pics/postgresql.svg'), alt: 'PostgreSQL'}
       ],
 
       latestReleases: []
