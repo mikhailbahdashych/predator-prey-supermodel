@@ -2,7 +2,7 @@
   <div class='main'>
     <Header />
     <div class='header-title'>
-      <h1>
+      <h1 class='big-text'>
         <span class="typed-text">{{ typeValueMain }}</span>
         <span class="cursor" :class="{'typing': typeStatusMain}">&nbsp;</span>
       </h1>
@@ -10,7 +10,7 @@
     <div class='contact'>
 
       <div class='left-side-contact'>
-        <h1>Wanna contact me? I'll be glad to receive any feedback! &#128233;</h1>
+        <h1 class='big-text small'>Wanna contact me? I'll be glad to receive any feedback! &#128233;</h1>
         <div class='left-side-contact-content'>
           <div class='contact-fields'>
             <input class='basic' placeholder='Email'>
@@ -19,13 +19,13 @@
             <button class='ripple'>SEND</button>
           </div>
         </div>
-        <h1 class='footer-note'>The message will be encrypted using my PGP public key
+        <h1 class='footer-note big-text small'>The message will be encrypted using my PGP public key
           (you can find it on the right side and send message manually).
           About how this was implemented you can find here!</h1>
       </div>
 
       <div class='right-side-contact'>
-        <h1>Also, you can find me here. &#128206;</h1>
+        <h1 class='big-text small'>Also, you can find me here. &#128206;</h1>
         <div class='top-items'>
           <div>
 
@@ -52,6 +52,7 @@
             <p>
               <span class='code-block code-block-hover tooltip' @click='copyToClipboard(`${item.name}`)'>
                 {{item.name}}: {{item.value}}
+                <img :src='item.img' :alt='item.name' width='18' height='18'>
                 <input :id='`${item.name}`' type='hidden' :value='copyValuesAndStatuses[idx + copyValuesAndStatuses.length - 3].value'>
                 <span v-if='!copyValuesAndStatuses[idx + copyValuesAndStatuses.length - 3].status' class="tooltiptext">Click to copy</span>
                 <span v-else class="tooltiptext">Copied</span>
@@ -93,9 +94,9 @@ export default {
         {name: 'Offensive security', value: 'BL4DERUNNNER', status: false, link: false, img: require('../assets/pics/red_door.png')},
         {name: 'THM', value: 'tryhackme.com/p/BL4DERUNNNER', status: false, link: true, img: require('../assets/pics/thm.svg')},
 
-        {name: 'BTC', value: 'bc1qmstcqe2k3vgzmx9rkn59fka9krk9p25ecjpqcc', status: false},
-        {name: 'ETH', value: '0x05A892cc3DD63bDd9258073d8E9fB2512b0ee905', status: false},
-        {name: 'LTC', value: 'LaxdwwKB6gBw2qzF8jrKRZwGstWN9UKK9b', status: false},
+        {name: 'LTC', value: 'LaxdwwKB6gBw2qzF8jrKRZwGstWN9UKK9b', status: false, img: require('../assets/pics/ltc.svg')},
+        {name: 'BTC', value: 'bc1qmstcqe2k3vgzmx9rkn59fka9krk9p25ecjpqcc', status: false, img: require('../assets/pics/btc.svg')},
+        {name: 'ETH', value: '0x05A892cc3DD63bDd9258073d8E9fB2512b0ee905', status: false, img: require('../assets/pics/eth.svg')},
       ],
     }
   },

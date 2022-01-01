@@ -3,17 +3,17 @@
     <Header />
     <div class="content">
       <div class="center-text">
-        <h1>
+        <h1 class='big-text'>
           <span class="typed-text">{{ typeValueMain }}</span>
           <span class="cursor" :style="[showCursorMain ? {'display' : 'inline-block'} : {'display' : 'none'}]" :class="{'typing': typeStatusMain}">&nbsp;</span>
         </h1>
-        <h1 style="font-size: 22px">
+        <h1 class='big-text small'>
           <span class="typed-text">{{ typeValueSec }}</span>
           <span class="cursor" :style="[showCursorSec ? {'display' : 'inline-block'} : {'display' : 'none'}]" :class="{'typing': typeStatusSec}">&nbsp;</span>
         </h1>
       </div>
-      <div style='margin-top: 100px'>
-        <h1 style="font-size: 18px">
+      <div class='bottom-text'>
+        <h1 class='big-text smaller'>
           <span class="typed-text">{{ typeValueFooter }}</span>
           <span class="cursor" :style="[showCursorFooter ? {'display' : 'inline-block'} : {'display' : 'none'}]" :class="{'typing': typeStatusFooter}">&nbsp;</span>
         </h1>
@@ -29,6 +29,7 @@
             <div class='latest-release-img'></div>
             <div class='latest-release-content'>
               <p>{{ item.title }}</p>
+              <p v-html='item.plot'></p>
             </div>
           </div>
         </div>
@@ -37,7 +38,7 @@
       <div class="right-about">
         <h1 class="title">Let me explain who I am and what I do &#128163;</h1>
         <p>Mikhail Bahdashych aka <span class="code-block">bl4drnnr</span> | Pentester / Red Teamer wannabe. &#128165;</p>
-        <p><span style='margin-left: 3em'>Hello</span> &#128075;! Welcome to Pentester's Notes Blog (pNb), my personal blog dedicated to computer and information security.
+        <p><span class='paragraph-begin'>Hello</span> &#128075;! Welcome to Pentester's Notes Blog (pNb), my personal blog dedicated to computer and information security.
           Here you can find a lot of interesting staff (hope so) about IS and, mostly,
           offensive security, like CTF's walk through, IS articles, tips and
           writeups of hacking various machines. &#128161;</p>
@@ -52,7 +53,7 @@
       <div class="left-about">
         <h1 class="title">Why are you reading this? &#129418;</h1>
         <p>
-          <span style='margin-left: 3em'>I</span> decided it would be a good practice for my front-end and DevOps skills from the one side, and from the second side, create page where I can write some staff about IS.
+          <span class='paragraph-begin'>I</span> decided it would be a good practice for my front-end and DevOps skills from the one side, and from the second side, create page where I can write some staff about IS.
           As a result of my work and my hobby, you can see this blog. &#127919;
           By the way, this blog was created using JavaScript <img src='../assets/pics/icons8-javascript.svg' alt='JS' width='22' height='22'>
           (Front-end - Vue.JS <img src='../assets/pics/icons8-vue-js.svg' alt='VueJS' width='22' height='22'>
@@ -63,7 +64,7 @@
           </span> )
         </p>
         <p>
-          <span style='margin-left: 3em'>Why</span> I created this blog? That's a good question! Haven't you found cybersecurity hard? Well, I have.
+          <span class='paragraph-begin'>Why</span> I created this blog? That's a good question! Haven't you found cybersecurity hard? Well, I have.
           So I decided that the best way to learn something is to start teaching it to others. And it makes sense. On the one hand, I will be able to improve my skills and share them with others, and on the other hand, I'll need to learn how to correctly and structurally convey my thoughts to others, and for this I need to understand the material.
           In fact, everyone wins &#128640;
         </p>
@@ -72,18 +73,14 @@
         <h1 class='title'>Here is list of technologies and programming languages I work(-ed) with:</h1>
         <p>Programming languages, frameworks and technologies:</p>
         <div class='icons'>
-          <img src='../assets/pics/icons8-javascript.svg' alt='JS' width='65' height='65'>
-          <img src='../assets/pics/icons8-c++.svg' alt='C++' width='65' height='65'>
-          <img src='../assets/pics/icons8-c-sharp-logo.svg' alt='C#' width='65' height='65'>
-          <img src='../assets/pics/python-5.svg' alt='Python' width='65' height='65'>
-          <img src='../assets/pics/icons8-java.svg' alt='Java' width='65' height='65'>
+          <span v-for='item in pics.slice(0, 5)' :key='item.alt'>
+            <img :src='item.src' :alt='item.alt' width='50' height='50'>
+          </span>
         </div>
         <div class='icons'>
-          <img src='../assets/pics/springio-icon.svg' alt='Spring' width='50' height='50' style='margin-top: 10px'>
-          <img src='../assets/pics/icons8-vue-js.svg' alt='VueJS' width='65' height='65'>
-          <img src='../assets/pics/nuxtjs-icon.svg' alt='Nuxt.js' width='65' height='65'>
-          <img src='../assets/pics/reactjs-icon.svg' alt='React' width='65' height='65'>
-          <img src='../assets/pics/expressjs-ar21.svg' alt='express.js' height='60' width='120' class='filter-white'>
+          <span v-for='item in pics.slice(5)' :key='item.alt'>
+            <img :src='item.src' :alt='item.alt' width='50' height='50'>
+          </span>
         </div>
         <div class='icons'>
           <img src='../assets/pics/icons8-docker.svg' alt='Docker' width='65' height='65'>
@@ -150,6 +147,22 @@ export default {
       typeArrayIndexFooter: 0,
       charIndexFooter: 0,
       showCursorFooter: false,
+
+      pics: [
+        {src: require('../assets/pics/icons8-javascript.svg'), alt: 'JS'},
+        {src: require('../assets/pics/icons8-c++.svg'), alt: 'C++'},
+        {src: require('../assets/pics/icons8-c-sharp-logo.svg'), alt: 'C#'},
+        {src: require('../assets/pics/python-5.svg'), alt: 'Python'},
+        {src: require('../assets/pics/icons8-java.svg'), alt: 'Java'},
+
+        {src: require('../assets/pics/springio-icon.svg'), alt: 'Spring'},
+        {src: require('../assets/pics/icons8-vue-js.svg'), alt: 'VueJS'},
+        {src: require('../assets/pics/nuxtjs-icon.svg'), alt: 'Nuxt'},
+        {src: require('../assets/pics/reactjs-icon.svg'), alt: 'React'},
+        {src: require('../assets/pics/expressjs-icon.svg'), alt: 'Express'},
+
+        // {src: require()}
+      ],
 
       latestReleases: []
     }

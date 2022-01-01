@@ -6,12 +6,6 @@
   text-align: center;
   .center-text {
     padding: 180px 0;
-    h1 {
-      font-size: 50px;
-      font-family: "Heiti SC", sans-serif;
-      font-weight: 200;
-      color: white;
-    }
     h3 {
       font-size: 22px;
       font-family: "Heiti SC", sans-serif;
@@ -101,13 +95,16 @@
   }
 }
 
-h1 {
+.big-text {
   font-size: 50px;
-  font-family: "Heiti SC", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-weight: 200;
   color: white;
   &.small {
     font-size: 22px
+  }
+  &.smaller {
+    font-size: 18px;
   }
   span.typed-text {
     color: white;
@@ -122,6 +119,9 @@ h1 {
   }
   span.cursor.typing {
     animation: none;
+  }
+  .bottom-text {
+    margin-top: 100px
   }
 }
 @keyframes cursorBlink {
@@ -150,4 +150,8 @@ p {
   font-family: "Ubuntu", sans-serif;
   color: white;
   font-size: 18px;
+}
+
+.paragraph-begin {
+  margin-left: 3em
 }
