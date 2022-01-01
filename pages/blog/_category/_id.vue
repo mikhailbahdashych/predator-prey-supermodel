@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getArticleById, getWriteUpById, getCtfById } from '~/api';
+import { getPostById } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 export default {
@@ -30,17 +30,11 @@ export default {
     }
   },
   async mounted() {
-    await this.getPostByTypeAndId()
+    await this.getPostById()
   },
   methods: {
-    async getPostByTypeAndId() {
-      if (this.$route.params.category === 'article') {
-        this.post = await getArticleById(this.$route.params.id)
-      } else if (this.$route.params.category === 'ctf') {
-        this.post = await getCtfById(this.$route.params.id)
-      } else {
-        this.post = await getWriteUpById(this.$route.params.id)
-      }
+    async getPostById() {
+      this.post = await getPostById(this.$route.params.id)
     }
   }
 }

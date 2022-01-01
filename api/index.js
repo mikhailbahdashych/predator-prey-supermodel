@@ -15,22 +15,7 @@ export const getLatestReleases = async (q) => {
   return data
 }
 
-export const getArticleById = async (id) => {
-  const { data } = await api.get(`g-a/${id}`)
-  return data
-}
-
-export const getTipById = async (id) => {
-  const { data } = await api.get(`g-t/${id}`)
-  return data
-}
-
-export const getWriteUpById = async (id) => {
-  const { data } = await api.get(`g-w-u/${id}`)
-  return data
-}
-
-export const getCtfById = async (id) => {
-  const { data } = await api.get(`g-ctf/${id}`)
+export const getPostById = async id => {
+  const { data } = await api.get(`g-p/${id}`)
   return data
 }

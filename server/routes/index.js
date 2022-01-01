@@ -21,40 +21,10 @@ router.get(`/g-l-r/:q`, async (req, res) => {
   }
 })
 
-router.get(`/g-a/:id`, async (req, res) => {
+router.get(`/g-p/:id`, async (req, res) => {
   try {
     const { id } = req.params
-    const data = await api.get(`/get-article/${id}`)
-    res.json(data.data)
-  } catch (e) {
-    console.log(e)
-  }
-})
-
-router.get(`/g-t/:id`, async (req, res) => {
-  try {
-    const { id } = req.params
-    const data = await api.get(`/get-tip/${id}`)
-    res.json(data.data)
-  } catch (e) {
-    console.log(e)
-  }
-})
-
-router.get(`/g-w-u/:id`, async (req, res) => {
-  try {
-    const { id } = req.params
-    const data = await api.get(`/get-write-up/${id}`)
-    res.json(data.data)
-  } catch (e) {
-    console.log(e)
-  }
-})
-
-router.get(`/g-ctf/:id`, async (req, res) => {
-  try {
-    const { id } = req.params
-    const data = await api.get(`/get-ctf/${id}`)
+    const data = await api.get(`/get-post/${id}`)
     res.json(data.data)
   } catch (e) {
     console.log(e)
