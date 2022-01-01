@@ -55,12 +55,12 @@
         <p>
           <span class='paragraph-begin'>I</span> decided it would be a good practice for my front-end and DevOps skills from the one side, and from the second side, create page where I can write some staff about IS.
           As a result of my work and my hobby, you can see this blog. &#127919;
-          By the way, this blog was created using JavaScript <img src='../assets/pics/icons8-javascript.svg' alt='JS' width='22' height='22'>
-          (Front-end - Vue.JS <img src='../assets/pics/icons8-vue-js.svg' alt='VueJS' width='22' height='22'>
-          + NuxtJS <img src='../assets/pics/nuxtjs-icon.svg' alt='Nuxt.js' width='22' height='22'>
+          By the way, this blog was created using JavaScript <img src='../assets/pics/js.svg' alt='JS' width='22' height='22'>
+          (Front-end - Vue.JS <img src='../assets/pics/vuejs.svg' alt='VueJS' width='22' height='22'>
+          + NuxtJS <img src='../assets/pics/nuxtjs.svg' alt='Nuxt.js' width='22' height='22'>
           and back-end - Express.js
           <span style='display: inline-flex; background-color: white; border-radius: 3px'>
-              <img src='../assets/pics/expressjs-ar21.svg' alt='express.js' height='22' width='44'>
+              <img src='../assets/pics/expressjs.svg' alt='express.js' height='22' width='44'>
           </span> )
         </p>
         <p>
@@ -83,22 +83,22 @@
           </span>
         </div>
         <div class='icons'>
-          <img src='../assets/pics/icons8-docker.svg' alt='Docker' width='65' height='65'>
-          <img src='../assets/pics/icons8-node-js.svg' alt='Node.js' width='65' height='65'>
+          <img src='../assets/pics/docker.svg' alt='Docker' width='65' height='65'>
+          <img src='../assets/pics/nodejs.svg' alt='Node.js' width='65' height='65'>
         </div>
 
         <p style='margin-top: 0'>IDE's and databases I use:</p>
         <div class='icons ides'>
-          <img src="../assets/pics/DataGrip_icon.svg" alt="DataGrip logo." width='65' height='65'>
-          <img src="../assets/pics/IntelliJ_IDEA_icon.svg" alt="IntelliJ IDEA logo." width='65' height='65'>
-          <img src="../assets/pics/PyCharm_icon.svg" alt="PyCharm logo." width='65' height='65'>
-          <img src="../assets/pics/WebStorm_icon.svg" alt="WebStorm logo." width='65' height='65'>
-          <img src="../assets/pics/Rider_icon.svg" alt="Rider logo." width='65' height='65'>
+          <img src='../assets/pics/datagrip.svg' alt="DataGrip logo." width='65' height='65'>
+          <img src='../assets/pics/Intellij.svg' alt="IntelliJ IDEA logo." width='65' height='65'>
+          <img src='../assets/pics/pycharm.svg' alt="PyCharm logo." width='65' height='65'>
+          <img src='../assets/pics/webstorm.svg' alt="WebStorm logo." width='65' height='65'>
+          <img src='../assets/pics/rider.svg' alt="Rider logo." width='65' height='65'>
         </div>
         <div class='icons'>
-          <img src='../assets/pics/icons8-microsoft-sql-server.svg' alt='MsSQL' width='65' height='65'>
-          <img src='../assets/pics/mongodb-icon.svg' alt='MongoDB' width='65' height='65'>
-          <img src='../assets/pics/mysql-icon.svg' alt='MySQL' width='65' height='65'>
+          <img src='../assets/pics/mssql.svg' alt='MsSQL' width='65' height='65'>
+          <img src='../assets/pics/mongodb.svg' alt='MongoDB' width='65' height='65'>
+          <img src='../assets/pics/mysql.svg' alt='MySQL' width='65' height='65'>
         </div>
       </div>
     </div>
@@ -149,17 +149,17 @@ export default {
       showCursorFooter: false,
 
       pics: [
-        {src: require('../assets/pics/icons8-javascript.svg'), alt: 'JS'},
-        {src: require('../assets/pics/icons8-c++.svg'), alt: 'C++'},
-        {src: require('../assets/pics/icons8-c-sharp-logo.svg'), alt: 'C#'},
-        {src: require('../assets/pics/python-5.svg'), alt: 'Python'},
-        {src: require('../assets/pics/icons8-java.svg'), alt: 'Java'},
+        {src: require('../assets/pics/js.svg'), alt: 'JS'},
+        {src: require('../assets/pics/c++.svg'), alt: 'C++'},
+        {src: require('../assets/pics/c-sharp.svg'), alt: 'C#'},
+        {src: require('../assets/pics/python.svg'), alt: 'Python'},
+        {src: require('../assets/pics/java.svg'), alt: 'Java'},
 
-        {src: require('../assets/pics/springio-icon.svg'), alt: 'Spring'},
-        {src: require('../assets/pics/icons8-vue-js.svg'), alt: 'VueJS'},
-        {src: require('../assets/pics/nuxtjs-icon.svg'), alt: 'Nuxt'},
-        {src: require('../assets/pics/reactjs-icon.svg'), alt: 'React'},
-        {src: require('../assets/pics/expressjs-icon.svg'), alt: 'Express'},
+        {src: require('../assets/pics/springio.svg'), alt: 'Spring'},
+        {src: require('../assets/pics/vuejs.svg'), alt: 'VueJS'},
+        {src: require('../assets/pics/nuxtjs.svg'), alt: 'Nuxt'},
+        {src: require('../assets/pics/reactjs.svg'), alt: 'React'},
+        {src: require('../assets/pics/expressjs.svg'), alt: 'Express'},
 
         // {src: require()}
       ],

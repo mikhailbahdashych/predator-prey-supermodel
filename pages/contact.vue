@@ -87,10 +87,10 @@ export default {
       charIndexMain: 0,
 
       copyValuesAndStatuses: [
-        {name: 'Discord', value: 'bl4drnnr#6177', status: false, link: false, img: require('../assets/pics/Discord.svg')},
-        {name: 'HTB', value: 'bl4drnnr#691742', status: false, link: false, img: require('../assets/pics/hack-the-box-svgrepo-com.svg')},
+        {name: 'Discord', value: 'bl4drnnr#6177', status: false, link: false, img: require('../assets/pics/discord.svg')},
+        {name: 'HTB', value: 'bl4drnnr#691742', status: false, link: false, img: require('../assets/pics/htb.svg')},
         {name: 'PGP', value: 'A0F3 A1A5 A32E 3378', status: false, link: true, img: require('../assets/pics/key.png')},
-        {name: 'GitHub', value: 'github.com/Lain1wakura', status: false, link: true, img: require('../assets/pics/GitHub-Mark-120px-plus.png')},
+        {name: 'GitHub', value: 'github.com/Lain1wakura', status: false, link: true, img: require('../assets/pics/github.png')},
         {name: 'Offensive security', value: 'BL4DERUNNNER', status: false, link: false, img: require('../assets/pics/red_door.png')},
         {name: 'THM', value: 'tryhackme.com/p/BL4DERUNNNER', status: false, link: true, img: require('../assets/pics/thm.svg')},
 
