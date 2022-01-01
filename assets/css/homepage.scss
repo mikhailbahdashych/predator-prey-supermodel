@@ -106,6 +106,9 @@
   &.smaller {
     font-size: 18px;
   }
+  &.blog-logo {
+    text-align: center;
+  }
   span.typed-text {
     color: white;
     font-family: "Ubuntu", sans-serif;
@@ -120,30 +123,11 @@
   span.cursor.typing {
     animation: none;
   }
-  .bottom-text {
-    margin-top: 100px
-  }
 }
 @keyframes cursorBlink {
   49% { background-color: #fff; }
   50% { background-color: transparent; }
   99% { background-color: transparent; }
-}
-
-.code-block {
-  display: inline-block;
-  align-items: center;
-  background-color: #363636;
-  border-radius: 5px;
-  padding: 4px 4px 4px 8px;
-  font-family: "Menlo", sans-serif;
-  color: white;
-  transition: 0.25s;
-  &.code-block-hover:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px #038a03;
-    cursor: pointer;
-  }
 }
 
 p {
@@ -154,4 +138,8 @@ p {
 
 .paragraph-begin {
   margin-left: 3em
+}
+
+.bottom-text {
+  margin-top: 100px
 }

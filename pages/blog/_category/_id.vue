@@ -2,7 +2,7 @@
   <div>
     <SideBar />
     <div class='blog-header'>
-      <div style='padding-top: 20px'>
+      <div class='search-div'>
         <input class='search-field' placeholder='Search...'>
       </div>
     </div>

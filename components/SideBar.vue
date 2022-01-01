@@ -1,7 +1,7 @@
 <template>
   <div class='side-bar'>
-    <nuxt-link to="/" style="text-decoration: none; color: white; text-align: center;">
-      <h1>pNb</h1>
+    <nuxt-link to="/" class='nuxt-link'>
+      <h1 class='big-text blog-logo'>pNb</h1>
     </nuxt-link>
     <div class='side-bar-menu'>
       <ul>

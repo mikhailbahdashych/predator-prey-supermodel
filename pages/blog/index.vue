@@ -2,12 +2,12 @@
   <div>
     <SideBar />
     <div class='blog-header'>
-      <div style='padding-top: 20px'>
+      <div class='search-div'>
         <input class='search-field' placeholder='Search...'>
       </div>
     </div>
     <div class='blog-page'>
-      <h1>Check out those releases &#128293;</h1>
+      <h1 class='big-text'>Check out those releases &#128293;</h1>
       <div class='latest-releases'>
         <div class="container">
 

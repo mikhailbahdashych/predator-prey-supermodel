@@ -3,22 +3,24 @@
   height: 70px;
   background-color: #191919;
   border-bottom: 0.5px solid rgba(255,255,255,0.1);
-  .search-field {
-    left: 50%;
-    width: 300px;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background-color: #131312;
-    color: white;
-    padding: 8px;
-    transition: 0.2s;
-    position: absolute;
+  .search-div {
+    padding-top: 20px;
+    .search-field {
+      left: 50%;
+      width: 300px;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background-color: #131312;
+      color: white;
+      padding: 8px;
+      transition: 0.2s;
+      position: absolute;
+    }
+    .search-field:focus {
+      transform: scale(1.01);
+      border-radius: 6px;
+      box-shadow: 0 0 10px #038a03;
+    }
   }
-  .search-field:focus {
-    transform: scale(1.15);
-    border-radius: 6px;
-    box-shadow: 0 0 20px #038a03;
-  }
-
 }

@@ -47,7 +47,7 @@
         </div>
 
         <div class='bottom-items'>
-          <p style='margin-bottom: 25px'>In case if you like what I'm doing &#9749;</p>
+          <h1 class='big-text small'>In case if you like what I'm doing &#9749;</h1>
           <div v-for='(item, idx) in copyValuesAndStatuses.slice(copyValuesAndStatuses.length - 3)' :key='item.name'>
             <p>
               <span class='code-block code-block-hover tooltip' @click='copyToClipboard(`${item.name}`)'>

@@ -43,7 +43,7 @@
           offensive security, like CTF's walk through, IS articles, tips and
           writeups of hacking various machines. &#128161;</p>
         <p>
-          <span style='margin-left: 3em'>At</span> the moment I am working as a full stack web developer, but cybersecurity is my passion and I step by step getting into it.
+          <span class='paragraph-begin'>At</span> the moment I am working as a full stack web developer, but cybersecurity is my passion and I step by step getting into it.
           Also, I'm very interested in network technologies, DevOpsing and coding. &#128187;
         </p>
       </div>
