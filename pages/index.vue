@@ -156,7 +156,7 @@ export default {
         {src: require('../assets/pics/postgresql.svg'), alt: 'PostgreSQL'}
       ],
 
-      latestReleases: []
+      latestReleases: [],
     }
   },
   async created() {
