@@ -27,7 +27,6 @@
       <div class='right-side-contact'>
         <h1 class='big-text small'>Also, you can find me here. &#128206;</h1>
         <div class='top-items'>
-
           <div>
             <div v-for='(item) in copyValuesAndStatuses.slice(0, copyValuesAndStatuses.length - 3)' :key='item.name'>
               <span v-if='item.link' class='code-block code-block-hover tooltip' @click='openInNewTab(`${item.name}`)'>
@@ -44,7 +43,6 @@
               </span>
             </div>
           </div>
-
         </div>
 
         <div class='bottom-items'>
