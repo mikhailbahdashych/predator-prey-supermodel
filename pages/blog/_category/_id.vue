@@ -10,7 +10,6 @@
       <h1 class='big-text post-title'>{{$route.params}}</h1>
       <h1 class='big-text post-title'>{{ post }}</h1>
       <h1 class='big-text post-title'>{{ posts }}</h1>
-<!--      <p v-html='post.text'></p>-->
     </div>
     <Footer />
   </div>
