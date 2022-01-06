@@ -31,4 +31,14 @@ router.get(`/g-p/:id`, async (req, res) => {
   }
 })
 
+router.get(`/g-p-b-c/:category`, async (req, res) => {
+  try {
+    const { category } = req.params
+    const data = await api.get(`/get-posts-by-category/${category}`)
+    res.json(data.data)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
 module.exports = router

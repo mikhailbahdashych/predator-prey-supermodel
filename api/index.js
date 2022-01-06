@@ -19,3 +19,8 @@ export const getPostById = async id => {
   const { data } = await api.get(`g-p/${id}`)
   return data
 }
+
+export const getPostsByCategory = async category => {
+  const { data } = await api.get(`g-p-b-c/${category}`)
+  return data
+}

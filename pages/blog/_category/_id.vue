@@ -8,7 +8,8 @@
     </div>
     <div class='post-content'>
       <h1 class='big-text post-title'>{{$route.params}}</h1>
-      <h1 class='big-text post-title'>{{ post.title }}</h1>
+      <h1 class='big-text post-title'>{{ post }}</h1>
+      <h1 class='big-text post-title'>{{ posts }}</h1>
 <!--      <p v-html='post.text'></p>-->
     </div>
     <Footer />
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import { getPostById } from '~/api';
+import { getPostById, getPostsByCategory } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 export default {
@@ -28,6 +29,8 @@ export default {
   data() {
     return {
       post: {},
+      posts: [],
+      typeOfPosts: null,
       subpages: [
         {name: 'Blog main page', value: 'bmp', page: '/blog', status: false},
         {name: 'Articles', value: 'article', page: '/blog/articles', status: false},
@@ -41,14 +44,19 @@ export default {
     this.subpages.forEach(item => {
       if (item.page.includes(this.$route.params.category)) {
         item.status = true
+        this.typeOfPosts = item.value
       }
     })
     window.scrollBy(0, 70)
-    await this.getPostById()
+    if (this.$route.params.id) await this.getPostById()
+    else await this.getPostsByCategory()
   },
   methods: {
     async getPostById() {
       this.post = await getPostById(this.$route.params.id)
+    },
+    async getPostsByCategory() {
+      this.posts = await getPostsByCategory(this.typeOfPosts)
     }
   }
 }
