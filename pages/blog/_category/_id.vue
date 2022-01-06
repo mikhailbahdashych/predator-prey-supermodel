@@ -30,6 +30,7 @@ export default {
       post: {},
       posts: [],
       typeOfPosts: null,
+      categories: ['articles', 'writeups', 'tips', 'ctfs'],
       subpages: [
         {name: 'Blog main page', value: 'bmp', page: '/blog', status: false},
         {name: 'Articles', value: 'article', page: '/blog/articles', status: false},
@@ -40,12 +41,7 @@ export default {
     }
   },
   async mounted() {
-    this.subpages.forEach(item => {
-      if (item.page.includes(this.$route.params.category)) {
-        item.status = true
-        this.typeOfPosts = item.value
-      }
-    })
+    this.getAndCheckCategory()
     window.scrollBy(0, 70)
     if (this.$route.params.id) await this.getPostById()
     else await this.getPostsByCategory()
@@ -56,6 +52,16 @@ export default {
     },
     async getPostsByCategory() {
       this.posts = await getPostsByCategory(this.typeOfPosts)
+    },
+    getAndCheckCategory() {
+      if (!this.categories.includes(this.$route.params.category))
+        this.$router.push({path: '/blog'})
+      this.subpages.forEach(item => {
+        if (item.page.includes(this.$route.params.category)) {
+          item.status = true
+          this.typeOfPosts = item.value
+        }
+      })
     }
   }
 }
