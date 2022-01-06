@@ -29,7 +29,7 @@
             <div class='latest-release-img'></div>
             <div class='latest-release-content'>
               <p>{{ item.title }}</p>
-              <p v-html='item.plot'></p>
+              <p class='plot'>{{ item.plot }}</p>
             </div>
           </div>
         </div>

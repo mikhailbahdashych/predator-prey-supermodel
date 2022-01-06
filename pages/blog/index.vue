@@ -9,18 +9,18 @@
     <div class='blog-page'>
       <h1 class='big-text'>Check out those releases &#128293;</h1>
       <div class='latest-releases'>
-        <div class="container">
 
-          <div
-            v-for="i in 4"
-            :key="i"
-            :class="listItemStyle(i-1)"
-            @click='toPost(i)'
-          >
-            <div class='content-container'></div>
+        <div class='container-block'>
+          <div class='items'>
+            <div class='block'><div class='image'></div></div>
+            <div class='block'><div class='image'></div></div>
           </div>
-
+          <div class='items'>
+            <div class='block'><div class='image'></div></div>
+            <div class='block'><div class='image'></div></div>
+          </div>
         </div>
+
       </div>
     </div>
     <Footer />
