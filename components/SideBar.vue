@@ -4,12 +4,10 @@
       <h1 class='big-text blog-logo'>pNb</h1>
     </nuxt-link>
     <div class='side-bar-menu'>
-      <ul>
-        <li @click='redirect("bmp")'><span class="underline-text"><a class='link-href'>Blog main page</a></span></li>
-        <li><span class="underline-text"><a class='link-href'>Articles</a></span></li>
-        <li><span class="underline-text"><a class='link-href'>Write-ups</a></span></li>
-        <li><span class="underline-text"><a class='link-href'>Tips</a></span></li>
-        <li><span class="underline-text"><a class='link-href'>CTF's</a></span></li>
+      <ul v-for='sub in subpages' :key='sub.value'>
+        <li @click='redirect(sub.value)'><span class='underline-text'>
+          <a class='link-href'>{{sub.name}}</a>
+        </span></li>
       </ul>
       <div class='filters'>
         <p>Filter by dates:</p>
@@ -39,6 +37,8 @@ export default {
   directives: {
     clickOutside: vClickOutside.directive
   },
+  // :style='[sub.status ? {"background-color": "rgba(255,255,255,0.5)"}: {}]'
+  props: { 'subpages': {type: Array, required: true} },
   data() {
     return {
       showDatePicker: false,
@@ -66,13 +66,13 @@ export default {
       this.showDatePicker = false
     },
     redirect(p) {
-      switch (p) {
-        case "bmp":
+      this.subpages.forEach(item => {
+        if (item.value === p) {
           this.$router.push({
-            path: '/blog'
+            path: item.page
           })
-          break
-      }
+        }
+      })
     }
   }
 }

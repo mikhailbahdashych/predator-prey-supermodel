@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SideBar />
+    <SideBar :subpages='subpages' />
     <div class='blog-header'>
       <div class='search-div'>
         <input class='search-field' placeholder='Search...'>
@@ -38,7 +38,14 @@ export default {
   },
   data() {
     return {
-      grids: ['first', 'second', 'third', 'forth']
+      grids: ['first', 'second', 'third', 'forth'],
+      subpages: [
+        {name: 'Blog main page', value: 'bmp', page: '/blog', status: true},
+        {name: 'Articles', value: 'article', page: '/blog/articles', status: false},
+        {name: 'Write-ups', value: 'writeup', page: '/blog/writeups', status: false},
+        {name: 'Tips', value: 'tip', page: '/blog/tips', status: false},
+        {name: 'CTF\'s', value: 'ctf', page: '/blog/ctfs', status: false},
+      ]
     }
   },
   async mounted() {

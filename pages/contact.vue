@@ -42,7 +42,7 @@
                 <img :src='item.img' :alt="item.name">
               </span>
             </div>
-          </div>
+          </div>w
         </div>
 
         <div class='bottom-items'>
@@ -89,7 +89,7 @@ export default {
         {name: 'Discord', value: 'bl4drnnr#6177', status: false, link: false, img: require('../assets/pics/discord.svg')},
         {name: 'HTB', value: 'bl4drnnr#691742', status: false, link: false, img: require('../assets/pics/htb.svg')},
         {name: 'PGP', value: '51E3 43BA 669A D317', status: false, link: true, img: require('../assets/pics/key.png')},
-        {name: 'GitHub', value: 'github.com/Lain1wakura', status: false, link: true, img: require('../assets/pics/github.png')},
+        {name: 'GitHub', value: 'github.com/bl4drnnr', status: false, link: true, img: require('../assets/pics/github.png')},
         {name: 'Offensive security', value: 'BL4DERUNNNER', status: false, link: false, img: require('../assets/pics/red_door.png')},
         {name: 'THM', value: 'tryhackme.com/p/BL4DERUNNNER', status: false, link: true, img: require('../assets/pics/thm.svg')},
 
@@ -117,7 +117,7 @@ export default {
     openInNewTab(link) {
       switch (link) {
         case "GitHub":
-          window.open('https://github.com/Lain1wakura', '_blank')
+          window.open('https://github.com/bl4drnnr', '_blank')
           break
         case "PGP":
           window.open('https://keys.openpgp.org/search?q=51E3+43BA+669A+D317', '_blank')
