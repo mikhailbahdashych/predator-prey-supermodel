@@ -1,11 +1,7 @@
 <template>
   <div>
     <SideBar :subpages='subpages' />
-    <div class='blog-header'>
-      <div class='search-div'>
-        <input class='search-field' placeholder='Search...'>
-      </div>
-    </div>
+    <Search />
     <div class='blog-page'>
       <h1 class='big-text'>Check out those releases &#128293;</h1>
       <div class='latest-releases'>
@@ -30,11 +26,13 @@
 <script>
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
+import Search from '~/components/Search'
 export default {
   name: 'Blog',
   components: {
     Footer,
     SideBar,
+    Search
   },
   data() {
     return {
@@ -66,5 +64,5 @@ export default {
 
 <style lang='scss'>
 @import "../../assets/css/blog";
-@import "../../assets/css/blogheader";
+@import "../../assets/css/search";
 </style>

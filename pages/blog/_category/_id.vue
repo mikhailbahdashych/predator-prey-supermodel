@@ -1,11 +1,7 @@
 <template>
   <div>
     <SideBar :subpages='subpages' @clicked="filterByDate" />
-    <div class='blog-header'>
-      <div class='search-div'>
-        <input class='search-field' placeholder='Search...'>
-      </div>
-    </div>
+    <Search />
     <div class='post-content'>
       <div v-if='$route.params.id'>
         <h1 class='big-text post-title'>{{ post.title }}</h1>
@@ -30,20 +26,22 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <!--    <Footer />-->
   </div>
 </template>
 
 <script>
 import moment from 'moment';
 import { getPostById, getPostsByCategory } from '~/api';
-import Footer from '~/components/Footer';
+// import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
+import Search from '~/components/Search'
 export default {
   name: 'Index',
   components: {
-    Footer,
+    // Footer,
     SideBar,
+    Search
   },
   data() {
     return {
@@ -79,7 +77,6 @@ export default {
   },
   async mounted() {
     this.getAndCheckCategory()
-    window.scrollBy(0, 70)
     if (this.$route.params.id) await this.getPostById()
     else await this.getPostsByCategory()
   },
@@ -116,4 +113,6 @@ export default {
 
 <style lang='scss'>
 @import "../../../assets/css/post";
+@import "../../../assets/css/blog";
+@import "../../../assets/css/search";
 </style>
