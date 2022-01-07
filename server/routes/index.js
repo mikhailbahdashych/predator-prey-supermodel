@@ -31,10 +31,10 @@ router.get(`/g-p/:id`, async (req, res) => {
   }
 })
 
-router.get(`/g-p-b-c/:category`, async (req, res) => {
+router.get(`/g-p-b-c/:category/:from/:to`, async (req, res) => {
   try {
-    const { category } = req.params
-    const data = await api.get(`/get-posts-by-category/${category}`)
+    const { category, from, to } = req.params
+    const data = await api.get(`/get-posts-by-category/${category}/${from}/${to}`)
     res.json(data.data)
   } catch (e) {
     console.log(e)

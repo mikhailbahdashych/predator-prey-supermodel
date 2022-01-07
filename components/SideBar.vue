@@ -22,7 +22,7 @@
           </div>
           <v-date-picker v-if='showDatePicker' v-model="range" is-dark is-range style='position: absolute' />
         </div>
-        <button class="ripple">FILTER</button>
+        <button class="ripple" @click='onClickButton'>FILTER</button>
       </div>
     </div>
   </div>
@@ -62,6 +62,9 @@ export default {
     }
   },
   methods: {
+    onClickButton () {
+      this.$emit('clicked', [this.formattedDateStart, this.formattedDateEnd])
+    },
     hideDatePicker() {
       this.showDatePicker = false
     },
