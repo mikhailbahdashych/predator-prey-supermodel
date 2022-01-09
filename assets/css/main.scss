@@ -73,3 +73,59 @@
     cursor: pointer;
   }
 }
+
+.post-preview {
+  width: 800px;
+  height: 150px;
+  background-color: #131313;
+  margin: 0 auto 15px;
+  border-radius: 15px;
+  display: flex;
+  transition: 0.3s;
+  cursor: pointer;
+  &.main-page-blog {
+    width: 535px;
+  }
+  &.home-page {
+    width: 650px;
+    height: 120px;
+     margin: 20px;
+  }
+  .post-preview-img {
+    height: 150px;
+    width: 150px;
+    border-radius: 15px;
+    background-color: #202021;
+    &.home-page-img {
+      height: 120px;
+      width: 120px;
+    }
+  }
+  .post-preview-content {
+    height: 150px;
+    width: 650px;
+    padding: 15px;
+    &.main-page-blog-preview-content {
+      width: 400px;
+    }
+    &.home-page-preview-content {
+      height: 100px;
+      width: 550px;
+      padding: 8px;
+    }
+    p { margin: 0 }
+    .plot {
+      font-size: 16px;
+      margin: 10px 0 10px 0;
+    }
+    .date {
+      font-size: 12px;
+      opacity: 0.5;
+    }
+  }
+}
+
+.post-preview:hover {
+  box-shadow: 0 0 20px #ee9004;
+  transform: scale(1.03);
+}

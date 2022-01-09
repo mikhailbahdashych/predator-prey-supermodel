@@ -25,11 +25,12 @@
         <h1 class="title">Latest releases &#128293;</h1>
 
         <div v-for='item of latestReleases' :key='item.id'>
-          <div class='latest-releases' @click='toPost(item.id, item.type)'>
-            <div class='latest-release-img'></div>
-            <div class='latest-release-content'>
+          <div class='post-preview home-page' @click='toPost(item.id, item.type)'>
+            <div class='post-preview-img home-page-img'></div>
+            <div class='post-preview-content home-page-preview-content'>
               <p>{{ item.title }}</p>
               <p class='plot'>{{ item.plot }}</p>
+              <p class='date'>{{ item.created_at }}</p>
             </div>
           </div>
         </div>
@@ -95,6 +96,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import { getLatestReleases } from '~/api';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
@@ -162,11 +164,12 @@ export default {
   async created() {
     setTimeout(this.typeTextMain, this.newTextDelayMain + 200);
     this.latestReleases = await getLatestReleases(3)
+    Object.keys(this.latestReleases).forEach(x => { this.latestReleases[x].created_at = moment(this.latestReleases[x].created_at).format('YYYY-MM-DD HH:mm:ss') })
   },
   methods: {
     toPost(id, type) {
       this.$router.push({
-        path: `blog/${type}/${id}`
+        path: `blog/${type + 's'}/${id}`
       })
     },
     typeTextMain() {
