@@ -3,9 +3,9 @@
     <SideBar :subpages='subpages' @clicked="getPostsByCategory" />
     <Search />
     <div class='post-content'>
-      <div v-if='$route.params.id'>
+      <div v-if='$route.params.id' class='content-body'>
         <h1 class='big-text post-title'>{{ post.title }}</h1>
-        <h1 class='big-text post-title'>{{ post }}</h1>
+        <div v-html='post.text'></div>
       </div>
       <div v-else>
         <div v-for='title in categoriesAndPretitles' :key='title.section'>
@@ -32,10 +32,16 @@
 
 <script>
 import moment from 'moment';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import xml from 'highlight.js/lib/languages/xml';
 import { getPostById, getPostsByCategory } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
-import Search from '~/components/Search'
+import Search from '~/components/Search';
+import 'highlight.js/styles/github-dark-dimmed.css';
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('xml', xml);
 export default {
   name: 'Index',
   components: {
@@ -79,6 +85,10 @@ export default {
     this.getAndCheckCategory()
     if (this.$route.params.id) await this.getPostById()
     else await this.getPostsByCategory()
+
+    document.querySelectorAll('pre.ql-syntax').forEach(el => {
+      hljs.highlightElement(el);
+    })
   },
   methods: {
     async getPostById() {

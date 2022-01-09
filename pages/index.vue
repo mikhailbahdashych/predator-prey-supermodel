@@ -29,7 +29,7 @@
             <div class='post-preview-img home-page-img'></div>
             <div class='post-preview-content home-page-preview-content'>
               <p>{{ item.title }}</p>
-              <p class='plot'>{{ item.plot }}</p>
+              <p class='plot' v-html='item.plot'></p>
               <p class='date'>{{ item.created_at }}</p>
             </div>
           </div>

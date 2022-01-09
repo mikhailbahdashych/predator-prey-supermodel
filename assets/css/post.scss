@@ -2,6 +2,20 @@
   min-height: calc(100vh - 100px);
   margin-left: 400px;
   width: 65%;
+  .content-body {
+    pre.ql-syntax {
+      margin: 0 auto;
+      white-space: pre;
+      font-size: 18px;
+      padding: 8px;
+      border-radius: 8px;
+      max-width: 70%;
+    }
+    img {
+      max-width: 1200px;
+      max-height: 1200px;
+    }
+  }
   .description-text {
     margin-top: 55px;
     margin-bottom: 55px;
