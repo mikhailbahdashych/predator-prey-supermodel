@@ -66,7 +66,6 @@ export default {
   },
   methods: {
     toPost(id, type) {
-      console.log('test')
       this.$router.push({
         path: `blog/${type + 's'}/${id}`
       })

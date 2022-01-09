@@ -12,12 +12,10 @@
       <div class='left-side-contact'>
         <h1 class='big-text small'>Wanna contact me? I'll be glad to receive any feedback! &#128233;</h1>
         <div class='left-side-contact-content'>
-          <div class='contact-fields'>
-            <input class='basic' placeholder='Email'>
-            <input class='basic' placeholder='Title'>
-            <textarea class='textarea' placeholder='Your message'/>
-            <button class='ripple'>SEND</button>
-          </div>
+          <input class='basic-input' placeholder='Email'>
+          <input class='basic-input' placeholder='Title'>
+          <textarea class='basic-input textarea' placeholder='Your message'/>
+          <button class='ripple'>SEND</button>
         </div>
         <h1 class='footer-note big-text small'>The message will be encrypted using my PGP public key
           (you can find it on the right side and send message manually).

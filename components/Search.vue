@@ -1,7 +1,7 @@
 <template>
   <div class='blog-header'>
     <div class='search-div'>
-      <input class='search-field' placeholder='Search...'>
+      <input class='basic-input search-field' placeholder='Search...'>
     </div>
   </div>
 </template>
