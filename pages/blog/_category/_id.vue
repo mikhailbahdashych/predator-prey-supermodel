@@ -34,15 +34,17 @@
 import moment from 'moment';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
-import xml from 'highlight.js/lib/languages/xml';
+import html from 'highlight.js/lib/languages/xml';
 import csharp from 'highlight.js/lib/languages/csharp';
+
 import { getPostById, getPostsByCategory } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 import Search from '~/components/Search';
+
 import 'highlight.js/styles/github-dark-dimmed.css';
 hljs.registerLanguage('javascript', javascript);
-hljs.registerLanguage('xml', xml);
+hljs.registerLanguage('html', html);
 hljs.registerLanguage('csharp', csharp);
 export default {
   name: 'Index',
