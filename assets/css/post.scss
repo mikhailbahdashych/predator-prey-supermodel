@@ -1,5 +1,5 @@
 .post-content {
-  height: 100vh;
+  min-height: calc(100vh - 100px);
   margin-left: 400px;
   width: 65%;
   .post-preview {

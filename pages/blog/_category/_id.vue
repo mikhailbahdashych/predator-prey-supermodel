@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SideBar :subpages='subpages' @clicked="filterByDate" />
+    <SideBar :subpages='subpages' @clicked="getPostsByCategory" />
     <Search />
     <div class='post-content'>
       <div v-if='$route.params.id'>
@@ -26,20 +26,20 @@
         </div>
       </div>
     </div>
-    <!--    <Footer />-->
+    <Footer />
   </div>
 </template>
 
 <script>
 import moment from 'moment';
 import { getPostById, getPostsByCategory } from '~/api';
-// import Footer from '~/components/Footer';
+import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 import Search from '~/components/Search'
 export default {
   name: 'Index',
   components: {
-    // Footer,
+    Footer,
     SideBar,
     Search
   },
@@ -81,15 +81,13 @@ export default {
     else await this.getPostsByCategory()
   },
   methods: {
-    async filterByDate(value) {
-      const [from, to] = value
-      this.posts = await getPostsByCategory({ category: this.typeOfPosts, from, to })
-    },
     async getPostById() {
       this.post = await getPostById(this.$route.params.id)
     },
-    async getPostsByCategory() {
-      this.posts = await getPostsByCategory({ category: this.typeOfPosts, from: null, to: null })
+    async getPostsByCategory(value) {
+      let dates = { from: null, to: null }
+      if (value) dates = { from: value[0], to: value[1] }
+      this.posts = await getPostsByCategory({ category: this.typeOfPosts, from: dates.from, to: dates.to })
       Object.keys(this.posts).forEach(x => { this.posts[x].created_at = moment(this.posts[x].created_at).format('YYYY-MM-DD HH:mm:ss') })
     },
     getAndCheckCategory() {
