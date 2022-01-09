@@ -26,7 +26,7 @@
 
         <div v-for='item of latestReleases' :key='item.id'>
           <div class='post-preview home-page' @click='toPost(item.id, item.type)'>
-            <div class='post-preview-img home-page-img'></div>
+            <div class='post-preview-img home-page-img' v-html='item.cover'></div>
             <div class='post-preview-content home-page-preview-content'>
               <p>{{ item.title }}</p>
               <p class='plot' v-html='item.plot'></p>

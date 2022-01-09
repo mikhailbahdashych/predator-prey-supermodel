@@ -9,7 +9,7 @@
         <div class='container-block'>
           <div class='items'>
             <div v-for='post in posts.slice(0, 2)' :key='post.id' class='post-preview main-page-blog' @click='toPost(post.id, post.type)'>
-              <div class='post-preview-img'></div>
+              <div class='post-preview-img' v-html='post.cover'></div>
               <div class='post-preview-content main-page-blog-preview-content'>
                 <p>{{ post.title }}</p>
                 <p class='plot' v-html='post.plot'></p>
@@ -19,7 +19,7 @@
           </div>
           <div class='items'>
             <div v-for='post in posts.slice(2, 4)' :key='post.id' class='post-preview main-page-blog' @click='toPost(post.id, post.type)'>
-              <div class='post-preview-img main-page-blog-img'></div>
+              <div class='post-preview-img' v-html='post.cover'></div>
               <div class='post-preview-content main-page-blog-preview-content'>
                 <p>{{ post.title }}</p>
                 <p class='plot' v-html='post.plot'></p>

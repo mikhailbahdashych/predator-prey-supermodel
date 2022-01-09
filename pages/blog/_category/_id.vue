@@ -16,7 +16,7 @@
         </div>
         <div v-for='p of posts' :key='p.id'>
           <div class='post-preview' @click='toPost(p.id, p.type)'>
-            <div class='post-preview-img'></div>
+            <div class='post-preview-img' v-html='p.cover'></div>
             <div class='post-preview-content'>
               <p>{{ p.title }}</p>
               <p class='plot' v-html='p.plot'></p>
