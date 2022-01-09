@@ -30,7 +30,7 @@
             <div class='post-preview-content home-page-preview-content'>
               <p>{{ item.title }}</p>
               <p class='plot' v-html='item.plot'></p>
-              <p class='date'>{{ item.created_at }}</p>
+              <p class='date'>Posted at: {{ item.created_at }}</p>
             </div>
           </div>
         </div>

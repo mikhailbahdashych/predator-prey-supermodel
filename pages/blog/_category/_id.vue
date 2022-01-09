@@ -19,8 +19,8 @@
             <div class='post-preview-img'></div>
             <div class='post-preview-content'>
               <p>{{ p.title }}</p>
-              <p class='plot'>{{ p.plot }}</p>
-              <p class='date'>{{ p.created_at }}</p>
+              <p class='plot' v-html='p.plot'></p>
+              <p class='date'>Posted at: {{ p.created_at }}</p>
             </div>
           </div>
         </div>

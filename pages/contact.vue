@@ -40,7 +40,7 @@
                 <img :src='item.img' :alt="item.name">
               </span>
             </div>
-          </div>w
+          </div>
         </div>
 
         <div class='bottom-items'>

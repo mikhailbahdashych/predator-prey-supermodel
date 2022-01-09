@@ -13,7 +13,7 @@
               <div class='post-preview-content main-page-blog-preview-content'>
                 <p>{{ post.title }}</p>
                 <p class='plot' v-html='post.plot'></p>
-                <p class='date'>{{ post.created_at }}</p>
+                <p class='date'>Posted at: {{ post.created_at }}</p>
               </div>
             </div>
           </div>
@@ -23,7 +23,7 @@
               <div class='post-preview-content main-page-blog-preview-content'>
                 <p>{{ post.title }}</p>
                 <p class='plot' v-html='post.plot'></p>
-                <p class='date'>{{ post.created_at }}</p>
+                <p class='date'>Posted at: {{ post.created_at }}</p>
               </div>
             </div>
           </div>
