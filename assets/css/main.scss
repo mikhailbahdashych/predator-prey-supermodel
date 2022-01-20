@@ -141,17 +141,6 @@
       font-size: 12px;
       opacity: 0.5;
     }
-    .skeleton-text {
-      background-color: #3f3f3f;
-      width: 50%;
-      height: 12px;
-      margin: 10px;
-      border-radius: 5px;
-      animation: pulse-bg 1s infinite;
-      &.plot {
-        width: 90%;
-      }
-    }
   }
   &.skeleton {
     background-color: #131313;
@@ -209,5 +198,24 @@
   }
   100% {
     background-color: #222;
+  }
+}
+
+.skeleton-text {
+  background-color: #3f3f3f;
+  width: 50%;
+  height: 12px;
+  margin: 10px;
+  border-radius: 5px;
+  animation: pulse-bg 1s infinite;
+  &.skeleton-header {
+    height: 35px;
+    margin: 15px auto 0;
+  }
+  &.plot {
+    width: 80%;
+    &.skeleton-text-centered {
+      margin: 10px auto;
+    }
   }
 }

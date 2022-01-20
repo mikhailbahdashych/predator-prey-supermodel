@@ -1,16 +1,31 @@
 <template>
   <div class='side-bar'>
-    <nuxt-link to="/" class='nuxt-link'>
-      <h1 class='big-text blog-logo'>pNb</h1>
-    </nuxt-link>
+    <div v-if='loading'>
+      <p class='skeleton-text skeleton-header'></p>
+    </div>
+    <div v-if='!loading'>
+      <nuxt-link to="/" class='nuxt-link'>
+        <h1 class='big-text blog-logo'>pNb</h1>
+      </nuxt-link>
+    </div>
     <div class='side-bar-menu'>
-      <ul v-for='sub in subpages' :key='sub.value'>
-        <li @click='redirect(sub.value)'><span class='underline-text'>
-          <a class='link-href'>{{sub.name}}</a>
-        </span></li>
-      </ul>
+      <div v-if='loading'>
+        <ul v-for='s in subpages.length' :key='s.value'>
+          <li class='skeleton-text'></li>
+        </ul>
+      </div>
+      <div v-if='!loading'>
+        <ul v-for='sub in subpages' :key='sub.value'>
+          <li @click='redirect(sub.value)'>
+          <span class='underline-text'>
+            <a class='link-href'>{{sub.name}}</a>
+          </span>
+          </li>
+        </ul>
+      </div>
       <div class='filters'>
-        <p>Filter by dates:</p>
+        <p v-if='loading' class='skeleton-text plot'></p>
+        <p v-if='!loading'>Filter by dates:</p>
         <div v-click-outside='hideDatePicker'>
           <div @click='showDatePicker = !showDatePicker'>
             <input
@@ -27,8 +42,8 @@
             <div @click='showFilter = !showFilter'>
               <input disabled :class="{'date-pick-active' : showFilter}" class='date-pick' :value='filters[0]' @click='showFilter = !showFilter'>
             </div>
-            <div style='width: 100px; height: 100px; position: absolute; background-color: greenyellow'
-            v-if='showFilter'>TEST</div>
+            <div v-if='showFilter'
+            style='width: 100px; height: 100px; position: absolute; background-color: greenyellow'>TEST</div>
           </div>
         </div>
         <button class="ripple" @click='onClickButton'>FILTER</button>
@@ -55,7 +70,8 @@ export default {
         start: moment().subtract(6, 'days').format('YYYY-MM-DD'),
         end: moment().format('YYYY-MM-DD')
       },
-      filters: ['A-Z', 'Z-A', 'Newest', 'Oldest', 'Most popular']
+      filters: ['A-Z', 'Z-A', 'Newest', 'Oldest', 'Most popular'],
+      loading: true
     }
   },
   computed: {
@@ -70,6 +86,11 @@ export default {
       const to = this.formattedDateEnd
       return from.toString() + " — " + to.toString()
     }
+  },
+  created() {
+    this.$nextTick(() => {
+      this.loading = false
+    })
   },
   methods: {
     onClickButton () {
@@ -96,4 +117,5 @@ export default {
 
 <style lang='scss'>
 @import "../assets/css/sidebar";
+@import "../assets/css/main";
 </style>

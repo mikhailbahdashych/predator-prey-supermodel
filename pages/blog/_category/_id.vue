@@ -8,10 +8,18 @@
         <div v-html='post.text'></div>
       </div>
       <div v-else>
-        <div v-for='title in categoriesAndPretitles' :key='title.section'>
-          <div v-if='$route.params.category === title.section'>
-            <h1 class='big-text post-title'>{{title.title}}</h1>
-            <p class='description-text'>{{title.text}}</p>
+        <div v-if='loading'>
+          <p class='skeleton-text skeleton-header'></p>
+          <div v-for='i of 3' :key='i'>
+            <p class='skeleton-text plot skeleton-text-centered'></p>
+          </div>
+        </div>
+        <div v-if='!loading'>
+          <div v-for='title in categoriesAndPretitles' :key='title.section'>
+            <div v-if='$route.params.category === title.section'>
+              <h1 class='big-text post-title'>{{title.title}}</h1>
+              <p class='description-text'>{{title.text}}</p>
+            </div>
           </div>
         </div>
         <PostsListsSkeleton v-if='loading' q="5" />

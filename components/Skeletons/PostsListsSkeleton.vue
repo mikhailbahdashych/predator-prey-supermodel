@@ -5,8 +5,9 @@
         <div class='post-preview-img skeleton-img'></div>
         <div class='post-preview-content'>
           <p class='skeleton-text'></p>
-          <p class='skeleton-text plot'></p>
-          <p class='skeleton-text plot'></p>
+          <div v-for='i of 2' :key='i'>
+            <p class='skeleton-text plot'></p>
+          </div>
         </div>
       </div>
     </div>

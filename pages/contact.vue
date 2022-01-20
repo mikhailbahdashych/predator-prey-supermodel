@@ -10,20 +10,37 @@
     <div class='contact'>
 
       <div class='left-side-contact'>
-        <h1 class='big-text small'>Wanna contact me? I'll be glad to receive any feedback! &#128233;</h1>
+        <div v-if='loading'>
+          <p class='skeleton-text skeleton-header'></p>
+        </div>
+        <div v-if='!loading'>
+          <h1 class='big-text small'>Wanna contact me? I'll be glad to receive any feedback! &#128233;</h1>
+        </div>
         <div class='left-side-contact-content'>
           <input class='basic-input' placeholder='Email'>
           <input class='basic-input' placeholder='Title'>
           <textarea class='basic-input textarea' placeholder='Your message'/>
           <button class='ripple'>SEND</button>
         </div>
-        <h1 class='footer-note big-text small'>The message will be encrypted using my PGP public key
-          (you can find it on the right side and send message manually).
-          About how this was implemented you can find here!</h1>
+        <div v-if='loading' class='footer-note'>
+          <div v-for='i of 3' :key='i'>
+            <p class='skeleton-text plot skeleton-text-centered'></p>
+          </div>
+        </div>
+        <div v-if='!loading'>
+          <h1 class='footer-note big-text small'>The message will be encrypted using my PGP public key
+            (you can find it on the right side and send message manually).
+            About how this was implemented you can find here!</h1>
+        </div>
       </div>
 
       <div class='right-side-contact'>
-        <h1 class='big-text small'>Also, you can find me here. &#128206;</h1>
+        <div v-if='loading' class='margin-b'>
+          <p class='skeleton-text skeleton-header'></p>
+        </div>
+        <div v-if='!loading'>
+          <h1 class='big-text small'>Also, you can find me here. &#128206;</h1>
+        </div>
         <div class='top-items'>
           <div>
             <div v-for='(item) in copyValuesAndStatuses.slice(0, copyValuesAndStatuses.length - 3)' :key='item.name'>
@@ -44,7 +61,12 @@
         </div>
 
         <div class='bottom-items'>
-          <h1 class='big-text small'>In case if you like what I'm doing &#9749;</h1>
+          <div v-if='loading' class='margin-b'>
+            <p class='skeleton-text skeleton-header'></p>
+          </div>
+          <div v-if='!loading'>
+            <h1 class='big-text small'>In case if you like what I'm doing &#9749;</h1>
+          </div>
           <div v-for='(item, idx) in copyValuesAndStatuses.slice(copyValuesAndStatuses.length - 3)' :key='item.name'>
             <p>
               <span class='code-block code-block-hover tooltip' @click='copyToClipboard(`${item.name}`)'>
@@ -95,6 +117,7 @@ export default {
         {name: 'BTC', value: 'bc1qmstcqe2k3vgzmx9rkn59fka9krk9p25ecjpqcc', status: false, img: require('../assets/pics/btc.svg')},
         {name: 'ETH', value: '0x05A892cc3DD63bDd9258073d8E9fB2512b0ee905', status: false, img: require('../assets/pics/eth.svg')},
       ],
+      loading: true
     }
   },
   head() {
@@ -105,6 +128,9 @@ export default {
     }
   },
   created() {
+    this.$nextTick(() => {
+      this.loading = false
+    })
     setTimeout(this.typeTextMain, this.newTextDelayMain + 200);
   },
   methods: {
