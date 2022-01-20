@@ -97,6 +97,13 @@ export default {
       ],
     }
   },
+  head() {
+    return {
+      bodyAttrs: {
+        class: 'reset-body'
+      }
+    }
+  },
   created() {
     setTimeout(this.typeTextMain, this.newTextDelayMain + 200);
   },
@@ -147,4 +154,7 @@ export default {
 
 <style lang='scss'>
 @import "assets/css/contact";
+.reset-body {
+  margin: 0;
+}
 </style>

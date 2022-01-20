@@ -14,16 +14,21 @@
             <p class='description-text'>{{title.text}}</p>
           </div>
         </div>
-        <div v-for='p of posts' :key='p.id'>
-          <div class='post-preview' @click='toPost(p.id, p.type)'>
-            <div class='post-preview-img' v-html='p.cover'></div>
-            <div class='post-preview-content'>
-              <p>{{ p.title }}</p>
-              <p class='plot' v-html='p.plot'></p>
-              <p class='date'>Posted at: {{ p.created_at }}</p>
+        <PostsListsSkeleton v-if='loading' q="5" />
+
+        <div v-if='!loading'>
+          <div v-for='p of posts' :key='p.id'>
+            <div class='post-preview' @click='toPost(p.id, p.type)'>
+              <div class='post-preview-img' v-html='p.cover'></div>
+              <div class='post-preview-content'>
+                <p>{{ p.title }}</p>
+                <p class='plot' v-html='p.plot'></p>
+                <p class='date'>Posted at: {{ p.created_at }}</p>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
     <Footer />
@@ -41,6 +46,7 @@ import { getPostById, getPostsByCategory } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 import Search from '~/components/Search';
+import PostsListsSkeleton from '~/components/Skeletons/PostsListsSkeleton';
 
 import 'highlight.js/styles/github-dark-dimmed.css';
 hljs.registerLanguage('javascript', javascript);
@@ -51,7 +57,8 @@ export default {
   components: {
     Footer,
     SideBar,
-    Search
+    Search,
+    PostsListsSkeleton
   },
   data() {
     return {
@@ -82,16 +89,20 @@ export default {
         {name: 'Write-ups', value: 'writeup', page: '/blog/writeups', status: false},
         {name: 'Tips', value: 'tip', page: '/blog/tips', status: false},
         {name: 'CTF\'s', value: 'ctf', page: '/blog/ctfs', status: false},
-      ]
+      ],
+      loading: true
     }
   },
-  async mounted() {
-    this.getAndCheckCategory()
-    if (this.$route.params.id) await this.getPostById()
-    else await this.getPostsByCategory()
+  mounted() {
+    this.$nextTick(async () => {
+      this.getAndCheckCategory()
+      if (this.$route.params.id) await this.getPostById()
+      else await this.getPostsByCategory()
 
-    document.querySelectorAll('pre.ql-syntax').forEach(el => {
-      hljs.highlightElement(el);
+      document.querySelectorAll('pre.ql-syntax').forEach(el => {
+        hljs.highlightElement(el);
+      })
+      this.loading = false
     })
   },
   methods: {

@@ -21,16 +21,20 @@
     </div>
 
     <div class="about">
-      <div v-if='latestReleases.length > 0' class="left-about">
-        <h1 class="title">Latest releases &#128293;</h1>
 
-        <div v-for='item of latestReleases' :key='item.id'>
-          <div class='post-preview home-page' @click='toPost(item.id, item.type)'>
-            <div class='post-preview-img home-page-img' v-html='item.cover'></div>
-            <div class='post-preview-content home-page-preview-content'>
-              <p>{{ item.title }}</p>
-              <p class='plot' v-html='item.plot'></p>
-              <p class='date'>Posted at: {{ item.created_at }}</p>
+      <LatestReleasesSkeleton v-if='loading' q='3' />
+
+      <div v-if='!loading'>
+        <div v-if='latestReleases.length > 0' class="left-about">
+          <h1 class="title">Latest releases &#128293;</h1>
+          <div v-for='item of latestReleases' :key='item.id'>
+            <div class='post-preview home-page' @click='toPost(item.id, item.type)'>
+              <div class='post-preview-img home-page-img' v-html='item.cover'></div>
+              <div class='post-preview-content home-page-preview-content'>
+                <p>{{ item.title }}</p>
+                <p class='plot' v-html='item.plot'></p>
+                <p class='date'>Posted at: {{ item.created_at }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -96,47 +100,41 @@
 </template>
 
 <script>
-import moment from 'moment';
-import { getLatestReleases } from '~/api';
+import moment from 'moment'
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
+import LatestReleasesSkeleton from '~/components/Skeletons/LatestReleasesSkeleton';
 import { typer } from '~/mixins/typer';
+import { getLatestReleases } from '~/api'
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    LatestReleasesSkeleton
   },
   mixins: [typer],
   data() {
     return {
-      pics: [
-        {src: require('../assets/pics/js.svg'), alt: 'JS'},
-        {src: require('../assets/pics/c++.svg'), alt: 'C++'},
-        {src: require('../assets/pics/c-sharp.svg'), alt: 'C#'},
-        {src: require('../assets/pics/python.svg'), alt: 'Python'},
-        {src: require('../assets/pics/java.svg'), alt: 'Java'},
-        {src: require('../assets/pics/vuejs.svg'), alt: 'VueJS'},
-        {src: require('../assets/pics/nuxtjs.svg'), alt: 'Nuxt'},
-        {src: require('../assets/pics/reactjs.svg'), alt: 'React'},
-        {src: require('../assets/pics/angular.svg'), alt: 'Angular'},
-        {src: require('../assets/pics/springio.svg'), alt: 'Spring'},
-        {src: require('../assets/pics/expressjs.svg'), alt: 'Express'},
-        {src: require('../assets/pics/netcore.svg'), alt: '.NET Core'},
-        {src: require('../assets/pics/docker.svg'), alt: 'Docker'},
-        {src: require('../assets/pics/nodejs.svg'), alt: 'Node.js'},
-        {src: require('../assets/pics/mssql.svg'), alt: 'MsSQL'},
-        {src: require('../assets/pics/mongodb.svg'), alt: 'Mongo'},
-        {src: require('../assets/pics/mysql.svg'), alt: 'MySQL'},
-        {src: require('../assets/pics/postgresql.svg'), alt: 'PostgreSQL'}
-      ],
-
+      loading: true,
       latestReleases: [],
     }
   },
-  async created() {
+  head() {
+    return {
+      bodyAttrs: {
+        class: 'reset-body'
+      }
+    }
+  },
+  mounted() {
+    this.$nextTick(async () => {
+      this.latestReleases = await getLatestReleases(3)
+      Object.keys(this.latestReleases).forEach(x => {
+        this.latestReleases[x].created_at = moment(this.latestReleases[x].created_at).format('YYYY-MM-DD HH:mm:ss')
+      })
+      this.loading = false
+    })
     setTimeout(this.typeTextMain, this.newTextDelayMain + 200);
-    this.latestReleases = await getLatestReleases(3)
-    Object.keys(this.latestReleases).forEach(x => { this.latestReleases[x].created_at = moment(this.latestReleases[x].created_at).format('YYYY-MM-DD HH:mm:ss') })
   },
   methods: {
     toPost(id, type) {
@@ -150,4 +148,7 @@ export default {
 
 <style lang='scss'>
 @import "../assets/css/homepage";
+.reset-body {
+  margin: 0;
+}
 </style>

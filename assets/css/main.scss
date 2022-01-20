@@ -1,5 +1,4 @@
 .main {
-  margin: 0;
   background: url("assets/video/background-darked.gif") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -90,7 +89,10 @@
   &.home-page {
     width: 650px;
     height: 120px;
-     margin: 20px;
+    margin: 20px;
+    &.skeleton {
+      background-color: #131313;
+    }
   }
   .post-preview-img {
     height: 150px;
@@ -114,6 +116,9 @@
         border-radius: 15px;
       }
     }
+    &.skeleton-img {
+      animation: pulse-bg 1s infinite;
+    }
   }
   .post-preview-content {
     height: 150px;
@@ -136,6 +141,20 @@
       font-size: 12px;
       opacity: 0.5;
     }
+    .skeleton-text {
+      background-color: #3f3f3f;
+      width: 50%;
+      height: 12px;
+      margin: 10px;
+      border-radius: 5px;
+      animation: pulse-bg 1s infinite;
+      &.plot {
+        width: 90%;
+      }
+    }
+  }
+  &.skeleton {
+    background-color: #131313;
   }
 }
 
@@ -179,4 +198,16 @@
   border-radius: 8px;
   box-shadow: 0 0 20px #038a03;
   transform: scale(1.05);
+}
+
+@keyframes pulse-bg {
+  0% {
+    background-color: #222;
+  }
+  50% {
+    background-color: #303030;
+  }
+  100% {
+    background-color: #222;
+  }
 }
