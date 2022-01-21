@@ -22,6 +22,18 @@
             </div>
           </div>
         </div>
+        <div class='filter-div'>
+          <div v-click-outside='hideFilters' class='float'>
+            <div @click='showFilter = !showFilter'>
+              <input disabled :class="{'date-pick-active' : showFilter}" class='date-pick filter' :value='defaultFilter' @click='showFilter = !showFilter'>
+            </div>
+            <div v-if='showFilter' class='filter-div-items'>
+              <div v-for='item in filters' :key='item'>
+                <p @click='sort(item)'>{{ item }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
         <PostsListsSkeleton v-if='loading' q="5" />
 
         <div v-if='!loading'>
@@ -50,6 +62,7 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import html from 'highlight.js/lib/languages/xml';
 import csharp from 'highlight.js/lib/languages/csharp';
 
+import vClickOutside from 'v-click-outside';
 import { getPostById, getPostsByCategory } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
@@ -67,6 +80,9 @@ export default {
     SideBar,
     Search,
     PostsListsSkeleton
+  },
+  directives: {
+    clickOutside: vClickOutside.directive
   },
   data() {
     return {
@@ -98,7 +114,10 @@ export default {
         {name: 'Tips', value: 'tip', page: '/blog/tips', status: false},
         {name: 'CTF\'s', value: 'ctf', page: '/blog/ctfs', status: false},
       ],
-      loading: true
+      loading: true,
+      showFilter: false,
+      filters: ['A-Z', 'Z-A', 'Newest', 'Oldest'], // 'Most popular'
+      defaultFilter: 'Newest'
     }
   },
   mounted() {
@@ -137,6 +156,24 @@ export default {
       this.$router.push({
         path: `/blog/${type + 's'}/${id}`
       })
+    },
+    hideFilters() {
+      this.showFilter = false
+    },
+    sort(item) {
+      if (item === 'A-Z') {
+        this.posts.sort((a, b) => a.title.localeCompare(b.title))
+      } else if (item === 'Z-A') {
+        this.posts.sort((a, b) => b.title.localeCompare(a.title))
+      } else if (item === 'Newest') {
+        this.posts.sort((a, b) => moment(b.created_at).format('YYYYMMDD') - moment(a.created_at).format('YYYYMMDD'))
+      } else if (item === 'Oldest') {
+        this.posts.sort((a, b) => moment(a.created_at).format('YYYYMMDD') - moment(b.created_at).format('YYYYMMDD'))
+      } else {
+        // @TODO Most popular
+      }
+      this.defaultFilter = item;
+      this.showFilter = false
     }
   }
 }

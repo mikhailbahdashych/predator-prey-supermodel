@@ -37,15 +37,6 @@
           </div>
           <v-date-picker v-if='showDatePicker' v-model="range" is-dark is-range style='position: absolute' />
         </div>
-        <div>
-          <div v-click-outside='hideFilters'>
-            <div @click='showFilter = !showFilter'>
-              <input disabled :class="{'date-pick-active' : showFilter}" class='date-pick' :value='filters[0]' @click='showFilter = !showFilter'>
-            </div>
-            <div v-if='showFilter'
-            style='width: 100px; height: 100px; position: absolute; background-color: greenyellow'>TEST</div>
-          </div>
-        </div>
         <button class="ripple" @click='onClickButton'>FILTER</button>
       </div>
     </div>
@@ -65,12 +56,10 @@ export default {
   data() {
     return {
       showDatePicker: false,
-      showFilter: false,
       range: {
         start: moment().subtract(6, 'days').format('YYYY-MM-DD'),
         end: moment().format('YYYY-MM-DD')
       },
-      filters: ['A-Z', 'Z-A', 'Newest', 'Oldest', 'Most popular'],
       loading: true
     }
   },
@@ -98,9 +87,6 @@ export default {
     },
     hideDatePicker() {
       this.showDatePicker = false
-    },
-    hideFilters() {
-      this.showFilter = false
     },
     redirect(p) {
       this.subpages.forEach(item => {
