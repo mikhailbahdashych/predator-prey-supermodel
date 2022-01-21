@@ -24,3 +24,8 @@ export const getPostsByCategory = async d => {
   const { data } = await api.get(`g-p-b-c/${d.category}/${d.from}/${d.to}`)
   return data
 }
+
+export const search = async payload => {
+  const { data } = await api.post(`search`, payload)
+  return data
+}

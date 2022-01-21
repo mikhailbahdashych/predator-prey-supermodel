@@ -6,4 +6,26 @@
   .search-div {
     padding-top: 20px;
   }
+  .search-box {
+    position: absolute;
+    width: 450px;
+    border-radius: 5px;
+    background-color: #202021;
+    border: 1px solid rgba(#fff, 0.25);
+    left: calc(50% - 75px);
+    top: 7.5%;
+    z-index: 99;
+    p {
+      //height: 30px;
+      margin: 0;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    p:hover {
+      background-color: rgba(#fff, 0.25);
+    }
+  }
 }

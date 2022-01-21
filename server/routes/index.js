@@ -41,4 +41,14 @@ router.get(`/g-p-b-c/:category/:from/:to`, async (req, res) => {
   }
 })
 
+router.post(`/search`, async (req, res) => {
+  try {
+    const data = await api.post(`/search`, req.body)
+    res.json(data.data)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
+
 module.exports = router

@@ -27,12 +27,12 @@
     height: 50px;
     .filter-div-items {
       width: 230px;
-      height: 205px;
+      height: 165px; // 205
       position: absolute;
       background-color: #202021;
       border-radius: 5px;
       z-index: 999;
-      border: 1px solid rgba(#008000FF, 0.5);
+      border: 1px solid rgba(#fff, 0.25);
       p {
         display: block;
         width: 215px;
