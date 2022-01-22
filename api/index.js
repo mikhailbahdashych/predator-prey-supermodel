@@ -29,3 +29,8 @@ export const search = async payload => {
   const { data } = await api.post(`search`, payload)
   return data
 }
+
+export const sendEmail = async payload => {
+  const { data } = await api.post('/s-e', payload)
+  return data
+}

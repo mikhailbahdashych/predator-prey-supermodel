@@ -17,10 +17,10 @@
           <h1 class='big-text small'>Wanna contact me? I'll be glad to receive any feedback! &#128233;</h1>
         </div>
         <div class='left-side-contact-content'>
-          <input class='basic-input' placeholder='Email'>
-          <input class='basic-input' placeholder='Title'>
-          <textarea class='basic-input textarea' placeholder='Your message'/>
-          <button class='ripple'>SEND</button>
+          <input v-model='email' class='basic-input' placeholder='Email'>
+          <input v-model='emailTitle' class='basic-input' placeholder='Title'>
+          <textarea v-model='emailMessage' class='basic-input textarea' placeholder='Your message'/>
+          <button class='ripple' @click='sendEmail'>SEND</button>
         </div>
         <div v-if='loading' class='footer-note'>
           <div v-for='i of 3' :key='i'>
@@ -87,7 +87,8 @@
 
 <script>
 import Header from '~/components/Header';
-import Footer from '~/components/Footer'
+import Footer from '~/components/Footer';
+// import { sendEmail } from '~/api';
 export default {
   name: 'Contact',
   components: {
@@ -117,7 +118,11 @@ export default {
         {name: 'BTC', value: 'bc1qmstcqe2k3vgzmx9rkn59fka9krk9p25ecjpqcc', status: false, img: require('../assets/pics/btc.svg')},
         {name: 'ETH', value: '0x05A892cc3DD63bDd9258073d8E9fB2512b0ee905', status: false, img: require('../assets/pics/eth.svg')},
       ],
-      loading: true
+      loading: true,
+
+      email: null,
+      emailTitle: null,
+      emailMessage: null
     }
   },
   head() {
@@ -134,6 +139,13 @@ export default {
     setTimeout(this.typeTextMain, this.newTextDelayMain + 200);
   },
   methods: {
+    async sendEmail() {
+      // await sendEmail({
+      //   email: this.email,
+      //   title: this.emailTitle,
+      //   message: this.emailMessage
+      // });
+    },
     typeTextMain() {
       if (this.charIndexMain < this.typeArrayMain[this.typeArrayIndexMain].length) {
         if (!this.typeStatusMain)

@@ -50,5 +50,13 @@ router.post(`/search`, async (req, res) => {
   }
 })
 
+router.post('/s-e', async (req, res) => {
+  try {
+    const data = await api.post('/send-email', req.body)
+    res.json(data.data)
+  } catch (e) {
+    console.log(e)
+  }
+})
 
 module.exports = router
