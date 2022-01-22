@@ -139,7 +139,12 @@ export default {
     setTimeout(this.typeTextMain, this.newTextDelayMain + 200);
   },
   methods: {
-    async sendEmail() {
+    sendEmail() {
+      if (this.email && this.emailTitle && this.emailMessage) {
+        this.email = null;
+        this.emailTitle = null;
+        this.emailMessage = null;
+      }
       // await sendEmail({
       //   email: this.email,
       //   title: this.emailTitle,
