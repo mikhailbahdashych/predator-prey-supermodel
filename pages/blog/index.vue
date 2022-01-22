@@ -48,7 +48,7 @@ import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 import Search from '~/components/Search';
 import BlogMainPageSkeleton from '~/components/Skeletons/BlogMainPageSkeleton';
-import { getLatestReleases } from '~/api';
+import { getSelectedReleases } from '~/api';
 export default {
   name: 'Blog',
   components: {
@@ -72,7 +72,7 @@ export default {
   },
   mounted() {
     this.$nextTick(async () => {
-      this.posts = await getLatestReleases(4)
+      this.posts = await getSelectedReleases(4)
       Object.keys(this.posts).forEach(x => {
         this.posts[x].created_at = moment(this.posts[x].created_at).format('YYYY-MM-DD HH:mm:ss')
       })

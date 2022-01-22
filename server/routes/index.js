@@ -11,6 +11,16 @@ const api = axios.create({
 
 const router = Router()
 
+router.get(`/g-s-r/:q`, async (req, res) => {
+  try {
+    const { q } = req.params
+    const data = await api.get(`/get-selected-releases/${q}`)
+    res.json(data.data)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
 router.get(`/g-l-r/:q`, async (req, res) => {
   try {
     const { q } = req.params

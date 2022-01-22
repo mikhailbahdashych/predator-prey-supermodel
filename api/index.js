@@ -10,6 +10,11 @@ const api = axios.create({
   }
 })
 
+export const getSelectedReleases = async q => {
+  const { data } = await api.get(`g-s-r/${q}`)
+  return data
+}
+
 export const getLatestReleases = async (q) => {
   const { data } =  await api.get(`g-l-r/${q}`)
   return data
