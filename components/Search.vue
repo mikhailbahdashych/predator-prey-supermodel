@@ -3,10 +3,14 @@
     <div class='search-div'>
       <input v-model='searchInput' class='basic-input search-field' placeholder='Search...'>
     </div>
-    <div v-if='searchInput && result.length > 0' class='search-box'>
-      <div v-if='localLoader'>
-        Loading...
+    <div v-if='localLoader' class='search-box'>
+      <div v-for='p of 3' :key='p'>
+        <div class='post-box'>
+          <p class='skeleton-text plot'></p>
+        </div>
       </div>
+    </div>
+    <div v-if='searchInput && result.length > 0 && !localLoader' class='search-box'>
       <div v-if='showInputError'>
         <p>Only letters and number allowed!</p>
       </div>
@@ -68,7 +72,7 @@ export default {
     },
     toPost(id, type) {
       this.$router.push({
-        path: `${type + 's'}/${id}`
+        path: `/blog/${type + 's'}/${id}`
       })
     }
   }

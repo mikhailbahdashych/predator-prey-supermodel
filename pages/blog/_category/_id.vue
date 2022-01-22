@@ -4,7 +4,15 @@
     <Search />
     <div class='post-content'>
       <div v-if='$route.params.id' class='content-body'>
-        <h1 class='big-text post-title'>{{ post.title }}</h1>
+        <div v-if='loading'>
+          <p class='skeleton-text skeleton-header'></p>
+          <div v-for='i of 3' :key='i'>
+            <p class='skeleton-text plot skeleton-text-centered'></p>
+          </div>
+        </div>
+        <div v-else>
+          <h1 class='big-text post-title'>{{ post.title }}</h1>
+        </div>
         <div v-html='post.text'></div>
       </div>
       <div v-else>
