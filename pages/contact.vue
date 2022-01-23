@@ -149,7 +149,7 @@ export default {
       //   email: this.email,
       //   title: this.emailTitle,
       //   message: this.emailMessage
-      // });
+      // })
     },
     typeTextMain() {
       if (this.charIndexMain < this.typeArrayMain[this.typeArrayIndexMain].length) {
