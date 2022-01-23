@@ -6,4 +6,8 @@ describe('Hello world tests!', () => {
     cy.visit(`http://localhost:8010`)
   })
 
+  it('Click on "BLOG" button', () => {
+    cy.get('#blog-button-link').click()
+  })
+
 })
