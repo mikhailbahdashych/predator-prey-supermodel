@@ -11,7 +11,7 @@
           </div>
         </div>
         <div v-else>
-          <h1 class='big-text post-title'>{{ post.title }}</h1>
+          <h1 class='big-text post-title' :id="post.id">{{ post.title }}</h1>
         </div>
         <div v-html='post.text'></div>
       </div>

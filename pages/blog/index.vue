@@ -18,7 +18,7 @@
               <div v-for='post in posts.slice(0, 2)' :key='post.id' class='post-preview main-page-blog' @click='toPost(post.id, post.type)'>
                 <div class='post-preview-img' v-html='post.cover'></div>
                 <div class='post-preview-content main-page-blog-preview-content'>
-                  <p>{{ post.title }}</p>
+                  <p :id="post.id">{{ post.title }}</p>
                   <p class='plot' v-html='post.plot'></p>
                   <p class='date'>Posted at: {{ post.created_at }}</p>
                 </div>
@@ -28,7 +28,7 @@
               <div v-for='post in posts.slice(2, 4)' :key='post.id' class='post-preview main-page-blog' @click='toPost(post.id, post.type)'>
                 <div class='post-preview-img' v-html='post.cover'></div>
                 <div class='post-preview-content main-page-blog-preview-content'>
-                  <p>{{ post.title }}</p>
+                  <p :id="post.id">{{ post.title }}</p>
                   <p class='plot' v-html='post.plot'></p>
                   <p class='date'>Posted at: {{ post.created_at }}</p>
                 </div>
