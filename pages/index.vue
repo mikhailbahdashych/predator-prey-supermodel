@@ -28,7 +28,7 @@
         <div v-if='latestReleases.length > 0' class="left-about">
           <h1 class="title">Latest releases &#128293;</h1>
           <div v-for='item of latestReleases' :key='item.id'>
-            <div class='post-preview home-page' @click='toPost(item.id, item.type)'>
+            <div :id="item.id" class='post-preview home-page' @click='toPost(item.id, item.type)'>
               <div class='post-preview-img home-page-img' v-html='item.cover'></div>
               <div class='post-preview-content home-page-preview-content'>
                 <p>{{ item.title }}</p>
