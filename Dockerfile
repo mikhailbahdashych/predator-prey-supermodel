@@ -1,15 +1,11 @@
-FROM node:11.13.0-alpine
+FROM node
 
-RUN mkdir -p /usr/src/nuxt-app
-WORKDIR /usr/src/nuxt-app
+WORKDIR /pnbfront
 
-RUN apk update && apk upgrade
-RUN apk add git
+COPY . .
 
-COPY . /usr/src/nuxt-app
-RUN npm run build
+RUN npm install
 
-EXPOSE 5000
+EXPOSE 8010
 
-ENV NUXT_HOST=127.0.0.1
-ENV NUXT_PORT=5000
+CMD [ "npm", "start" ]
