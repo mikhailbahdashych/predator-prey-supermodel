@@ -46,9 +46,16 @@ module.exports = {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/google-fonts'
     // '@nuxtjs/vuetify'
   ],
 
+  googleFonts: {
+    families: {
+      Ubuntu: [300],
+      Lato: [100]
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
