@@ -40,3 +40,7 @@ export const sendEmail = async payload => {
   return data
 }
 
+export const getTestData = async () => {
+  const { data } = await api.get('/test')
+  return data
+}

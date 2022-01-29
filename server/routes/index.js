@@ -6,7 +6,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const api = axios.create({
-  baseURL: process.env.PNB_API
+  baseURL: process.env.NODE_ENV === "development" ? process.env.PNB_API_DEV : process.env.PNB_API_PROD
 })
 
 const router = Router()
@@ -63,6 +63,15 @@ router.post(`/search`, async (req, res) => {
 router.post('/s-e', async (req, res) => {
   try {
     const data = await api.post('/send-email', req.body)
+    res.json(data.data)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
+router.get('/test', async (req, res) => {
+  try {
+    const data = await api.get('/test')
     res.json(data.data)
   } catch (e) {
     console.log(e)
