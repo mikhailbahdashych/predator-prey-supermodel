@@ -53,7 +53,8 @@ module.exports = {
   googleFonts: {
     families: {
       Ubuntu: [300],
-      Lato: [100]
+      Lato: [100],
+      'Merriweather+Sans': [100, 200, 300]
     }
   },
 
