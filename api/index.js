@@ -39,3 +39,8 @@ export const sendEmail = async payload => {
   const { data } = await api.post('/s-e', payload)
   return data
 }
+
+export const someTestEndpoint = async () => {
+  const { data } = await api.get('/test')
+  return data
+}

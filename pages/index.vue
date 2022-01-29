@@ -17,6 +17,7 @@
           <span class="typed-text">{{ typeValueFooter }}</span>
           <span class="cursor" :style="[showCursorFooter ? {'display' : 'inline-block'} : {'display' : 'none'}]" :class="{'typing': typeStatusFooter}">&nbsp;</span>
         </h1>
+        <h1 style='color: white'>{{test}}</h1>
       </div>
     </div>
 
@@ -105,7 +106,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import LatestReleasesSkeleton from '~/components/Skeletons/LatestReleasesSkeleton';
 import { typer } from '~/mixins/typer';
-import { getLatestReleases } from '~/api'
+import { getLatestReleases, someTestEndpoint } from '~/api'
 export default {
   components: {
     Header,
@@ -117,6 +118,7 @@ export default {
     return {
       loading: true,
       latestReleases: [],
+      test: null
     }
   },
   head() {
@@ -129,6 +131,7 @@ export default {
   mounted() {
     this.$nextTick(async () => {
       this.latestReleases = await getLatestReleases(3)
+      this.test = await someTestEndpoint()
       Object.keys(this.latestReleases).forEach(x => {
         this.latestReleases[x].created_at = moment(this.latestReleases[x].created_at).format('YYYY-MM-DD HH:mm:ss')
       })
