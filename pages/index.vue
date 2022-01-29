@@ -106,7 +106,7 @@ import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import LatestReleasesSkeleton from '~/components/Skeletons/LatestReleasesSkeleton';
 import { typer } from '~/mixins/typer';
-import { getLatestReleases, someTestEndpoint } from '~/api'
+import { getLatestReleases } from '~/api'
 export default {
   components: {
     Header,
@@ -131,7 +131,6 @@ export default {
   mounted() {
     this.$nextTick(async () => {
       this.latestReleases = await getLatestReleases(3)
-      this.test = await someTestEndpoint()
       Object.keys(this.latestReleases).forEach(x => {
         this.latestReleases[x].created_at = moment(this.latestReleases[x].created_at).format('YYYY-MM-DD HH:mm:ss')
       })
