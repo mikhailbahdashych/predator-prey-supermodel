@@ -2,7 +2,7 @@ FROM node
 
 ENV ENV_HOST=0.0.0.0
 
-WORKDIR /app
+WORKDIR /pnbfront
 
 COPY package*.json ./
 
