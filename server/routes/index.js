@@ -69,13 +69,4 @@ router.post('/s-e', async (req, res) => {
   }
 })
 
-router.get('/test', async (req, res) => {
-  try {
-    const data = await api.get('/test')
-    res.json(data.data)
-  } catch (e) {
-    console.log(e)
-  }
-})
-
 module.exports = router
