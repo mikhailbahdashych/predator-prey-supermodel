@@ -1,16 +1,16 @@
 FROM node
 
-ENV ENV_HOST=0.0.0.0
-
 WORKDIR /pnbfront
 
-COPY package*.json ./
+COPY package.json ./
 
 RUN npm install
 
 COPY . .
 
 RUN npm run build
+
+ENV ENV_HOST=0.0.0.0
 
 EXPOSE 8010
 
