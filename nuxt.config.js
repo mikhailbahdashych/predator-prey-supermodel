@@ -14,6 +14,7 @@ module.exports = {
     port: process.env.ENV_PORT,
     host: process.env.ENV_HOST
   },
+  target: 'static',
   head: {
     title: 'pnb',
     htmlAttrs: {
@@ -69,7 +70,6 @@ module.exports = {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  },
+  }
 
-  buildDir: 'dist'
 }
