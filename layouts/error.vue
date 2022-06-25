@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <div v-if='loading'></div>
-    <div v-else>
+  <div class="error-page">
+    <div class="error">
       <h1>You shouldn't be here! >:(</h1>
       <p>
         <nuxt-link class='nuxt-link' to='/'>
@@ -15,42 +14,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      loading: true
-    }
-  },
-  head() {
-    return {
-      bodyAttrs: {
-        class: 'reset-body-error'
-      }
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.loading = false
-    })
-  }
+  name: "error"
 }
 </script>
 
 <style lang='scss'>
-.reset-body-error {
-  text-align: center;
-  color: white;
-  font-size: 16px;
-  h1, p {
-    font-family: "Lato", sans-serif;
-  }
-  h1 {
-    font-size: 52px;
-  }
-  p {
-    font-size: 28px;
-  }
-  .nuxt-link {
-    color: #69BEEB;
-  }
-}
+@import '../assets/css/error';
 </style>
