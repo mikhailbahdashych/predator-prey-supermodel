@@ -1,7 +1,7 @@
 <template>
   <div class="checkbox-container">
     <label class="container">
-      <input type="checkbox" :value="innerValue" @input="onInput" :disabled="disabled">
+      <input type="checkbox" :value="innerValue" :disabled="disabled" @input="onInput" >
       <span class="checkmark"></span>
     </label>
     <p class="checkbox-paragraph" v-html="label" />
@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: "Checkbox",
   props: {
     label: {
       type: String,
@@ -24,18 +25,17 @@ export default {
       default: false
     }
   },
-  name: "Checkbox",
+  data() {
+    return {
+      innerValue: this.value
+    }
+  },
   watch: {
     value(value) {
       this.innerValue = value
     },
     innerValue(value) {
       this.$emit('input', value)
-    }
-  },
-  data() {
-    return {
-      innerValue: this.value
     }
   },
   methods: {

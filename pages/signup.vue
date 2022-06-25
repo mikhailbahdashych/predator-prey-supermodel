@@ -14,20 +14,32 @@
     <div class="login-inputs">
       <div v-if="status !== 1" class="login-inputs-container">
         <h1>Sign up</h1>
-        <Input :oneerror="email.emailError" :title="'Email'" :type="'text'" v-model="email.email" />
-        <Input :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement || passwordError.passwordRules" :title="'Password'" :type="'password'" v-model="password.password" />
-        <Input :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement || passwordError.passwordRules" :title="'Repeat password'" :type="'password'" v-model="password.passwordRepeat" />
+        <Input v-model="email.email"
+               :oneerror="email.emailError"
+               :title="'Email'"
+               :type="'text'"
+        />
+        <Input v-model="password.password"
+               :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement || passwordError.passwordRules"
+               :title="'Password'"
+               :type="'password'"
+        />
+        <Input v-model="password.passwordRepeat"
+               :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement || passwordError.passwordRules"
+               :title="'Repeat password'"
+               :type="'password'"
+        />
         <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
         <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
         <div v-if="passwordError.passwordRules" class="password-requirement">
 
-          <div v-for="rule in passwordRulesList" class="flex" :key="rule.text">
+          <div v-for="rule in passwordRulesList" :key="rule.text" class="flex">
             <div v-for="(item, i) in Object.entries(rule)" :key="i">
               <p>
-                <span class="paragraph" v-if="item[0] === 'text'">{{ item[1] }}</span>
+                <span v-if="item[0] === 'text'" class="paragraph">{{ item[1] }}</span>
                 <span v-else>
-                  <span class="paragraph success" v-if="item[1]">OK</span>
-                  <span class="paragraph error" v-else>NOT OK</span>
+                  <span v-if="item[1]" class="paragraph success">OK</span>
+                  <span v-else class="paragraph error">NOT OK</span>
                 </span>
               </p>
             </div>
@@ -38,7 +50,7 @@
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
         <Button :label="'Sign up'" :clickon="register" :disabled="!validFields()" />
       </div>
-      <div class="login-inputs-container" v-else>
+      <div v-else class="login-inputs-container">
         <h1>Confirmation email has been sent.</h1>
         <p class="paragraph medium">Please, follow the instruction in the email to complete registration process.</p>
         <p class="paragraph medium">The link will be valid for 24 hours.</p>
@@ -54,7 +66,7 @@ import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
 import {validateEmail, validatePassword, validatePasswordRules} from "~/helpers/frontValidator";
 export default {
-  name: "signup",
+  name: "Signup",
   components: {
     Input,
     Button,
