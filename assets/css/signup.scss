@@ -11,6 +11,9 @@
     height: 100vh;
     width: 50%;
     background-color: v.$bg1;
+    .login-title {
+      text-align: center;
+    }
     @media only screen and (max-width: 930px) {
       display: none;
     }

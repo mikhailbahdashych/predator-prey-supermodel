@@ -2,7 +2,7 @@
   <div class="login">
 
     <div class="login-content">
-      <h1 @click="redirect('/')">pNb</h1>
+      <h1 class="login-title" @click="redirect('/')">pNb</h1>
     </div>
 
     <div class="login-header">
