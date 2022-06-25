@@ -3,7 +3,6 @@
     <div class="inner-header">
       <nuxt-link to="/" class='nuxt-link'><h3>HOME</h3></nuxt-link>
       <nuxt-link id='blog-button-link' to="/blog" class='nuxt-link'><h3>BLOG</h3></nuxt-link>
-      <nuxt-link to="/contact" class='nuxt-link'><h3>CONTACT</h3></nuxt-link>
     </div>
   </div>
 </template>

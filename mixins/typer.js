@@ -1,27 +1,6 @@
 export const typer = {
   data() {
     return {
-      pics: [
-        {src: require('../assets/pics/js.svg'), alt: 'JS'},
-        {src: require('../assets/pics/c++.svg'), alt: 'C++'},
-        {src: require('../assets/pics/c-sharp.svg'), alt: 'C#'},
-        {src: require('../assets/pics/python.svg'), alt: 'Python'},
-        {src: require('../assets/pics/java.svg'), alt: 'Java'},
-        {src: require('../assets/pics/vuejs.svg'), alt: 'VueJS'},
-        {src: require('../assets/pics/nuxtjs.svg'), alt: 'Nuxt'},
-        {src: require('../assets/pics/reactjs.svg'), alt: 'React'},
-        {src: require('../assets/pics/angular.svg'), alt: 'Angular'},
-        {src: require('../assets/pics/springio.svg'), alt: 'Spring'},
-        {src: require('../assets/pics/expressjs.svg'), alt: 'Express'},
-        {src: require('../assets/pics/netcore.svg'), alt: '.NET Core'},
-        {src: require('../assets/pics/docker.svg'), alt: 'Docker'},
-        {src: require('../assets/pics/nodejs.svg'), alt: 'Node.js'},
-        {src: require('../assets/pics/mssql.svg'), alt: 'MsSQL'},
-        {src: require('../assets/pics/mongodb.svg'), alt: 'Mongo'},
-        {src: require('../assets/pics/mysql.svg'), alt: 'MySQL'},
-        {src: require('../assets/pics/postgresql.svg'), alt: 'PostgreSQL'}
-      ],
-
       typeValueMain: '',
       typeStatusMain: false,
       typeArrayMain: ['THE FUTURE IS HERE. THE FUTURE IS NOW.'],
@@ -41,16 +20,6 @@ export const typer = {
       typeArrayIndexSec: 0,
       charIndexSec: 0,
       showCursorSec: false,
-
-      typeValueFooter: '',
-      typeStatusFooter: false,
-      typeArrayFooter: ['PENTESTER\'S NOTES BLOG BY MIKHAIL BAHDASHYCH'],
-      typingSpeedFooter: 100,
-      erasingSpeedFooter: 100,
-      newTextDelayFooter: 1000,
-      typeArrayIndexFooter: 0,
-      charIndexFooter: 0,
-      showCursorFooter: false,
     }
   },
   methods: {
@@ -77,21 +46,7 @@ export const typer = {
       } else {
         this.typeStatusSec = false;
         this.showCursorSec = false;
-        this.showCursorFooter = true;
-        this.typeFooterText();
       }
     },
-    typeFooterText() {
-      if (this.charIndexFooter < this.typeArrayFooter[this.typeArrayIndexFooter].length) {
-        if (!this.typeStatusFooter)
-          this.typeStatusFooter = true;
-        this.typeValueFooter += this.typeArrayFooter[this.typeArrayIndexFooter].charAt(this.charIndexFooter);
-        this.charIndexFooter += 1;
-        setTimeout(this.typeFooterText, this.typingSpeedFooter);
-      } else {
-        this.typeStatusFooter = false;
-        this.showCursorFooter = true;
-      }
-    }
   }
 }
