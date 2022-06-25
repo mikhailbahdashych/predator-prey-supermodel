@@ -1,5 +1,9 @@
-p, h1, h2, h3, h4, h5, html, body {
+p, h1, h2, h3, h4, h5 {
   font-family: "Ubuntu", sans-serif;
+}
+
+html, body {
+  margin: 0;
 }
 
 .nuxt-link {

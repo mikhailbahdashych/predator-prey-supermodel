@@ -7,12 +7,9 @@
     </div>
 
     <div class="about">
-      <div class="right-about"></div>
     </div>
 
     <div class="about blog">
-      <div class="left-about"></div>
-      <div class="right-about"></div>
     </div>
 
     <Footer/>
@@ -37,9 +34,6 @@ export default {
   },
   head() {
     return {
-      bodyAttrs: {
-        class: 'reset-body'
-      }
     }
   },
   mounted() {
@@ -63,7 +57,4 @@ export default {
 
 <style lang='scss'>
 @import "../assets/css/homepage";
-.reset-body {
-  margin: 0;
-}
 </style>
