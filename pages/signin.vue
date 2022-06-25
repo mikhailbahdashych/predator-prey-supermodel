@@ -1,19 +1,9 @@
 <template>
   <div class="login">
 
-    <div class="login-content">
-      <h1 class="login-title" @click="redirect('/')">pNb</h1>
-    </div>
-
-    <div class="login-header">
-      <p class="paragraph right">Don't have account yet?
-        <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
-      </p>
-    </div>
-
     <div class="login-inputs">
       <div class="login-inputs-container" v-if="!phone.show && !twofa.show">
-        <h1>Log In</h1>
+        <h1>Sign In</h1>
 
         <div class="login-options">
           <p class="choose" @click="chooseLogin('email')">With Email</p>
@@ -39,7 +29,7 @@
 
         <Input @keyup.enter.native="signin" :oneerror="loginPassword.loginPasswordError" :title="'Password'" :type="'password'" v-model="loginPassword.password" />
         <p v-if="loginError === -1" class="paragraph error">Account doesn't exists or wasn't confirmed!</p>
-        <Button :label="'Log In'" :clickon="signin" />
+        <Button :label="'Sign In'" :clickon="signin" />
         <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
 
       </div>
@@ -56,6 +46,16 @@
 
       <div class="login-inputs-container" v-else-if="phone.show"></div>
 
+    </div>
+
+    <div class="login-content">
+      <h1 class="login-title" @click="redirect('/')">pNb</h1>
+    </div>
+
+    <div class="login-header">
+      <p class="paragraph left">Don't have account yet?
+        <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
+      </p>
     </div>
 
   </div>
