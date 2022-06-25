@@ -4,7 +4,6 @@
       class="basic-button"
       :disabled="disabled"
       :class="additionalClass"
-      @click="$emit('show')"
     >
       <p>{{ label }}</p>
     </button>

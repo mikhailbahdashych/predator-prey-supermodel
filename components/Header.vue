@@ -18,10 +18,10 @@
         </div>
         <div class="header-content">
           <div class="header-button">
-            <Button :label="'SIGN IN'" :additional-class="'transparent'" />
+            <Button :click-on="signIn" :label="'SIGN IN'" :additional-class="'transparent'" />
           </div>
           <div class="header-button">
-            <Button :label="'SIGN UP'" />
+            <Button :click-on="signUp" :label="'SIGN UP'" />
           </div>
         </div>
       </div>
@@ -35,6 +35,14 @@ export default {
   name: 'Header',
   components: {
     Button
+  },
+  methods: {
+    async signIn() {
+      return await this.$router.push({ path: '/signin' })
+    },
+    async signUp() {
+      return await this.$router.push({ path: '/signup' })
+    }
   }
 }
 </script>

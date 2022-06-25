@@ -1,3 +1,5 @@
+@use "../variables" as v;
+
 .header {
   display: flex;
   width: 100%;
@@ -25,7 +27,7 @@
         }
       }
       .header-links:hover {
-        color: green;
+        color: v.$mcm;
         transform: scale(1.1);
       }
     }
