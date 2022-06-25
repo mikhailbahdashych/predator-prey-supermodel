@@ -2,12 +2,12 @@
   <div class="login">
 
     <div class="login-content">
-      <h1 @click="redirect('/')">Logo</h1>
+      <h1 class="login-title" @click="redirect('/')">pNb</h1>
     </div>
 
     <div class="login-header">
       <p class="paragraph right">Don't have account yet?
-        <span class="paragraph link" @click="redirect('/register')">Register now!</span>
+        <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
       </p>
     </div>
 

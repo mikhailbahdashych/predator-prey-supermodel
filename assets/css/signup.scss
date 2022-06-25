@@ -13,6 +13,7 @@
     background-color: v.$bg1;
     .login-title {
       text-align: center;
+      font-size: 52px;
     }
     @media only screen and (max-width: 930px) {
       display: none;
@@ -49,6 +50,14 @@
       width: 450px;
       .login-options {
         display: flex;
+        .vertical-line {
+          width: 1px;
+          background-color: white;
+          height: 50px;
+          float: left;
+          opacity: 0.5;
+          margin: 0 20px 0 20px;
+        }
         .choose {
           cursor: pointer;
           transition: .2s;
