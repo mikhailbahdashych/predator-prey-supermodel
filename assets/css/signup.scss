@@ -5,11 +5,11 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: v.$bg1;
+  background-color: v.$bg3;
 
   .login-content {
     height: 100vh;
-    width: 40%;
+    width: 50%;
     background-color: v.$bg1;
     @media only screen and (max-width: 930px) {
       display: none;

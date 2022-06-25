@@ -1,5 +1,8 @@
+@use "variables" as v;
+
 p, h1, h2, h3, h4, h5 {
   font-family: "Ubuntu", sans-serif;
+  color: white;
 }
 
 html, body {
@@ -8,5 +11,22 @@ html, body {
 
 .nuxt-link {
   text-decoration: none;
-  color: white;
+  color: v.$mcl;
 }
+
+.paragraph {
+  font-size: 14px;
+  opacity: 0.9;
+  color: v.$mcl;
+  &.average { font-size: 16px; }
+  &.medium { font-size: 18px; }
+  &.large { font-size: 24px; }
+  &.right { float: right; }
+  &.error { color: v.$error; }
+  &.on-white-paragraph { color: black; }
+  &.link { color: v.$mcm; cursor: pointer; text-decoration: underline }
+  &.success { color: lightgreen }
+  &.opacity { opacity: 0.5; }
+  &.bold { font-weight: 500 }
+}
+
