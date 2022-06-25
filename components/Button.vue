@@ -1,12 +1,12 @@
 <template>
   <div @click="clickOn">
     <button
-      @click="$emit('show')"
-      :disabled="disabled"
       class="basic-button"
+      :disabled="disabled"
       :class="additionalClass"
+      @click="$emit('show')"
     >
-      {{ label }}
+      <p>{{ label }}</p>
     </button>
   </div>
 </template>

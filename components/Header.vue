@@ -4,7 +4,7 @@
       <div class="header-content">
         <div class="header-content">
           <nuxt-link to="/" class='nuxt-link'>
-            <h3 class="header-links">pNb</h3>
+            <h3 class="header-links logo">pNb</h3>
           </nuxt-link>
           <nuxt-link to="/" class='nuxt-link'>
             <h3 class="header-links">FORUM</h3>
