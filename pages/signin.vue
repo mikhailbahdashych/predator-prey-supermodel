@@ -64,12 +64,14 @@
 <script>
 import Input from "~/components/Input";
 import Button from "~/components/Button";
+import InputTwoFa from "~/components/InputTwoFa";
 import {validateEmail, validatePasswordLength} from "~/helpers/frontValidator";
 export default {
   name: "Signin",
   components: {
     Input,
     Button,
+    InputTwoFa
   },
   watch: {
     'loginEmail.email': {
