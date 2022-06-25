@@ -9,8 +9,8 @@
           <nuxt-link to="/" class='nuxt-link'><h3>BLOG</h3></nuxt-link>
         </div>
         <div class="header-content">
-          <nuxt-link to="/" class='nuxt-link'><h3>SIGN IN</h3></nuxt-link>
-          <nuxt-link to="/" class='nuxt-link'><h3>SIGN UP</h3></nuxt-link>
+          <div class="header-button"><Button :label="'SIGN IN'" :additional-class="'transparent'" /></div>
+          <div class="header-button"><Button :label="'SIGN UP'" /></div>
         </div>
       </div>
     </div>
@@ -18,11 +18,15 @@
 </template>
 
 <script>
+import Button from "~/components/Button";
 export default {
-  name: 'Header'
+  name: 'Header',
+  components: {
+    Button
+  }
 }
 </script>
 
 <style lang='scss'>
-@import '../assets/css/main';
+@import '../assets/css/Header';
 </style>

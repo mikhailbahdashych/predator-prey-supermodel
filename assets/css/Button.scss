@@ -1,0 +1,19 @@
+.basic-button {
+  height: 36px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid green;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  transition: 0.5s;
+}
+
+.basic-button:disabled {
+  background-color: rgba(green, 0.5);
+  cursor: auto;
+}
+
+.transparent {
+  background-color: transparent;
+  color: green;
+}
