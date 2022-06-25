@@ -1,8 +1,18 @@
 <template>
   <div class="header">
     <div class="inner-header">
-      <nuxt-link to="/" class='nuxt-link'><h3>HOME</h3></nuxt-link>
-      <nuxt-link id='blog-button-link' to="/blog" class='nuxt-link'><h3>BLOG</h3></nuxt-link>
+      <div class="header-content">
+        <div class="header-content">
+          <nuxt-link to="/" class='nuxt-link'><h3>pNb</h3></nuxt-link>
+          <nuxt-link to="/" class='nuxt-link'><h3>FORUM</h3></nuxt-link>
+          <nuxt-link to="/" class='nuxt-link'><h3>Q&A</h3></nuxt-link>
+          <nuxt-link to="/" class='nuxt-link'><h3>BLOG</h3></nuxt-link>
+        </div>
+        <div class="header-content">
+          <nuxt-link to="/" class='nuxt-link'><h3>SIGN IN</h3></nuxt-link>
+          <nuxt-link to="/" class='nuxt-link'><h3>SIGN UP</h3></nuxt-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
