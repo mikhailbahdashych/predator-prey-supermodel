@@ -21,7 +21,6 @@
     "highlight.js": "^11.4.0",
     "moment": "^2.29.1",
     "nuxt": "^2.15.7",
-    "v-calendar": "^2.3.4",
     "v-click-outside": "^3.1.2",
     "vue": "^2.6.14"
   },

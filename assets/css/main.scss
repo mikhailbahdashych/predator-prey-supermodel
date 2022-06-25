@@ -2,58 +2,7 @@ p, h1, h2, h3, h4, h5, html, body {
   font-family: "Ubuntu", sans-serif;
 }
 
-.main {
-  background-color: #181919;
-}
-
 .nuxt-link {
   text-decoration: none;
   color: white;
-}
-
-.code-block {
-  display: inline-block;
-  align-items: center;
-  background-color: #363636;
-  border-radius: 5px;
-  padding: 4px 4px 4px 8px;
-  font-family: "Menlo", sans-serif;
-  color: white;
-  transition: 0.25s;
-  &.code-block-hover:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px #038a03;
-    cursor: pointer;
-  }
-}
-
-@keyframes pulse-bg {
-  0% {
-    background-color: #222;
-  }
-  50% {
-    background-color: #303030;
-  }
-  100% {
-    background-color: #222;
-  }
-}
-
-.skeleton-text {
-  background-color: #3f3f3f;
-  width: 50%;
-  height: 12px;
-  margin: 10px;
-  border-radius: 5px;
-  animation: pulse-bg 1s infinite;
-  &.skeleton-header {
-    height: 35px;
-    margin: 15px auto;
-  }
-  &.plot {
-    width: 80%;
-    &.skeleton-text-centered {
-      margin: 10px auto;
-    }
-  }
 }

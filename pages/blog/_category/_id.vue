@@ -42,7 +42,6 @@
             </div>
           </div>
         </div>
-        <PostsListsSkeleton v-if='loading' q="5" />
 
         <div v-if='!loading'>
           <div v-for='p of posts' :key='p.id'>
@@ -75,7 +74,6 @@ import { getPostById, getPostsByCategory } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 import Search from '~/components/Search';
-import PostsListsSkeleton from '~/components/Skeletons/PostsListsSkeleton';
 
 import 'highlight.js/styles/github-dark-dimmed.css';
 hljs.registerLanguage('javascript', javascript);
@@ -86,8 +84,7 @@ export default {
   components: {
     Footer,
     SideBar,
-    Search,
-    PostsListsSkeleton
+    Search
   },
   directives: {
     clickOutside: vClickOutside.directive

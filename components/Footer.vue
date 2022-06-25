@@ -19,5 +19,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "assets/css/footer";
+@import "../assets/css/components/Footer";
 </style>

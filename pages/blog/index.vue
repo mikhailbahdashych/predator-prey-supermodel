@@ -11,7 +11,6 @@
       </div>
       <div class='latest-releases'>
 
-        <BlogMainPageSkeleton v-if='loading' />
         <div v-if='!loading'>
           <div class='container-block'>
             <div class='items'>
@@ -47,7 +46,6 @@ import moment from 'moment'
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 import Search from '~/components/Search';
-import BlogMainPageSkeleton from '~/components/Skeletons/BlogMainPageSkeleton';
 import { getSelectedReleases } from '~/api';
 export default {
   name: 'Blog',
@@ -55,7 +53,6 @@ export default {
     Footer,
     SideBar,
     Search,
-    BlogMainPageSkeleton
   },
   data() {
     return {

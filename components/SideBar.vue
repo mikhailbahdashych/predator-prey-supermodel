@@ -102,6 +102,6 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "../assets/css/sidebar";
+@import "../assets/css/components/Sidebar";
 @import "../assets/css/main";
 </style>

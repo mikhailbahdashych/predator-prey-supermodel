@@ -1,6 +1,9 @@
+@use "variables" as v;
+
 .content {
   height: 700px;
   text-align: center;
+  background-color: v.$bg2;
   .center-text {
     padding: 180px 0;
     h3 {

@@ -3,7 +3,6 @@
     <Header />
     <div class="content">
       <div class="center-text">
-
       </div>
     </div>
 
