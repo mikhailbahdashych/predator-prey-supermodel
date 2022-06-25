@@ -1,6 +1,6 @@
 export const validateEmail = (email) => {
   if (email) {
-    const regex = /[a-z\d!#$%&*+/=?^_`{|}~-]+(?:\\.[a-z\d!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z\d](?:[a-z\d-]*[a-z\d])?\\.)+[a-z\d](?:[a-z\d-]*[a-z\d])?/
+    const regex = new RegExp('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')
     return regex.test(email);
   } else if (email === '') {
     return 1
@@ -11,7 +11,7 @@ export const validateEmail = (email) => {
 
 export const validatePassword = (password) => {
   if (password) {
-    const regex = /"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"/
+    const regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
     return regex.test(password)
   } else {
     return null
