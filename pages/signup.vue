@@ -7,7 +7,7 @@
 
     <div class="login-header">
       <p class="paragraph right">Already have account?
-        <span class="paragraph link" @click="redirect('/login')">Log in!</span>
+        <span class="paragraph link" @click="redirect('/signin')">Sign in!</span>
       </p>
     </div>
 
@@ -20,12 +20,12 @@
                :type="'text'"
         />
         <Input v-model="password.password"
-               :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement || passwordError.passwordRules"
+               :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
                :title="'Password'"
                :type="'password'"
         />
         <Input v-model="password.passwordRepeat"
-               :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement || passwordError.passwordRules"
+               :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
                :title="'Repeat password'"
                :type="'password'"
         />
@@ -48,7 +48,7 @@
 
         <Checkbox v-model="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
-        <Button :label="'Sign up'" :clickon="register" :disabled="!validFields()" />
+        <Button :label="'Sign up'" :click-on="register" :disabled="!validFields()" />
       </div>
       <div v-else class="login-inputs-container">
         <h1>Confirmation email has been sent.</h1>
@@ -134,8 +134,14 @@ export default {
         (!this.passwordError.passwordMismatch && !this.passwordError.passwordRequirement && !this.passwordError.passwordRules)
     },
     validPassword() {
-      // @TODO Fix error list + do smt with regexes
-      this.passwordRulesList = validatePasswordRules(this.password.password)
+      const passwordRuleCheck = validatePasswordRules(this.password.password)
+      Object.entries(passwordRuleCheck).forEach(item => {
+        this.passwordRulesList.forEach(rule => {
+          Object.entries(rule).forEach(x => {
+            if (item[0] === x[0]) rule[item[0]] = item[1]
+          })
+        })
+      })
       this.passwordError.passwordMismatch = !!((this.password.password && this.password.passwordRepeat) && (this.password.password !== this.password.passwordRepeat));
       this.passwordError.passwordRequirement = !this.password.password || !this.password.passwordRepeat;
       this.passwordError.passwordRules = !!(!validatePassword(this.password.password) || !validatePassword(this.password.passwordRepeat));

@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: v.$bg3;
+  background-color: v.$bg2;
 
   .login-content {
     height: 100vh;
@@ -58,6 +58,20 @@
       .login-inputs-container-two-fa {
         text-align: center;
       }
+
+      .password-requirement {
+        border-radius: 5px;
+        border: 1px solid rgba(#fff,0.9);
+        .flex {
+          display: flex;
+        }
+        p {
+          padding-left: 15px;
+          color: white;
+          opacity: 0.9;
+        }
+      }
+
     }
   }
 }
