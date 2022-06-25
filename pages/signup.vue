@@ -2,7 +2,7 @@
   <div class="login">
 
     <div class="login-content">
-      <h1 @click="redirect('/')">Logo</h1>
+      <h1 @click="redirect('/')">pNb</h1>
     </div>
 
     <div class="login-header">
@@ -122,6 +122,7 @@ export default {
         (!this.passwordError.passwordMismatch && !this.passwordError.passwordRequirement && !this.passwordError.passwordRules)
     },
     validPassword() {
+      // @TODO Fix error list + do smt with regexes
       this.passwordRulesList = validatePasswordRules(this.password.password)
       this.passwordError.passwordMismatch = !!((this.password.password && this.password.passwordRepeat) && (this.password.password !== this.password.passwordRepeat));
       this.passwordError.passwordRequirement = !this.password.password || !this.password.passwordRepeat;

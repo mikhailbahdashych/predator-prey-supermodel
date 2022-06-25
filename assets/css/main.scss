@@ -30,3 +30,8 @@ html, body {
   &.bold { font-weight: 500 }
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: v.$mcm;
+}

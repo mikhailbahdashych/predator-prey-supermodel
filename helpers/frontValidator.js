@@ -1,6 +1,6 @@
 export const validateEmail = (email) => {
   if (email) {
-    const regex = /'[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?'/
+    const regex = /[a-z\d!#$%&*+/=?^_`{|}~-]+(?:\\.[a-z\d!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z\d](?:[a-z\d-]*[a-z\d])?\\.)+[a-z\d](?:[a-z\d-]*[a-z\d])?/
     return regex.test(email);
   } else if (email === '') {
     return 1
