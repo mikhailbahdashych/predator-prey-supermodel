@@ -21,8 +21,8 @@
         <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
         <div v-if="passwordError.passwordRules" class="password-requirement">
 
-          <div v-for="rule in passwordRulesList" class="flex">
-            <div v-for="(item) in Object.entries(rule)">
+          <div v-for="rule in passwordRulesList" class="flex" :key="rule.text">
+            <div v-for="(item, i) in Object.entries(rule)" :key="i">
               <p>
                 <span class="paragraph" v-if="item[0] === 'text'">{{ item[1] }}</span>
                 <span v-else>
@@ -52,6 +52,7 @@
 import Input from "~/components/Input";
 import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
+import {validateEmail, validatePassword, validatePasswordRules} from "~/helpers/frontValidator";
 export default {
   name: "signup",
   components: {
@@ -59,9 +60,94 @@ export default {
     Button,
     Checkbox
   },
+  data() {
+    return {
+      email: {
+        email: null,
+        emailError: false,
+      },
+
+      password: {
+        password: null,
+        passwordRepeat: null,
+      },
+
+      status: null,
+      tac: false,
+      error: false,
+
+      passwordError: {
+        passwordMismatch: false,
+        passwordRequirement: false,
+        passwordRules: false
+      },
+      passwordRulesList: [
+        {eightChars: false, text: 'Password length should be more than 8 characters'},
+        {uppCase: false, text: 'Password should contain at least one uppercase character'},
+        {lowCase: false, text: 'Password should contain at least one lowercase character'},
+        {specChar: false, text: 'Password should contain at least one special character'},
+        {digitChar: false, text: 'Password should contain at least one digit character'}
+      ]
+    }
+  },
+  watch: {
+    'password.password': {
+      handler: function () {
+        if (this.password.password === this.password.passwordRepeat) { this.passwordError.passwordMismatch = false }
+        this.validPassword()
+      }
+    },
+    'password.passwordRepeat': {
+      handler: function () {
+        if (this.password.password === this.password.passwordRepeat) { this.passwordError.passwordMismatch = false }
+        this.validPassword()
+      }
+    },
+    'email.email': {
+      handler: function () {
+        if (!validateEmail(this.email.email)) this.email.emailError = true
+        else if (validateEmail(this.email.email) === 1) this.email.emailError = false
+        else this.email.emailError = false
+      }
+    },
+  },
+  methods: {
+    async redirect(path) {
+      await this.$router.push({ path })
+    },
+    validFields() {
+      return this.tac &&
+        !this.email.emailError &&
+        this.email.email && this.password.password && this.password.passwordRepeat &&
+        (!this.passwordError.passwordMismatch && !this.passwordError.passwordRequirement && !this.passwordError.passwordRules)
+    },
+    validPassword() {
+      this.passwordRulesList = validatePasswordRules(this.password.password)
+      this.passwordError.passwordMismatch = !!((this.password.password && this.password.passwordRepeat) && (this.password.password !== this.password.passwordRepeat));
+      this.passwordError.passwordRequirement = !this.password.password || !this.password.passwordRepeat;
+      this.passwordError.passwordRules = !!(!validatePassword(this.password.password) || !validatePassword(this.password.passwordRepeat));
+      if (!this.password.password && !this.password.passwordRepeat) {
+        this.passwordError.passwordMismatch = false
+        this.passwordError.passwordRequirement = false
+        this.passwordError.passwordRules = false
+      }
+    },
+    register() {
+      if (this.validFields()) {
+        // await register({
+        //   email: this.email.email,
+        //   password: this.password.password,
+        // }).then(async (res) => {
+        //   if (res.status === -1) return this.status = res.status
+        // }).catch(() => {
+        //   this.status = -1
+        // })
+      }
+    }
+  }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@import '../assets/css/signup';
 </style>
