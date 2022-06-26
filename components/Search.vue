@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import { search } from '~/api';
 export default {
   name: 'Search',
   data() {
@@ -53,7 +52,7 @@ export default {
     }
   },
   methods: {
-    async search() {
+    search() {
       // @TODO do loader
       this.showInputError = false
       const validInput = this.inputRegex.test(this.searchInput)
@@ -64,9 +63,7 @@ export default {
         return
       }
       if (this.searchInput.length > 1) {
-        this.result = await search({
-          input: this.searchInput
-        })
+        this.result = null
       }
       this.localLoader = false
     },

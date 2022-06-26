@@ -42,11 +42,9 @@
 </template>
 
 <script>
-import moment from 'moment'
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 import Search from '~/components/Search';
-import { getSelectedReleases } from '~/api';
 export default {
   name: 'Blog',
   components: {
@@ -66,15 +64,6 @@ export default {
       ],
       loading: true
     }
-  },
-  mounted() {
-    this.$nextTick(async () => {
-      this.posts = await getSelectedReleases(4)
-      Object.keys(this.posts).forEach(x => {
-        this.posts[x].created_at = moment(this.posts[x].created_at).format('YYYY-MM-DD HH:mm:ss')
-      })
-      this.loading = false
-    })
   },
   methods: {
     toPost(id, type) {
