@@ -24,24 +24,24 @@
         </div>
 
         <InputWithButton
+          v-model="resetPasswordEmail.email"
           :error="resetPasswordEmail.emailError"
           :button-click-on="() => {}"
           :title="'Email'"
           :focus="resetPasswordEmail.emailFocus"
           :button-title="'Send code'"
           :style="[!resetPasswordLoginWithEmail ? {'display': 'none'} : {'': ''}]"
-          v-model="resetPasswordEmail.email"
         />
         <InputWithButton
+          v-model="resetPasswordPhone.phone"
           :button-click-on="() => {}"
           :title="'Phone'"
           :focus="resetPasswordPhone.phoneFocus"
           :button-title="'Send code'"
           :style="[resetPasswordLoginWithEmail ? {'display': 'none'} : {'': ''}]"
-          v-model="resetPasswordPhone.phone"
         />
 
-        <Input @keyup.enter.native="() => {}" :title="'Verification code'" />
+        <Input :title="'Verification code'" @keyup.enter.native="() => {}" />
         <Button :label="'Submit'" :clickon="() => {}" />
       </div>
     </div>
@@ -54,17 +54,10 @@ import InputWithButton from "~/components/InputWithButton";
 import Button from "~/components/Button";
 import { validateEmail } from "~/helpers/frontValidator";
 export default {
-  name: "reset-password",
+  name: "ResetPassword",
   components: {
     InputWithButton,
     Button
-  },
-  watch: {
-    'resetPasswordEmail.email': {
-      handler: function () {
-        this.resetPasswordEmail.emailError = !validateEmail(this.resetPasswordEmail.email)
-      }
-    },
   },
   data() {
     return {
@@ -83,12 +76,19 @@ export default {
       resetPasswordLoginWithEmail: false
     }
   },
+  watch: {
+    'resetPasswordEmail.email': {
+      handler: function () {
+        this.resetPasswordEmail.emailError = !validateEmail(this.resetPasswordEmail.email)
+      }
+    },
+  },
   mounted() {
     this.chooseOption('email')
   },
   methods: {
     redirect(path) {
-      this.$router.push({ path })
+      this.$router.push({path})
     },
     chooseOption(option) {
       if (option === 'email') this.setResetPasswordEmailFocusLogin()

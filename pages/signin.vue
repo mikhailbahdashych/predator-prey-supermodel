@@ -45,12 +45,12 @@
         <div class="login-inputs-container-two-fa">
           <p class="paragraph">Please, provide Google Authenticator code to continue</p>
           <InputTwoFa :twofa="twofa.code" @returnTwofa="returnTwofa" />
-          <p v-if="this.twofa.error" class="paragraph error">Wrong code!</p>
+          <p v-if="twofa.error" class="paragraph error">Wrong code!</p>
           <p class="paragraph right link">Unable to login with 2FA?</p>
         </div>
       </div>
 
-      <div class="login-inputs-container" v-else-if="phone.show"></div>
+      <div v-else-if="phone.show" class="login-inputs-container"></div>
 
     </div>
 
@@ -81,18 +81,6 @@ export default {
     Button,
     InputTwoFa
   },
-  watch: {
-    'loginEmail.email': {
-      handler: function () {
-        this.loginEmail.loginEmailError = !validateEmail(this.loginEmail.email)
-      }
-    },
-    'loginPassword.password': {
-      handler: function () {
-        this.loginPassword.loginPasswordError = !validatePasswordLength(this.loginPassword.password)
-      }
-    },
-  },
   data() {
     return {
       loginEmail: {
@@ -113,6 +101,18 @@ export default {
       twofa: { code: [], show: false, error: false },
       phone: { phone: null, show: false, error: false }
     }
+  },
+  watch: {
+    'loginEmail.email': {
+      handler: function () {
+        this.loginEmail.loginEmailError = !validateEmail(this.loginEmail.email)
+      }
+    },
+    'loginPassword.password': {
+      handler: function () {
+        this.loginPassword.loginPasswordError = !validatePasswordLength(this.loginPassword.password)
+      }
+    },
   },
   methods: {
     signin() {
