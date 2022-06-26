@@ -16,8 +16,8 @@
       >
       <div @click="buttonClickOn">
         <button
-          @click="$emit('show')"
           class="basic-button input-with-button"
+          @click="$emit('show')"
         >
           {{ buttonTitle }}
         </button>
@@ -83,6 +83,11 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      innerValue: this.value
+    }
+  },
   watch: {
     focus: function() {
       if (this.focus) this.$refs.name.focus()
@@ -95,11 +100,6 @@ export default {
     },
     innerValue(value) {
       this.$emit('input', value)
-    }
-  },
-  data() {
-    return {
-      innerValue: this.value
     }
   },
   methods: {
