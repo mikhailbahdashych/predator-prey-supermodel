@@ -18,10 +18,10 @@
         </div>
         <div class="header-content">
           <div class="header-button">
-            <Button :click-on="signIn" :label="'SIGN IN'" :additional-class="'transparent'" />
+            <Button :click-handler="signIn" :label="'SIGN IN'" :additional-class="'transparent'" />
           </div>
           <div class="header-button">
-            <Button :click-on="signUp" :label="'SIGN UP'" />
+            <Button :click-handler="signUp" :label="'SIGN UP'" />
           </div>
         </div>
       </div>

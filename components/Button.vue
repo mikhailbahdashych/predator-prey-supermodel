@@ -1,5 +1,5 @@
 <template>
-  <div @click="clickOn">
+  <div @click="clickHandler">
     <button
       class="basic-button"
       :disabled="disabled"
@@ -22,7 +22,7 @@ export default {
       type: Boolean,
       default: false
     },
-    clickOn: {
+    clickHandler: {
       type: Function,
       default: () => {}
     },

@@ -42,7 +42,7 @@
         />
 
         <Input :title="'Verification code'" @keyup.enter.native="() => {}" />
-        <Button :label="'Submit'" :clickon="() => {}" :additional-class="'big'" />
+        <Button :label="'Submit'" :click-handler="() => {}" :additional-class="'big'" />
       </div>
     </div>
 

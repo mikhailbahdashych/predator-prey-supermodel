@@ -35,7 +35,7 @@
           @keyup.enter.native="signin"
         />
         <p v-if="loginError === -1" class="paragraph error">Account doesn't exists or wasn't confirmed!</p>
-        <Button :label="'Sign In'" :clickon="signin" :additional-class="'big'" />
+        <Button :label="'Sign In'" :click-handler="signin" :additional-class="'big'" />
         <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
 
       </div>

@@ -62,7 +62,7 @@
 
         <Checkbox v-model="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
-        <Button :label="'Sign up'" :click-on="register" :disabled="!validFields()" :additional-class="'big'" />
+        <Button :label="'Sign up'" :click-handler="register" :disabled="!validFields()" :additional-class="'big'" />
       </div>
       <div v-else class="login-inputs-container">
         <h1>Confirmation email has been sent.</h1>
