@@ -2,7 +2,7 @@
   <div class="login">
 
     <div class="login-inputs">
-      <div class="login-inputs-container" v-if="!phone.show && !twofa.show">
+      <div v-if="!phone.show && !twofa.show" class="login-inputs-container">
         <h1>Sign In</h1>
 
         <div class="login-options">
@@ -12,29 +12,35 @@
         </div>
 
         <Input
+          v-model="loginEmail.email"
           :oneerror="loginEmail.loginEmailError"
           :style="[!loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
           :focus="loginEmail.emailFocus"
           :title="'Email'"
           :type="'email'"
-          v-model="loginEmail.email"
         />
         <Input
+          v-model="loginPhone.phone"
           :style="[loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
           :focus="loginPhone.phoneFocus"
           :title="'Phone number'"
           :type="'email'"
-          v-model="loginPhone.phone"
         />
 
-        <Input @keyup.enter.native="signin" :oneerror="loginPassword.loginPasswordError" :title="'Password'" :type="'password'" v-model="loginPassword.password" />
+        <Input
+          v-model="loginPassword.password"
+          :oneerror="loginPassword.loginPasswordError"
+          :title="'Password'"
+          :type="'password'"
+          @keyup.enter.native="signin"
+        />
         <p v-if="loginError === -1" class="paragraph error">Account doesn't exists or wasn't confirmed!</p>
         <Button :label="'Sign In'" :clickon="signin" />
         <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
 
       </div>
 
-      <div class="login-inputs-container" v-else-if="twofa.show">
+      <div v-else-if="twofa.show" class="login-inputs-container">
         <h1>Two-Factor authentication</h1>
         <div class="login-inputs-container-two-fa">
           <p class="paragraph">Please, provide Google Authenticator code to continue</p>

@@ -14,20 +14,23 @@
     <div class="login-inputs">
       <div v-if="status !== 1" class="login-inputs-container">
         <h1>Sign up</h1>
-        <Input v-model="email.email"
-               :oneerror="email.emailError"
-               :title="'Email'"
-               :type="'text'"
+        <Input
+          v-model="email.email"
+          :oneerror="email.emailError"
+          :title="'Email'"
+          :type="'text'"
         />
-        <Input v-model="password.password"
-               :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
-               :title="'Password'"
-               :type="'password'"
+        <Input
+          v-model="password.password"
+          :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+          :title="'Password'"
+          :type="'password'"
         />
-        <Input v-model="password.passwordRepeat"
-               :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
-               :title="'Repeat password'"
-               :type="'password'"
+        <Input
+          v-model="password.passwordRepeat"
+          :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+          :title="'Repeat password'"
+          :type="'password'"
         />
         <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
         <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
