@@ -55,7 +55,7 @@
     </div>
 
     <div class="login-content">
-      <h1 class="login-title" @click="redirect('/')">
+      <h1 class="login-title center" @click="redirect('/')">
         <span class="login-title-header">pNb</span>
       </h1>
     </div>
@@ -74,6 +74,7 @@ import Input from "~/components/Input";
 import Button from "~/components/Button";
 import InputTwoFa from "~/components/InputTwoFa";
 import {validateEmail, validatePasswordLength} from "~/helpers/frontValidator";
+import {signIn} from "~/api";
 export default {
   name: "Signin",
   components: {
@@ -115,12 +116,36 @@ export default {
     },
   },
   methods: {
-    signin() {
+    async signin() {
       if (
         (this.loginEmail.email || this.loginPhone.phone) &&
         (!this.loginEmail.loginEmailError && !this.loginPassword.loginPasswordError)
       ) {
-        //
+        const res = await signIn({
+          email: this.loginEmail.email,
+          phone: this.loginPhone.phone,
+          password: this.loginPassword.password,
+          twofa: this.twofa.code.join('')
+        })
+
+        if (res.status === -1) {
+          this.loginError = -1
+          return
+        }
+
+        if (res.twofa) {
+          this.twofa.show = true
+        } else if (res.phone) {
+          this.phone.show = true
+        } else if (!res.status) {
+          localStorage.setItem('token', res)
+          localStorage.setItem('email', this.loginEmail.email)
+          await this.$router.push({path: '/account'})
+        } else if (this.twofa.code) {
+          this.twofa.error = true
+        } else {
+          this.phone.error = true
+        }
       } else {
         this.loginEmail.loginEmailError = true
         this.loginPassword.loginPasswordError = true

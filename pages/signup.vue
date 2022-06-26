@@ -79,6 +79,7 @@ import Input from "~/components/Input";
 import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
 import {validateEmail, validatePassword, validatePasswordRules} from "~/helpers/frontValidator";
+import {signUp} from "~/api";
 export default {
   name: "Signup",
   components: {
@@ -165,16 +166,16 @@ export default {
         this.passwordError.passwordRules = false
       }
     },
-    register() {
+    async register() {
       if (this.validFields()) {
-        // await register({
-        //   email: this.email.email,
-        //   password: this.password.password,
-        // }).then(async (res) => {
-        //   if (res.status === -1) return this.status = res.status
-        // }).catch(() => {
-        //   this.status = -1
-        // })
+        await signUp({
+          email: this.email.email,
+          password: this.password.password,
+        }).then((res) => {
+          if (res.status === -1) this.status = res.status
+        }).catch(() => {
+          this.status = -1
+        })
       }
     }
   }
