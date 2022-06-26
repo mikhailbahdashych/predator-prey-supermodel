@@ -11,11 +11,19 @@ const api = axios.create({
 })
 
 export const signIn = async payload => {
-  const { data } = await api.post('s-i', payload)
-  return data
+  try {
+    const { data } = await api.post('s-i', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
 }
 
 export const signUp = async payload => {
-  const { data } = await api.post('s-u', payload)
-  return data
+  try {
+    const { data } = await api.post('s-u', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
 }
