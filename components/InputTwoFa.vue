@@ -1,7 +1,7 @@
 <template>
   <div :class="onwhite ? 'on-white' : ''">
     <input
-      class="input-two-fa"
+      class="input-two-fa center"
       :id="`n1`" type="number"
       v-model="i1"
       :disabled="disabled"
@@ -12,7 +12,7 @@
       oninput="if (this.value === '') { if (this.previousElementSibling) {this.previousElementSibling.focus()} } else { this.nextElementSibling.focus() }"
     >
     <input
-      class="input-two-fa"
+      class="input-two-fa center"
       :id="`n2`" type="number"
       v-model="i2"
       :disabled="disabled"
@@ -23,7 +23,7 @@
       oninput="if (this.value === '') { this.previousElementSibling.focus() } else { this.nextElementSibling.focus() }"
     >
     <input
-      class="input-two-fa"
+      class="input-two-fa center"
       :id="`n3`" type="number"
       v-model="i3"
       :disabled="disabled"
@@ -34,7 +34,7 @@
       oninput="if (this.value === '') { this.previousElementSibling.focus() } else { this.nextElementSibling.focus() }"
     >
     <input
-      class="input-two-fa"
+      class="input-two-fa center"
       :id="`n4`" type="number"
       v-model="i4"
       :disabled="disabled"
@@ -45,7 +45,7 @@
       oninput="if (this.value === '') { this.previousElementSibling.focus() } else { this.nextElementSibling.focus() }"
     >
     <input
-      class="input-two-fa"
+      class="input-two-fa center"
       :id="`n5`" type="number"
       v-model="i5"
       :disabled="disabled"
@@ -56,7 +56,7 @@
       oninput="if (this.value === '') { this.previousElementSibling.focus() } else { this.nextElementSibling.focus() }"
     >
     <input
-      class="input-two-fa"
+      class="input-two-fa center"
       :id="`n6`" type="number"
       v-model="i6"
       :disabled="disabled"

@@ -42,7 +42,7 @@
 
       <div v-else-if="twofa.show" class="login-inputs-container">
         <h1>Two-Factor authentication</h1>
-        <div class="login-inputs-container-two-fa">
+        <div class="center">
           <p class="paragraph">Please, provide Google Authenticator code to continue</p>
           <InputTwoFa :twofa="twofa.code" @returnTwofa="returnTwofa" />
           <p v-if="twofa.error" class="paragraph error">Wrong code!</p>

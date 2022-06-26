@@ -12,7 +12,7 @@
     width: 50%;
     background-color: v.$bg1;
     .login-title {
-      text-align: center;
+      height: 15%;
       font-size: 52px;
       .login-title-header {
         cursor: pointer;
@@ -23,9 +23,16 @@
         font-size: 60px;
       }
     }
-    @media only screen and (max-width: 930px) {
-      display: none;
+    .login-welcome-texts {
+      margin: 0 auto;
+      width: 90%;
+      height: 50%;
+      .login-community {
+        width: 75%;
+        margin: 0 auto;
+      }
     }
+    @media only screen and (max-width: 930px) { display: none; }
   }
 
   .login-header {
@@ -33,9 +40,7 @@
     height: 50px;
     position: absolute;
     top: 0;
-    p {
-      padding: 15px;
-    }
+    p { padding: 15px; }
   }
 
   .login-inputs {
@@ -70,20 +75,12 @@
           transition: .2s;
           color: white;
         }
-        .choose:hover {
-          color: v.$mcm;
-        }
-      }
-      .login-inputs-container-two-fa {
-        text-align: center;
+        .choose:hover { color: v.$mcm; }
       }
 
       .password-requirement {
         border-radius: 5px;
         border: 1px solid rgba(#fff,0.9);
-        .flex {
-          display: flex;
-        }
         p {
           padding-left: 15px;
           color: white;

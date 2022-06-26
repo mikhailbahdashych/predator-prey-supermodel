@@ -1,14 +1,12 @@
 <template>
-  <div class="error-page">
-    <div class="error">
-      <h1>You shouldn't be here! >:(</h1>
-      <p>
-        <nuxt-link class='nuxt-link' to='/'>
-          Go
-        </nuxt-link>
-        and find some cool staff out of here!
-      </p>
-    </div>
+  <div class="error-page center">
+    <h1>You shouldn't be here! >:(</h1>
+    <p>
+      <nuxt-link class='nuxt-link' to='/'>
+        Go
+      </nuxt-link>
+      and find some cool staff out of here!
+    </p>
   </div>
 </template>
 

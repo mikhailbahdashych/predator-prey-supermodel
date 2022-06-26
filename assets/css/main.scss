@@ -1,8 +1,12 @@
 @use "variables" as v;
 
-p, h1, h2, h3, h4, h5 {
+p, h1, h2, h3, h4, h5, li {
   font-family: "Ubuntu", sans-serif;
   color: white;
+}
+
+li {
+  font-size: 18px;
 }
 
 html, body {
@@ -34,4 +38,12 @@ a {
   text-decoration: none;
   cursor: pointer;
   color: v.$mcm;
+}
+
+.center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
 }
