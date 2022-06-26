@@ -17,10 +17,8 @@
 </template>
 
 <script>
-import moment from 'moment'
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-import { getLatestReleases } from '~/api';
 export default {
   components: {
     Header,
@@ -35,15 +33,6 @@ export default {
   head() {
     return {
     }
-  },
-  mounted() {
-    this.$nextTick(async () => {
-      this.latestReleases = await getLatestReleases(3)
-      Object.keys(this.latestReleases).forEach(x => {
-        this.latestReleases[x].created_at = moment(this.latestReleases[x].created_at).format('YYYY-MM-DD HH:mm:ss')
-      })
-      this.loading = false
-    })
   },
   methods: {
     toPost(id, type) {

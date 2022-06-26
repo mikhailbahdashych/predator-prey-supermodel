@@ -70,7 +70,6 @@ import html from 'highlight.js/lib/languages/xml';
 import csharp from 'highlight.js/lib/languages/csharp';
 
 import vClickOutside from 'v-click-outside';
-import { getPostById, getPostsByCategory } from '~/api';
 import Footer from '~/components/Footer';
 import SideBar from '~/components/SideBar';
 import Search from '~/components/Search';
@@ -125,39 +124,11 @@ export default {
       defaultFilter: 'Newest'
     }
   },
-  mounted() {
-    this.$nextTick(async () => {
-      this.getAndCheckCategory()
-      if (this.$route.params.id) await this.getPostById()
-      else await this.getPostsByCategory()
-
-      document.querySelectorAll('pre.ql-syntax').forEach(el => {
-        hljs.highlightElement(el);
-      })
-      this.loading = false
-    })
-  },
   methods: {
-    async getPostById() {
-      this.post = await getPostById(this.$route.params.id)
-    },
-    async getPostsByCategory(value) {
-      let dates = { from: null, to: null }
-      if (value) dates = { from: value[0], to: value[1] }
-      this.posts = await getPostsByCategory({ category: this.typeOfPosts, from: dates.from, to: dates.to })
-      Object.keys(this.posts).forEach(x => { this.posts[x].created_at = moment(this.posts[x].created_at).format('YYYY-MM-DD HH:mm:ss') })
-    },
-    getAndCheckCategory() {
-      if (!this.categories.includes(this.$route.params.category))
-        this.$router.push({path: '/blog'})
-      this.subpages.forEach(item => {
-        if (item.page.includes(this.$route.params.category)) {
-          item.status = true
-          this.typeOfPosts = item.value
-        }
-      })
-    },
     toPost(id, type) {
+      // document.querySelectorAll('pre.ql-syntax').forEach(el => {
+      //   hljs.highlightElement(el);
+      // })
       this.$router.push({
         path: `/blog/${type + 's'}/${id}`
       })
