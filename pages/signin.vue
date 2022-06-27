@@ -137,7 +137,7 @@ export default {
           return
         }
 
-        if (res.twofa) {
+        if (res.twoFa) {
           this.twofa.show = true
         } else if (res.phone) {
           this.phone.show = true

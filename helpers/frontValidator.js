@@ -58,3 +58,8 @@ export const validate2fa = (i) => {
   if (i.length > 1) { i = i.slice(0, 1) }
   return i
 }
+
+export const validateUserPersonalId = (id) => {
+  const regex = new RegExp('^\\d{10}$')
+  return regex.test(id)
+}

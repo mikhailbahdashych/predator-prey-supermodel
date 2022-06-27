@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import {getUserByToken} from '~/api';
 import Button from '~/components/Button'
 export default {
   name: "Account",
@@ -30,10 +31,14 @@ export default {
     }
   },
   async mounted() {
-
+    await this.getCurrentUser(localStorage.getItem('token'))
   },
   methods: {
-
+    async getCurrentUser(token) {
+      if (token) {
+        this.user = await getUserByToken(token)
+      }
+    }
   }
 }
 </script>
