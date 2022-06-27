@@ -12,7 +12,8 @@
 
 <script>
 export default {
-  name: "Error"
+  name: "Error",
+  layout: 'empty'
 }
 </script>
 

@@ -41,3 +41,12 @@ export const getUserByToken = async token => {
     return e.response.data
   }
 }
+
+export const getUserByPersonalId = async personalId => {
+  try {
+    const { data } = await api.get(`g-u-b-p-id/${personalId}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}

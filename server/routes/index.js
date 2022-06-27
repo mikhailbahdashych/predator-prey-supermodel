@@ -43,4 +43,14 @@ router.get('/g-u-b-t', async (req, res) => {
   }
 })
 
+router.get('/g-u-b-p-id/:personalId', async (req, res) => {
+  try {
+    const { data } = await api.get(`/get-user-by-personal-id/${req.params.personalId}`)
+    res.json(data)
+  } catch (e) {
+    throw new Error(e)
+  }
+})
+
+
 module.exports = router
