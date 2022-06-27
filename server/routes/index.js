@@ -16,7 +16,7 @@ router.post('/s-i', async (req, res) => {
     const { data } = await api.post('/sign-in', req.body)
     res.json(data)
   } catch (e) {
-    throw new Error(e)
+    return res.status(e.response.status).json(e.response.data)
   }
 });
 
@@ -25,7 +25,7 @@ router.post('/s-u', async (req, res) => {
     const { data } = await api.post('/sign-up', req.body)
     res.json(data)
   } catch (e) {
-    throw new Error(e)
+    return res.status(e.response.status).json(e.response.data)
   }
 });
 
@@ -39,7 +39,7 @@ router.get('/g-u-b-t', async (req, res) => {
     })
     res.json(data)
   } catch (e) {
-    throw new Error(e)
+    return res.status(e.response.status).json(e.response.data)
   }
 })
 
@@ -48,7 +48,7 @@ router.get('/g-u-b-p-id/:personalId', async (req, res) => {
     const { data } = await api.get(`/get-user-by-personal-id/${req.params.personalId}`)
     res.json(data)
   } catch (e) {
-    throw new Error(e)
+    return res.status(e.response.status).json(e.response.data)
   }
 })
 

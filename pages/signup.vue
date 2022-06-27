@@ -32,6 +32,12 @@
           :type="'text'"
         />
         <Input
+          v-model="nickname.nickname"
+          :oneerror="nickname.nicknameError"
+          :title="'Nickname'"
+          :type="'text'"
+        />
+        <Input
           v-model="password.password"
           :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
           :title="'Password'"
@@ -90,6 +96,11 @@ export default {
   layout: 'empty',
   data() {
     return {
+      nickname: {
+        nickname: null,
+        nicknameError: false
+      },
+
       email: {
         email: null,
         emailError: false,
@@ -138,6 +149,11 @@ export default {
         else this.email.emailError = false
       }
     },
+    'nickname.nickname': {
+      handler: function () {
+        this.nickname.nicknameError = !this.nickname.nickname;
+      }
+    }
   },
   methods: {
     async redirect(path) {
@@ -146,7 +162,7 @@ export default {
     validFields() {
       return this.tac &&
         !this.email.emailError &&
-        this.email.email && this.password.password && this.password.passwordRepeat &&
+        this.email.email && this.password.password && this.password.passwordRepeat && this.nickname.nickname &&
         (!this.passwordError.passwordMismatch && !this.passwordError.passwordRequirement && !this.passwordError.passwordRules)
     },
     validPassword() {
@@ -172,6 +188,7 @@ export default {
         await signUp({
           email: this.email.email,
           password: this.password.password,
+          nickname: this.nickname.nickname
         }).then((res) => {
           if (res.status === -1) this.status = res.status
         }).catch(() => {

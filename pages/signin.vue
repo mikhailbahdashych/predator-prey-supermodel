@@ -34,8 +34,8 @@
           :type="'password'"
           @keyup.enter.native="signin"
         />
-        <p v-if="loginError === -1" class="paragraph error">Account doesn't exists or wasn't confirmed!</p>
-        <Button :label="'Sign In'" :click-handler="signin" :additional-class="'big'" />
+        <p v-if="loginError === -1" class="paragraph error">Wrong credentials!</p>
+        <Button :label="'Sign In'" :click-handler="signin" :additional-class="'mt big'" />
         <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
 
       </div>
@@ -102,7 +102,7 @@ export default {
         phoneFocus: false,
         phone: null,
       },
-      loginError: false,
+      loginError: null,
       twofa: { code: [], show: false, error: false },
       phone: { phone: null, show: false, error: false }
     }

@@ -39,11 +39,11 @@ export default {
       return await this.$router.push('/')
     else if (localStorage.getItem('token'))
       return await this.getCurrentUser(localStorage.getItem('token'))
-    await this.getUser()
+    await this.getUser(this.$route.params.personalId)
   },
   methods: {
-    async getUser() {
-      this.user = await getUserByPersonalId(this.$route.params.personalId)
+    async getUser(personalId) {
+      this.user = await getUserByPersonalId(personalId)
     },
     async getCurrentUser(token) {
       this.user = await getUserByToken(token)
