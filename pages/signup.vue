@@ -68,6 +68,7 @@
 
         <Checkbox v-model="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
+        <p v-else-if="status === -2" class="paragraph error">User with this nickname already exists!</p>
         <Button :label="'Sign up'" :click-handler="register" :disabled="!validFields()" :additional-class="'big'" />
       </div>
       <div v-else class="login-inputs-container">
@@ -190,9 +191,7 @@ export default {
           password: this.password.password,
           nickname: this.nickname.nickname
         }).then((res) => {
-          if (res.status === -1) this.status = res.status
-        }).catch(() => {
-          this.status = -1
+          if (res.status) this.status = res.status
         })
       }
     }

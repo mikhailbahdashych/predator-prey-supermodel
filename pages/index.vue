@@ -16,23 +16,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      loading: true,
-      latestReleases: [],
-    }
-  },
-  head() {
-    return {
-    }
-  },
-  methods: {
-    toPost(id, type) {
-      this.$router.push({
-        path: `blog/${type + 's'}/${id}`
-      })
-    },
-  },
+
 }
 </script>
 

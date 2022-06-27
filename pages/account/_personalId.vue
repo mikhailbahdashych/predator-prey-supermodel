@@ -5,7 +5,7 @@
       <div class='account-header-data'>
         <h1>{{user.nickname}}</h1>
       </div>
-      <div class='account-header-buttons'>
+      <div v-if='isOwner' class='account-header-buttons'>
         <span class='account-header-button'>
           <Button :label="'Edit profile'" :additional-class="'transparent'" />
         </span>

@@ -136,6 +136,10 @@ export default {
           this.loginError = -1
           return
         }
+        if (res.status === -2) {
+          this.loginError = -2
+          return
+        }
 
         if (res.twoFa) {
           this.twofa.show = true
@@ -143,12 +147,7 @@ export default {
           this.phone.show = true
         } else if (!res.status) {
           localStorage.setItem('token', res)
-          localStorage.setItem('email', this.loginEmail.email)
           await this.$router.push({path: '/account'})
-        } else if (this.twofa.code) {
-          this.twofa.error = true
-        } else {
-          this.phone.error = true
         }
       } else {
         this.loginEmail.loginEmailError = true
