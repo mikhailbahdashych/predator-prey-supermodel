@@ -6,8 +6,12 @@
         <h1>@username</h1>
       </div>
       <div class='account-header-buttons'>
-        <span class='account-header-button'><Button :label="'Edit profile'" :additional-class="'transparent'" /></span>
-        <span class='account-header-button'><Button :label="'Settings'" :additional-class="'transparent'" /></span>
+        <span class='account-header-button'>
+          <Button :label="'Edit profile'" :additional-class="'transparent'" />
+        </span>
+        <span class='account-header-button'>
+          <Button :label="'Settings'" :additional-class="'transparent'" />
+        </span>
       </div>
     </div>
   </div>
@@ -22,8 +26,11 @@ export default {
   },
   data() {
     return {
-
+      user: null
     }
+  },
+  async mounted() {
+
   },
   methods: {
 

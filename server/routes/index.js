@@ -29,4 +29,17 @@ router.post('/s-u', async (req, res) => {
   }
 });
 
+router.get('/g-u-b-t', async (req, res) => {
+  try {
+    const { data } = await api.get('/get-user-by-token', {
+      headers: {
+        'Authorization': req.headers.authorization
+      }
+    })
+    res.json(data)
+  } catch (e) {
+    throw new Error(e)
+  }
+})
+
 module.exports = router
