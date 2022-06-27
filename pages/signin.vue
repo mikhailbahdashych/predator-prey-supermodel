@@ -58,6 +58,9 @@
       <h1 class="login-title center" @click="redirect('/')">
         <span class="login-title-header">pNb</span>
       </h1>
+      <div class="login-welcome-texts">
+        <h1 class="center">Welcome back, @username, glad to see you again</h1>
+      </div>
     </div>
 
     <div class="login-header">

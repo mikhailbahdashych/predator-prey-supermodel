@@ -2,9 +2,12 @@
   <div class="login">
 
     <div class="login-content">
-      <h1 class="login-title" @click="redirect('/')">
+      <h1 class="login-title center" @click="redirect('/')">
         <span class="login-title-header">pNb</span>
       </h1>
+      <div class="login-welcome-texts">
+        <h1 class="center">Forgot your password? Nah... not a big deal</h1>
+      </div>
     </div>
 
     <div class="login-header">
