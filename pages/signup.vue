@@ -6,7 +6,7 @@
         <span class="login-title-header">pNb</span>
       </h1>
       <div class="login-welcome-texts">
-        <h2 class="center">Welcome, @username, feel free to join pNb community</h2>
+        <h1 class="center">Welcome, @username, feel free to join pNb community</h1>
         <ul class="login-community">
           <li>Be in charge of everything that happens in world of cybersecurity</li>
           <li>Teach and learn - share you knowledge and learn from other</li>
