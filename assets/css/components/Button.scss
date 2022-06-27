@@ -9,6 +9,7 @@
   color: v.$mcl;
   font-weight: 300;
   transition: 0.5s;
+  min-width: 100px;
   &.input-with-button {
     width: 75px;
     margin-top: 0;

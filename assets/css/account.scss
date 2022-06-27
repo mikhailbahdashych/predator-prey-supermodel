@@ -1,1 +1,28 @@
 @use "variables" as v;
+
+.account {
+  width: 70%;
+  margin: 0 auto;
+  .account-header {
+    display: flex;
+    height: 250px;
+    padding: 15px;
+    .account-header-avatar {
+      min-width: 250px;
+      min-height: 250px;
+      background-color: #3f85b1;
+      border-radius: 50%;
+    }
+    .account-header-data {
+      h1 { margin: 0; }
+      width: 700px;
+    }
+    .account-header-buttons {
+      width: 150px;
+      display: flex;
+      .account-header-button {
+        margin: 10px
+      }
+    }
+  }
+}
