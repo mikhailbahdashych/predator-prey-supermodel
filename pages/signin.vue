@@ -82,6 +82,7 @@ export default {
     Button,
     InputTwoFa
   },
+  layout: 'empty',
   data() {
     return {
       loginEmail: {

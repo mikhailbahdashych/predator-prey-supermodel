@@ -87,6 +87,7 @@ export default {
     Button,
     Checkbox
   },
+  layout: 'empty',
   data() {
     return {
       email: {

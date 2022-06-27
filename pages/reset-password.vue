@@ -59,6 +59,7 @@ export default {
     InputWithButton,
     Button
   },
+  layout: 'empty',
   data() {
     return {
       resetPasswordEmail: {
