@@ -11,7 +11,7 @@
     </div>
 
 
-    <div v-if="currentSection === 'User settings'" class="account-security-content">
+    <div v-if="currentSection === 'Personal information'" class="account-security-content">
 
     </div>
 
@@ -33,19 +33,17 @@ export default {
   data() {
     return {
       accountHeaderItems: [
-        { title: 'User settings', active: true },
+        { title: 'Personal information', active: true },
         { title: 'Security settings', active: false },
-        { title: 'Global settings', active: false },
+        { title: 'Site settings', active: false },
       ],
-      currentSection: 'User settings',
+      currentSection: 'Personal information',
       userSettings: {}
     }
   },
   async mounted() {
-    if (!localStorage.getItem('token'))
-      await this.getUsersSettings(localStorage.getItem('token'))
-    else
-      await this.$router.push('/')
+    if (!localStorage.getItem('token')) await this.getUsersSettings(localStorage.getItem('token'))
+    else await this.$router.push('/')
   },
   methods: {
     async getUsersSettings(token) {

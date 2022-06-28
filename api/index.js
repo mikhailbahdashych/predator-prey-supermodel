@@ -58,3 +58,12 @@ export const getUserSettings = async token => {
     return e.response.data
   }
 }
+
+export const updateUserPersonalInformation = async data => {
+  try {
+    const { data } = await api.patch(`u-u-p-i`, data)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
