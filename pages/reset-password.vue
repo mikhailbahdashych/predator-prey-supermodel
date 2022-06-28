@@ -45,7 +45,7 @@
         />
 
         <Input :title="'Verification code'" @keyup.enter.native="() => {}" />
-        <Button :label="'Submit'" :click-handler="() => {}" :additional-class="'big'" />
+        <Button :label="'Submit'" :additional-class="'big'" @click-handler="() => {}" />
       </div>
     </div>
 

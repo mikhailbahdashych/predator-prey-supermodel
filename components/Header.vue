@@ -16,20 +16,20 @@
             <h3 class="header-links">BLOG</h3>
           </nuxt-link>
         </div>
-        <div class="header-content" v-if="!token">
+        <div v-if="tokenStatus === -1" class="header-content">
           <div class="header-button">
-            <Button @click-handler="redirect('/signin')" :label="'SIGN IN'" :additional-class="'transparent'" />
+            <Button :label="'SIGN IN'" :additional-class="'transparent'" @click-handler="redirect('/signin')" />
           </div>
           <div class="header-button">
-            <Button @click-handler="redirect('/signup')" :label="'SIGN UP'" />
+            <Button :label="'SIGN UP'" @click-handler="redirect('/signup')" />
           </div>
         </div>
-        <div class="header-content" v-else>
+        <div v-else class="header-content">
           <div class="header-button">
             <Button :label="'My account'" />
           </div>
           <div class="header-button">
-            <Button @click-handler="logout" :label="'Log Out'" :additional-class="'transparent'" />
+            <Button :label="'Log Out'" :additional-class="'transparent'" @click-handler="logout" />
           </div>
         </div>
       </div>
@@ -39,6 +39,7 @@
 
 <script>
 import Button from "~/components/Button";
+import {getUserByToken} from "~/api";
 export default {
   name: 'Header',
   components: {
@@ -46,15 +47,16 @@ export default {
   },
   data() {
     return {
-      token: null
+      tokenStatus: false
     }
   },
-  mounted() {
-    this.checkToken()
+  async mounted() {
+    await this.checkToken(localStorage.getItem('token'))
   },
   methods: {
-    checkToken() {
-      this.token = !!localStorage.getItem('token');
+    async checkToken(token) {
+      const { status } = await getUserByToken(token);
+      this.tokenStatus = status
     },
     redirect(path) {
       this.$router.push({ path })

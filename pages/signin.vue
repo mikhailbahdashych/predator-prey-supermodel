@@ -35,7 +35,7 @@
           @keyup.enter.native="signin"
         />
         <p v-if="loginError === -1" class="paragraph error">Wrong credentials!</p>
-        <Button :label="'Sign In'" :click-handler="signin" :additional-class="'mt big'" />
+        <Button :label="'Sign In'" :additional-class="'mt big'" @click-handler="signin" />
         <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
 
       </div>

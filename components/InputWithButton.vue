@@ -17,7 +17,7 @@
       <div @click="buttonClickOn">
         <button
           class="basic-button input-with-button"
-          @click="$emit('show')"
+          @click="$emit('click-handler')"
         >
           {{ buttonTitle }}
         </button>
