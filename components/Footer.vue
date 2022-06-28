@@ -1,5 +1,5 @@
 <template>
-  <div class='footer'>
+  <footer class='footer'>
     <div class='footer-content'>
       <div class='right-side-footer'>
         <nuxt-link to='/' class='nuxt-link'><p>Home</p></nuxt-link>
@@ -11,7 +11,7 @@
         <p>© All rights reserved, 2021</p>
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>

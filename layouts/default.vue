@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <Header />
-    <main>
-      <Nuxt/>
-    </main>
+  <div class="page-content">
+    <div class="content-wrap">
+      <Header />
+      <main>
+        <Nuxt/>
+      </main>
+    </div>
     <Footer />
   </div>
 </template>
