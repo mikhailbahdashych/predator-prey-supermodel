@@ -78,4 +78,13 @@ router.patch('/u-u-s-s', async (req, res) => {
   }
 })
 
+router.post('/s', async (req, res) => {
+  try {
+    const { data } = await api.post('/search', req.body)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 module.exports = router

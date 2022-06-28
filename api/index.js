@@ -80,3 +80,12 @@ export const updateUserSecuritySettings = async payload => {
     return e.response.data
   }
 }
+
+export const search = async payload => {
+  try {
+    const { data } = await api.post('s', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
