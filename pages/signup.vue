@@ -161,8 +161,8 @@ export default {
     await verifyClientByToken(this.$router, localStorage.getItem('token'), true)
   },
   methods: {
-    async redirect(path) {
-      await this.$router.push({ path })
+    redirect(path) {
+      this.$router.push({ path })
     },
     validFields() {
       return this.tac &&

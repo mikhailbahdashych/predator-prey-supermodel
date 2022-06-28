@@ -1,12 +1,12 @@
 <template>
   <div class='account'>
-    <div class='account-header'>
+    <div class='account-header-content'>
       <div class='account-header-avatar' />
       <div class='account-header-data'>
         <h1>{{user.username}}</h1>
         <div v-if="isOwner" class="account-header-data">
           <Button :label="'Edit profile'" :additional-class="'transparent'" class="buttons" />
-          <Button :label="'Settings'" :additional-class="'transparent'" class="buttons" />
+          <Button :label="'Settings'" :additional-class="'transparent'" class="buttons" @click-handler="redirect('/account/settings')" />
         </div>
       </div>
     </div>
@@ -49,7 +49,10 @@ export default {
 
       if (this.user.personalId === this.$route.params.personalId)
         this.isOwner = true
-    }
+    },
+    redirect(path) {
+      this.$router.push({ path })
+    },
   }
 }
 </script>

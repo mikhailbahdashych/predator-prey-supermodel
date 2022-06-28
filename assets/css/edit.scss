@@ -1,0 +1,35 @@
+@use "variables" as v;
+
+
+.account-header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  position: absolute;
+  .account-header-inner {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    border-bottom: 1px solid v.$mcl;
+    @media only screen and (max-width: 930px) { width: 100%; }
+    .account-header-item-block {
+      height: calc(100% - 15px);
+      padding-top: 15px;
+      margin: 0 auto;
+      &.active { border-bottom: 3px solid v.$mcm; }
+      .account-header-item {
+        cursor: pointer;
+        margin: 0;
+        color: rgba(#fff, 0.5);
+        transition: .2s;
+        &.active { color: v.$mcl;}
+        @media screen and (max-width: 520px) { font-size: 12px; }
+      }
+      .account-header-item:hover { color: v.$mcl; }
+    }
+  }
+}
+
+.account-security-content {
+  //min-height: calc(100vh - 250px);
+}
