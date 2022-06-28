@@ -32,9 +32,9 @@
           :type="'text'"
         />
         <Input
-          v-model="nickname.nickname"
-          :oneerror="nickname.nicknameError"
-          :title="'Nickname'"
+          v-model="username.username"
+          :oneerror="username.usernameError"
+          :title="'Username'"
           :type="'text'"
         />
         <Input
@@ -68,7 +68,7 @@
 
         <Checkbox v-model="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
-        <p v-else-if="status === -2" class="paragraph error">User with this nickname already exists!</p>
+        <p v-else-if="status === -2" class="paragraph error">User with this username already exists!</p>
         <Button :label="'Sign up'" :click-handler="register" :disabled="!validFields()" :additional-class="'big'" />
       </div>
       <div v-else class="login-inputs-container">
@@ -97,9 +97,9 @@ export default {
   layout: 'empty',
   data() {
     return {
-      nickname: {
-        nickname: null,
-        nicknameError: false
+      username: {
+        username: null,
+        usernameError: false
       },
 
       email: {
@@ -150,9 +150,9 @@ export default {
         else this.email.emailError = false
       }
     },
-    'nickname.nickname': {
+    'username.username': {
       handler: function () {
-        this.nickname.nicknameError = !this.nickname.nickname;
+        this.username.usernameError = !this.username.username;
       }
     }
   },
@@ -163,7 +163,7 @@ export default {
     validFields() {
       return this.tac &&
         !this.email.emailError &&
-        this.email.email && this.password.password && this.password.passwordRepeat && this.nickname.nickname &&
+        this.email.email && this.password.password && this.password.passwordRepeat && this.username.username &&
         (!this.passwordError.passwordMismatch && !this.passwordError.passwordRequirement && !this.passwordError.passwordRules)
     },
     validPassword() {
@@ -189,7 +189,7 @@ export default {
         await signUp({
           email: this.email.email,
           password: this.password.password,
-          nickname: this.nickname.nickname
+          username: this.username.username
         }).then((res) => {
           if (res.status) this.status = res.status
         })

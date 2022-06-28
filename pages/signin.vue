@@ -119,6 +119,10 @@ export default {
       }
     },
   },
+  mounted() {
+    // await verifyClientByToken(this.$router, localStorage.getItem('token'), true)
+    this.chooseLogin('email')
+  },
   methods: {
     async signin() {
       if (

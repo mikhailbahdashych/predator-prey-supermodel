@@ -3,7 +3,7 @@
     <div class='account-header'>
       <div class='account-header-avatar' />
       <div class='account-header-data'>
-        <h1>{{user.nickname}}</h1>
+        <h1>{{user.username}}</h1>
       </div>
       <div v-if='isOwner' class='account-header-buttons'>
         <span class='account-header-button'>
