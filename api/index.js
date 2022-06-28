@@ -31,10 +31,7 @@ export const signUp = async payload => {
 export const getUserByToken = async token => {
   try {
     const { data } = await api.get('g-u-b-t', {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'ato': token
-      }
+      headers: { 'ato': token }
     })
     return data
   } catch (e) {
@@ -45,6 +42,17 @@ export const getUserByToken = async token => {
 export const getUserByPersonalId = async personalId => {
   try {
     const { data } = await api.get(`g-u-b-p-id/${personalId}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getUserSettings = async token => {
+  try {
+    const { data } = await api.get('g-u-s', {
+      headers: { 'ato': token }
+    })
     return data
   } catch (e) {
     return e.response.data

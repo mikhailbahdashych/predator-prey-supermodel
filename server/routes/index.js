@@ -32,10 +32,7 @@ router.post('/s-u', async (req, res) => {
 router.get('/g-u-b-t', async (req, res) => {
   try {
     const { data } = await api.get('/get-user-by-token', {
-      headers: {
-        'Authorization': req.headers.authorization,
-        'ato': req.headers.ato
-      }
+      headers: { 'ato': req.headers.ato }
     })
     res.json(data)
   } catch (e) {
@@ -52,5 +49,15 @@ router.get('/g-u-b-p-id/:personalId', async (req, res) => {
   }
 })
 
+router.get('/g-u-s', async (req, res) => {
+  try {
+    const { data } = await api.get('/get-user-settings', {
+      headers: { 'ato': req.headers.ato }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
 
 module.exports = router

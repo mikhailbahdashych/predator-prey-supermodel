@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {verifyClientByToken} from "~/helpers/auth";
+import {getUserSettings} from "~/api";
 export default {
   name: "Settings",
   data() {
@@ -37,14 +37,22 @@ export default {
         { title: 'Security settings', active: false },
         { title: 'Global settings', active: false },
       ],
-      currentSection: 'User settings'
+      currentSection: 'User settings',
+      userSettings: {}
     }
   },
   async mounted() {
-    await verifyClientByToken(this.$router, localStorage.getItem('token'))
+    await this.getUsersSettings(localStorage.getItem('token'))
   },
   methods: {
+    async getUsersSettings(token) {
+      if (!token) {
+        return this.$router.push('/')
+      }
+      this.userSettings = await getUserSettings(token)
+    },
     changeSubpage(item) {
+      this.currentSection = item.title
       this.accountHeaderItems.forEach(header => { header.active = item.title === header.title })
     }
   }

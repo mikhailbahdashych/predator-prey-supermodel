@@ -4,7 +4,7 @@ export const verifyClientByToken = async (router, token, nonRedirect = false) =>
   if (!nonRedirect) {
     if (!token) return await router.push({ path: '/' })
 
-    const client = await getUserByToken({ token })
+    const client = await getUserByToken(token)
 
     if (!client || client.status === -1) {
       localStorage.removeItem('token')
@@ -14,7 +14,7 @@ export const verifyClientByToken = async (router, token, nonRedirect = false) =>
     return client
   }
   if (token) {
-    const client = await getUserByToken({ token })
+    const client = await getUserByToken(token)
     if (client || client.status !== -1) return await router.push({ path: `/account/${client.personalId}` })
   }
 }
