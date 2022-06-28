@@ -4,14 +4,10 @@
       <div class='account-header-avatar' />
       <div class='account-header-data'>
         <h1>{{user.username}}</h1>
-      </div>
-      <div v-if='isOwner' class='account-header-buttons'>
-        <span class='account-header-button'>
-          <Button :label="'Edit profile'" :additional-class="'transparent'" />
-        </span>
-        <span class='account-header-button'>
-          <Button :label="'Settings'" :additional-class="'transparent'" />
-        </span>
+        <div v-if="isOwner" class="account-header-data">
+          <Button :label="'Edit profile'" :additional-class="'transparent'" class="buttons" />
+          <Button :label="'Settings'" :additional-class="'transparent'" class="buttons" />
+        </div>
       </div>
     </div>
   </div>

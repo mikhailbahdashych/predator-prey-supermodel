@@ -3,10 +3,14 @@
 .account {
   width: 70%;
   margin: 0 auto;
+  h1 { margin: 0; }
   .account-header {
+    border: 1px solid rgba(v.$mcl, 0.35);
+    border-radius: 35px;
     display: flex;
     height: 250px;
     padding: 15px;
+    margin: 15px 0 15px 0;
     .account-header-avatar {
       min-width: 250px;
       min-height: 250px;
@@ -14,14 +18,9 @@
       border-radius: 50%;
     }
     .account-header-data {
-      h1 { margin: 0; }
-      width: 700px;
-    }
-    .account-header-buttons {
-      width: 150px;
       display: flex;
-      .account-header-button {
-        margin: 10px
+      .buttons {
+        margin-left: 15px;
       }
     }
   }

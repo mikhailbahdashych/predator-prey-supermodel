@@ -26,7 +26,7 @@
         </div>
         <div v-else class="header-content">
           <div class="header-button">
-            <Button :label="'My account'" />
+            <Button :label="'My account'" @click-handler="redirect(`/account/${tokenStatus}`)" />
           </div>
           <div class="header-button">
             <Button :label="'Log Out'" :additional-class="'transparent'" @click-handler="logout" />
@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      tokenStatus: false
+      tokenStatus: null
     }
   },
   async mounted() {
@@ -55,8 +55,8 @@ export default {
   },
   methods: {
     async checkToken(token) {
-      const { status } = await getUserByToken(token);
-      this.tokenStatus = status
+      const t = await getUserByToken(token);
+      this.tokenStatus = t.status || t.personalId
     },
     redirect(path) {
       this.$router.push({ path })
