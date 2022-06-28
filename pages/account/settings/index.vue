@@ -2,7 +2,7 @@
   <div>
     <div class="account-header">
       <div class="account-header-inner">
-        <div v-for="item in accountHeaderItems" class="account-header-item-block" :key="item.title" :class="[item.active ? 'active' : '']">
+        <div v-for="item in accountHeaderItems" :key="item.title" :class="[item.active ? 'active' : '']" class="account-header-item-block">
           <p :class="[item.active ? 'active' : '']" class="account-header-item" @click="changeSubpage(item)">
             {{item.title}}
           </p>
@@ -11,15 +11,15 @@
     </div>
 
 
-    <div class="account-security-content" v-if="currentSection === 'User settings'">
+    <div v-if="currentSection === 'User settings'" class="account-security-content">
 
     </div>
 
-    <div class="account-security-content" v-else-if="currentSection === 'Security settings'">
+    <div v-else-if="currentSection === 'Security settings'" class="account-security-content">
 
     </div>
 
-    <div class="account-security-content" v-else>
+    <div v-else class="account-security-content">
 
     </div>
 
@@ -42,14 +42,16 @@ export default {
     }
   },
   async mounted() {
-    await this.getUsersSettings(localStorage.getItem('token'))
+    if (!localStorage.getItem('token'))
+      await this.getUsersSettings(localStorage.getItem('token'))
+    else
+      await this.$router.push('/')
   },
   methods: {
     async getUsersSettings(token) {
-      if (!token) {
-        return this.$router.push('/')
-      }
       this.userSettings = await getUserSettings(token)
+      if (this.userSettings.status === -1)
+        return this.$router.push('/')
     },
     changeSubpage(item) {
       this.currentSection = item.title
