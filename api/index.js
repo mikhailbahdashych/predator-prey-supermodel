@@ -59,9 +59,18 @@ export const getUserSettings = async token => {
   }
 }
 
-export const updateUserPersonalInformation = async data => {
+export const updateUserPersonalInformation = async payload => {
   try {
-    const { data } = await api.patch(`u-u-p-i`, data)
+    const { data } = await api.patch(`u-u-p-i`, payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const updateUserSecuritySettings = async payload => {
+  try {
+    const { data } = await api.patch('u-u-s-s', payload)
     return data
   } catch (e) {
     return e.response.data

@@ -69,4 +69,13 @@ router.patch('/u-u-p-i', async (req, res) => {
   }
 })
 
+router.patch('/u-u-s-s', async (req, res) => {
+  try {
+    const { data } = await api.patch('/update-user-security-settings', req.body)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 module.exports = router
