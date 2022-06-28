@@ -16,12 +16,20 @@
             <h3 class="header-links">BLOG</h3>
           </nuxt-link>
         </div>
-        <div class="header-content">
+        <div class="header-content" v-if="!token">
           <div class="header-button">
-            <Button :click-handler="signIn" :label="'SIGN IN'" :additional-class="'transparent'" />
+            <Button @click-handler="redirect('/signin')" :label="'SIGN IN'" :additional-class="'transparent'" />
           </div>
           <div class="header-button">
-            <Button :click-handler="signUp" :label="'SIGN UP'" />
+            <Button @click-handler="redirect('/signup')" :label="'SIGN UP'" />
+          </div>
+        </div>
+        <div class="header-content" v-else>
+          <div class="header-button">
+            <Button :label="'My account'" />
+          </div>
+          <div class="header-button">
+            <Button @click-handler="logout" :label="'Log Out'" :additional-class="'transparent'" />
           </div>
         </div>
       </div>
@@ -36,13 +44,25 @@ export default {
   components: {
     Button
   },
-  methods: {
-    async signIn() {
-      return await this.$router.push({ path: '/signin' })
-    },
-    async signUp() {
-      return await this.$router.push({ path: '/signup' })
+  data() {
+    return {
+      token: null
     }
+  },
+  mounted() {
+    this.checkToken()
+  },
+  methods: {
+    checkToken() {
+      this.token = !!localStorage.getItem('token');
+    },
+    redirect(path) {
+      this.$router.push({ path })
+    },
+    logout() {
+      localStorage.removeItem('token')
+      this.$router.push({ path: '/' })
+    },
   }
 }
 </script>

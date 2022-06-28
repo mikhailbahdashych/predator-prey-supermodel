@@ -1,6 +1,7 @@
 <template>
   <div @click="clickHandler">
     <button
+      @click="$emit('click-handler')"
       class="basic-button"
       :disabled="disabled"
       :class="additionalClass"
