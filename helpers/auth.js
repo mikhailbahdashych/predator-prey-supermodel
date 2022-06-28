@@ -1,0 +1,21 @@
+import {getUserByToken} from "~/api";
+
+exports.verifyClientByToken = async (router, token, nonRedirect = false) => {
+  if (!nonRedirect) {
+    if (!token) return await router.push({ path: '/' })
+
+    const client = await getUserByToken({ token })
+
+    if (!client || client.status === -1) {
+      localStorage.removeItem('token')
+      return await router.push({ path: '/' })
+    }
+
+    return client
+  } else {
+    if (token) {
+      const client = await getUserByToken({ token })
+      if (client || client.status !== -1) return await router.push({ path: `/account/${client.personalId}` })
+    }
+  }
+}

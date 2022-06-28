@@ -87,6 +87,7 @@ import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
 import {validateEmail, validatePassword, validatePasswordRules} from "~/helpers/frontValidator";
 import {signUp} from "~/api";
+import {verifyClientByToken} from "~/helpers/auth";
 export default {
   name: "Signup",
   components: {
@@ -155,6 +156,9 @@ export default {
         this.username.usernameError = !this.username.username;
       }
     }
+  },
+  async mounted() {
+    await verifyClientByToken(this.$router, localStorage.getItem('token'), true)
   },
   methods: {
     async redirect(path) {
