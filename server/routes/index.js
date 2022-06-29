@@ -78,9 +78,18 @@ router.patch('/u-u-s-s', async (req, res) => {
   }
 })
 
-router.post('/s', async (req, res) => {
+router.post('/s-2fa', async (req, res) => {
   try {
-    const { data } = await api.post('/search', req.body)
+    const { data } = await api.post('/set-2fa', req.body)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.post('/d-2fa', async (req, res) => {
+  try {
+    const { data } = await api.post('/disable-2fa', req.body)
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
