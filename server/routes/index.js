@@ -62,7 +62,9 @@ router.get('/g-u-s', async (req, res) => {
 
 router.patch('/u-u-p-i', async (req, res) => {
   try {
-    const { data } = await api.patch('/update-user-personal-information', req.body)
+    const { data } = await api.patch('/update-user-personal-information', req.body, {
+      headers: { 'ato': req.headers.ato }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -71,7 +73,9 @@ router.patch('/u-u-p-i', async (req, res) => {
 
 router.patch('/u-u-s-s', async (req, res) => {
   try {
-    const { data } = await api.patch('/update-user-security-settings', req.body)
+    const { data } = await api.patch('/update-user-security-settings', req.body, {
+      headers: { 'ato': req.headers.ato }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -80,7 +84,9 @@ router.patch('/u-u-s-s', async (req, res) => {
 
 router.post('/s-2fa', async (req, res) => {
   try {
-    const { data } = await api.post('/set-2fa', req.body)
+    const { data } = await api.post('/set-2fa', req.body, {
+      headers: { 'ato': req.headers.ato }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -89,7 +95,9 @@ router.post('/s-2fa', async (req, res) => {
 
 router.post('/d-2fa', async (req, res) => {
   try {
-    const { data } = await api.post('/disable-2fa', req.body)
+    const { data } = await api.post('/disable-2fa', req.body, {
+      headers: { 'ato': req.headers.ato }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
