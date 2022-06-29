@@ -102,3 +102,14 @@ export const disableTwoFa = async payload => {
     return e.response.data
   }
 }
+
+export const changePassword = async payload => {
+  try {
+    const { data } = await api.post('c-p', payload, {
+      headers: { 'ato': payload.token }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}

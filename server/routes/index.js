@@ -104,4 +104,15 @@ router.post('/d-2fa', async (req, res) => {
   }
 })
 
+router.post('/c-p', async (req, res) => {
+  try {
+    const { data } = await api.post('/change-password', req.body, {
+      headers: { 'ato': req.headers.ato }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 module.exports = router
