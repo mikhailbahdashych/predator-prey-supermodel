@@ -31,6 +31,11 @@
     border: 1px solid rgba(v.$error, 0.25);
     color: v.$error;
   }
+  &.danger-fill {
+    border: none;
+    color: v.$mcl;
+    background-color: v.$error;
+  }
   p {
     margin: 0;
   }
@@ -40,4 +45,9 @@
   background-color: rgba(v.$mcm, 0.35);
   border: 1px solid v.$mcl;
   cursor: auto;
+  &.danger-fill {
+    border: none;
+    color: v.$mcl;
+    background-color: rgba(v.$error, 0.35);
+  }
 }

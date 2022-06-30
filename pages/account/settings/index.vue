@@ -40,7 +40,7 @@
         @close="closeModal('Set 2FA')"
       >
         <Button v-if="!securityTwoFa.qr && securityTwoFa.status !== 1" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
-        <div v-if="securityTwoFa.qr" class="center">
+        <div v-if="securityTwoFa.qr && securityTwoFa.status !== 1" class="center">
           <img :src="securityTwoFa.qr" alt="2fa">
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA code'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
@@ -51,7 +51,7 @@
             <span class="paragraph error">(Strongly isn't recommend!)</span>
           </p>
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA disable'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton" @click-handler="disableTwoFa" />
+          <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill'" :disabled="securityTwoFa.disabledButton" @click-handler="disableTwoFa" />
         </div>
       </basic-modal>
 
@@ -145,14 +145,14 @@ export default {
         twoFaToken: this.securityTwoFa.secret,
         token: localStorage.getItem('token')
       })
-      this.securityTwoFa.status = status
+      this.securityTwoFa = { code: [], normalCode: null, qr: null, status, secret: null, disabledButton: true }
     },
     async disableTwoFa() {
       const { status } = await disableTwoFa({
         twoFa: this.securityTwoFa.code.join(''),
         token: localStorage.getItem('token')
       })
-      this.securityTwoFa.status = status
+      this.securityTwoFa = { code: [], normalCode: null, qr: null, status, secret: null, disabledButton: true }
     },
     async generateTwoFa() {
       const user = await getUserByToken(localStorage.getItem('token'))
