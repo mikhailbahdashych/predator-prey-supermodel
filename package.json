@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "highlight.js": "^11.4.0",
     "moment": "^2.29.1",
+    "node-2fa": "^2.0.3",
     "nuxt": "^2.15.7",
     "v-click-outside": "^3.1.2"
   },

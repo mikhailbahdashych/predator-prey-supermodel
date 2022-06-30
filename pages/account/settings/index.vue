@@ -40,7 +40,7 @@
       Once it's done, click the button below to start."
         @close="closeModal('Set 2FA')"
       >
-<!--        <Button v-if="!securityTwofa.qr" :label="'Generate 2FA'" :clickon="generate2fa" />-->
+        <Button v-if="!securityTwoFa.qr" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
 <!--        <img v-if="securityTwofa.qr && ([null, -1, -2].includes(securityTwofa.status))" :src="securityTwofa.qr" alt="2fa">-->
 <!--        <div v-if="securityTwofa.qr && ([null, -1, -2].includes(securityTwofa.status))">-->
 <!--          <InputTwoFa :twofa="securityTwofa.code" @returnTwofa="returnTwofa" :onwhite="true" />-->
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
 import {getUserSettings} from "~/api";
@@ -97,6 +98,9 @@ export default {
         'Disable 2FA': false,
         twoFa: false,
       },
+
+      securityTwoFa: { code: [], qr: null, status: null, secret: null },
+
     }
   },
   async mounted() {
@@ -122,6 +126,9 @@ export default {
       Object.entries(this.securityShowModal).forEach(item => {
         if (item[0] === option) this.securityShowModal[item[0]] = false
       })
+    },
+    generateTwoFa() {
+      // const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: localStorage.getItem('token') })
     }
   }
 }
