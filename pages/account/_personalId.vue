@@ -1,6 +1,6 @@
 <template>
   <div class='account'>
-    <div class='account-header-content'>
+    <div class='account-content'>
       <div class='account-header-avatar' />
       <div class='account-header-data'>
         <h1>{{user.username}}</h1>
@@ -10,6 +10,19 @@
         </div>
       </div>
     </div>
+
+    <div class="account-content activity">
+      <div class="section-activity border">
+
+      </div>
+      <div class="section-activity border">
+
+      </div>
+      <div class="section-activity">
+
+      </div>
+    </div>
+
   </div>
 </template>
 
