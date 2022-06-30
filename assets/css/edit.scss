@@ -29,3 +29,22 @@
     }
   }
 }
+
+.account-security-content {
+  margin: 0 auto;
+  width: 50%;
+  padding-top: 70px;
+
+  .security-item {
+    border-bottom: 1px solid rgba(v.$mcl, 0.25);
+    .security-item-content {
+      display: flex;
+      align-items: baseline;
+      p { margin-left: 15px }
+    }
+    &.danger {
+      border-bottom: 1px solid rgba(v.$error, 0.25);
+      h3, p { color: v.$error }
+    }
+  }
+}

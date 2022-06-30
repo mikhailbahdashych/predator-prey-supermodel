@@ -31,7 +31,6 @@ html, body {
   &.medium { font-size: 18px; }
   &.large { font-size: 24px; }
   &.right { float: right; }
-  &.error { color: v.$error; }
   &.on-white-paragraph { color: black; }
   &.link { color: v.$mcm; cursor: pointer; text-decoration: underline }
   &.success { color: lightgreen }
@@ -68,3 +67,5 @@ li {
     padding-bottom: 50px;
   }
 }
+
+.error { color: v.$error; }

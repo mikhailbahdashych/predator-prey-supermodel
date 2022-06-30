@@ -17,6 +17,13 @@
 
     <div v-else-if="currentSection === 'Security settings'" class="account-security-content">
 
+      <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`security-item ${setting.danger ? 'danger' : ''}`">
+        <div class="security-item-content">
+          <h3 class="font-second">{{ setting.title }}</h3>
+          <p class="font-second">{{ setting.description }}</p>
+        </div>
+      </div>
+
     </div>
 
     <div v-else class="account-security-content">
@@ -38,7 +45,14 @@ export default {
         { title: 'Site settings', active: false },
       ],
       currentSection: 'Personal information',
-      userSettings: {}
+      userSettings: {},
+
+      securitySettingsOptions: [
+        { title: 'Set 2FA', description: 'Secure your account with Two-factor authentication (2FA).', buttonTitle: 'Set 2FA', danger: false },
+        { title: 'Change password', description: 'You are able to change email only one time.', buttonTitle: 'Change password', danger: false },
+        { title: 'Change email', description: 'You are able to change email only one time.', buttonTitle: 'Change email', danger: false },
+        { title: 'Close account', description: 'After closing account all information about it will be deleted.', buttonTitle: 'Close', danger: true }
+      ]
     }
   },
   async mounted() {
