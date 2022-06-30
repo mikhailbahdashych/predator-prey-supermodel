@@ -41,7 +41,7 @@
         @close="closeModal('Set 2FA')"
       >
         <Button v-if="!securityTwoFa.qr" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
-<!--        <img v-if="securityTwofa.qr && ([null, -1, -2].includes(securityTwofa.status))" :src="securityTwofa.qr" alt="2fa">-->
+        <img v-if="securityTwoFa.qr" :src="securityTwoFa.qr" alt="2fa">
 <!--        <div v-if="securityTwofa.qr && ([null, -1, -2].includes(securityTwofa.status))">-->
 <!--          <InputTwoFa :twofa="securityTwofa.code" @returnTwofa="returnTwofa" :onwhite="true" />-->
 <!--          <Button :label="'Confirm 2FA'" :clickon="set2fa" />-->
@@ -67,7 +67,7 @@
 import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
-import {getUserSettings} from "~/api";
+import {getUserByToken, getUserSettings} from "~/api";
 export default {
   name: "Settings",
   components: {
@@ -127,8 +127,13 @@ export default {
         if (item[0] === option) this.securityShowModal[item[0]] = false
       })
     },
-    generateTwoFa() {
-      // const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: localStorage.getItem('token') })
+    async generateTwoFa() {
+      const user = await getUserByToken(localStorage.getItem('token'))
+      if (user.status === -1) return
+
+      const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: user.username })
+      this.securityTwoFa.qr = qr
+      this.securityTwoFa.secret = secret
     }
   }
 }
