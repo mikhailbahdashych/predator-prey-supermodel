@@ -28,6 +28,17 @@ export const signUp = async payload => {
   }
 }
 
+export const changePassword = async payload => {
+  try {
+    const { data } = await api.post('c-p', payload, {
+      headers: { 'ato': payload.token }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getUserByToken = async token => {
   try {
     const { data } = await api.get('g-u-b-t', {
@@ -48,9 +59,9 @@ export const getUserByPersonalId = async personalId => {
   }
 }
 
-export const getUserSettings = async token => {
+export const getUserPersonalInformation = async token => {
   try {
-    const { data } = await api.get('g-u-s', {
+    const { data } = await api.get('g-u-p-i', {
       headers: { 'ato': token }
     })
     return data
@@ -67,6 +78,18 @@ export const updateUserPersonalInformation = async payload => {
     return data
   } catch (e) {
     return e.response.data
+  }
+}
+
+export const getUserSecuritySettings = async token => {
+  try {
+    const { data } = await api.get('g-u-s-s', {
+      headers: { 'ato': token }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+
   }
 }
 
@@ -95,17 +118,6 @@ export const setTwoFa = async payload => {
 export const disableTwoFa = async payload => {
   try {
     const { data } = await api.post('d-2fa', payload, {
-      headers: { 'ato': payload.token }
-    })
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const changePassword = async payload => {
-  try {
-    const { data } = await api.post('c-p', payload, {
       headers: { 'ato': payload.token }
     })
     return data

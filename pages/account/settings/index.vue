@@ -70,7 +70,7 @@ import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
 import InputTwoFa from "~/components/InputTwoFa";
-import {getUserByToken, getUserSettings, setTwoFa} from "~/api";
+import {getUserByToken, setTwoFa} from "~/api";
 export default {
   name: "Settings",
   components: {
