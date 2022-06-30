@@ -115,4 +115,13 @@ router.post('/c-p', async (req, res) => {
   }
 })
 
+router.get('/g-u-l-a/:personalId', async (req, res) => {
+  try {
+    const { data } = await api.get(`/get-user-last-activity/${req.params.personalId}`)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 module.exports = router

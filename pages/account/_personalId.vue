@@ -3,7 +3,7 @@
     <div class='account-content'>
       <div class='account-header-avatar' />
       <div class='account-header-data'>
-        <h1>{{user.username}}</h1>
+        <h1 class='font-second'>{{user.username}}</h1>
         <div v-if="isOwner" class="account-header-data">
           <Button :label="'Edit profile'" :additional-class="'transparent'" class="buttons" />
           <Button :label="'Settings'" :additional-class="'transparent'" class="buttons" @click-handler="redirect('/account/settings')" />
@@ -13,13 +13,13 @@
 
     <div class="account-content activity">
       <div class="section-activity border">
-
+        <h2 class='font-second center'>Last forum activity</h2>
       </div>
       <div class="section-activity border">
-
+        <h2 class='font-second center'>Last Q&A activity</h2>
       </div>
       <div class="section-activity">
-
+        <h2 class='font-second center'>Last blog activity</h2>
       </div>
     </div>
 

@@ -113,3 +113,12 @@ export const changePassword = async payload => {
     return e.response.data
   }
 }
+
+export const getUserLastActivity = async personalId => {
+  try {
+    const { data } = await api.get(`g-u-l-a/${personalId}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
