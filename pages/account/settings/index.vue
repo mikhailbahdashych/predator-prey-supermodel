@@ -44,7 +44,7 @@
           <img :src="securityTwoFa.qr" alt="2fa">
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA code'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
-          <p class="paragraph success" v-if="securityTwoFa.status === 1">2FA has been successfully set!</p>
+          <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
         </div>
       </basic-modal>
 
@@ -62,7 +62,7 @@ import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
 import InputTwoFa from "~/components/InputTwoFa";
-import {getUserByToken, getUserSecuritySettings, setTwoFa} from "~/api";
+import {getUserByToken, getUserSettings, setTwoFa} from "~/api";
 export default {
   name: "Settings",
   components: {
@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     async getUsersSettings(token) {
-      this.userSettings = await getUserSecuritySettings(token)
+      this.userSettings = await getUserSettings(token)
       if (this.userSettings.status === -1)
         return this.$router.push('/')
     },

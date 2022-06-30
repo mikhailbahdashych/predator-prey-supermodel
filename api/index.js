@@ -59,9 +59,18 @@ export const getUserByPersonalId = async personalId => {
   }
 }
 
-export const getUserPersonalInformation = async token => {
+export const getUserLastActivity = async personalId => {
   try {
-    const { data } = await api.get('g-u-p-i', {
+    const { data } = await api.get(`g-u-l-a/${personalId}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getUserSettings = async token => {
+  try {
+    const { data } = await api.get('/g-u-s', {
       headers: { 'ato': token }
     })
     return data
@@ -78,18 +87,6 @@ export const updateUserPersonalInformation = async payload => {
     return data
   } catch (e) {
     return e.response.data
-  }
-}
-
-export const getUserSecuritySettings = async token => {
-  try {
-    const { data } = await api.get('g-u-s-s', {
-      headers: { 'ato': token }
-    })
-    return data
-  } catch (e) {
-    return e.response.data
-
   }
 }
 
@@ -120,15 +117,6 @@ export const disableTwoFa = async payload => {
     const { data } = await api.post('d-2fa', payload, {
       headers: { 'ato': payload.token }
     })
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const getUserLastActivity = async personalId => {
-  try {
-    const { data } = await api.get(`g-u-l-a/${personalId}`)
     return data
   } catch (e) {
     return e.response.data

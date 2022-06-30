@@ -60,9 +60,18 @@ router.get('/g-u-b-p-id/:personalId', async (req, res) => {
   }
 })
 
-router.get('/g-u-p-i', async (req, res) => {
+router.get('/g-u-l-a/:personalId', async (req, res) => {
   try {
-    const { data } = await api.get('/get-user-personal-information', {
+    const { data } = await api.get(`/get-user-last-activity/${req.params.personalId}`)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.get('/g-u-s', async (req, res) => {
+  try {
+    const { data } = await api.get('/get-user-settings', {
       headers: { 'ato': req.headers.ato }
     })
     res.json(data)
@@ -74,17 +83,6 @@ router.get('/g-u-p-i', async (req, res) => {
 router.patch('/u-u-p-i', async (req, res) => {
   try {
     const { data } = await api.patch('/update-user-personal-information', req.body, {
-      headers: { 'ato': req.headers.ato }
-    })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-})
-
-router.get('/g-u-s-s', async (req, res) => {
-  try {
-    const { data } = await api.get('/get-user-security-settings', {
       headers: { 'ato': req.headers.ato }
     })
     res.json(data)
@@ -120,15 +118,6 @@ router.post('/d-2fa', async (req, res) => {
     const { data } = await api.post('/disable-2fa', req.body, {
       headers: { 'ato': req.headers.ato }
     })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-})
-
-router.get('/g-u-l-a/:personalId', async (req, res) => {
-  try {
-    const { data } = await api.get(`/get-user-last-activity/${req.params.personalId}`)
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
