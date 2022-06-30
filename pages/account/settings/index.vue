@@ -39,12 +39,19 @@
       Once it's done, click the button below to start."
         @close="closeModal('Set 2FA')"
       >
-        <Button v-if="!securityTwoFa.qr" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
+        <Button v-if="!securityTwoFa.qr && securityTwoFa.status !== 1" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
         <div v-if="securityTwoFa.qr" class="center">
           <img :src="securityTwoFa.qr" alt="2fa">
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA code'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
           <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
+        </div>
+        <div v-if="securityTwoFa.status === 1" class="center">
+          <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.
+            <span class="paragraph error">(Strongly isn't recommend!)</span>
+          </p>
+          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
+          <Button :label="'Confirm 2FA disable'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton" @click-handler="disableTwoFa" />
         </div>
       </basic-modal>
 
@@ -62,7 +69,7 @@ import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
 import InputTwoFa from "~/components/InputTwoFa";
-import {getUserByToken, getUserSettings, setTwoFa} from "~/api";
+import {disableTwoFa, getUserByToken, getUserSettings, setTwoFa} from "~/api";
 export default {
   name: "Settings",
   components: {
@@ -107,6 +114,11 @@ export default {
       this.userSettings = await getUserSettings(token)
       if (this.userSettings.status === -1)
         return this.$router.push('/')
+
+      if (this.userSettings.twoFa)
+        this.securityTwoFa.status = 1
+
+      // @TODO Fix big bug buttons
     },
     changeSubpage(item) {
       this.currentSection = item.title
@@ -135,13 +147,13 @@ export default {
       })
       this.securityTwoFa.status = status
     },
-    // async disableTwoFa() {
-    //   const { status } = await disableTwoFa({
-    //     twoFa: this.securityTwoFa.code.join(''),
-    //     token: localStorage.getItem('token')
-    //   })
-    //   this.securityTwoFa.status = status
-    // },
+    async disableTwoFa() {
+      const { status } = await disableTwoFa({
+        twoFa: this.securityTwoFa.code.join(''),
+        token: localStorage.getItem('token')
+      })
+      this.securityTwoFa.status = status
+    },
     async generateTwoFa() {
       const user = await getUserByToken(localStorage.getItem('token'))
       if (user.status === -1) return

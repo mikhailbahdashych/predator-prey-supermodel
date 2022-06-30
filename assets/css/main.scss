@@ -34,6 +34,7 @@ html, body {
   &.large { font-size: 24px; }
   &.right { float: right; }
   &.on-white-paragraph { color: black; }
+  &.error { color: v.$error }
   &.link { color: v.$mcm; cursor: pointer; text-decoration: underline }
   &.success { color: green }
   &.opacity { opacity: 0.5; }
