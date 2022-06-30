@@ -51,7 +51,8 @@
             <span class="paragraph error">(Strongly isn't recommend!)</span>
           </p>
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill'" :disabled="securityTwoFa.disabledButton" @click-handler="disableTwoFa" />
+          <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 0" @click-handler="disableTwoFa" />
+          <p v-if="securityTwoFa.status === 0" class="paragraph success">2FA has been successfully disabled!</p>
         </div>
       </basic-modal>
 
@@ -152,7 +153,7 @@ export default {
         twoFa: this.securityTwoFa.code.join(''),
         token: localStorage.getItem('token')
       })
-      this.securityTwoFa = { code: [], normalCode: null, qr: null, status, secret: null, disabledButton: true }
+      this.securityTwoFa = { code: [], normalCode: null, qr: null, status: status === 1 ? 0 : -1, secret: null, disabledButton: true }
     },
     async generateTwoFa() {
       const user = await getUserByToken(localStorage.getItem('token'))
