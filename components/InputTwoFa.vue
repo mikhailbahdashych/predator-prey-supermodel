@@ -96,16 +96,16 @@ export default {
     }
   },
   watch: {
-    i1() { this.i1 = validate2fa(this.i1); this.twoFaCode[0] = this.i1; this.returnTwofa() },
-    i2() { this.i2 = validate2fa(this.i2); this.twoFaCode[1] = this.i2; this.returnTwofa() },
-    i3() { this.i3 = validate2fa(this.i3); this.twoFaCode[2] = this.i3; this.returnTwofa() },
-    i4() { this.i4 = validate2fa(this.i4); this.twoFaCode[3] = this.i4; this.returnTwofa() },
-    i5() { this.i5 = validate2fa(this.i5); this.twoFaCode[4] = this.i5; this.returnTwofa() },
-    i6() { this.i6 = validate2fa(this.i6); this.twoFaCode[5] = this.i6; this.returnTwofa() },
+    i1() { this.i1 = validate2fa(this.i1); this.twoFaCode[0] = this.i1; this.returnTwoFa() },
+    i2() { this.i2 = validate2fa(this.i2); this.twoFaCode[1] = this.i2; this.returnTwoFa() },
+    i3() { this.i3 = validate2fa(this.i3); this.twoFaCode[2] = this.i3; this.returnTwoFa() },
+    i4() { this.i4 = validate2fa(this.i4); this.twoFaCode[3] = this.i4; this.returnTwoFa() },
+    i5() { this.i5 = validate2fa(this.i5); this.twoFaCode[4] = this.i5; this.returnTwoFa() },
+    i6() { this.i6 = validate2fa(this.i6); this.twoFaCode[5] = this.i6; this.returnTwoFa() },
   },
   methods: {
-    returnTwofa() {
-      this.$emit('returnTwofa', this.twoFaCode)
+    returnTwoFa() {
+      this.$emit('returnTwoFa', this.twoFaCode)
     },
   }
 }

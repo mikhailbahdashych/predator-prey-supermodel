@@ -40,9 +40,12 @@
         @close="closeModal('Set 2FA')"
       >
         <Button v-if="!securityTwoFa.qr" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
-        <img v-if="securityTwoFa.qr" :src="securityTwoFa.qr" alt="2fa">
+        <div v-if="securityTwoFa.qr" class="center">
+          <img :src="securityTwoFa.qr" alt="2fa">
+          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
+          <Button :label="'Confirm 2FA code'" :additional-class="'big'" @click-handler="setTwoFa" />
+        </div>
 <!--        <div v-if="securityTwofa.qr && ([null, -1, -2].includes(securityTwofa.status))">-->
-<!--          <InputTwoFa :twofa="securityTwofa.code" @returnTwofa="returnTwofa" :onwhite="true" />-->
 <!--          <Button :label="'Confirm 2FA'" :clickon="set2fa" />-->
 <!--        </div>-->
 <!--        <div v-else-if="securityTwofa.status === 1">-->
@@ -66,12 +69,14 @@
 import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
-import {getUserByToken, getUserSettings} from "~/api";
+import InputTwoFa from "~/components/InputTwoFa";
+import {getUserByToken, getUserSettings, setTwoFa} from "~/api";
 export default {
   name: "Settings",
   components: {
     Button,
-    BasicModal
+    BasicModal,
+    InputTwoFa
   },
   data() {
     return {
@@ -108,7 +113,7 @@ export default {
   },
   methods: {
     async getUsersSettings(token) {
-      this.userSettings = await getUserSettings(token)
+      // this.userSettings = await getUserSe(token)
       if (this.userSettings.status === -1)
         return this.$router.push('/')
     },
@@ -126,6 +131,24 @@ export default {
         if (item[0] === option) this.securityShowModal[item[0]] = false
       })
     },
+    returnTwoFa(twoFa) {
+
+    },
+    async setTwoFa() {
+      const { status } = await setTwoFa({
+        twoFa: this.securityTwoFa.code.join(''),
+        tokenTwoFa: this.securityTwoFa.secret,
+        token: localStorage.getItem('token')
+      })
+      this.securityTwoFa.status = status
+    },
+    // async disableTwoFa() {
+    //   const { status } = await disableTwoFa({
+    //     twoFa: this.securityTwoFa.code.join(''),
+    //     token: localStorage.getItem('token')
+    //   })
+    //   this.securityTwoFa.status = status
+    // },
     async generateTwoFa() {
       const user = await getUserByToken(localStorage.getItem('token'))
       if (user.status === -1) return
