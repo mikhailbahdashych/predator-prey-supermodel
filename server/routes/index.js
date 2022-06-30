@@ -87,6 +87,7 @@ router.get('/g-u-s-s', async (req, res) => {
     const { data } = await api.get('/get-user-security-settings', {
       headers: { 'ato': req.headers.ato }
     })
+    res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }

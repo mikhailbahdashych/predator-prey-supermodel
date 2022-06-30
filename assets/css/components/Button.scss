@@ -37,6 +37,7 @@
 }
 
 .basic-button:disabled {
-  background-color: rgba(v.$mcm, 0.25);
+  background-color: rgba(v.$mcm, 0.35);
+  border: 1px solid v.$mcl;
   cursor: auto;
 }

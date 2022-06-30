@@ -43,17 +43,8 @@
         <div v-if="securityTwoFa.qr" class="center">
           <img :src="securityTwoFa.qr" alt="2fa">
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA code'" :additional-class="'big'" @click-handler="setTwoFa" />
+          <Button :label="'Confirm 2FA code'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton" @click-handler="setTwoFa" />
         </div>
-<!--        <div v-if="securityTwofa.qr && ([null, -1, -2].includes(securityTwofa.status))">-->
-<!--          <Button :label="'Confirm 2FA'" :clickon="set2fa" />-->
-<!--        </div>-->
-<!--        <div v-else-if="securityTwofa.status === 1">-->
-<!--          <p class="paragraph medium on-white-paragraph">2FA set successfully</p>-->
-<!--        </div>-->
-<!--        <div v-if="securityTwofa.status === -1">-->
-<!--          <p class="paragraph medium error">Wrong code!</p>-->
-<!--        </div>-->
       </basic-modal>
 
     </div>
@@ -70,7 +61,7 @@ import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
 import InputTwoFa from "~/components/InputTwoFa";
-import {getUserByToken, setTwoFa} from "~/api";
+import {getUserByToken, getUserSecuritySettings, setTwoFa} from "~/api";
 export default {
   name: "Settings",
   components: {
@@ -102,8 +93,7 @@ export default {
         'Disable 2FA': false,
         twoFa: false,
       },
-
-      securityTwoFa: { code: [], qr: null, status: null, secret: null },
+      securityTwoFa: { code: [], normalCode: null, qr: null, status: null, secret: null, disabledButton: true },
 
     }
   },
@@ -113,7 +103,7 @@ export default {
   },
   methods: {
     async getUsersSettings(token) {
-      // this.userSettings = await getUserSe(token)
+      this.userSettings = await getUserSecuritySettings(token)
       if (this.userSettings.status === -1)
         return this.$router.push('/')
     },
@@ -132,12 +122,14 @@ export default {
       })
     },
     returnTwoFa(twoFa) {
-
+      this.securityTwoFa.disabledButton = !(twoFa.join('').length === 6)
+      if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
+      this.securityTwoFa.normalCode = twoFa.join('')
     },
     async setTwoFa() {
       const { status } = await setTwoFa({
-        twoFa: this.securityTwoFa.code.join(''),
-        tokenTwoFa: this.securityTwoFa.secret,
+        twoFaCode: this.securityTwoFa.normalCode,
+        twoFaToken: this.securityTwoFa.secret,
         token: localStorage.getItem('token')
       })
       this.securityTwoFa.status = status
