@@ -30,9 +30,16 @@ export const signUp = async payload => {
 
 export const changePassword = async payload => {
   try {
-    const { data } = await api.post('c-p', payload, {
-      headers: { 'ato': payload.token }
-    })
+    const { data } = await api.post('c-p', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const closeAccount = async payload => {
+  try {
+    const { data } = await api.post('c-a', payload)
     return data
   } catch (e) {
     return e.response.data

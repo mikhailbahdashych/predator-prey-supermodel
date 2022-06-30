@@ -31,14 +31,21 @@ router.post('/s-u', async (req, res) => {
 
 router.post('/c-p', async (req, res) => {
   try {
-    const { data } = await api.post('/change-password', req.body, {
-      headers: { 'ato': req.headers.ato }
-    })
+    const { data } = await api.post('/change-password', req.body)
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
+
+router.post('/c-a', async (req, res) => {
+  try {
+    const { data } = await api.post('/close-account', req.body)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
 
 router.get('/g-u-b-t', async (req, res) => {
   try {
@@ -49,7 +56,7 @@ router.get('/g-u-b-t', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
 
 router.get('/g-u-b-p-id/:personalId', async (req, res) => {
   try {
@@ -58,7 +65,7 @@ router.get('/g-u-b-p-id/:personalId', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
 
 router.get('/g-u-l-a/:personalId', async (req, res) => {
   try {
@@ -67,7 +74,7 @@ router.get('/g-u-l-a/:personalId', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
 
 router.get('/g-u-s', async (req, res) => {
   try {
@@ -78,7 +85,7 @@ router.get('/g-u-s', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
 
 router.patch('/u-u-p-i', async (req, res) => {
   try {
@@ -89,7 +96,7 @@ router.patch('/u-u-p-i', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
 
 router.patch('/u-u-s-s', async (req, res) => {
   try {
@@ -100,7 +107,7 @@ router.patch('/u-u-s-s', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
 
 router.post('/s-2fa', async (req, res) => {
   try {
@@ -111,7 +118,7 @@ router.post('/s-2fa', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
 
 router.post('/d-2fa', async (req, res) => {
   try {
@@ -122,6 +129,6 @@ router.post('/d-2fa', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-})
+});
 
 module.exports = router
