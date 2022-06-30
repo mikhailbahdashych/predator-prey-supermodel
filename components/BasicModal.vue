@@ -15,9 +15,14 @@
 export default {
   name: "BasicModal",
   props: {
-    header: String,
-    description: String,
-    onClose: Boolean
+    header: {
+      type: String,
+      default: ''
+    },
+    description: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>
