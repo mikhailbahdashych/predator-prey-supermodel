@@ -4,6 +4,8 @@ p, h1, h2, h3, h4, h5, li {
   font-family: "Ubuntu", sans-serif;
   color: white;
   opacity: 0.8;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .font-second {
@@ -67,5 +69,3 @@ li {
     padding-bottom: 50px;
   }
 }
-
-.error { color: v.$error; }

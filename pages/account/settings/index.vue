@@ -18,9 +18,14 @@
     <div v-else-if="currentSection === 'Security settings'" class="account-security-content">
 
       <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`security-item ${setting.danger ? 'danger' : ''}`">
-        <div class="security-item-content">
-          <h3 class="font-second">{{ setting.title }}</h3>
-          <p class="font-second">{{ setting.description }}</p>
+        <div class="security-items">
+          <div class="security-items">
+            <h3 class="font-second danger-text">{{ setting.title }}</h3>
+            <p class="font-second danger-text">{{ setting.description }}</p>
+          </div>
+          <div class="security-items">
+            <Button :label="setting.buttonTitle" :additional-class="`transparent ${setting.danger ? 'danger' : ''}`" />
+          </div>
         </div>
       </div>
 
@@ -34,9 +39,13 @@
 </template>
 
 <script>
+import Button from "~/components/Button";
 import {getUserSettings} from "~/api";
 export default {
   name: "Settings",
+  components: {
+    Button
+  },
   data() {
     return {
       accountHeaderItems: [
