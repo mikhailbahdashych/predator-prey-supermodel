@@ -10,7 +10,6 @@
       </div>
     </div>
 
-
     <div v-if="currentSection === 'Personal information'" class="account-security-content">
 
     </div>
