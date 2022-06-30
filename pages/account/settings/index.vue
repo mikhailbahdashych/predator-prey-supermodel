@@ -56,6 +56,15 @@
         </div>
       </basic-modal>
 
+      <basic-modal
+        v-if="securityShowModal['Close account']"
+        header="Close account"
+        description="We are very sorry about this :( You can get back any time you want. Hope, to see you again."
+        @close="closeModal('Close account')"
+      >
+
+      </basic-modal>
+
     </div>
 
     <div v-else class="account-security-content">
