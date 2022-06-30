@@ -35,7 +35,7 @@ html, body {
   &.right { float: right; }
   &.on-white-paragraph { color: black; }
   &.link { color: v.$mcm; cursor: pointer; text-decoration: underline }
-  &.success { color: lightgreen }
+  &.success { color: green }
   &.opacity { opacity: 0.5; }
   &.bold { font-weight: 500 }
 }

@@ -42,8 +42,9 @@
         <Button v-if="!securityTwoFa.qr" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
         <div v-if="securityTwoFa.qr" class="center">
           <img :src="securityTwoFa.qr" alt="2fa">
-          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA code'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton" @click-handler="setTwoFa" />
+          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
+          <Button :label="'Confirm 2FA code'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
+          <p class="paragraph success" v-if="securityTwoFa.status === 1">2FA has been successfully set!</p>
         </div>
       </basic-modal>
 
