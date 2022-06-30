@@ -1,7 +1,7 @@
 <template>
   <div class='account'>
     <div class='account-content'>
-      <div class='account-header-avatar' />
+      <img class='account-header-avatar' src="../../assets/img/testava.jpg" alt="ava">
       <div class='account-header-data'>
         <h1 class='font-second'>{{user.username}}</h1>
         <div v-if="isOwner" class="account-header-data">

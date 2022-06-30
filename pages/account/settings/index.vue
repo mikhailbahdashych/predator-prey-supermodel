@@ -42,7 +42,7 @@ export default {
     }
   },
   async mounted() {
-    if (!localStorage.getItem('token')) await this.getUsersSettings(localStorage.getItem('token'))
+    if (localStorage.getItem('token') !== null) await this.getUsersSettings(localStorage.getItem('token'))
     else await this.$router.push('/')
   },
   methods: {
