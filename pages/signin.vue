@@ -34,7 +34,7 @@
           :type="'password'"
           @keyup.enter.native="signin"
         />
-        <p v-if="loginError === -1" class="paragraph error">Wrong credentials!</p>
+        <p v-if="loginError" class="paragraph error">Wrong credentials!</p>
         <Button :label="'Sign In'" :additional-class="'mt big'" @click-handler="signin" />
         <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
 
@@ -44,8 +44,7 @@
         <div class="center">
           <h1>Two-Factor authentication</h1>
           <p class="paragraph">Please, provide Google Authenticator code to continue</p>
-          <InputTwoFa :twofa="twoFa.code" @returnTwofa="returnTwoFa" />
-          <Button :label="'Sign In'" :additional-class="'mt big'" @click-handler="signin" />
+          <InputTwoFa :twofa="twoFa.code" @returnTwoFa="returnTwoFa" />
           <p v-if="twoFa.error" class="paragraph error">Wrong code!</p>
           <p class="paragraph right link">Unable to login with 2FA?</p>
         </div>
@@ -104,7 +103,7 @@ export default {
         phoneFocus: false,
         phone: null,
       },
-      loginError: null,
+      loginError: false,
       twoFa: { code: [], show: false, error: false, normalCode: null },
       phone: { phone: null, show: false, error: false }
     }
@@ -139,11 +138,11 @@ export default {
         })
 
         if (res.status === -1) {
-          this.loginError = -1
+          this.loginError = true
           return
         }
         if (res.status === -2) {
-          this.loginError = -2
+          this.twoFa.error = true
           return
         }
 
@@ -152,8 +151,8 @@ export default {
         } else if (res.phone) {
           this.phone.show = true
         } else if (!res.status) {
-          localStorage.setItem('token', res)
-          await this.$router.push({path: '/account'})
+          localStorage.setItem('token', res.token)
+          await this.$router.push({path: `/account/${res.userId}`})
         }
       } else {
         this.loginEmail.loginEmailError = true
@@ -163,9 +162,10 @@ export default {
     redirect(path) {
       this.$router.push({ path })
     },
-    returnTwoFa(twoFa) {
+    async returnTwoFa(twoFa) {
       if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
       this.twoFa.normalCode = twoFa.join('')
+      await this.signin()
     },
     chooseLogin(option) {
       if (option === 'email') this.setEmailFocusLogin()
