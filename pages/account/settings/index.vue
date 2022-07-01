@@ -47,12 +47,10 @@
           <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
         </div>
         <div v-if="securityTwoFa.status === 2" class="center">
-          <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.
-            <span class="paragraph error">(Strongly isn't recommend!)</span>
-          </p>
-          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 0" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 0" @click-handler="disableTwoFa" />
-          <p v-if="securityTwoFa.status === 0" class="paragraph success">2FA has been successfully disabled!</p>
+          <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
+          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 0" @returnTwoFa="returnTwoFa" />
+          <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
+          <p v-if="securityTwoFa.disableStatus === 0" class="paragraph success">2FA has been successfully disabled!</p>
         </div>
       </basic-modal>
 
@@ -118,7 +116,7 @@ export default {
         twoFa: false,
       },
 
-      securityTwoFa: { code: [], normalCode: null, qr: null, status: null, secret: null, disabledButton: true },
+      securityTwoFa: { code: [], normalCode: null, qr: null, status: null, disableStatus: null, secret: null, disabledButton: true },
       closeAcc: {
         password: null,
         repeatPassword: null,
@@ -171,7 +169,7 @@ export default {
         twoFaCode: this.securityTwoFa.normalCode,
         token: localStorage.getItem('token')
       })
-      this.securityTwoFa.status = status === 1 ? 0 : -1
+      this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
     async closeAccount() {
       await closeAccount({
