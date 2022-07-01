@@ -36,7 +36,7 @@
         description="We strongly recommend you to set up 2FA.
       This will increase the security of you account.
       Before it, you should download Google Authenticator application.
-      Once it's done, click the button below to start."
+      Once it is done, click the button below to start."
         @close="closeModal('Set 2FA')"
       >
         <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
@@ -45,12 +45,14 @@
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA code'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
           <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
+          <p v-else-if="securityTwoFa.status === -1" class="paragraph error">Wrong code!</p>
         </div>
         <div v-if="securityTwoFa.status === 2" class="center">
           <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 0" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
           <p v-if="securityTwoFa.disableStatus === 0" class="paragraph success">2FA has been successfully disabled!</p>
+          <p v-else-if="securityTwoFa.disableStatus === -1" class="paragraph error">Wrong code!</p>
         </div>
       </basic-modal>
 
@@ -134,8 +136,10 @@ export default {
       if (this.userSettings.status === -1)
         return this.$router.push('/')
 
-      if (this.userSettings.twoFa)
+      if (this.userSettings.twoFa) {
         this.securityTwoFa.status = 2
+        this.securitySettingsOptions[0].title = 'Disable 2FA'
+      }
     },
     changeSubpage(item) {
       this.currentSection = item.title

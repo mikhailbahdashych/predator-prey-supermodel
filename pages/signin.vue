@@ -2,7 +2,7 @@
   <div class="login">
 
     <div class="login-inputs">
-      <div v-if="!phone.show && !twofa.show" class="login-inputs-container">
+      <div v-if="!phone.show && !twoFa.show" class="login-inputs-container">
         <h1>Sign In</h1>
 
         <div class="login-options">
@@ -40,12 +40,13 @@
 
       </div>
 
-      <div v-else-if="twofa.show" class="login-inputs-container">
-        <h1>Two-Factor authentication</h1>
+      <div v-else-if="twoFa.show" class="login-inputs-container">
         <div class="center">
+          <h1>Two-Factor authentication</h1>
           <p class="paragraph">Please, provide Google Authenticator code to continue</p>
-          <InputTwoFa :twofa="twofa.code" @returnTwofa="returnTwofa" />
-          <p v-if="twofa.error" class="paragraph error">Wrong code!</p>
+          <InputTwoFa :twofa="twoFa.code" @returnTwofa="returnTwoFa" />
+          <Button :label="'Sign In'" :additional-class="'mt big'" @click-handler="signin" />
+          <p v-if="twoFa.error" class="paragraph error">Wrong code!</p>
           <p class="paragraph right link">Unable to login with 2FA?</p>
         </div>
       </div>
@@ -104,7 +105,7 @@ export default {
         phone: null,
       },
       loginError: null,
-      twofa: { code: [], show: false, error: false },
+      twoFa: { code: [], show: false, error: false, normalCode: null },
       phone: { phone: null, show: false, error: false }
     }
   },
@@ -134,7 +135,7 @@ export default {
           email: this.loginEmail.email,
           phone: this.loginPhone.phone,
           password: this.loginPassword.password,
-          twofa: this.twofa.code.join('')
+          twoFa: this.twoFa.normalCode
         })
 
         if (res.status === -1) {
@@ -147,7 +148,7 @@ export default {
         }
 
         if (res.twoFa) {
-          this.twofa.show = true
+          this.twoFa.show = true
         } else if (res.phone) {
           this.phone.show = true
         } else if (!res.status) {
@@ -162,9 +163,9 @@ export default {
     redirect(path) {
       this.$router.push({ path })
     },
-    returnTwofa(twofa) {
-      if (twofa.length !== 6 || twofa.join('').length !== 6) return
-      this.signin()
+    returnTwoFa(twoFa) {
+      if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
+      this.twoFa.normalCode = twoFa.join('')
     },
     chooseLogin(option) {
       if (option === 'email') this.setEmailFocusLogin()
