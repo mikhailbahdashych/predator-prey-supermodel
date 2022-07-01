@@ -33,24 +33,24 @@
       <basic-modal
         v-if="securityShowModal['Set 2FA']"
         header="Activate 2FA"
-        description="We strongly recommend you to 2FA.
+        description="We strongly recommend you to set up 2FA.
       This will increase the security of you account.
       Before it, you should download Google Authenticator application.
       Once it's done, click the button below to start."
         @close="closeModal('Set 2FA')"
       >
-        <Button v-if="!securityTwoFa.qr && securityTwoFa.status !== 1" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
-        <div v-if="securityTwoFa.qr && securityTwoFa.status !== 1" class="center">
+        <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
+        <div v-if="securityTwoFa.qr" class="center">
           <img :src="securityTwoFa.qr" alt="2fa">
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA code'" :additional-class="'big'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
           <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
         </div>
-        <div v-if="securityTwoFa.status === 1" class="center">
+        <div v-if="securityTwoFa.status === 2" class="center">
           <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.
             <span class="paragraph error">(Strongly isn't recommend!)</span>
           </p>
-          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
+          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 0" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 0" @click-handler="disableTwoFa" />
           <p v-if="securityTwoFa.status === 0" class="paragraph success">2FA has been successfully disabled!</p>
         </div>
@@ -62,7 +62,6 @@
         description="We are very sorry about this :( You can get back any time you want. Hope, to see you again."
         @close="closeModal('Close account')"
       >
-
       </basic-modal>
 
     </div>
@@ -79,7 +78,13 @@ import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
 import InputTwoFa from "~/components/InputTwoFa";
-import {disableTwoFa, getUserByToken, getUserSettings, setTwoFa} from "~/api";
+import {
+  disableTwoFa,
+  getUserByToken,
+  getUserSettings,
+  setTwoFa,
+  closeAccount
+} from "~/api";
 export default {
   name: "Settings",
   components: {
@@ -103,6 +108,7 @@ export default {
         { title: 'Change email', description: 'You are able to change email only one time.', buttonTitle: 'Change email', danger: false },
         { title: 'Close account', description: 'After closing account all information about it will be deleted.', buttonTitle: 'Close', danger: true }
       ],
+
       securityShowModal: {
         'Set 2FA': false,
         'Close account': false,
@@ -111,8 +117,13 @@ export default {
         'Disable 2FA': false,
         twoFa: false,
       },
-      securityTwoFa: { code: [], normalCode: null, qr: null, status: null, secret: null, disabledButton: true },
 
+      securityTwoFa: { code: [], normalCode: null, qr: null, status: null, secret: null, disabledButton: true },
+      closeAcc: {
+        password: null,
+        repeatPassword: null,
+        twoFa: null
+      }
     }
   },
   async mounted() {
@@ -126,9 +137,7 @@ export default {
         return this.$router.push('/')
 
       if (this.userSettings.twoFa)
-        this.securityTwoFa.status = 1
-
-      // @TODO Fix big bug buttons
+        this.securityTwoFa.status = 2
     },
     changeSubpage(item) {
       this.currentSection = item.title
@@ -155,14 +164,20 @@ export default {
         twoFaToken: this.securityTwoFa.secret,
         token: localStorage.getItem('token')
       })
-      this.securityTwoFa = { code: [], normalCode: null, qr: null, status, secret: null, disabledButton: true }
+      this.securityTwoFa.status = status
     },
     async disableTwoFa() {
       const { status } = await disableTwoFa({
-        twoFa: this.securityTwoFa.code.join(''),
+        twoFaCode: this.securityTwoFa.normalCode,
         token: localStorage.getItem('token')
       })
-      this.securityTwoFa = { code: [], normalCode: null, qr: null, status: status === 1 ? 0 : -1, secret: null, disabledButton: true }
+      this.securityTwoFa.status = status === 1 ? 0 : -1
+    },
+    async closeAccount() {
+      await closeAccount({
+        password: this.closeAcc.password,
+        twoFa: this.closeAcc.twoFa
+      })
     },
     async generateTwoFa() {
       const user = await getUserByToken(localStorage.getItem('token'))
