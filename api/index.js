@@ -37,6 +37,15 @@ export const changePassword = async payload => {
   }
 }
 
+export const changeEmail = async payload => {
+  try {
+    const { data } = await api.post('c-e', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const closeAccount = async payload => {
   try {
     const { data } = await api.post('c-a', payload)

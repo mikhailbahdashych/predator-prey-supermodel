@@ -38,6 +38,15 @@ router.post('/c-p', async (req, res) => {
   }
 });
 
+router.post('/c-e', async (req, res) => {
+  try {
+    const { data } = await api.post('/change-email', req.body)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 router.post('/c-a', async (req, res) => {
   try {
     const { data } = await api.post('/close-account', req.body)
