@@ -99,7 +99,9 @@ import {
   getUserByToken,
   getUserSettings,
   setTwoFa,
-  closeAccount
+  closeAccount,
+  changePassword,
+  changeEmail
 } from "~/api";
 export default {
   name: "Settings",
@@ -135,11 +137,8 @@ export default {
       },
 
       securityTwoFa: { code: [], normalCode: null, qr: null, status: null, disableStatus: null, secret: null, disabledButton: true },
-      closeAcc: {
-        password: null,
-        repeatPassword: null,
-        twoFa: null
-      }
+      closeAcc: { password: null, repeatPassword: null, twoFa: null },
+      changePass: { password: null, repeatPassword: null, twoFa: null }
     }
   },
   async mounted() {
@@ -196,6 +195,12 @@ export default {
         password: this.closeAcc.password,
         twoFa: this.closeAcc.twoFa
       })
+    },
+    async changePassword() {
+      await changePassword({})
+    },
+    async changeEmail() {
+      await changeEmail({})
     },
     async generateTwoFa() {
       const user = await getUserByToken(localStorage.getItem('token'))
