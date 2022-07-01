@@ -146,11 +146,11 @@ export default {
           return
         }
 
-        if (res.twoFa) {
+        if (res.twoFa)
           this.twoFa.show = true
-        } else if (res.phone) {
+        else if (res.phone)
           this.phone.show = true
-        } else if (!res.status) {
+        else if (!res.status) {
           localStorage.setItem('token', res.token)
           await this.$router.push({path: `/account/${res.userId}`})
         }

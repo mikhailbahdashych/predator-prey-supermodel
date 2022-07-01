@@ -57,6 +57,22 @@
       </basic-modal>
 
       <basic-modal
+        v-if="securityShowModal['Change password']"
+        header="Change password"
+        description="Change your password by providing current password and 2FA (if it is set up)"
+        @close="closeModal('Change password')"
+      >
+      </basic-modal>
+
+      <basic-modal
+        v-if="securityShowModal['Change email']"
+        header="Change email"
+        description="Be careful! You are able to change email only one time."
+        @close="closeModal('Change email')"
+      >
+      </basic-modal>
+
+      <basic-modal
         v-if="securityShowModal['Close account']"
         header="Close account"
         description="We are very sorry about this :( You can get back any time you want. Hope, to see you again."
