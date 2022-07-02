@@ -132,7 +132,22 @@
           :additional-class="'on-white w400'"
           :type="'password'"
         />
-        <p v-if="securityPassword.error" class="paragraph error">Passwords have to match!</p>
+        <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
+        <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
+        <div v-if="passwordError.passwordRules" class="password-requirement">
+
+          <div v-for="rule in passwordRulesList" :key="rule.text" class="flex">
+            <div v-for="(item, i) in Object.entries(rule)" :key="i">
+              <p>
+                <span v-if="item[0] === 'text'" class="paragraph">{{ item[1] }}</span>
+                <span v-else>
+                  <span v-if="item[1]" class="paragraph success">OK</span>
+                  <span v-else class="paragraph error">NOT OK</span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
         <Button
           :label="'Change password'"
           :additional-class="'big w400'"
@@ -192,6 +207,7 @@ import {
   changePassword,
   changeEmail
 } from '~/api'
+import { validatePassword, validatePasswordRules } from '~/helpers/frontValidator'
 
 export default {
   name: 'Settings',
@@ -260,19 +276,37 @@ export default {
         secret: null,
         disabledButton: true
       },
+
+      closeAcc: { currentPassword: null, twoFa: null, status: null },
+
       securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null },
-      closeAcc: { currentPassword: null, twoFa: null, status: null }
+      passwordError: {
+        passwordMismatch: false,
+        passwordRequirement: false,
+        passwordRules: false
+      },
+      passwordRulesList: [
+        {eightChars: false, text: 'Password length should be more than 8 characters'},
+        {uppCase: false, text: 'Password should contain at least one uppercase character'},
+        {lowCase: false, text: 'Password should contain at least one lowercase character'},
+        {specChar: false, text: 'Password should contain at least one special character'},
+        {digitChar: false, text: 'Password should contain at least one digit character'}
+      ]
     }
   },
   watch: {
     'securityPassword.newPassword': {
       handler: function() {
-        this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat
+        if (this.securityPassword.newPassword === this.securityPassword.newPasswordRepeat) { this.passwordError.passwordMismatch = false }
+        // this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat
+        this.validPassword()
       }
     },
     'securityPassword.newPasswordRepeat': {
       handler: function() {
-        this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat
+        if (this.securityPassword.newPassword === this.securityPassword.newPasswordRepeat) { this.passwordError.passwordMismatch = false }
+        // this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat
+        this.validPassword()
       }
     }
   },
@@ -378,7 +412,25 @@ export default {
     },
     redirect(path) {
       this.$router.push(path)
-    }
+    },
+    validPassword() {
+      const passwordRuleCheck = validatePasswordRules(this.securityPassword.newPassword)
+      Object.entries(passwordRuleCheck).forEach(item => {
+        this.passwordRulesList.forEach(rule => {
+          Object.entries(rule).forEach(x => {
+            if (item[0] === x[0]) rule[item[0]] = item[1]
+          })
+        })
+      })
+      this.passwordError.passwordMismatch = !!((this.securityPassword.newPassword && this.securityPassword.newPasswordRepeat) && (this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat));
+      this.passwordError.passwordRequirement = !this.securityPassword.newPassword || !this.securityPassword.newPasswordRepeat;
+      this.passwordError.passwordRules = !!(!validatePassword(this.securityPassword.newPassword) || !validatePassword(this.securityPassword.newPasswordRepeat));
+      if (!this.securityPassword.newPassword && !this.securityPassword.newPasswordRepeat) {
+        this.passwordError.passwordMismatch = false
+        this.passwordError.passwordRequirement = false
+        this.passwordError.passwordRules = false
+      }
+    },
   }
 }
 </script>

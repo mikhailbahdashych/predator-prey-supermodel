@@ -166,6 +166,7 @@ export default {
             this.showReopeningScreen.status = true
             this.showReopeningScreen.username = res.username
             this.showReopeningScreen.personalId = res.personalId
+            localStorage.setItem('token', res.token)
             return
           }
 
