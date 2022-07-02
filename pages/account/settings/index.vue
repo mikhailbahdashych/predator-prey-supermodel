@@ -16,7 +16,19 @@
 
     <div v-else-if="currentSection === 'Security settings'" class="account-security-content">
       <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`security-item ${setting.danger ? 'danger' : ''}`">
-        <div class="security-items">
+        <div v-if="setting.title === 'Set 2FA'" class="security-items">
+          <div class="security-items">
+            <h3 class="font-second danger-text">{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
+            <p class="font-second danger-text">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
+          </div>
+          <div class="security-items">
+            <Button
+              :label="securityTwoFa.status === 2 ? 'Disable 2FA' : setting.buttonTitle"
+              :additional-class="`transparent`"
+              @click-handler="openModal(securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title)" />
+          </div>
+        </div>
+        <div v-else class="security-items">
           <div class="security-items">
             <h3 class="font-second danger-text">{{ setting.title }}</h3>
             <p class="font-second danger-text">{{ setting.description }}</p>
@@ -34,9 +46,9 @@
         v-if="securityShowModal['Set 2FA']"
         header="Activate 2FA"
         description="We strongly recommend you to set up 2FA.
-      This will increase the security of you account.
-      Before it, you should download Google Authenticator application.
-      Once it is done, click the button below to start."
+        This will increase the security of you account.
+        Before it, you should download Google Authenticator application.
+        Once it is done, click the button below to start."
         @close="closeModal('Set 2FA')"
       >
         <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
@@ -47,6 +59,15 @@
           <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
           <p v-else-if="securityTwoFa.status === -1" class="paragraph error">Wrong code!</p>
         </div>
+      </basic-modal>
+
+      <basic-modal
+        v-if="securityShowModal['Disable 2FA']"
+        header="Disable 2FA"
+        description="You are about deactivate your Two-factor authentication.
+        Be careful! This action will decrease your account security"
+        @close="closeModal('Disable 2FA')"
+      >
         <div v-if="securityTwoFa.status === 2" class="center">
           <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 0" @returnTwoFa="returnTwoFa" />
@@ -153,7 +174,6 @@ export default {
 
       if (this.userSettings.twoFa) {
         this.securityTwoFa.status = 2
-        this.securitySettingsOptions[0].title = 'Disable 2FA'
       }
     },
     changeSubpage(item) {
