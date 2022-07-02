@@ -44,7 +44,7 @@
 
 .basic-button:disabled {
   background-color: rgba(v.$mcm, 0.35);
-  border: 1px solid v.$mcl;
+  border: 1px solid rgba(v.$mcl, 0.35);
   cursor: auto;
   &.danger-fill {
     border: none;

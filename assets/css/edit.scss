@@ -45,7 +45,6 @@
     }
     &.danger {
       border-bottom: 1px solid rgba(v.$error, 0.25);
-      h3, p { color: v.$error }
     }
   }
 }

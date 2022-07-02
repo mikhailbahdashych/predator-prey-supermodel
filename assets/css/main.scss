@@ -11,6 +11,10 @@ p, h1, h2, h3, h4, h5, li {
 .font-second {
   font-family: "Lato", sans-serif;
   font-weight: bold;
+  p, h1, h2, h3, h4, h5, li {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  }
 }
 
 li {
@@ -60,9 +64,8 @@ li {
   margin: 10px;
 }
 
-.mt {
-  margin-top: 10px;
-}
+.mt { margin-top: 10px; }
+.mr { margin-right: 10px; }
 
 .page-content {
   position: relative;

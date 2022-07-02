@@ -19,27 +19,45 @@
       <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`security-item ${setting.danger ? 'danger' : ''}`">
         <div v-if="setting.title === 'Set 2FA'" class="security-items">
           <div class="security-items">
-            <h3 class="font-second danger-text">{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
-            <p class="font-second danger-text">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
+            <h3 class="font-second">{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
+            <p class="font-second">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
           </div>
           <div class="security-items">
             <Button
               :label="securityTwoFa.status === 2 ? 'Disable 2FA' : setting.buttonTitle"
               :additional-class="`transparent`"
               @click-handler="openModal(securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title)" />
+            <Button
+              v-if="setting.title === 'Close account'"
+              :label="'Show more'"
+              @click-handler="stateShowCloseAccMoreInfo" />
           </div>
         </div>
         <div v-else class="security-items">
           <div class="security-items">
-            <h3 class="font-second danger-text">{{ setting.title }}</h3>
-            <p class="font-second danger-text">{{ setting.description }}</p>
+            <h3 :class="`font-second ${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
+            <p :class="`font-second ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
           </div>
           <div class="security-items">
+            <Button
+              v-if="setting.title === 'Close account'"
+              :label="'Show more'"
+              :additional-class="`transparent mr`"
+              @click-handler="stateShowCloseAccMoreInfo" />
             <Button
               :label="setting.buttonTitle"
               :additional-class="`transparent ${setting.danger ? 'danger' : ''}`"
               @click-handler="openModal(setting.title)" />
           </div>
+        </div>
+        <div v-if="closeAccountMoreInfo && setting.title === 'Close account'" class="font-second">
+          <p>Closing your account means:</p>
+          <ul>
+            <li>Your username will be shown as user1234567890.</li>
+            <li>All your personal information will be hidden from other users.</li>
+            <li>You can restore your account any time just by signing in back.</li>
+          </ul>
+          <p>For more information see <span class="paragraph link" @click="redirect('tac')">terms and conditions</span>.</p>
         </div>
       </div>
 
@@ -144,12 +162,12 @@
 </template>
 
 <script>
-import * as node2fa from "node-2fa";
-import Button from "~/components/Button";
-import BasicModal from "~/components/BasicModal";
-import InputTwoFa from "~/components/InputTwoFa";
-import Input from '~/components/Input';
-import Popup from '~/components/Popup';
+import * as node2fa from 'node-2fa'
+import Button from '~/components/Button'
+import BasicModal from '~/components/BasicModal'
+import InputTwoFa from '~/components/InputTwoFa'
+import Input from '~/components/Input'
+import Popup from '~/components/Popup'
 import {
   disableTwoFa,
   getUserByToken,
@@ -158,9 +176,10 @@ import {
   closeAccount,
   changePassword,
   changeEmail
-} from "~/api";
+} from '~/api'
+
 export default {
-  name: "Settings",
+  name: 'Settings',
   components: {
     Button,
     BasicModal,
@@ -171,19 +190,41 @@ export default {
   data() {
     return {
       showPopup: false,
+      closeAccountMoreInfo: false,
+
       accountHeaderItems: [
         { title: 'Personal information', active: true },
         { title: 'Security settings', active: false },
-        { title: 'Site settings', active: false },
+        { title: 'Site settings', active: false }
       ],
       currentSection: 'Personal information',
       userSettings: {},
 
       securitySettingsOptions: [
-        { title: 'Set 2FA', description: 'Secure your account with Two-factor authentication (2FA).', buttonTitle: 'Set 2FA', danger: false },
-        { title: 'Change password', description: 'Change your password by providing current password and new password.', buttonTitle: 'Change password', danger: false },
-        { title: 'Change email', description: 'You are able to change email only one time.', buttonTitle: 'Change email', danger: false },
-        { title: 'Close account', description: 'After closing account all information about it will be deleted.', buttonTitle: 'Close', danger: true }
+        {
+          title: 'Set 2FA',
+          description: 'Secure your account with Two-factor authentication (2FA).',
+          buttonTitle: 'Set 2FA',
+          danger: false
+        },
+        {
+          title: 'Change password',
+          description: 'Change your password by providing current password and new password.',
+          buttonTitle: 'Change password',
+          danger: false
+        },
+        {
+          title: 'Change email',
+          description: 'You are able to change email only one time.',
+          buttonTitle: 'Change email',
+          danger: false
+        },
+        {
+          title: 'Close account',
+          description: 'After closing account all information about it will be deleted.',
+          buttonTitle: 'Close',
+          danger: true
+        }
       ],
 
       securityShowModal: {
@@ -192,22 +233,30 @@ export default {
         'Change email': false,
         'Change password': false,
         'Disable 2FA': false,
-        twoFa: false,
+        twoFa: false
       },
 
-      securityTwoFa: { code: [], normalCode: null, qr: null, status: null, disableStatus: null, secret: null, disabledButton: true },
-      securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null },
+      securityTwoFa: {
+        code: [],
+        normalCode: null,
+        qr: null,
+        status: null,
+        disableStatus: null,
+        secret: null,
+        disabledButton: true
+      },
+      securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null }
     }
   },
   watch: {
     'securityPassword.newPassword': {
-      handler: function () {
-        this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat;
+      handler: function() {
+        this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat
       }
     },
     'securityPassword.newPasswordRepeat': {
-      handler: function () {
-        this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat;
+      handler: function() {
+        this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat
       }
     }
   },
@@ -227,7 +276,9 @@ export default {
     },
     changeSubpage(item) {
       this.currentSection = item.title
-      this.accountHeaderItems.forEach(header => { header.active = item.title === header.title })
+      this.accountHeaderItems.forEach(header => {
+        header.active = item.title === header.title
+      })
     },
     openModal(option) {
       Object.entries(this.securityShowModal).forEach(item => {
@@ -265,7 +316,7 @@ export default {
     async changePassword() {
       const { status } = await changePassword({
         currentPassword: this.securityPassword.currentPassword,
-        newPassword: this.securityPassword.newPassword,
+        newPassword: this.securityPassword.newPassword
         // twoFa
       })
       this.securityPassword.status = status
@@ -293,6 +344,12 @@ export default {
       setTimeout(() => {
         this.showPopup = false
       }, 1500)
+    },
+    stateShowCloseAccMoreInfo() {
+      this.closeAccountMoreInfo = !this.closeAccountMoreInfo
+    },
+    redirect(path) {
+      this.$router.push(path)
     }
   }
 }
