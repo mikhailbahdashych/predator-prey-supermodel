@@ -333,6 +333,8 @@ export default {
         token: localStorage.getItem('token')
       })
       this.closeAcc.status = status
+      this.closeAcc.currentPassword = null
+      this.closeAcc.twoFa = null
 
       if (status === 1) {
         localStorage.removeItem('token')

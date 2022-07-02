@@ -1,74 +1,81 @@
 <template>
-  <div class="login">
+  <div>
+    <div v-if="!showReopeningScreen.status" class="login">
 
-    <div class="login-inputs">
-      <div v-if="!phone.show && !twoFa.show" class="login-inputs-container">
-        <h1>Sign In</h1>
+      <div class="login-inputs">
+        <div v-if="!phone.show && !twoFa.show" class="login-inputs-container">
+          <h1>Sign In</h1>
 
-        <div class="login-options">
-          <p class="choose" @click="chooseLogin('email')">With Email</p>
-          <div class="vertical-line" />
-          <p class="choose" @click="chooseLogin('phone')">With Phone Number</p>
+          <div class="login-options">
+            <p class="choose" @click="chooseLogin('email')">With Email</p>
+            <div class="vertical-line" />
+            <p class="choose" @click="chooseLogin('phone')">With Phone Number</p>
+          </div>
+
+          <Input
+            v-model="loginEmail.email"
+            :oneerror="loginEmail.loginEmailError"
+            :style="[!loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
+            :focus="loginEmail.emailFocus"
+            :title="'Email'"
+            :type="'email'"
+          />
+          <Input
+            v-model="loginPhone.phone"
+            :style="[loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
+            :focus="loginPhone.phoneFocus"
+            :title="'Phone number'"
+            :type="'email'"
+          />
+
+          <Input
+            v-model="loginPassword.password"
+            :oneerror="loginPassword.loginPasswordError"
+            :title="'Password'"
+            :type="'password'"
+            @keyup.enter.native="signin"
+          />
+          <p v-if="loginError" class="paragraph error">Wrong credentials!</p>
+          <Button :label="'Sign In'" :additional-class="'mt big'" @click-handler="signin" />
+          <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
+
         </div>
 
-        <Input
-          v-model="loginEmail.email"
-          :oneerror="loginEmail.loginEmailError"
-          :style="[!loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
-          :focus="loginEmail.emailFocus"
-          :title="'Email'"
-          :type="'email'"
-        />
-        <Input
-          v-model="loginPhone.phone"
-          :style="[loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
-          :focus="loginPhone.phoneFocus"
-          :title="'Phone number'"
-          :type="'email'"
-        />
+        <div v-else-if="twoFa.show" class="login-inputs-container">
+          <div class="center">
+            <h1>Two-Factor authentication</h1>
+            <p class="paragraph">Please, provide Google Authenticator code to continue</p>
+            <InputTwoFa :twofa="twoFa.code" @returnTwoFa="returnTwoFa" />
+            <p v-if="twoFa.error" class="paragraph error">Wrong code!</p>
+            <p class="paragraph right link">Unable to login with 2FA?</p>
+          </div>
+        </div>
 
-        <Input
-          v-model="loginPassword.password"
-          :oneerror="loginPassword.loginPasswordError"
-          :title="'Password'"
-          :type="'password'"
-          @keyup.enter.native="signin"
-        />
-        <p v-if="loginError" class="paragraph error">Wrong credentials!</p>
-        <Button :label="'Sign In'" :additional-class="'mt big'" @click-handler="signin" />
-        <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
+        <div v-else-if="phone.show" class="login-inputs-container"></div>
 
       </div>
 
-      <div v-else-if="twoFa.show" class="login-inputs-container">
-        <div class="center">
-          <h1>Two-Factor authentication</h1>
-          <p class="paragraph">Please, provide Google Authenticator code to continue</p>
-          <InputTwoFa :twofa="twoFa.code" @returnTwoFa="returnTwoFa" />
-          <p v-if="twoFa.error" class="paragraph error">Wrong code!</p>
-          <p class="paragraph right link">Unable to login with 2FA?</p>
+      <div class="login-content">
+        <h1 class="login-title center" @click="redirect('/')">
+          <span class="login-title-header">pNb</span>
+        </h1>
+        <div class="login-welcome-texts">
+          <h1 class="center">Welcome back, @username, glad to see you again</h1>
         </div>
       </div>
 
-      <div v-else-if="phone.show" class="login-inputs-container"></div>
-
-    </div>
-
-    <div class="login-content">
-      <h1 class="login-title center" @click="redirect('/')">
-        <span class="login-title-header">pNb</span>
-      </h1>
-      <div class="login-welcome-texts">
-        <h1 class="center">Welcome back, @username, glad to see you again</h1>
+      <div class="login-header">
+        <p class="paragraph left">Don't have account yet?
+          <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
+        </p>
       </div>
+
     </div>
 
-    <div class="login-header">
-      <p class="paragraph left">Don't have account yet?
-        <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
-      </p>
+    <div v-if="showReopeningScreen.status" class="login">
+      <h1>There you are! Nice to see you again, {{ showReopeningScreen.username }}</h1>
+<!--      <Button/>-->
     </div>
-
   </div>
 </template>
 
@@ -105,7 +112,9 @@ export default {
       },
       loginError: false,
       twoFa: { code: [], show: false, error: false, normalCode: null },
-      phone: { phone: null, show: false, error: false }
+      phone: { phone: null, show: false, error: false },
+
+      showReopeningScreen: { status: false, username: null }
     }
   },
   watch: {
@@ -151,6 +160,12 @@ export default {
         else if (res.phone)
           this.phone.show = true
         else if (!res.status) {
+          if (res.reopening) {
+            this.showReopeningScreen.status = true
+            this.showReopeningScreen.username = res.username
+            return
+          }
+
           localStorage.setItem('token', res.token)
           await this.$router.push({path: `/account/${res.userId}`})
         }
