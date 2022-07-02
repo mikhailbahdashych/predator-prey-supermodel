@@ -191,8 +191,7 @@ export default {
       },
 
       securityTwoFa: { code: [], normalCode: null, qr: null, status: null, disableStatus: null, secret: null, disabledButton: true },
-      securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null },
-      closeAcc: { password: null, repeatPassword: null, twoFa: null },
+      securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null },
     }
   },
   watch: {
@@ -256,13 +255,15 @@ export default {
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
     async closeAccount() {
-      await closeAccount({
-        password: this.closeAcc.password,
-        twoFa: this.closeAcc.twoFa
-      })
+      await closeAccount({})
     },
     async changePassword() {
-      await changePassword({})
+      const { status } = await changePassword({
+        currentPassword: this.securityPassword.currentPassword,
+        newPassword: this.securityPassword.newPassword,
+        // twoFa
+      })
+      this.securityPassword.status = status
     },
     async changeEmail() {
       await changeEmail({})
