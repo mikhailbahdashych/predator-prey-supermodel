@@ -76,7 +76,7 @@
 
           <p class="paragraph on-white-paragraph">In case if you are unable to scan this QR code, copy (click to copy) this key and paste it in Google Authenticator application as setup key.</p>
           <input id="secret" :value="`${securityTwoFa.secret}`" type="hidden" />
-          <p class="paragraph on-white-paragraph" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
+          <p class="paragraph link" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
 
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA code'" :additional-class="'big w400'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
@@ -133,7 +133,11 @@
           :type="'password'"
         />
         <p v-if="securityPassword.error" class="paragraph error">Passwords have to match!</p>
-        <Button :label="'Change password'"/>
+        <Button
+          :label="'Change password'"
+          :additional-class="'big'"
+          :disabled="!securityPassword.currentPassword || securityPassword.error || !securityPassword.newPassword || !securityPassword.newPasswordRepeat"
+          @click-handler="changePassword"/>
       </basic-modal>
 
       <basic-modal
