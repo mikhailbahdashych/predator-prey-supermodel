@@ -87,9 +87,33 @@
       <basic-modal
         v-if="securityShowModal['Change password']"
         header="Change password"
-        description="Change your password by providing current password and 2FA (if it is set up)"
+        description="Change your password by providing current password and new password.
+        Be careful! After that, because of security reasons, you won't be able to change password for 48 hours."
         @close="closeModal('Change password')"
       >
+        <Input
+          v-model="securityPassword.currentPassword"
+          :title="'Current password'"
+          :title-class="'on-white-paragraph'"
+          :additional-class="'on-white'"
+          :type="'password'"
+        />
+        <Input
+          v-model="securityPassword.newPassword"
+          :title="'New password'"
+          :title-class="'on-white-paragraph'"
+          :additional-class="'on-white'"
+          :type="'password'"
+        />
+        <Input
+          v-model="securityPassword.newPasswordRepeat"
+          :title="'Repeat new password'"
+          :title-class="'on-white-paragraph'"
+          :additional-class="'on-white'"
+          :type="'password'"
+        />
+        <p v-if="securityPassword.error" class="paragraph error">Passwords have to match!</p>
+        <Button :label="'Change password'"/>
       </basic-modal>
 
       <basic-modal
@@ -122,6 +146,7 @@ import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
 import InputTwoFa from "~/components/InputTwoFa";
+import Input from '~/components/Input'
 import {
   disableTwoFa,
   getUserByToken,
@@ -136,7 +161,8 @@ export default {
   components: {
     Button,
     BasicModal,
-    InputTwoFa
+    InputTwoFa,
+    Input
   },
   data() {
     return {
@@ -150,7 +176,7 @@ export default {
 
       securitySettingsOptions: [
         { title: 'Set 2FA', description: 'Secure your account with Two-factor authentication (2FA).', buttonTitle: 'Set 2FA', danger: false },
-        { title: 'Change password', description: 'You are able to change email only one time.', buttonTitle: 'Change password', danger: false },
+        { title: 'Change password', description: 'Change your password by providing current password and new password.', buttonTitle: 'Change password', danger: false },
         { title: 'Change email', description: 'You are able to change email only one time.', buttonTitle: 'Change email', danger: false },
         { title: 'Close account', description: 'After closing account all information about it will be deleted.', buttonTitle: 'Close', danger: true }
       ],
@@ -165,8 +191,20 @@ export default {
       },
 
       securityTwoFa: { code: [], normalCode: null, qr: null, status: null, disableStatus: null, secret: null, disabledButton: true },
+      securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null },
       closeAcc: { password: null, repeatPassword: null, twoFa: null },
-      changePass: { password: null, repeatPassword: null, twoFa: null }
+    }
+  },
+  watch: {
+    'securityPassword.newPassword': {
+      handler: function () {
+        this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat;
+      }
+    },
+    'securityPassword.newPasswordRepeat': {
+      handler: function () {
+        this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat;
+      }
     }
   },
   async mounted() {
