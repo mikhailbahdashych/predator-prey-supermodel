@@ -73,8 +73,10 @@
     </div>
 
     <div v-if="showReopeningScreen.status" class="login">
-      <h1>There you are! Nice to see you again, {{ showReopeningScreen.username }}</h1>
-<!--      <Button/>-->
+      <div class="center block">
+        <h1>There you are! Nice to see you again, {{ showReopeningScreen.username }}!</h1>
+        <Button :label="'Here we go'" :additional-class="'big w400'" @click-handler="redirect(`/account/${showReopeningScreen.personalId}`)"/>
+      </div>
     </div>
   </div>
 </template>
@@ -114,7 +116,7 @@ export default {
       twoFa: { code: [], show: false, error: false, normalCode: null },
       phone: { phone: null, show: false, error: false },
 
-      showReopeningScreen: { status: false, username: null }
+      showReopeningScreen: { status: false, username: null, personalId: null }
     }
   },
   watch: {
@@ -160,14 +162,15 @@ export default {
         else if (res.phone)
           this.phone.show = true
         else if (!res.status) {
-          if (res.reopening) {
+          if (res.username) {
             this.showReopeningScreen.status = true
             this.showReopeningScreen.username = res.username
+            this.showReopeningScreen.personalId = res.personalId
             return
           }
 
           localStorage.setItem('token', res.token)
-          await this.$router.push({path: `/account/${res.userId}`})
+          await this.$router.push({path: `/account/${res.personalId}`})
         }
       } else {
         this.loginEmail.loginEmailError = true
