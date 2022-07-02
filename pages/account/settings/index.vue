@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Popup v-if="showPopup" :content="'Copied!'" />
     <div class="account-header">
       <div class="account-header-inner">
         <div v-for="item in accountHeaderItems" :key="item.title" :class="[item.active ? 'active' : '']" class="account-header-item-block">
@@ -55,8 +56,9 @@
         <div v-if="securityTwoFa.qr" class="center">
           <img :src="securityTwoFa.qr" alt="2fa">
 
-          <p class="paragraph on-white-paragraph">In case if you are unable to scan this QR code, copy this key and paste it in Google Authenticator application as setup key.</p>
-          <p class="paragraph on-white-paragraph">{{ securityTwoFa.secret }}</p>
+          <p class="paragraph on-white-paragraph">In case if you are unable to scan this QR code, copy (click to copy) this key and paste it in Google Authenticator application as setup key.</p>
+          <input id="secret" :value="`${securityTwoFa.secret}`" type="hidden" />
+          <p class="paragraph on-white-paragraph" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
 
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
           <Button :label="'Confirm 2FA code'" :additional-class="'big w400'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
@@ -146,7 +148,8 @@ import * as node2fa from "node-2fa";
 import Button from "~/components/Button";
 import BasicModal from "~/components/BasicModal";
 import InputTwoFa from "~/components/InputTwoFa";
-import Input from '~/components/Input'
+import Input from '~/components/Input';
+import Popup from '~/components/Popup';
 import {
   disableTwoFa,
   getUserByToken,
@@ -162,10 +165,12 @@ export default {
     Button,
     BasicModal,
     InputTwoFa,
-    Input
+    Input,
+    Popup
   },
   data() {
     return {
+      showPopup: false,
       accountHeaderItems: [
         { title: 'Personal information', active: true },
         { title: 'Security settings', active: false },
@@ -275,6 +280,19 @@ export default {
       const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: user.username })
       this.securityTwoFa.qr = qr
       this.securityTwoFa.secret = secret
+    },
+    copy(t) {
+      const input = document.querySelector(`#${t}`)
+      input.setAttribute('type', 'text')
+      input.select()
+      document.execCommand('copy')
+      input.setAttribute('type', 'hidden')
+
+      this.showPopup = true
+
+      setTimeout(() => {
+        this.showPopup = false
+      }, 1500)
     }
   }
 }
