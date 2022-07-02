@@ -115,27 +115,27 @@
           v-model="securityPassword.currentPassword"
           :title="'Current password'"
           :title-class="'on-white-paragraph'"
-          :additional-class="'on-white'"
+          :additional-class="'on-white w400'"
           :type="'password'"
         />
         <Input
           v-model="securityPassword.newPassword"
           :title="'New password'"
           :title-class="'on-white-paragraph'"
-          :additional-class="'on-white'"
+          :additional-class="'on-white w400'"
           :type="'password'"
         />
         <Input
           v-model="securityPassword.newPasswordRepeat"
           :title="'Repeat new password'"
           :title-class="'on-white-paragraph'"
-          :additional-class="'on-white'"
+          :additional-class="'on-white w400'"
           :type="'password'"
         />
         <p v-if="securityPassword.error" class="paragraph error">Passwords have to match!</p>
         <Button
           :label="'Change password'"
-          :additional-class="'big'"
+          :additional-class="'big w400'"
           :disabled="!securityPassword.currentPassword || securityPassword.error || !securityPassword.newPassword || !securityPassword.newPasswordRepeat"
           @click-handler="changePassword"/>
       </basic-modal>
@@ -154,6 +154,17 @@
         description="We are very sorry about this :( You can get back any time you want. Hope, to see you again."
         @close="closeModal('Close account')"
       >
+        <Input
+          v-model="closeAcc.currentPassword"
+          :title="'Current password'"
+          :title-class="'on-white-paragraph'"
+          :additional-class="'on-white w400'"
+          :type="'password'"
+        />
+        <InputTwoFa v-if="securityTwoFa.status" :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
+        <Button :label="'Close account'" :additional-class="'danger-fill big w400'" :disabled="!closeAcc.currentPassword" @click-handler="closeAccount" />
+        <p v-if="closeAcc.status === -2" class="paragraph error">Invalid 2FA!</p>
+        <p v-else-if="closeAcc.status === -3" class="paragraph error">Invalid password!</p>
       </basic-modal>
 
     </div>
@@ -249,7 +260,8 @@ export default {
         secret: null,
         disabledButton: true
       },
-      securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null }
+      securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null },
+      closeAcc: { currentPassword: null, twoFa: null, status: null }
     }
   },
   watch: {
@@ -315,7 +327,17 @@ export default {
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
     async closeAccount() {
-      await closeAccount({})
+      const { status } = await closeAccount({
+        password: this.closeAcc.currentPassword,
+        twoFa: this.closeAcc.twoFa,
+        token: localStorage.getItem('token')
+      })
+      this.closeAcc.status = status
+
+      if (status === 1) {
+        localStorage.removeItem('token')
+        await this.$router.push('/')
+      }
     },
     async changePassword() {
       const { status } = await changePassword({

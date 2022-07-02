@@ -119,9 +119,7 @@ export const updateUserSecuritySettings = async payload => {
 
 export const setTwoFa = async payload => {
   try {
-    const { data } = await api.post('s-2fa', payload, {
-      headers: { 'ato': payload.token }
-    })
+    const { data } = await api.post('s-2fa', payload)
     return data
   } catch (e) {
     return e.response.data
@@ -130,9 +128,7 @@ export const setTwoFa = async payload => {
 
 export const disableTwoFa = async payload => {
   try {
-    const { data } = await api.post('d-2fa', payload, {
-      headers: { 'ato': payload.token }
-    })
+    const { data } = await api.post('d-2fa', payload)
     return data
   } catch (e) {
     return e.response.data
