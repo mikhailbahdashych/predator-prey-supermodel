@@ -113,6 +113,7 @@
       >
         <Input
           v-model="securityPassword.currentPassword"
+          :oneerror="securityPassword.currentPasswordLength"
           :title="'Current password'"
           :title-class="'on-white-paragraph'"
           :additional-class="'on-white w400'"
@@ -120,6 +121,7 @@
         />
         <Input
           v-model="securityPassword.newPassword"
+          :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
           :title="'New password'"
           :title-class="'on-white-paragraph'"
           :additional-class="'on-white w400'"
@@ -127,6 +129,7 @@
         />
         <Input
           v-model="securityPassword.newPasswordRepeat"
+          :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
           :title="'Repeat new password'"
           :title-class="'on-white-paragraph'"
           :additional-class="'on-white w400'"
@@ -134,12 +137,12 @@
         />
         <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
         <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
-        <div v-if="passwordError.passwordRules" class="password-requirement">
+        <div v-if="passwordError.passwordRules">
 
-          <div v-for="rule in passwordRulesList" :key="rule.text" class="flex">
+          <div v-for="rule in passwordRulesList" :key="rule.text" class="password-requirement-list">
             <div v-for="(item, i) in Object.entries(rule)" :key="i">
               <p>
-                <span v-if="item[0] === 'text'" class="paragraph">{{ item[1] }}</span>
+                <span v-if="item[0] === 'text'" class="paragraph on-white-paragraph">{{ item[1] }}</span>
                 <span v-else>
                   <span v-if="item[1]" class="paragraph success">OK</span>
                   <span v-else class="paragraph error">NOT OK</span>
@@ -207,7 +210,7 @@ import {
   changePassword,
   changeEmail
 } from '~/api'
-import { validatePassword, validatePasswordRules } from '~/helpers/frontValidator'
+import { validatePassword, validatePasswordLength, validatePasswordRules } from '~/helpers/frontValidator'
 
 export default {
   name: 'Settings',
@@ -279,7 +282,7 @@ export default {
 
       closeAcc: { currentPassword: null, twoFa: null, status: null },
 
-      securityPassword: { currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null },
+      securityPassword: { currentPasswordLength: null, currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null },
       passwordError: {
         passwordMismatch: false,
         passwordRequirement: false,
@@ -295,17 +298,20 @@ export default {
     }
   },
   watch: {
+    'securityPassword.currentPassword': {
+      handler: function () {
+        this.securityPassword.currentPasswordLength = !validatePasswordLength(this.securityPassword.currentPassword)
+      }
+    },
     'securityPassword.newPassword': {
       handler: function() {
         if (this.securityPassword.newPassword === this.securityPassword.newPasswordRepeat) { this.passwordError.passwordMismatch = false }
-        // this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat
         this.validPassword()
       }
     },
     'securityPassword.newPasswordRepeat': {
       handler: function() {
         if (this.securityPassword.newPassword === this.securityPassword.newPasswordRepeat) { this.passwordError.passwordMismatch = false }
-        // this.securityPassword.error = this.securityPassword.newPassword !== this.securityPassword.newPasswordRepeat
         this.validPassword()
       }
     }

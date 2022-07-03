@@ -47,4 +47,9 @@
       border-bottom: 1px solid rgba(v.$error, 0.25);
     }
   }
+  .password-requirement-list {
+    width: 450px;
+    display: flex;
+    p { margin: 0 0 10px 10px }
+  }
 }
