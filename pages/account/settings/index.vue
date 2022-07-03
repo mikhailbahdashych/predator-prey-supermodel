@@ -185,10 +185,8 @@
           :additional-class="'on-white w400'"
           :type="'password'"
         />
-        <InputTwoFa v-if="securityTwoFa.status" :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFa" />
         <Button :label="'Close account'" :additional-class="'danger-fill big w400'" :disabled="!closeAcc.currentPassword" @click-handler="closeAccount" />
-        <p v-if="closeAcc.status === -2" class="paragraph error">Invalid 2FA!</p>
-        <p v-else-if="closeAcc.status === -3" class="paragraph error">Invalid password!</p>
+        <p v-if="closeAcc.status === -3" class="paragraph error">Invalid password!</p>
       </basic-modal>
 
       <basic-modal
@@ -295,7 +293,7 @@ export default {
         disabledButton: true
       },
 
-      closeAcc: { currentPassword: null, twoFa: null, status: null },
+      closeAcc: { currentPassword: null, status: null },
 
       securityPassword: { currentPasswordLength: null, currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null },
       passwordError: {
@@ -392,18 +390,21 @@ export default {
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
     async closeAccount() {
-      const { status } = await closeAccount({
-        password: this.closeAcc.currentPassword,
-        twoFa: this.closeAcc.twoFa,
-        token: localStorage.getItem('token')
-      })
-      this.closeAcc.status = status
-      this.closeAcc.currentPassword = null
-      this.closeAcc.twoFa = null
+      if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
+        this.confirmActionTwoFa.show = true
+      } else {
+        const { status } = await closeAccount({
+          password: this.closeAcc.currentPassword,
+          twoFa: this.confirmActionTwoFa.normalCode,
+          token: localStorage.getItem('token')
+        })
+        this.closeAcc.status = status
+        this.closeAcc.currentPassword = null
 
-      if (status === 1) {
-        localStorage.removeItem('token')
-        await this.$router.push('/')
+        if (status === 1) {
+          localStorage.removeItem('token')
+          await this.$router.push('/')
+        }
       }
     },
     async changePassword() {
