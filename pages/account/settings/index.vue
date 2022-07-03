@@ -139,6 +139,7 @@
         <p v-if="securityPassword.status === 1" class="paragraph success">Password has been successfully changed!</p>
         <p v-else-if="securityPassword.status === -2" class="paragraph error">Wrong password!</p>
         <p v-else-if="securityPassword.status === -3" class="paragraph error">Wrong 2FA code!</p>
+        <p v-else-if="securityPassword.status === -4" class="paragraph error">New password can't be the same as current one!</p>
 
         <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
         <p v-else-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
@@ -193,6 +194,7 @@
         v-if="confirmActionTwoFa.show"
         header="Confirm action"
         description="Confirm action by providing 2FA code in the box below."
+        @close="confirmActionTwoFa.show = false"
       >
         <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFaConfirmAction" />
         <Button :label="'Confirm action'" :additional-class="'danger-fill big w400'" />
