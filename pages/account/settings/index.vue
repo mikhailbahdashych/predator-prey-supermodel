@@ -197,7 +197,7 @@
         @close="confirmActionTwoFa.show = false"
       >
         <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFaConfirmAction" />
-        <Button :label="'Confirm action'" :additional-class="'danger-fill big w400'" />
+        <Button :label="'Confirm action'" :additional-class="'danger-fill big w400'" @click-handler="confirmAction" />
       </basic-modal>
 
     </div>
@@ -311,10 +311,11 @@ export default {
         {digitChar: false, text: 'Password should contain at least one digit character'}
       ],
 
-      confirmActionTwoFa: {
+       confirmActionTwoFa: {
         show: false,
         code: [],
         normalCode: null,
+        action: null
       }
     }
   },
@@ -394,6 +395,7 @@ export default {
     async closeAccount() {
       if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
         this.confirmActionTwoFa.show = true
+        this.confirmActionTwoFa.action = 'closeAccount'
       } else {
         const { status } = await closeAccount({
           password: this.closeAcc.currentPassword,
@@ -412,6 +414,7 @@ export default {
     async changePassword() {
       if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
         this.confirmActionTwoFa.show = true
+        this.confirmActionTwoFa.action = 'changePassword'
       } else {
         const { status } = await changePassword({
           token: localStorage.getItem('token'),
@@ -432,6 +435,17 @@ export default {
       const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: user.username })
       this.securityTwoFa.qr = qr
       this.securityTwoFa.secret = secret
+    },
+    async confirmAction() {
+      switch (this.confirmActionTwoFa.action) {
+        case 'closeAccount':
+          await this.closeAccount()
+          break;
+        case 'changePassword':
+          await this.changePassword()
+          break;
+      }
+      this.confirmActionTwoFa.show = false
     },
     copy(t) {
       const input = document.querySelector(`#${t}`)
