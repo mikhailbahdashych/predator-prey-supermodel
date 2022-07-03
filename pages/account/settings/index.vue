@@ -135,6 +135,8 @@
           :additional-class="'on-white w400'"
           :type="'password'"
         />
+        <p v-if="securityPassword.status === -2" class="paragraph error">Wrong password!</p>
+        <p v-if="securityPassword.status === -3" class="paragraph error">Wrong 2FA code!</p>
         <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
         <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
         <div v-if="passwordError.passwordRules">
@@ -383,6 +385,7 @@ export default {
     },
     async changePassword() {
       const { status } = await changePassword({
+        token: localStorage.getItem('token'),
         currentPassword: this.securityPassword.currentPassword,
         newPassword: this.securityPassword.newPassword
         // twoFa
