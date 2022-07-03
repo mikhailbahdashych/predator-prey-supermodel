@@ -135,10 +135,14 @@
           :additional-class="'on-white w400'"
           :type="'password'"
         />
-        <p v-if="securityPassword.status === -2" class="paragraph error">Wrong password!</p>
-        <p v-if="securityPassword.status === -3" class="paragraph error">Wrong 2FA code!</p>
+
+        <p v-if="securityPassword.status === 1" class="paragraph success">Password has been successfully changed!</p>
+        <p v-else-if="securityPassword.status === -2" class="paragraph error">Wrong password!</p>
+        <p v-else-if="securityPassword.status === -3" class="paragraph error">Wrong 2FA code!</p>
+
         <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
-        <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
+        <p v-else-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
+
         <div v-if="passwordError.passwordRules">
 
           <div v-for="rule in passwordRulesList" :key="rule.text" class="password-requirement-list">
