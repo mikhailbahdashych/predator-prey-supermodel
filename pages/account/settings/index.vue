@@ -187,6 +187,15 @@
         <p v-else-if="closeAcc.status === -3" class="paragraph error">Invalid password!</p>
       </basic-modal>
 
+      <basic-modal
+        v-if="confirmActionTwoFa.show"
+        header="Confirm action"
+        description="Confirm action by providing 2FA code in the box below."
+      >
+        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFaConfirmAction" />
+        <Button :label="'Confirm action'" :additional-class="'danger-fill big w400'" />
+      </basic-modal>
+
     </div>
 
     <div v-else class="account-security-content">
@@ -296,7 +305,13 @@ export default {
         {lowCase: false, text: 'Password should contain at least one lowercase character'},
         {specChar: false, text: 'Password should contain at least one special character'},
         {digitChar: false, text: 'Password should contain at least one digit character'}
-      ]
+      ],
+
+      confirmActionTwoFa: {
+        show: false,
+        code: [],
+        normalCode: null,
+      }
     }
   },
   watch: {
@@ -353,6 +368,10 @@ export default {
       if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
       this.securityTwoFa.normalCode = twoFa.join('')
     },
+    returnTwoFaConfirmAction(twoFa) {
+      if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
+      this.confirmActionTwoFa.normalCode = twoFa.join('')
+    },
     async setTwoFa() {
       const { status } = await setTwoFa({
         twoFaCode: this.securityTwoFa.normalCode,
@@ -384,13 +403,17 @@ export default {
       }
     },
     async changePassword() {
-      const { status } = await changePassword({
-        token: localStorage.getItem('token'),
-        currentPassword: this.securityPassword.currentPassword,
-        newPassword: this.securityPassword.newPassword
-        // twoFa
-      })
-      this.securityPassword.status = status
+      if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
+        this.confirmActionTwoFa.show = true
+      } else {
+        const { status } = await changePassword({
+          token: localStorage.getItem('token'),
+          currentPassword: this.securityPassword.currentPassword,
+          newPassword: this.securityPassword.newPassword,
+          twoFa: this.confirmActionTwoFa.normalCode
+        })
+        this.securityPassword.status = status
+      }
     },
     async changeEmail() {
       await changeEmail({})
