@@ -193,7 +193,8 @@
           :type="'password'"
         />
         <Button :label="'Close account'" :additional-class="'danger-fill big w400'" :disabled="!closeAcc.currentPassword" @click-handler="closeAccount" />
-        <p v-if="closeAcc.status === -3" class="paragraph error">Invalid password!</p>
+        <p v-if="closeAcc.status === -2" class="paragraph error">Wrong 2FA code!</p>
+        <p v-else-if="closeAcc.status === -3" class="paragraph error">Invalid password!</p>
       </basic-modal>
 
       <basic-modal
