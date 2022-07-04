@@ -106,17 +106,6 @@ export const updateUserPersonalInformation = async payload => {
   }
 }
 
-export const updateUserSecuritySettings = async payload => {
-  try {
-    const { data } = await api.patch('u-u-s-s', payload, {
-      headers: { 'ato': payload.token }
-    })
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
 export const setTwoFa = async payload => {
   try {
     const { data } = await api.post('s-2fa', payload)
