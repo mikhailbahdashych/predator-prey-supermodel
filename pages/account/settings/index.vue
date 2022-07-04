@@ -10,25 +10,23 @@
       </div>
     </div>
 
-    <div v-if="currentSection === 'Personal information'" class="account-security-content">
-
-    </div>
-
+    <personal-information v-if="currentSection === 'Personal information'" />
     <security-settings v-else-if="currentSection === 'Security settings'" />
-
-    <div v-else class="account-security-content">
-
-    </div>
+    <site-settings v-else />
 
   </div>
 </template>
 
 <script>
 import SecuritySettings from '~/components/pageComponents/SecuritySettings'
+import PersonalInformation from '~/components/pageComponents/PersonalInformation'
+import SiteSettings from '~/components/pageComponents/SiteSettings'
 export default {
   name: 'Settings',
   components: {
-    SecuritySettings
+    SecuritySettings,
+    PersonalInformation,
+    SiteSettings
   },
   data() {
     return {
