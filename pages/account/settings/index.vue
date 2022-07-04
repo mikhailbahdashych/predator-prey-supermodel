@@ -304,7 +304,13 @@ export default {
 
       closeAcc: { currentPassword: null, status: null },
 
-      securityPassword: { currentPasswordLength: null, currentPassword: null, newPassword: null, newPasswordRepeat: null, status: null },
+      securityPassword: {
+        currentPasswordLength: null,
+        currentPassword: null,
+        newPassword: null,
+        newPasswordRepeat: null,
+        status: null
+      },
       passwordError: {
         passwordMismatch: false,
         passwordRequirement: false,
@@ -318,7 +324,12 @@ export default {
         {digitChar: false, text: 'Password should contain at least one digit character'}
       ],
 
-       confirmActionTwoFa: {
+      changeEmailData: {
+        newEmail: null,
+        status: null
+      },
+
+      confirmActionTwoFa: {
         show: false,
         code: [],
         normalCode: null,
@@ -434,7 +445,17 @@ export default {
       }
     },
     async changeEmail() {
-      await changeEmail({})
+      if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
+        this.confirmActionTwoFa.show = true
+        this.confirmActionTwoFa.action = 'changeEmail'
+      } else {
+        const { status } = await changeEmail({
+          token: localStorage.getItem('token'),
+          twoFa: this.confirmActionTwoFa.normalCode,
+          newEmail: this.changeEmailData.newEmail
+        })
+        this.changeEmailData.status = status
+      }
     },
     async generateTwoFa() {
       const user = await getUserByToken(localStorage.getItem('token'))
@@ -451,6 +472,9 @@ export default {
           break;
         case 'changePassword':
           await this.changePassword()
+          break;
+        case 'changeEmail':
+          await this.changeEmail()
           break;
       }
       this.confirmActionTwoFa.show = false
