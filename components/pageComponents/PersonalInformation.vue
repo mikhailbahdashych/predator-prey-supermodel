@@ -22,6 +22,8 @@ export default {
   methods: {
     async getUserPersonalInfo(token) {
       this.personalInfo = await getUserSettings(token, 'p')
+      if (this.personalInfo.status === -1)
+        return this.$router.push('/')
     }
   },
 }
