@@ -84,9 +84,9 @@ export const getUserLastActivity = async personalId => {
   }
 }
 
-export const getUserSettings = async token => {
+export const getUserSettings = async (token, type) => {
   try {
-    const { data } = await api.get('/g-u-s', {
+    const { data } = await api.get(`/g-u-s/${type}`, {
       headers: { 'ato': token }
     })
     return data

@@ -306,7 +306,9 @@ export default {
         code: [],
         normalCode: null,
         action: null
-      }
+      },
+
+      userSettings: {}
     }
   },
   watch: {
@@ -334,7 +336,7 @@ export default {
   },
   methods: {
     async getUsersSettings(token) {
-      this.userSettings = await getUserSettings(token)
+      this.userSettings = await getUserSettings(token, 's')
       if (this.userSettings.status === -1)
         return this.$router.push('/')
 

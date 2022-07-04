@@ -36,7 +36,6 @@ export default {
         { title: 'Site settings', active: false }
       ],
       currentSection: 'Personal information',
-      userSettings: {},
     }
   },
   methods: {
