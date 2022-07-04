@@ -194,7 +194,7 @@
         v-if="confirmActionTwoFa.show"
         header="Confirm action"
         description="Confirm action by providing 2FA code in the box below."
-        @close="confirmActionTwoFa.show = false"
+        @close="closeConfirmTwoFa"
       >
         <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFaConfirmAction" />
         <Button :label="'Confirm action'" :additional-class="'danger-fill big w400'" @click-handler="confirmAction" />
@@ -420,6 +420,7 @@ export default {
           token: localStorage.getItem('token'),
           currentPassword: this.securityPassword.currentPassword,
           newPassword: this.securityPassword.newPassword,
+          newPasswordRepeat: this.securityPassword.newPasswordRepeat,
           twoFa: this.confirmActionTwoFa.normalCode
         })
         this.securityPassword.status = status
@@ -446,6 +447,14 @@ export default {
           break;
       }
       this.confirmActionTwoFa.show = false
+    },
+    closeConfirmTwoFa() {
+      this.confirmActionTwoFa = {
+        show: false,
+        code: [],
+        normalCode: null,
+        action: null
+      }
     },
     copy(t) {
       const input = document.querySelector(`#${t}`)
