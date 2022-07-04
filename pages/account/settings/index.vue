@@ -161,7 +161,13 @@
         <Button
           :label="'Change password'"
           :additional-class="'big w400'"
-          :disabled="!securityPassword.currentPassword || securityPassword.error || !securityPassword.newPassword || !securityPassword.newPasswordRepeat"
+          :disabled="
+           !securityPassword.currentPassword ||
+           passwordError.passwordMismatch ||
+           passwordError.passwordRequirement ||
+           securityPassword.error ||
+           !securityPassword.newPassword ||
+           !securityPassword.newPasswordRepeat"
           @click-handler="changePassword"/>
       </basic-modal>
 
@@ -447,6 +453,7 @@ export default {
           break;
       }
       this.confirmActionTwoFa.show = false
+      this.confirmActionTwoFa.normalCode = null
     },
     closeConfirmTwoFa() {
       this.confirmActionTwoFa = {
