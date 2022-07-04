@@ -28,24 +28,28 @@
         <Input
           v-model="email.email"
           :oneerror="email.emailError"
+          :disabled="disabledField"
           :title="'Email'"
           :type="'text'"
         />
         <Input
           v-model="username.username"
           :oneerror="username.usernameError"
+          :disabled="disabledField"
           :title="'Username'"
           :type="'text'"
         />
         <Input
           v-model="password.password"
           :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+          :disabled="disabledField"
           :title="'Password'"
           :type="'password'"
         />
         <Input
           v-model="password.passwordRepeat"
           :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+          :disabled="disabledField"
           :title="'Repeat password'"
           :type="'password'"
         />
@@ -67,7 +71,8 @@
         </div>
 
         <Checkbox v-model="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
-        <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
+        <p v-if="status === 1" class="paragraph success">Account has been successfully created, please, confirm your email!</p>
+        <p v-else-if="status === -1" class="paragraph error">User with this email already exists!</p>
         <p v-else-if="status === -2" class="paragraph error">User with this username already exists!</p>
         <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'big'" @click-handler="register" />
       </div>
@@ -128,7 +133,9 @@ export default {
         {lowCase: false, text: 'Password should contain at least one lowercase character'},
         {specChar: false, text: 'Password should contain at least one special character'},
         {digitChar: false, text: 'Password should contain at least one digit character'}
-      ]
+      ],
+
+      disabledField: false
     }
   },
   watch: {
@@ -196,6 +203,7 @@ export default {
           username: this.username.username
         }).then((res) => {
           if (res.status) this.status = res.status
+          if (res.status === 1) this.disabledField = true
         })
       }
     }
