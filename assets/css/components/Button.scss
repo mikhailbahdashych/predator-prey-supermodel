@@ -5,7 +5,7 @@
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid v.$mcd;
-  background-color: v.$mcm;
+  background-color: v.$mc;
   color: v.$mcl;
   font-weight: 300;
   transition: 0.5s;
@@ -18,7 +18,7 @@
   &.transparent {
     background-color: transparent;
     color: v.$mcl;
-    border: 1px solid v.$mcm;
+    border: 1px solid v.$mc;
   }
   &.big {
     width: 100%;
@@ -43,7 +43,7 @@
 }
 
 .basic-button:disabled {
-  background-color: rgba(v.$mcm, 0.35);
+  background-color: rgba(v.$mc, 0.35);
   border: 1px solid rgba(v.$mcl, 0.35);
   cursor: auto;
   &.danger-fill {

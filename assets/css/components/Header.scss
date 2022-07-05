@@ -4,7 +4,7 @@
   display: flex;
   width: 100%;
   height: 60px;
-  background-color: #131313;
+  background-color: v.$bg1;
   .inner-header {
     margin: 0 auto;
     width: 75%;
@@ -27,7 +27,7 @@
         }
       }
       .header-links:hover {
-        color: v.$mcm;
+        color: v.$mc;
         transform: scale(1.1);
       }
     }

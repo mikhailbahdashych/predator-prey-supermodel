@@ -25,7 +25,7 @@
     &.error { border: 1px solid v.$error; }
     &.error:focus { border: 1px solid v.$error; }
   }
-  .basic-input:focus { border: 1px solid v.$mcm; }
+  .basic-input:focus { border: 1px solid v.$mc; }
   .basic-input:disabled { background-color: rgba(#aaa, 0.5) }
 
   .on-white {

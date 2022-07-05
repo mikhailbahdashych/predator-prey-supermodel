@@ -40,7 +40,7 @@ html, body {
   &.right { float: right; }
   &.on-white-paragraph { color: black; }
   &.error { color: v.$error }
-  &.link { color: v.$mcm; cursor: pointer; text-decoration: underline }
+  &.link { color: v.$mc; cursor: pointer; text-decoration: underline }
   &.success { color: green }
   &.opacity { opacity: 0.5; }
   &.bold { font-weight: 500 }
@@ -49,7 +49,7 @@ html, body {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: v.$mcm;
+  color: v.$mc;
 }
 
 .center {
