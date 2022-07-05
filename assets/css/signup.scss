@@ -5,12 +5,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: v.$bg2;
+  background-color: v.$header-bg;
 
   .login-content {
     height: 100vh;
     width: 50%;
-    background-color: v.$bg1;
+    background-color: v.$default-bg;
     .login-title {
       height: 25%;
       font-size: 52px;

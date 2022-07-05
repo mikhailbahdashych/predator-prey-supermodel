@@ -74,6 +74,7 @@ li {
 .page-content {
   position: relative;
   min-height: 100vh;
+  background-color: v.$default-bg;
   .content-wrap {
     padding-bottom: 50px;
   }

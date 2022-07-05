@@ -1,15 +1,5 @@
 <template>
-  <div class='main'>
-    <div class="content">
-      <div class="center-text">
-      </div>
-    </div>
-
-    <div class="about">
-    </div>
-
-    <div class="about blog">
-    </div>
+  <div>
 
   </div>
 </template>

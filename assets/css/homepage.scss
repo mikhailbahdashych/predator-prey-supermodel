@@ -3,7 +3,6 @@
 .content {
   height: 700px;
   text-align: center;
-  background-color: v.$bg2;
   .center-text {
     padding: 180px 0;
     h3 {
@@ -21,11 +20,10 @@
   display: flex;
   margin-right: auto;
   margin-left: auto;
-  background-color: v.$bg1;
+  background-color: v.$default-bg;
   justify-content: space-between;
   vertical-align: center;
   &.blog {
-    background-color: v.$bg2;
   }
 }
 
