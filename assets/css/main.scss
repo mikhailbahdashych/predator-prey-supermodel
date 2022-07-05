@@ -1,19 +1,22 @@
 @use "variables" as v;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200&display=swap');
 
 p, h1, h2, h3, h4, h5, li {
-  font-family: "Ubuntu", sans-serif;
-  color: white;
+  //font-family: "Menlo", sans-serif;
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
+  color: v.$main-color-light;
   opacity: 0.8;
   margin-right: 5px;
   margin-left: 5px;
 }
 
 .font-second {
-  font-family: "Lato", sans-serif;
-  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  font-weight: 100;
   p, h1, h2, h3, h4, h5, li {
-  font-family: "Lato", sans-serif;
-  font-weight: bold;
+    font-family: "Inter", sans-serif;
+    font-weight: 100;
   }
 }
 
@@ -27,20 +30,20 @@ html, body {
 
 .nuxt-link {
   text-decoration: none;
-  color: v.$mcl;
+  color: v.$main-color-light;
 }
 
 .paragraph {
   font-size: 14px;
   opacity: 0.9;
-  color: v.$mcl;
+  color: v.$main-color-light;
   &.average { font-size: 16px; }
   &.medium { font-size: 18px; }
   &.large { font-size: 24px; }
   &.right { float: right; }
-  &.on-white-paragraph { color: black; }
+  &.on-white-paragraph { color: v.$default-bg; }
   &.error { color: v.$error }
-  &.link { color: v.$mc; cursor: pointer; text-decoration: underline }
+  &.link { color: v.$main-color; cursor: pointer; text-decoration: underline }
   &.success { color: green }
   &.opacity { opacity: 0.5; }
   &.bold { font-weight: 500 }
@@ -49,7 +52,7 @@ html, body {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: v.$mc;
+  color: v.$main-color;
 }
 
 .center {

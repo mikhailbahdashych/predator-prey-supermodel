@@ -11,10 +11,10 @@
   font-size: 32px;
   font-weight: 900;
   outline: none;
-  color: white;
+  color: v.$main-color-light;
   background-color: v.$default-bg;
   border-radius: 6px;
-  border: 1px solid rgba(v.$mc, 0.5);
+  border: 1px solid rgba(v.$main-color, 0.5);
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     display: none;
@@ -27,13 +27,13 @@
 }
 
 .input-two-fa:disabled {
-  background-color: rgba(black, 0.5);
+  background-color: rgba(v.$default-bg, 0.5);
 }
 
 .on-white {
   input {
     border: 1px solid v.$default-bg;
     background-color: rgba(#fff, 0.5);
-    color: black;
+    color: v.$default-bg;
   }
 }

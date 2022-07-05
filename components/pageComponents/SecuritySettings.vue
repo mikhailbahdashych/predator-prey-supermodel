@@ -4,35 +4,29 @@
     <div class="account-security-content">
       <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`security-item ${setting.danger ? 'danger' : ''}`">
         <div v-if="setting.title === 'Set 2FA'" class="security-items">
-          <div class="security-items">
+          <div class="security-items texts">
             <h3 class="font-second">{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
             <p class="font-second">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
           </div>
           <div class="security-items">
             <Button
               :label="securityTwoFa.status === 2 ? 'Disable 2FA' : setting.buttonTitle"
-              :additional-class="`transparent`"
+              :additional-class="`transparent min-width150`"
               @click-handler="openModal(securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title)" />
-            <Button
-              v-if="setting.title === 'Close account'"
-              :label="'Show more'"
-              @click-handler="stateShowCloseAccMoreInfo" />
           </div>
         </div>
         <div v-else class="security-items">
-          <div class="security-items">
+          <div class="security-items texts">
             <h3 :class="`font-second ${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
             <p :class="`font-second ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
+            <p v-if="setting.title === 'Close account'" class="paragraph link" @click="stateShowCloseAccMoreInfo">
+              {{ !closeAccountMoreInfo ? 'Show more' : 'Show less' }}
+            </p>
           </div>
           <div class="security-items">
             <Button
-              v-if="setting.title === 'Close account'"
-              :label="'Show more'"
-              :additional-class="`transparent mr`"
-              @click-handler="stateShowCloseAccMoreInfo" />
-            <Button
               :label="setting.buttonTitle"
-              :additional-class="`transparent ${setting.danger ? 'danger' : ''}`"
+              :additional-class="`transparent min-width150 ${setting.danger ? 'danger' : ''}`"
               @click-handler="openModal(setting.title)" />
           </div>
         </div>

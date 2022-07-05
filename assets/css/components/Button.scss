@@ -4,9 +4,9 @@
   height: 36px;
   border-radius: 5px;
   cursor: pointer;
-  border: 1px solid v.$mcd;
-  background-color: v.$mc;
-  color: v.$mcl;
+  border: none;
+  background-color: v.$main-color;
+  color: v.$main-color-light;
   font-weight: 300;
   transition: 0.5s;
   min-width: 100px;
@@ -17,8 +17,12 @@
   }
   &.transparent {
     background-color: transparent;
-    color: v.$mcl;
-    border: 1px solid v.$mc;
+    color: v.$main-color-light;
+    border: 1px solid v.$main-color;
+    transition: .2s;
+  }
+  &.transparent:hover {
+    background-color: rgba(v.$main-color, 0.25);
   }
   &.big {
     width: 100%;
@@ -28,13 +32,20 @@
       font-size: 18px;
     }
   }
+  &.min-width150 {
+    width: 150px;
+  }
   &.danger {
-    border: 1px solid rgba(v.$error, 0.25);
+    border: 1px solid rgba(v.$error, 0.5);
     color: v.$error;
+    transition: .2s;
+  }
+  &.danger:hover {
+    background-color: rgba(v.$error, 0.25);
   }
   &.danger-fill {
     border: none;
-    color: v.$mcl;
+    color: v.$main-color-light;
     background-color: v.$error;
   }
   p {
@@ -43,12 +54,11 @@
 }
 
 .basic-button:disabled {
-  background-color: rgba(v.$mc, 0.35);
-  border: 1px solid rgba(v.$mcl, 0.35);
+  background-color: rgba(v.$main-color, 0.35);
   cursor: auto;
   &.danger-fill {
     border: none;
-    color: v.$mcl;
+    color: v.$main-color-light;
     background-color: rgba(v.$error, 0.35);
   }
 }

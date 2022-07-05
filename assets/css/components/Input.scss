@@ -12,7 +12,7 @@
   font-size: 16px;
   line-height: 24px;
   transition: 0.3s;
-  color: white;
+  color: v.$main-color-light;
   &.w400 { width: 450px; }
 }
 
@@ -25,12 +25,12 @@
     &.error { border: 1px solid v.$error; }
     &.error:focus { border: 1px solid v.$error; }
   }
-  .basic-input:focus { border: 1px solid v.$mc; }
+  .basic-input:focus { border: 1px solid v.$main-color; }
   .basic-input:disabled { background-color: rgba(#aaa, 0.5) }
 
   .on-white {
-    border: 1px solid black;
+    border: 1px solid rgba(v.$default-bg, 0.5);
     background-color: rgba(#fff, 0.5);
-    color: black;
+    color: v.$default-bg;
   }
 }

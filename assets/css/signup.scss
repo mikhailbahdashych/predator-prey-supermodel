@@ -19,7 +19,7 @@
         transition: .2s;
       }
       .login-title-header:hover {
-        color: v.$mc;
+        color: v.$main-color;
         font-size: 60px;
       }
     }
@@ -64,7 +64,7 @@
         display: flex;
         .vertical-line {
           width: 1px;
-          background-color: white;
+          background-color: v.$main-color-light;
           height: 50px;
           float: left;
           opacity: 0.5;
@@ -73,9 +73,9 @@
         .choose {
           cursor: pointer;
           transition: .2s;
-          color: white;
+          color: v.$main-color-light;
         }
-        .choose:hover { color: v.$mc; }
+        .choose:hover { color: v.$main-color; }
       }
 
       .password-requirement {
@@ -83,7 +83,7 @@
         border: 1px solid rgba(#fff,0.9);
         p {
           padding-left: 15px;
-          color: white;
+          color: v.$main-color-light;
           opacity: 0.9;
         }
       }
