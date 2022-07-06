@@ -116,7 +116,9 @@ export default {
       twoFa: { code: [], show: false, error: false, normalCode: null },
       phone: { phone: null, show: false, error: false },
 
-      showReopeningScreen: { status: false, username: null, personalId: null }
+      showReopeningScreen: { status: false, username: null, personalId: null },
+
+      loading: true
     }
   },
   watch: {
@@ -130,6 +132,9 @@ export default {
         this.loginPassword.loginPasswordError = !validatePasswordLength(this.loginPassword.password)
       }
     },
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
     await verifyClientByToken(this.$router, localStorage.getItem('token'), true)

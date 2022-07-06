@@ -77,7 +77,9 @@ export default {
       },
 
       resetPasswordCode: null,
-      resetPasswordLoginWithEmail: false
+      resetPasswordLoginWithEmail: false,
+
+      loading: true
     }
   },
   watch: {
@@ -86,6 +88,9 @@ export default {
         this.resetPasswordEmail.emailError = !validateEmail(this.resetPasswordEmail.email)
       }
     },
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   mounted() {
     this.chooseOption('email')

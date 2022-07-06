@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import SecuritySettings from '~/components/pageComponents/SecuritySettings'
-import PersonalInformation from '~/components/pageComponents/PersonalInformation'
-import SiteSettings from '~/components/pageComponents/SiteSettings'
+import SecuritySettings from '~/components/pageComponents/settings/SecuritySettings'
+import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
+import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
 export default {
   name: 'Settings',
   components: {

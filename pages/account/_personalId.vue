@@ -38,8 +38,12 @@ export default {
   data() {
     return {
       user: {},
-      isOwner: false
+      isOwner: false,
+      loading: true
     }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
     if (!this.$route.params.personalId)

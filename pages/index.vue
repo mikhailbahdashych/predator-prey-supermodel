@@ -6,7 +6,14 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      loading: true
+    }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
+  },
 }
 </script>
 

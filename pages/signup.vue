@@ -135,7 +135,9 @@ export default {
         {digitChar: false, text: 'Password should contain at least one digit character'}
       ],
 
-      disabledField: false
+      disabledField: false,
+
+      loading: true
     }
   },
   watch: {
@@ -163,6 +165,9 @@ export default {
         this.username.usernameError = !this.username.username;
       }
     }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
     await verifyClientByToken(this.$router, localStorage.getItem('token'), true)
