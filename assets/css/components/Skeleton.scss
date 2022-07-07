@@ -1,0 +1,22 @@
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);;
+  }
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+  opacity: .7;
+  margin: 5px;
+  height: .5rem;
+  border-radius: .125rem;
+
+  .skeleton-text {
+    opacity: 0;
+    width: 100%;
+  }
+}

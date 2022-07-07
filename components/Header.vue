@@ -3,16 +3,20 @@
     <div class="inner-header">
       <div class="header-content">
         <div class="header-content">
-          <nuxt-link to="/" class='nuxt-link'>
-            <h3 class="header-links logo">pNb</h3>
+          <skeleton v-if='loading' :text="'pNb1'" />
+          <nuxt-link v-else to="/" class='nuxt-link'>
+            <h3 class="header-links logo">pNb2</h3>
           </nuxt-link>
-          <nuxt-link to="/" class='nuxt-link'>
+          <skeleton v-if='loading' :text="'pNb1'" />
+          <nuxt-link v-else to="/" class='nuxt-link'>
             <h3 class="header-links">FORUM</h3>
           </nuxt-link>
-          <nuxt-link to="/" class='nuxt-link'>
+          <skeleton v-if='loading' :text="'pNb1'" />
+          <nuxt-link v-else to="/" class='nuxt-link'>
             <h3 class="header-links">Q&A</h3>
           </nuxt-link>
-          <nuxt-link to="/" class='nuxt-link'>
+          <skeleton v-if='loading' :text="'pNb1'" />
+          <nuxt-link v-else to="/" class='nuxt-link'>
             <h3 class="header-links">BLOG</h3>
           </nuxt-link>
         </div>
@@ -39,16 +43,22 @@
 
 <script>
 import Button from "~/components/Button";
+import Skeleton from '~/components/skeleton/Skeleton'
 import {getUserByToken} from "~/api";
 export default {
   name: 'Header',
   components: {
-    Button
+    Button,
+    Skeleton
   },
   data() {
     return {
-      tokenStatus: null
+      tokenStatus: null,
+      loading: true
     }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
     await this.checkToken(localStorage.getItem('token'))

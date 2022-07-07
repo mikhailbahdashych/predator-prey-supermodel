@@ -1,25 +1,21 @@
 <template>
-  <div class="skeleton-container">
+  <div class="skeleton">
     <p class="skeleton-text">{{ text }}</p>
   </div>
 </template>
 
 <script>
 export default {
+  name: "SkeletonText",
   props: {
-    type: {
-      type: String,
-      default: ''
-    },
     text: {
       type: String,
       default: ''
     }
-  },
-  name: "SkeletonText"
+  }
 }
 </script>
 
 <style lang="scss">
-@import "../../assets/css/components/SkeletonText";
+@import "../../assets/css/components/Skeleton";
 </style>

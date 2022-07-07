@@ -13,10 +13,18 @@
 <script>
 export default {
   name: "Error",
-  layout: 'empty'
+  layout: 'empty',
+  head () {
+    return {
+      bodyAttrs: {
+        class: 'body-margin'
+      }
+    }
+  }
 }
 </script>
 
 <style lang='scss'>
 @import '../assets/css/error';
+@import '../assets/css/main';
 </style>

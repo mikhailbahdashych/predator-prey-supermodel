@@ -17,6 +17,17 @@ export default {
   name: 'Default',
   components: {
     Header, Footer
+  },
+  head () {
+    return {
+      bodyAttrs: {
+        class: 'body-margin'
+      }
+    }
   }
 }
 </script>
+
+<style lang="scss">
+@import "../assets/css/main";
+</style>

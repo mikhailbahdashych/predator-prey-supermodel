@@ -8,10 +8,17 @@
 
 <script>
 export default {
-  name: 'Empty'
+  name: 'Empty',
+  head () {
+    return {
+      bodyAttrs: {
+        class: 'body-margin'
+      }
+    }
+  }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@import "../assets/css/main";
 </style>
