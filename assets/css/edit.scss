@@ -16,13 +16,13 @@
       height: calc(100% - 15px);
       padding-top: 15px;
       margin: 0 auto;
-      &.active { border-bottom: 3px solid v.$main-color; }
+      &.item-box-active { border-bottom: 3px solid v.$main-color; }
       .item {
         cursor: pointer;
         margin: 0;
         color: rgba(#fff, 0.5);
         transition: .2s;
-        &.active { color: v.$main-color-light;  padding-bottom: 15px; }
+        &.item-active { color: v.$main-color-light;  padding-bottom: 15px; }
         @media screen and (max-width: 520px) { font-size: 12px; }
       }
       .item:hover { color: v.$main-color-light; }
