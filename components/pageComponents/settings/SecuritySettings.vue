@@ -5,8 +5,8 @@
       <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`item ${setting.danger ? 'danger' : ''}`">
         <div v-if="setting.title === 'Set 2FA'" class="item-content">
           <div class="item-content texts">
-            <h3 class="font-second">{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
-            <p class="font-second">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
+            <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
+            <p class="description">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
           </div>
           <div class="item-content">
             <Button
@@ -17,8 +17,8 @@
         </div>
         <div v-else class="item-content">
           <div class="item-content texts">
-            <h3 :class="`font-second ${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
-            <p :class="`font-second ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
+            <h3 :class="`${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
+            <p :class="`description ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
             <p v-if="setting.title === 'Close account'" class="paragraph link" @click="stateShowCloseAccMoreInfo">
               {{ !closeAccountMoreInfo ? 'Show more' : 'Show less' }}
             </p>
@@ -30,7 +30,7 @@
               @click-handler="openModal(setting.title)" />
           </div>
         </div>
-        <div v-if="closeAccountMoreInfo && setting.title === 'Close account'" class="font-second">
+        <div v-if="closeAccountMoreInfo && setting.title === 'Close account'">
           <p>Closing your account means:</p>
           <ul>
             <li>Your username will be shown as user1234567890.</li>

@@ -44,7 +44,12 @@
       align-items: center;
       height: 100%;
       justify-content: space-between;
-      &.texts { display: block; }
+      &.texts {
+        display: block;
+        .description {
+          opacity: .5;
+        }
+      }
     }
     &.danger {
       border-bottom: 1px solid rgba(v.$error, 0.25);
