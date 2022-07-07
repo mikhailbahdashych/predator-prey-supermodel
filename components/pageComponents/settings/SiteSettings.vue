@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="account-security-content">
+    <div class="account-preferences">
 
     </div>
   </div>

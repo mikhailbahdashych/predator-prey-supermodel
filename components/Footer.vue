@@ -8,7 +8,7 @@
         <nuxt-link to='/blog' class='nuxt-link'><p>Blog</p></nuxt-link>
       </div>
       <div class='left-side-footer'>
-        <p>© All rights reserved, 2021</p>
+        <p class='rights'>© All rights reserved, 2021</p>
       </div>
     </div>
   </footer>

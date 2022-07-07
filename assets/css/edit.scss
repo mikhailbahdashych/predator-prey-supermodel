@@ -12,48 +12,46 @@
     display: flex;
     border-bottom: 1px solid v.$main-color-light;
     @media only screen and (max-width: 930px) { width: 100%; }
-    .account-header-item-block {
+    .item-box {
       height: calc(100% - 15px);
       padding-top: 15px;
       margin: 0 auto;
       &.active { border-bottom: 3px solid v.$main-color; }
-      .account-header-item {
+      .item {
         cursor: pointer;
         margin: 0;
         color: rgba(#fff, 0.5);
         transition: .2s;
-        &.active { color: v.$main-color-light;}
+        &.active { color: v.$main-color-light;  padding-bottom: 15px; }
         @media screen and (max-width: 520px) { font-size: 12px; }
       }
-      .account-header-item:hover { color: v.$main-color-light; }
+      .item:hover { color: v.$main-color-light; }
     }
   }
 }
 
-.account-security-content {
+.account-preferences {
   margin: 0 auto;
   width: 55%;
   padding-top: 70px;
 
-  .security-item {
+  .item {
     border-bottom: 1px solid rgba(v.$main-color-light, 0.25);
-    .security-items {
+    .item-content {
       display: flex;
       align-items: center;
       height: 100%;
       justify-content: space-between;
-      &.texts {
-        display: block;
-      }
+      &.texts { display: block; }
     }
     &.danger {
       border-bottom: 1px solid rgba(v.$error, 0.25);
     }
   }
-  .password-requirement-list {
+  .password-requirements {
     width: 450px;
     display: flex;
-    .password-requirement-list-item { margin: 0 0 10px 10px }
+    .item { margin: 0 0 10px 10px }
     .status {
       width: 20px;
       height: 20px;

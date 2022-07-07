@@ -2,8 +2,8 @@
   <div>
     <div class="account-header">
       <div class="account-header-inner">
-        <div v-for="item in accountHeaderItems" :key="item.title" :class="[item.active ? 'active' : '']" class="account-header-item-block">
-          <p :class="[item.active ? 'active' : '']" class="account-header-item" @click="changeSubpage(item)">
+        <div v-for="item in accountHeaderItems" :key="item.title" :class="[item.active ? 'active' : '']" class="item-box">
+          <p :class="[item.active ? 'active' : '']" class="item" @click="changeSubpage(item)">
             {{item.title}}
           </p>
         </div>

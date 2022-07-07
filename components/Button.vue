@@ -6,7 +6,7 @@
       :class="additionalClass"
       @click="$emit('click-handler')"
     >
-      <p>{{ label }}</p>
+      <p class="label">{{ label }}</p>
     </button>
   </div>
 </template>

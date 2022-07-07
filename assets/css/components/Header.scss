@@ -8,27 +8,26 @@
   .inner-header {
     margin: 0 auto;
     width: 75%;
-    .header-content {
+    .content {
       display: flex;
       height: 100%;
       justify-content: space-between;
       align-items: center;
 
-      .header-button {
+      .button {
         align-items: center;
         display: flex;
         margin-left: 20px;
       }
-      .header-links {
+      .links {
         font-size: 16px;
         transition: 0.3s;
         &.logo { font-size: 30px; }
       }
-      .header-links:hover {
+      .links:hover {
         color: v.$main-color;
         transform: scale(1.1);
       }
-
     }
   }
 }

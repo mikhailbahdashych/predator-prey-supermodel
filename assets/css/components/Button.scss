@@ -28,9 +28,6 @@
     width: 100%;
     &.w400 { width: 450px; }
     height: 48px;
-    p {
-      font-size: 18px;
-    }
   }
   &.min-width150 {
     width: 150px;
@@ -48,8 +45,11 @@
     color: v.$main-color-light;
     background-color: v.$error;
   }
-  p {
+  .label {
     margin: 0;
+  }
+  .basic-button:hover {
+    //box-shadow: ;
   }
 }
 

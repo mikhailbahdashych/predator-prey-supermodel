@@ -17,7 +17,7 @@
     </div>
 
     <div class="login-header">
-      <p class="paragraph right">Already have account?
+      <p class="paragraph right p-signin">Already have account?
         <span class="paragraph link" @click="redirect('/signin')">Sign in!</span>
       </p>
     </div>

@@ -1,38 +1,38 @@
 <template>
   <div class="header">
     <div class="inner-header">
-      <div class="header-content">
-        <div class="header-content">
+      <div class="content">
+        <div class="content">
           <skeleton v-if='loading' :text="'pNb'" />
           <nuxt-link v-else to="/" class='nuxt-link'>
-            <h3 class="header-links logo">pNb</h3>
+            <h3 class="links logo">pNb</h3>
           </nuxt-link>
           <skeleton v-if='loading' :text="'FORUM'" />
           <nuxt-link v-else to="/" class='nuxt-link'>
-            <h3 class="header-links">FORUM</h3>
+            <h3 class="links">FORUM</h3>
           </nuxt-link>
           <skeleton v-if='loading' :text="'Q&A'" />
           <nuxt-link v-else to="/" class='nuxt-link'>
-            <h3 class="header-links">Q&A</h3>
+            <h3 class="links">Q&A</h3>
           </nuxt-link>
           <skeleton v-if='loading' :text="'BLOG'" />
           <nuxt-link v-else to="/" class='nuxt-link'>
-            <h3 class="header-links">BLOG</h3>
+            <h3 class="links">BLOG</h3>
           </nuxt-link>
         </div>
-        <div v-if="tokenStatus === -1" class="header-content">
-          <div class="header-button">
+        <div v-if="tokenStatus === -1" class="content">
+          <div class="button">
             <Button :label="'SIGN IN'" :additional-class="'transparent'" @click-handler="redirect('/signin')" />
           </div>
-          <div class="header-button">
+          <div class="button">
             <Button :label="'SIGN UP'" @click-handler="redirect('/signup')" />
           </div>
         </div>
-        <div v-else class="header-content">
-          <div class="header-button">
+        <div v-else class="content">
+          <div class="button">
             <Button :label="'My account'" @click-handler="redirect(`/account/${tokenStatus}`)" />
           </div>
-          <div class="header-button">
+          <div class="button">
             <Button :label="'Log Out'" :additional-class="'transparent'" @click-handler="logout" />
           </div>
         </div>

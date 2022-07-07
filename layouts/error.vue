@@ -1,7 +1,7 @@
 <template>
   <div class="error-page center">
-    <h1>You shouldn't be here! >:(</h1>
-    <p>
+    <h1 class='text head'>You shouldn't be here! >:(</h1>
+    <p class='text paragraph'>
       <nuxt-link class='nuxt-link' to='/'>
         Go
       </nuxt-link>
