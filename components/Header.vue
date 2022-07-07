@@ -3,19 +3,19 @@
     <div class="inner-header">
       <div class="header-content">
         <div class="header-content">
-          <skeleton v-if='loading' :text="'pNb1'" />
+          <skeleton v-if='loading' :text="'pNb'" />
           <nuxt-link v-else to="/" class='nuxt-link'>
-            <h3 class="header-links logo">pNb2</h3>
+            <h3 class="header-links logo">pNb</h3>
           </nuxt-link>
-          <skeleton v-if='loading' :text="'pNb1'" />
+          <skeleton v-if='loading' :text="'FORUM'" />
           <nuxt-link v-else to="/" class='nuxt-link'>
             <h3 class="header-links">FORUM</h3>
           </nuxt-link>
-          <skeleton v-if='loading' :text="'pNb1'" />
+          <skeleton v-if='loading' :text="'Q&A'" />
           <nuxt-link v-else to="/" class='nuxt-link'>
             <h3 class="header-links">Q&A</h3>
           </nuxt-link>
-          <skeleton v-if='loading' :text="'pNb1'" />
+          <skeleton v-if='loading' :text="'BLOG'" />
           <nuxt-link v-else to="/" class='nuxt-link'>
             <h3 class="header-links">BLOG</h3>
           </nuxt-link>
@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      tokenStatus: null,
+      tokenStatus: -1,
       loading: true
     }
   },

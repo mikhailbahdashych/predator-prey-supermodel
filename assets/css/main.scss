@@ -66,7 +66,7 @@ html, body {
   &.on-white-paragraph { color: v.$default-bg; }
   &.error { color: v.$error }
   &.link { color: v.$main-color; cursor: pointer; text-decoration: underline }
-  &.success { color: green }
+  &.success { color: lightgreen }
   &.opacity { opacity: 0.5; }
   &.bold { font-weight: 500 }
 }

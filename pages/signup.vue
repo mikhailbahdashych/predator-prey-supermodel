@@ -59,11 +59,11 @@
 
           <div v-for="rule in passwordRulesList" :key="rule.text" class="flex">
             <div v-for="(item, i) in Object.entries(rule)" :key="i">
-              <p>
+              <p class="password-requirement-item">
                 <span v-if="item[0] === 'text'" class="paragraph">{{ item[1] }}</span>
                 <span v-else>
-                  <span v-if="item[1]" class="paragraph success">OK</span>
-                  <span v-else class="paragraph error">NOT OK</span>
+                  <img v-if="item[1]" class="status" src="../assets/img/greencircle.svg" alt="OK" />
+                  <img v-else class="status" src="../assets/img/redcircle.svg" alt="NOT OK" />
                 </span>
               </p>
             </div>
