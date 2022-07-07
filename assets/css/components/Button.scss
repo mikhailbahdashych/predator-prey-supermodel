@@ -23,6 +23,7 @@
   }
   &.transparent:hover {
     background-color: rgba(v.$main-color, 0.25);
+    box-shadow: none;
   }
   &.big {
     width: 100%;
@@ -48,9 +49,11 @@
   .label {
     margin: 0;
   }
-  .basic-button:hover {
-    //box-shadow: ;
-  }
+}
+
+.basic-button:hover {
+  box-shadow: 0 0 10px v.$main-color;
+  transition: box-shadow .2s ease;
 }
 
 .basic-button:disabled {
@@ -61,4 +64,8 @@
     color: v.$main-color-light;
     background-color: rgba(v.$error, 0.35);
   }
+}
+
+.basic-button:disabled:hover {
+  box-shadow: none;
 }

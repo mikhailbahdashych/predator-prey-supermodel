@@ -22,7 +22,10 @@
       .links {
         font-size: 16px;
         transition: 0.3s;
-        &.logo { font-size: 30px; }
+        &.logo {
+          font-size: 30px;
+          padding-right: 15px;
+        }
       }
       .links:hover {
         color: v.$main-color;
