@@ -22,8 +22,8 @@
       </p>
     </div>
 
-    <div class="login-inputs">
-      <div v-if="status !== 1" class="login-inputs-container">
+    <div v-if="!showPersonalInformationFields" class="login-inputs">
+      <div class="login-inputs-container">
         <h1>Sign up</h1>
         <Input
           v-model="email.email"
@@ -71,10 +71,35 @@
         </div>
 
         <Checkbox v-model="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
-        <p v-if="status === 1" class="paragraph success">Account has been successfully created, please, confirm your email!</p>
-        <p v-else-if="status === -1" class="paragraph error">User with this email already exists!</p>
+        <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'big'" @click-handler="showPersonalInfoFields" />
+      </div>
+    </div>
+
+    <div v-if="showPersonalInformationFields" class="login-inputs">
+      <div v-if="status !== 1" class="login-inputs-container">
+        <div class="flex">
+          <Input
+            v-model="password.passwordRepeat"
+            :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+            :disabled="disabledField"
+            :title="'Repeat password'"
+            :type="'password'"
+          />
+          <Input
+            v-model="password.passwordRepeat"
+            :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+            :disabled="disabledField"
+            :title="'Repeat password'"
+            :type="'password'"
+          />
+        </div>
+        <div class="flex">
+          <Button @click-handler="signUp" :label="'Skip step'" :additional-class="'big'" />
+          <Button @click-handler="signUp" :label="'Skip step'" :additional-class="'big'" />
+          <Button @click-handler="signUp" :label="'Skip step'" :additional-class="'big'" />
+        </div>
+        <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
         <p v-else-if="status === -2" class="paragraph error">User with this username already exists!</p>
-        <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'big'" @click-handler="register" />
       </div>
       <div v-else class="login-inputs-container">
         <h1>Confirmation email has been sent.</h1>
@@ -134,6 +159,19 @@ export default {
         {specChar: false, text: 'Password should contain at least one special character'},
         {digitChar: false, text: 'Password should contain at least one digit character'}
       ],
+
+      showPersonalInformationFields: false,
+      personalInformation: {
+        firstName: null,
+        lastName: null,
+        title: null,
+        location: null,
+        aboutMe: null,
+        website: null,
+        twitter: null,
+        github: null,
+        showEmail: false
+      },
 
       disabledField: false,
 
@@ -200,16 +238,19 @@ export default {
         this.passwordError.passwordRules = false
       }
     },
-    async register() {
+    async signUp() {
+      await signUp({
+        email: this.email.email,
+        password: this.password.password,
+        username: this.username.username
+      }).then((res) => {
+        if (res.status) this.status = res.status
+        if (res.status === 1) this.disabledField = true
+      })
+    },
+    showPersonalInfoFields() {
       if (this.validFields()) {
-        await signUp({
-          email: this.email.email,
-          password: this.password.password,
-          username: this.username.username
-        }).then((res) => {
-          if (res.status) this.status = res.status
-          if (res.status === 1) this.disabledField = true
-        })
+        this.showPersonalInformationFields = true
       }
     }
   }

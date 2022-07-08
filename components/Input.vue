@@ -1,5 +1,5 @@
 <template>
-  <div class="basic-input-outer">
+  <div class="basic-input-container">
     <p :class="`paragraph ${titleClass}`">{{ title }}</p>
     <input
       ref="name"

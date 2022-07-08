@@ -36,7 +36,12 @@
             @keyup.enter.native="signin"
           />
           <p v-if="loginError" class="paragraph error">Wrong credentials!</p>
-          <Button :label="'Sign In'" :additional-class="'mt big'" @click-handler="signin" />
+          <Button
+            :label="'Sign In'"
+            :disabled="loginEmail.loginEmailError || loginPassword.loginPasswordError || !loginPassword.password || !loginEmail.email"
+            :additional-class="'mt big'"
+            @click-handler="signin"
+          />
           <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
 
         </div>
@@ -75,7 +80,11 @@
     <div v-if="showReopeningScreen.status" class="login">
       <div class="center block">
         <h1>There you are! Nice to see you again, {{ showReopeningScreen.username }}!</h1>
-        <Button :label="'Here we go'" :additional-class="'big modal-size'" @click-handler="redirect(`/account/me`)"/>
+        <Button
+          :label="'Here we go'"
+          :additional-class="'big modal-size'"
+          @click-handler="redirect(`/account/me`)"
+        />
       </div>
     </div>
   </div>
@@ -142,10 +151,7 @@ export default {
   },
   methods: {
     async signin() {
-      if (
-        (this.loginEmail.email || this.loginPhone.phone) &&
-        (!this.loginEmail.loginEmailError && !this.loginPassword.loginPasswordError)
-      ) {
+      if (!this.loginEmail.loginEmailError && !this.loginPassword.loginPasswordError) {
         const res = await signIn({
           email: this.loginEmail.email,
           phone: this.loginPhone.phone,
@@ -176,11 +182,8 @@ export default {
 
           localStorage.setItem('token', res.token)
           localStorage.setItem('personalId', res.personalId)
-          await this.$router.push({path: `/account/me`})
+          await this.$router.push('/account/me')
         }
-      } else {
-        this.loginEmail.loginEmailError = true
-        this.loginPassword.loginPasswordError = true
       }
     },
     redirect(path) {

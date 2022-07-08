@@ -13,20 +13,19 @@
   line-height: 24px;
   transition: 0.3s;
   color: v.$main-color-light;
-  &.modal-size { width: 450px; }
   &.textarea {
     padding: 15px;
     font-size: 14px;
     font-family: "Menlo", sans-serif;
-    min-height: 64px;
+    height: 120px;
     resize: vertical;
     &.textarea:focus { border: 1px solid rgba(v.$main-color, .5); }
   }
 }
 
-.basic-input-outer {
-  min-width: 350px;
-
+.basic-input-container {
+  margin: 0 auto;
+  width: 100%;
   .basic-input {
     min-height: 35px;
     margin-bottom: 10px;

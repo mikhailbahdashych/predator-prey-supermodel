@@ -1,13 +1,15 @@
 <template>
-  <div @click="clickHandler">
-    <button
-      class="basic-button"
-      :disabled="disabled"
-      :class="additionalClass"
-      @click="$emit('click-handler')"
-    >
-      <p class="label">{{ label }}</p>
-    </button>
+  <div class="button-container">
+    <div @click="clickHandler">
+      <button
+        class="basic-button"
+        :disabled="disabled"
+        :class="additionalClass"
+        @click="$emit('click-handler')"
+      >
+        <p class="label">{{ label }}</p>
+      </button>
+    </div>
   </div>
 </template>
 

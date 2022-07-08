@@ -67,6 +67,8 @@ module.exports = {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
+  loading: { color: '#58A7FEFF' },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

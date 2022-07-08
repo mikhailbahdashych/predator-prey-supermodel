@@ -1,72 +1,74 @@
 @use "../variables" as v;
 
-.basic-button {
-  height: 36px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  background-color: v.$main-color;
-  font-weight: 300;
-  transition: 0.5s;
-  min-width: 100px;
-  &.input-with-button {
-    width: 75px;
-    margin-top: 0;
-    height: 48px;
-  }
-  &.transparent {
-    background-color: transparent;
-    color: v.$main-color-light;
-    border: 1px solid v.$main-color;
-    transition: .2s;
-    .label { color: v.$main-color-light; }
-  }
-  &.transparent:hover {
-    background-color: rgba(v.$main-color, 0.25);
-    box-shadow: none;
-  }
-  &.big {
-    width: 100%;
-    height: 48px;
-    &.modal-size { width: 450px; }
-  }
-  &.min-width150 {
-    width: 150px;
-  }
-  &.danger {
-    border: 1px solid rgba(v.$error, 0.5);
-    color: v.$error;
-    transition: .2s;
-  }
-  &.danger:hover {
-    background-color: rgba(v.$error, 0.25);
-  }
-  &.danger-fill {
+.button-container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+
+  .basic-button {
+    height: 36px;
+    border-radius: 5px;
+    cursor: pointer;
     border: none;
-    color: v.$main-color-light;
-    background-color: v.$error;
-  }
-  .label {
-    margin: 0;
-    color: v.$default-bg;
-  }
-}
+    background-color: v.$main-color;
+    font-weight: 300;
+    min-width: 100px;
+    &.input-with-button {
+      width: 75px;
+      margin-top: 0;
+      height: 48px;
+    }
 
-.basic-button:hover {
-  box-shadow: 0 0 10px v.$main-color;
-  transition: box-shadow .2s ease;
-}
+    &.transparent {
+      background-color: transparent;
+      color: v.$main-color-light;
+      border: 1px solid v.$main-color;
+      .label { color: v.$main-color-light; }
+    }
+    &.transparent:hover {
+      background-color: rgba(v.$main-color, 0.25);
+    }
 
-.basic-button:disabled {
-  background-color: rgba(v.$main-color, 0.35);
-  cursor: auto;
-  &.danger-fill {
-    border: none;
-    color: v.$main-color-light;
-    background-color: rgba(v.$error, 0.35);
+    &.danger {
+      border: 1px solid rgba(v.$error, 0.5);
+      color: v.$error;
+    }
+    &.danger:hover {
+      background-color: rgba(v.$error, 0.25);
+    }
+    &.danger-fill {
+      border: none;
+      color: v.$main-color-light;
+      background-color: v.$error;
+    }
+    &.danger-fill:hover {
+      background-color: v.$error-pale;
+    }
+    &.danger-fill:disabled {
+      border: none;
+      color: v.$main-color-light;
+      background-color: rgba(v.$error, 0.35);
+    }
+
+    &.min-width150 {
+      width: 150px;
+    }
+    .label {
+      margin: 0;
+      color: v.$default-bg;
+    }
   }
-}
 
-.basic-button:disabled:hover {
-  box-shadow: none;
+  .basic-button:hover {
+    background-color: v.$main-color-page;
+  }
+  .basic-button:active {
+    background-color: v.$main-color-dark;
+  }
+  .basic-button:disabled {
+    background-color: rgba(v.$main-color, 0.35);
+    cursor: auto;
+  }
+
 }
