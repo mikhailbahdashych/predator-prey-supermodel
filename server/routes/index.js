@@ -118,9 +118,7 @@ router.post('/s-2fa', async (req, res) => {
 
 router.post('/d-2fa', async (req, res) => {
   try {
-    const { data } = await api.post('/disable-2fa', req.body, {
-      headers: { 'ato': req.headers.ato }
-    })
+    const { data } = await api.post('/disable-2fa', req.body)
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
