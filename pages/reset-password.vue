@@ -11,7 +11,7 @@
     </div>
 
     <div class="login-header">
-      <p class="paragraph p-signin right">Don't have account yet?
+      <p class="paragraph account-having right">Don't have account yet?
         <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
       </p>
     </div>
@@ -45,7 +45,7 @@
         />
 
         <Input :title="'Verification code'" @keyup.enter.native="() => {}" />
-        <Button :label="'Submit'" :additional-class="'big'" @click-handler="() => {}" />
+        <Button :label="'Submit'" :additional-class="'mt high-height'" @click-handler="() => {}" />
       </div>
     </div>
 

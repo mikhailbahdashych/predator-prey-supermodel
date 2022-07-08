@@ -70,7 +70,7 @@
       </div>
 
       <div class="login-header">
-        <p class="paragraph p-signin left">Don't have account yet?
+        <p class="paragraph account-having left">Don't have account yet?
           <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
         </p>
       </div>

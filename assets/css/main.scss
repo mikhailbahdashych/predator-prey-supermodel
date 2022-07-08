@@ -46,6 +46,7 @@ li {
   font-size: 14px;
   opacity: 0.9;
   color: v.$main-color-light;
+  &.small { font-size: 12px }
   &.average { font-size: 16px; }
   &.medium { font-size: 18px; }
   &.large { font-size: 24px; }
@@ -81,7 +82,7 @@ li {
 }
 
 .mt { margin-top: 10px; }
-.mr { margin-right: 10px; }
+.mrl { margin-right: 10px; margin-left: 10px }
 
 .page-content {
   position: relative;
@@ -96,4 +97,8 @@ li {
   background-color: #ccc;
   border-radius: 10%;
   padding: 4px;
+}
+
+hr {
+  opacity: .25;
 }

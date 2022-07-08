@@ -19,7 +19,7 @@
           class="basic-button input-with-button"
           @click="$emit('click-handler')"
         >
-          {{ buttonTitle }}
+          <p class="label">{{ buttonTitle }}</p>
         </button>
       </div>
     </div>

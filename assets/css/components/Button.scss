@@ -2,74 +2,73 @@
 
 .button-container {
   width: 100%;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+}
 
-  .basic-button {
-    height: 36px;
-    border-radius: 5px;
-    cursor: pointer;
+.basic-button {
+  height: 36px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: v.$main-color;
+  font-weight: 300;
+  width: 100%;
+  min-width: 100px;
+  &.input-with-button {
+    width: 75px;
+    margin-top: 0;
+    height: 48px;
+  }
+
+  &.transparent {
+    background-color: transparent;
+    color: v.$main-color-light;
+    border: 1px solid v.$main-color;
+    .label { color: v.$main-color-light; }
+  }
+  &.transparent:hover {
+    background-color: rgba(v.$main-color, 0.25);
+  }
+
+  &.danger {
+    border: 1px solid rgba(v.$error, 0.5);
+    color: v.$error;
+  }
+  &.danger:hover {
+    background-color: rgba(v.$error, 0.25);
+  }
+  &.danger-fill {
     border: none;
-    background-color: v.$main-color;
-    font-weight: 300;
-    width: 100%;
-    min-width: 100px;
-    &.input-with-button {
-      width: 75px;
-      margin-top: 0;
-      height: 48px;
-    }
-
-    &.transparent {
-      background-color: transparent;
-      color: v.$main-color-light;
-      border: 1px solid v.$main-color;
-      .label { color: v.$main-color-light; }
-    }
-    &.transparent:hover {
-      background-color: rgba(v.$main-color, 0.25);
-    }
-
-    &.danger {
-      border: 1px solid rgba(v.$error, 0.5);
-      color: v.$error;
-    }
-    &.danger:hover {
-      background-color: rgba(v.$error, 0.25);
-    }
-    &.danger-fill {
-      border: none;
-      color: v.$main-color-light;
-      background-color: v.$error;
-    }
-    &.danger-fill:hover {
-      background-color: v.$error-pale;
-    }
-    &.danger-fill:disabled {
-      border: none;
-      color: v.$main-color-light;
-      background-color: rgba(v.$error, 0.35);
-    }
-
-    &.min-width150 { width: 150px; }
-    &.high-height { height: 48px; }
-
-    .label {
-      margin: 0;
-      color: v.$default-bg;
-    }
+    color: v.$main-color-light;
+    background-color: v.$error;
+  }
+  &.danger-fill:hover {
+    background-color: v.$error-pale;
+  }
+  &.danger-fill:disabled {
+    border: none;
+    color: v.$main-color-light;
+    background-color: rgba(v.$error, 0.35);
   }
 
-  .basic-button:hover {
-    background-color: v.$main-color-page;
-  }
-  .basic-button:active {
-    background-color: v.$main-color-dark;
-  }
-  .basic-button:disabled {
-    background-color: rgba(v.$main-color, 0.35);
-    cursor: auto;
-  }
+  &.min-width150 { width: 150px; }
+  &.high-height { height: 48px; }
 
+  .label {
+    margin: 0;
+    color: v.$default-bg;
+  }
+}
+
+.basic-button:hover {
+  background-color: v.$main-color-page;
+}
+.basic-button:active {
+  background-color: v.$main-color-dark;
+}
+.basic-button:disabled {
+  background-color: rgba(v.$main-color, 0.35);
+  cursor: auto;
 }

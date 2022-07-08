@@ -17,7 +17,7 @@
     </div>
 
     <div class="login-header">
-      <p class="paragraph right p-signin">Already have account?
+      <p class="paragraph right account-having">Already have account?
         <span class="paragraph link" @click="redirect('/signin')">Sign in!</span>
       </p>
     </div>
@@ -77,24 +77,54 @@
 
     <div v-if="showPersonalInformationFields" class="login-inputs">
       <div v-if="status !== 1" class="login-inputs-container">
+        <h3>Tell us a little about yourself</h3>
+        <p>Don't worry, you can skip this step and fill information you want later</p>
+        <hr>
         <div class="flex">
           <Input
-            v-model="password.passwordRepeat"
-            :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
-            :disabled="disabledField"
-            :title="'Repeat password'"
-            :type="'password'"
+            v-model="personalInformation.firstName"
+            :title="'First name'"
+            :title-class="'small'"
+            :additional-class="'small mrl'"
           />
           <Input
-            v-model="password.passwordRepeat"
-            :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
-            :disabled="disabledField"
-            :title="'Repeat password'"
-            :type="'password'"
+            v-model="personalInformation.lastName"
+            :title="'Last name'"
+            :title-class="'small'"
+            :additional-class="'small'"
           />
         </div>
+        <p>Provide your nickname or link</p>
+        <hr>
+        <Input
+          v-model="personalInformation.twitter"
+          :title="'Twitter'"
+          :title-class="'small'"
+          :additional-class="'small'"
+        />
+        <Input
+          v-model="personalInformation.github"
+          :title="'GitHub'"
+          :title-class="'small'"
+          :additional-class="'small'"
+        />
+        <Input
+          v-model="personalInformation.website"
+          :title="'Personal website'"
+          :title-class="'small'"
+          :additional-class="'small'"
+        />
         <div class="flex">
-          
+          <Button
+            :label="'Skip'"
+            :additional-class="'mt transparent mrl'"
+            @click-handler="signUpWithoutInfo"
+          />
+          <Button
+            :label="'Sign up'"
+            :additional-class="'mt mrl'"
+            @click-handler="signUpWithInfo"
+          />
         </div>
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
         <p v-else-if="status === -2" class="paragraph error">User with this username already exists!</p>
@@ -162,7 +192,7 @@ export default {
       personalInformation: {
         firstName: null,
         lastName: null,
-        title: null,
+        company: null,
         location: null,
         aboutMe: null,
         website: null,
@@ -236,7 +266,15 @@ export default {
         this.passwordError.passwordRules = false
       }
     },
-    async signUp() {
+    async signUpWithInfo() {
+      await signUp({
+
+      }).then((res) => {
+        if (res.status) this.status = res.status
+        if (res.status === 1) this.disabledField = true
+      })
+    },
+    async signUpWithoutInfo() {
       await signUp({
         email: this.email.email,
         password: this.password.password,

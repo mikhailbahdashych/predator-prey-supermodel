@@ -4,7 +4,7 @@
   border-radius: 5px;
   outline: none;
   border: 1px solid rgba(0,0,0,0);
-  background-color: rgba(#000, 0.5);
+  background-color: rgba(#000, .5);
   padding: 0 0 0 16px;
   width: 100%;
   box-sizing: border-box;
@@ -24,20 +24,26 @@
 }
 
 .basic-input-container {
-  margin: 0 auto;
   width: 100%;
+  padding: 0 5px;
+
   .basic-input {
-    min-height: 35px;
     margin-bottom: 10px;
+    &.small {
+      font-size: 14px;
+      height: 36px;
+      padding: 0 0 0 8px;
+      margin: 0;
+    }
     &.error { border: 1px solid rgba(v.$error, .5); }
     &.error:focus { border: 1px solid rgba(v.$error, .5); }
   }
   .basic-input:focus { border: 1px solid rgba(v.$main-color, .5); }
-  .basic-input:disabled { background-color: rgba(#aaa, 0.5) }
+  .basic-input:disabled { background-color: rgba(#aaa, .5) }
 
   .on-white {
-    border: 1px solid rgba(v.$default-bg, 0.5);
-    background-color: rgba(#fff, 0.5);
+    border: 1px solid rgba(v.$default-bg, .5);
+    background-color: rgba(#fff, .5);
     color: v.$default-bg;
   }
 }

@@ -55,9 +55,13 @@ export default {
       type: String,
       default: ''
     },
+    titleClass: {
+      type: String,
+      default: ''
+    },
     error: {
       type: Object,
-      default: function () { return {}}
+      default: function () { return {} }
     },
     focus: {
       type: Boolean,
@@ -66,11 +70,7 @@ export default {
     oneerror: {
       type: Boolean,
       default: false
-    },
-    titleClass: {
-      type: String,
-      default: ''
-    },
+    }
   },
   data() {
     return {
