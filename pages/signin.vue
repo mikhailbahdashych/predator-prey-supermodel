@@ -65,7 +65,7 @@
       </div>
 
       <div class="login-header">
-        <p class="paragraph left">Don't have account yet?
+        <p class="paragraph p-signin left">Don't have account yet?
           <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
         </p>
       </div>
@@ -75,7 +75,7 @@
     <div v-if="showReopeningScreen.status" class="login">
       <div class="center block">
         <h1>There you are! Nice to see you again, {{ showReopeningScreen.username }}!</h1>
-        <Button :label="'Here we go'" :additional-class="'big w400'" @click-handler="redirect(`/account/${showReopeningScreen.personalId}`)"/>
+        <Button :label="'Here we go'" :additional-class="'big modal-size'" @click-handler="redirect(`/account/${showReopeningScreen.personalId}`)"/>
       </div>
     </div>
   </div>

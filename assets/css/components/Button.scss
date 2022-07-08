@@ -27,8 +27,8 @@
   }
   &.big {
     width: 100%;
-    &.w400 { width: 450px; }
     height: 48px;
+    &.modal-size { width: 450px; }
   }
   &.min-width150 {
     width: 150px;
