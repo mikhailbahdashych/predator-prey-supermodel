@@ -114,6 +114,18 @@
           :title-class="'small'"
           :additional-class="'small'"
         />
+        <p>What do you want to tell this world?</p>
+        <hr>
+        <Input
+          v-model="personalInformation.title"
+          :title="'Title (will be shown as status in your account)'"
+          :title-class="'small'"
+          :additional-class="'small'"
+        />
+        <Textarea
+          v-model="personalInformation.aboutMe"
+          :title="'Bio'"
+        />
         <div class="flex">
           <Button
             :label="'Skip'"
@@ -126,6 +138,8 @@
             @click-handler="signUpWithInfo"
           />
         </div>
+
+        <Checkbox v-model="personalInformation.showEmail" :label="`Show my email as public email for contact`" />
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
         <p v-else-if="status === -2" class="paragraph error">User with this username already exists!</p>
       </div>
@@ -143,6 +157,7 @@
 import Input from "~/components/Input";
 import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
+import Textarea from "~/components/Textarea";
 import { validateEmail, validatePassword, validatePasswordRules } from "~/helpers/frontValidator";
 import { signUp } from "~/api";
 import { verifyClientByToken } from "~/helpers/auth";
@@ -151,7 +166,8 @@ export default {
   components: {
     Input,
     Button,
-    Checkbox
+    Checkbox,
+    Textarea
   },
   layout: 'empty',
   data() {
@@ -192,8 +208,7 @@ export default {
       personalInformation: {
         firstName: null,
         lastName: null,
-        company: null,
-        location: null,
+        title: null,
         aboutMe: null,
         website: null,
         twitter: null,
@@ -268,7 +283,10 @@ export default {
     },
     async signUpWithInfo() {
       await signUp({
-
+        email: this.email.email,
+        password: this.password.password,
+        username: this.username.username,
+        personalInformation: this.personalInformation
       }).then((res) => {
         if (res.status) this.status = res.status
         if (res.status === 1) this.disabledField = true
