@@ -14,6 +14,14 @@
   transition: 0.3s;
   color: v.$main-color-light;
   &.modal-size { width: 450px; }
+  &.textarea {
+    padding: 15px;
+    font-size: 14px;
+    font-family: "Menlo", sans-serif;
+    min-height: 64px;
+    resize: vertical;
+    &.textarea:focus { border: 1px solid rgba(v.$main-color, .5); }
+  }
 }
 
 .basic-input-outer {
@@ -22,10 +30,10 @@
   .basic-input {
     min-height: 35px;
     margin-bottom: 10px;
-    &.error { border: 1px solid v.$error; }
-    &.error:focus { border: 1px solid v.$error; }
+    &.error { border: 1px solid rgba(v.$error, .5); }
+    &.error:focus { border: 1px solid rgba(v.$error, .5); }
   }
-  .basic-input:focus { border: 1px solid v.$main-color; }
+  .basic-input:focus { border: 1px solid rgba(v.$main-color, .5); }
   .basic-input:disabled { background-color: rgba(#aaa, 0.5) }
 
   .on-white {

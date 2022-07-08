@@ -6,14 +6,14 @@
   .basic-input-button {
     margin-right: 15px;
     &.error {
-      border: 1px solid v.$error;
+      border: 1px solid rgba(v.$error, .5);
     }
     &.error:focus {
-      border: 1px solid v.$error;
+      border: 1px solid rgba(v.$error, .5);
     }
   }
   .basic-input-button:focus {
-    border: 1px solid v.$main-color;
+    border: 1px solid rgba(v.$main-color, .5);
   }
   .basic-input-button:disabled {
     color: rgba(#fff, 0.5);

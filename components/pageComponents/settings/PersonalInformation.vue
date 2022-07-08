@@ -7,17 +7,22 @@
       <Input
         :title="'Last name'"
       />
+      <Textarea
+        :title="'About'"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import Input from '~/components/Input';
+import Textarea from "~/components/Textarea";
 // import Button from "~/components/Button";
 export default {
   name: 'PersonalInformation',
   components: {
     Input,
+    Textarea
     // Button
   },
   props: {
