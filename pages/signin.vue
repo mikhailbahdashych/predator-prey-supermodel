@@ -39,7 +39,7 @@
           <Button
             :label="'Sign In'"
             :disabled="loginEmail.loginEmailError || loginPassword.loginPasswordError || !loginPassword.password || !loginEmail.email"
-            :additional-class="'mt big'"
+            :additional-class="'mt high-height'"
             @click-handler="signin"
           />
           <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>

@@ -13,6 +13,7 @@
     border: none;
     background-color: v.$main-color;
     font-weight: 300;
+    width: 100%;
     min-width: 100px;
     &.input-with-button {
       width: 75px;
@@ -51,9 +52,9 @@
       background-color: rgba(v.$error, 0.35);
     }
 
-    &.min-width150 {
-      width: 150px;
-    }
+    &.min-width150 { width: 150px; }
+    &.high-height { height: 48px; }
+
     .label {
       margin: 0;
       color: v.$default-bg;

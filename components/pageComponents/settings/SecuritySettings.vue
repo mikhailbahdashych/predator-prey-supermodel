@@ -50,7 +50,7 @@
         Once it is done, click the button below to start."
         @close="closeModal('Set 2FA')"
       >
-        <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" @click-handler="generateTwoFa" />
+        <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" :additional-class="'high-height'" @click-handler="generateTwoFa" />
         <div v-if="securityTwoFa.qr" class="center">
           <img :src="securityTwoFa.qr" alt="2fa">
 
@@ -59,7 +59,7 @@
           <p class="paragraph link" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
 
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA code'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
+          <Button :label="'Confirm 2FA code'" :additional-class="'high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
 
           <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
           <p v-else-if="securityTwoFa.status === -1" class="paragraph error">Wrong code!</p>
@@ -77,7 +77,7 @@
           <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
 
           <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 0" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
+          <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
 
           <p v-if="securityTwoFa.disableStatus === 0" class="paragraph success">2FA has been successfully disabled!</p>
           <p v-else-if="securityTwoFa.disableStatus === -1" class="paragraph error">Wrong code!</p>
@@ -147,6 +147,7 @@
            securityPassword.error ||
            !securityPassword.newPassword ||
            !securityPassword.newPasswordRepeat"
+          :additional-class="'high-height'"
           @click-handler="changePassword"/>
       </basic-modal>
 
@@ -171,7 +172,7 @@
           :additional-class="'on-white'"
           :type="'password'"
         />
-        <Button :label="'Close account'" :additional-class="'danger-fill'" :disabled="!closeAcc.currentPassword" @click-handler="closeAccount" />
+        <Button :label="'Close account'" :additional-class="'danger-fill high-height'" :disabled="!closeAcc.currentPassword" @click-handler="closeAccount" />
         <p v-if="closeAcc.status === -2" class="paragraph error">Wrong 2FA code!</p>
         <p v-else-if="closeAcc.status === -3" class="paragraph error">Invalid password!</p>
       </basic-modal>
@@ -184,7 +185,7 @@
       @close="closeConfirmTwoFa"
     >
       <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFaConfirmAction" />
-      <Button :label="'Confirm action'" :additional-class="'danger-fill'" @click-handler="confirmAction" />
+      <Button :label="'Confirm action'" :additional-class="'danger-fill high-height'" @click-handler="confirmAction" />
     </basic-modal>
 
   </div>

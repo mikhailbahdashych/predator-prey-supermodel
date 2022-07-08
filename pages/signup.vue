@@ -71,7 +71,7 @@
         </div>
 
         <Checkbox v-model="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
-        <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'big'" @click-handler="showPersonalInfoFields" />
+        <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'high-height'" @click-handler="showPersonalInfoFields" />
       </div>
     </div>
 
@@ -94,9 +94,7 @@
           />
         </div>
         <div class="flex">
-          <Button @click-handler="signUp" :label="'Skip step'" :additional-class="'big'" />
-          <Button @click-handler="signUp" :label="'Skip step'" :additional-class="'big'" />
-          <Button @click-handler="signUp" :label="'Skip step'" :additional-class="'big'" />
+          
         </div>
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
         <p v-else-if="status === -2" class="paragraph error">User with this username already exists!</p>

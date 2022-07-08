@@ -6,7 +6,9 @@
         <h3>{{header}}</h3>
       </div>
       <p class="modal-description">{{description}}</p>
-      <slot/>
+      <div class="modal-content">
+        <slot/>
+      </div>
     </div>
   </div>
 </template>
