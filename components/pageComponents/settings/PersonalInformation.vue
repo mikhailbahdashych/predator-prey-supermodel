@@ -1,14 +1,25 @@
 <template>
   <div>
     <div class="account-preferences">
-
+      <Input
+        :title="'First name'"
+      />
+      <Input
+        :title="'Last name'"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Input from '~/components/Input';
+// import Button from "~/components/Button";
 export default {
   name: 'PersonalInformation',
+  components: {
+    Input,
+    // Button
+  },
   props: {
     personalSettings: {
       type: Object,

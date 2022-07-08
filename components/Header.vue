@@ -22,18 +22,22 @@
         </div>
         <div v-if="tokenStatus === -1" class="content">
           <div class="button">
-            <Button :label="'SIGN IN'" :additional-class="'transparent'" @click-handler="redirect('/signin')" />
+            <skeleton v-if='loading' :text="'SIGN IN'" />
+            <Button v-else :label="'SIGN IN'" :additional-class="'transparent'" @click-handler="redirect('/signin')" />
           </div>
           <div class="button">
-            <Button :label="'SIGN UP'" @click-handler="redirect('/signup')" />
+            <skeleton v-if='loading' :text="'SIGN UP'" />
+            <Button v-else :label="'SIGN UP'" @click-handler="redirect('/signup')" />
           </div>
         </div>
         <div v-else class="content">
           <div class="button">
-            <Button :label="'My account'" @click-handler="redirect(`/account/${tokenStatus}`)" />
+            <skeleton v-if='loading' :text="'My account'" />
+            <Button v-else :label="'My account'" @click-handler="redirect('/account/me')" />
           </div>
           <div class="button">
-            <Button :label="'Log Out'" :additional-class="'transparent'" @click-handler="logout" />
+            <skeleton v-if='loading' :text="'Log Out'" />
+            <Button v-else :label="'Log Out'" :additional-class="'transparent'" @click-handler="logout" />
           </div>
         </div>
       </div>
@@ -43,8 +47,7 @@
 
 <script>
 import Button from "~/components/Button";
-import Skeleton from '~/components/skeleton/Skeleton'
-import {getUserByToken} from "~/api";
+import Skeleton from '~/components/skeleton/Skeleton';
 export default {
   name: 'Header',
   components: {
@@ -60,20 +63,16 @@ export default {
   created() {
     this.$nextTick(() => { this.loading = false })
   },
-  async mounted() {
-    await this.checkToken(localStorage.getItem('token'))
+  mounted() {
+    this.tokenStatus = localStorage.getItem('token') ? 1 : -1;
   },
   methods: {
-    async checkToken(token) {
-      const t = await getUserByToken(token);
-      this.tokenStatus = t.status || t.personalId
-    },
     redirect(path) {
-      this.$router.push({ path })
+      this.$router.push(path)
     },
     logout() {
       localStorage.removeItem('token')
-      this.$router.push({ path: '/' })
+      this.$router.push('/')
     },
   }
 }

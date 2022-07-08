@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <personal-information v-if="currentSection === 'Personal information'" />
+    <personal-information v-if="currentSection === 'Personal information'" :personal-settings="personalSettings" />
     <security-settings v-else-if="currentSection === 'Security settings'" :security-settings="securitySettings" />
     <site-settings v-else />
 
@@ -21,7 +21,7 @@
 import SecuritySettings from '~/components/pageComponents/settings/SecuritySettings'
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
-import {getUserSettings} from "~/api";
+import { getUserSettings } from "~/api";
 export default {
   name: 'Settings',
   components: {

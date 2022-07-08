@@ -75,7 +75,7 @@
     <div v-if="showReopeningScreen.status" class="login">
       <div class="center block">
         <h1>There you are! Nice to see you again, {{ showReopeningScreen.username }}!</h1>
-        <Button :label="'Here we go'" :additional-class="'big modal-size'" @click-handler="redirect(`/account/${showReopeningScreen.personalId}`)"/>
+        <Button :label="'Here we go'" :additional-class="'big modal-size'" @click-handler="redirect(`/account/me`)"/>
       </div>
     </div>
   </div>
@@ -85,9 +85,9 @@
 import Input from "~/components/Input";
 import Button from "~/components/Button";
 import InputTwoFa from "~/components/InputTwoFa";
-import {validateEmail, validatePasswordLength} from "~/helpers/frontValidator";
-import {verifyClientByToken} from "~/helpers/auth";
-import {signIn} from "~/api";
+import { validateEmail, validatePasswordLength } from "~/helpers/frontValidator";
+import { verifyClientByToken } from "~/helpers/auth";
+import { signIn } from "~/api";
 export default {
   name: "Signin",
   components: {
@@ -116,7 +116,7 @@ export default {
       twoFa: { code: [], show: false, error: false, normalCode: null },
       phone: { phone: null, show: false, error: false },
 
-      showReopeningScreen: { status: false, username: null, personalId: null },
+      showReopeningScreen: { status: false, username: null },
 
       loading: true
     }
@@ -170,13 +170,13 @@ export default {
           if (res.username) {
             this.showReopeningScreen.status = true
             this.showReopeningScreen.username = res.username
-            this.showReopeningScreen.personalId = res.personalId
             localStorage.setItem('token', res.token)
             return
           }
 
           localStorage.setItem('token', res.token)
-          await this.$router.push({path: `/account/${res.personalId}`})
+          localStorage.setItem('personalId', res.personalId)
+          await this.$router.push({path: `/account/me`})
         }
       } else {
         this.loginEmail.loginEmailError = true
@@ -184,7 +184,7 @@ export default {
       }
     },
     redirect(path) {
-      this.$router.push({ path })
+      this.$router.push(path)
     },
     async returnTwoFa(twoFa) {
       if (twoFa.length !== 6 || twoFa.join('').length !== 6) return

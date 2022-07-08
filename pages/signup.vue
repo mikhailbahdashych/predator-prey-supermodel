@@ -90,9 +90,9 @@
 import Input from "~/components/Input";
 import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
-import {validateEmail, validatePassword, validatePasswordRules} from "~/helpers/frontValidator";
-import {signUp} from "~/api";
-import {verifyClientByToken} from "~/helpers/auth";
+import { validateEmail, validatePassword, validatePasswordRules } from "~/helpers/frontValidator";
+import { signUp } from "~/api";
+import { verifyClientByToken } from "~/helpers/auth";
 export default {
   name: "Signup",
   components: {
@@ -174,7 +174,7 @@ export default {
   },
   methods: {
     redirect(path) {
-      this.$router.push({ path })
+      this.$router.push(path)
     },
     validFields() {
       return this.tac &&

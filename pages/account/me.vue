@@ -4,6 +4,8 @@
       <img class='account-header-avatar' src="../../assets/img/testava.jpg" alt="ava">
       <div class='account-header-data'>
         <h1 class='font-second'>{{user.username}}</h1>
+        <Button :label="'Edit profile'" :additional-class="'transparent'" class="buttons" />
+        <Button :label="'Settings'" :additional-class="'transparent'" class="buttons" @click-handler="redirect('/account/settings')" />
       </div>
     </div>
 
@@ -23,10 +25,13 @@
 </template>
 
 <script>
-import { getUserByPersonalId } from '~/api';
-import { validateUserPersonalId } from '~/helpers/frontValidator';
+import Button from "~/components/Button";
+import { getUserByToken } from "~/api";
 export default {
-  name: 'PersonalId',
+  name: "Index",
+  components: {
+    Button
+  },
   data() {
     return {
       user: {},
@@ -37,22 +42,23 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    if (!this.$route.params.personalId)
-      return await this.$router.push('/')
-    else if (!validateUserPersonalId(this.$route.params.personalId))
-      return await this.$router.push('/')
-    else if (this.$route.params.personalId === localStorage.getItem('personalId'))
-      return await this.$router.push('/account/me')
-    await this.getUser(this.$route.params.personalId)
+    if (localStorage.getItem('token'))
+      return await this.getCurrentUser(localStorage.getItem('token'))
   },
   methods: {
-    async getUser(personalId) {
-      this.user = await getUserByPersonalId(personalId)
+    async getCurrentUser(token) {
+      this.user = await getUserByToken(token)
+
+      if (!this.user)
+        return await this.$router.push('/')
     },
+    redirect(path) {
+      this.$router.push(path)
+    }
   }
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @import "../../assets/css/account";
 </style>

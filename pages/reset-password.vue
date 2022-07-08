@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     redirect(path) {
-      this.$router.push({path})
+      this.$router.push(path)
     },
     chooseOption(option) {
       if (option === 'email') this.setResetPasswordEmailFocusLogin()
