@@ -1,12 +1,12 @@
 <template>
-  <div class="basic-textarea-outer">
+  <div>
     <p :class="`paragraph`">{{ title }}</p>
     <textarea
-      ref="name"
+      :value="value"
       class="bi textarea"
-      :value="innerValue"
-      @input="onInput"
-    />
+      @input="updateValue($event.target.value)"
+      ref="input"
+    ></textarea>
   </div>
 </template>
 
@@ -18,28 +18,15 @@ export default {
       type: String,
       default: ''
     },
-  },
-  data() {
-    return {
-      innerValue: this.value
-    }
-  },
-  watch: {
-    focus: function() {
-      if (this.focus) this.$refs.name.focus()
-    },
-    value(value) {
-      this.innerValue = value
-    },
-    innerValue(value) {
-      this.$emit('input', value)
+    value: {
+      type: String,
+      default: ''
     }
   },
   methods: {
-    onInput(event) {
-      this.$nextTick(() => {
-        this.innerValue = event.target.value
-      })
+    updateValue(value) {
+      this.$refs.input.value = value;
+      this.$emit('input', value);
     }
   }
 }

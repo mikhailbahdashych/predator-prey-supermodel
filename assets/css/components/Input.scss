@@ -13,12 +13,12 @@
   line-height: 24px;
   transition: 0.3s;
   color: v.$main-color-light;
+  font-family: "Souce Sans Pro", sans-serif;
   &.textarea {
     padding: 15px;
     font-size: 14px;
     min-height: 56px;
     max-height: 200px;
-    font-family: "Menlo", sans-serif;
     height: 120px;
     resize: vertical;
     &.textarea:focus { border: 1px solid rgba(v.$main-color, .5); }
