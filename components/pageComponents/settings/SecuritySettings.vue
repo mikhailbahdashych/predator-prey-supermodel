@@ -204,7 +204,6 @@ import {
   changePassword,
   closeAccount,
   disableTwoFa,
-  getUserByToken,
   setTwoFa,
   getUserSettings
 } from '~/api'
@@ -330,12 +329,12 @@ export default {
   },
   methods: {
     async getUserSecuritySettings(token) {
-      const settings = await getUserSettings(token, 'security')
+      this.userSettings = await getUserSettings(token, 'security')
 
-      if (settings.status === -1)
+      if (this.userSettings.status === -1)
         return this.$router.push('/')
 
-      if (settings.twoFa)
+      if (this.userSettings.twoFa)
         this.securityTwoFa.status = 2
     },
     openModal(option) {
@@ -419,11 +418,8 @@ export default {
         this.changeEmailData.status = status
       }
     },
-    async generateTwoFa() {
-      const user = await getUserByToken(localStorage.getItem('token'))
-      if (user.status === -1) return
-
-      const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: user.username })
+    generateTwoFa() {
+      const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: this.userSettings.username })
       this.securityTwoFa.qr = qr
       this.securityTwoFa.secret = secret
     },
