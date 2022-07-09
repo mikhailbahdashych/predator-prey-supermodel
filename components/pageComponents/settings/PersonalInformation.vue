@@ -68,7 +68,10 @@ import Input from '~/components/Input';
 import Textarea from "~/components/Textarea";
 import Button from "~/components/Button";
 import Popup from "~/components/Popup";
-import { updateUserPersonalInformation } from "~/api";
+import {
+  updateUserPersonalInformation,
+  getUserSettings
+} from "~/api";
 export default {
   name: 'PersonalInformation',
   components: {
@@ -77,12 +80,6 @@ export default {
     Button,
     Popup
   },
-  props: {
-    personalSettings: {
-      type: Object,
-      default: () => {}
-    }
-  },
   data() {
     return {
       personalInfo: {},
@@ -90,12 +87,17 @@ export default {
       showPopup: false
     }
   },
-  watch: {
-    personalSettings() {
-      this.personalInfo = this.personalSettings
-    }
+  async mounted() {
+    if (localStorage.getItem('token')) await this.getUserPersonalSettings(localStorage.getItem('token'))
+    else return this.$router.push('/')
   },
   methods: {
+    async getUserPersonalSettings(token) {
+      this.personalInfo = await getUserSettings(token)
+
+      if (this.personalInfo.status === -1)
+        return this.$router.push('/')
+    },
     async updatePersonalInfo() {
       this.loading = true
 

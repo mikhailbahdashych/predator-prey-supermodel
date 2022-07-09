@@ -205,7 +205,8 @@ import {
   closeAccount,
   disableTwoFa,
   getUserByToken,
-  setTwoFa
+  setTwoFa,
+  getUserSettings
 } from '~/api'
 export default {
   name: 'SecuritySettings',
@@ -215,12 +216,6 @@ export default {
     InputTwoFa,
     Input,
     Popup
-  },
-  props: {
-    securitySettings: {
-      type: Object,
-      default: () => {}
-    }
   },
   data() {
     return {
@@ -327,13 +322,22 @@ export default {
         if (this.securityPassword.newPassword === this.securityPassword.newPasswordRepeat) { this.passwordError.passwordMismatch = false }
         this.validPassword()
       }
-    },
-    securitySettings() {
-      if (this.securitySettings.twoFa)
-        this.securityTwoFa.status = 2
     }
   },
+  async mounted() {
+    if (localStorage.getItem('token')) await this.getUserSecuritySettings(localStorage.getItem('token'))
+    else return this.$router.push('/')
+  },
   methods: {
+    async getUserSecuritySettings(token) {
+      const settings = await getUserSettings(token)
+
+      if (settings.status === -1)
+        return this.$router.push('/')
+
+      if (settings.twoFa)
+        this.securityTwoFa.status = 2
+    },
     openModal(option) {
       Object.entries(this.securityShowModal).forEach(item => {
         if (item[0] === option) this.securityShowModal[item[0]] = true

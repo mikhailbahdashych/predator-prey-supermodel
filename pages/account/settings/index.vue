@@ -18,8 +18,8 @@
       </div>
     </div>
 
-    <personal-information v-if="currentSection === 'Public account'" :personal-settings="personalSettings" />
-    <security-settings v-else-if="currentSection === 'Security settings'" :security-settings="securitySettings" />
+    <personal-information v-if="currentSection === 'Public account'" />
+    <security-settings v-else-if="currentSection === 'Security settings'" />
     <site-settings v-else />
 
   </div>
@@ -29,7 +29,6 @@
 import SecuritySettings from '~/components/pageComponents/settings/SecuritySettings'
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
-import { getUserSettings } from "~/api";
 export default {
   name: 'Settings',
   components: {
@@ -51,20 +50,7 @@ export default {
       securitySettings: {},
     }
   },
-  async mounted() {
-    if (localStorage.getItem('token') !== null) await this.getUsersSettings(localStorage.getItem('token'))
-    else await this.$router.push('/')
-  },
   methods: {
-    async getUsersSettings(token) {
-      const userSettings = await getUserSettings(token)
-
-      if (userSettings.status === -1)
-        return this.$router.push('/')
-
-      this.personalSettings = userSettings.personalSettings
-      this.securitySettings = userSettings.securitySettings
-    },
     changeSubsection(item) {
       this.currentSection = item.title
       this.accountHeaderItems.forEach(header => {

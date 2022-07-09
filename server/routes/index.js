@@ -85,9 +85,9 @@ router.get('/g-u-l-a/:personalId', async (req, res) => {
   }
 });
 
-router.get('/g-u-s', async (req, res) => {
+router.get('/g-u-s/:type', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-user-settings`, {
+    const { data } = await api.get(`/get-user-settings/${req.params.type}`, {
       headers: { 'ato': req.headers.ato }
     })
     res.json(data)
