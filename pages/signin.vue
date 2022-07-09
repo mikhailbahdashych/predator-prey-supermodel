@@ -152,6 +152,7 @@ export default {
   methods: {
     async signin() {
       if (!this.loginEmail.loginEmailError && !this.loginPassword.loginPasswordError) {
+        this.loading = true
         const res = await signIn({
           email: this.loginEmail.email,
           phone: this.loginPhone.phone,
@@ -161,10 +162,12 @@ export default {
 
         if (res.status === -1) {
           this.loginError = true
+          this.loading = false
           return
         }
         if (res.status === -2) {
           this.twoFa.error = true
+          this.loading = false
           return
         }
 
@@ -177,13 +180,16 @@ export default {
             this.showReopeningScreen.status = true
             this.showReopeningScreen.username = res.username
             localStorage.setItem('token', res.token)
+            this.loading = false
             return
           }
 
           localStorage.setItem('token', res.token)
           localStorage.setItem('personalId', res.personalId)
+          this.loading = false
           await this.$router.push('/account/me')
         }
+        this.loading = false
       }
     },
     redirect(path) {

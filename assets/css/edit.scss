@@ -8,7 +8,7 @@
   .avatar {
     max-width: 500px;
     width: 225px;
-    margin: 10px 0 0 18px;
+    margin: 10px 0 10px 18px;
     height: 90px;
     display: flex;
     padding: 10px;
@@ -31,7 +31,6 @@
 
   .side-bar {
     width: 250px;
-    padding-top: 30px;
     background-color: v.$default-bg;
     .item {
       width: 100%;
@@ -63,10 +62,10 @@
   margin-left: 250px;
 
   .profile-picture {
-    width: 45%;
+    width: 30%;
   }
   .fields {
-    width: 55%;
+    width: 70%;
   }
 
   .item {

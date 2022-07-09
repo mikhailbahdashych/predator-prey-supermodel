@@ -83,12 +83,14 @@
         <div class="flex">
           <Input
             v-model="personalInformation.first_name"
+            :disabled="loading"
             :title="'First name'"
             :title-class="'small'"
             :additional-class="'small mrl'"
           />
           <Input
             v-model="personalInformation.last_name"
+            :disabled="loading"
             :title="'Last name'"
             :title-class="'small'"
             :additional-class="'small'"
@@ -98,18 +100,21 @@
         <hr>
         <Input
           v-model="personalInformation.twitter"
+          :disabled="loading"
           :title="'Twitter'"
           :title-class="'small'"
           :additional-class="'small'"
         />
         <Input
           v-model="personalInformation.github"
+          :disabled="loading"
           :title="'GitHub'"
           :title-class="'small'"
           :additional-class="'small'"
         />
         <Input
           v-model="personalInformation.website_link"
+          :disabled="loading"
           :title="'Personal website'"
           :title-class="'small'"
           :additional-class="'small'"
@@ -118,29 +123,39 @@
         <hr>
         <Input
           v-model="personalInformation.title"
+          :disabled="loading"
           :title="'Title (will be shown as status in your account)'"
           :title-class="'small'"
           :additional-class="'small'"
         />
         <Textarea
           v-model="personalInformation.about_me"
+          :disabled="loading"
           :title="'Bio'"
         />
-        <Checkbox :input-value="personalInformation.show_email" v-model="personalInformation.show_email" :label="`Show my email as public email for contact`" />
+        <Checkbox
+          v-model="personalInformation.show_email"
+          :input-value="personalInformation.show_email"
+          :disabled="loading"
+          :label="`Show my email as public email for contact`"
+        />
         <div class="flex">
           <Button
             :label="'Go back'"
             :additional-class="'mt transparent mrl'"
+            :disabled="loading"
             @click-handler="signUpStepBack"
           />
           <Button
             :label="'Skip'"
             :additional-class="'mt transparent mrl'"
+            :disabled="loading"
             @click-handler="signUpWithoutInfo"
           />
           <Button
             :label="'Sign up'"
             :additional-class="'mt mrl'"
+            :disabled="loading"
             @click-handler="signUpWithInfo"
           />
         </div>
@@ -288,25 +303,33 @@ export default {
       }
     },
     async signUpWithInfo() {
-      await signUp({
+      this.loading = true
+
+      const { status } = await signUp({
         email: this.email.email,
         password: this.password.password,
         username: this.username.username,
         personalInformation: this.personalInformation
-      }).then((res) => {
-        if (res.status) this.status = res.status
-        if (res.status === 1) this.disabledField = true
       })
+
+      if (status) this.status = status
+      if (status === 1) this.disabledField = true
+
+      this.loading = false
     },
     async signUpWithoutInfo() {
-      await signUp({
+      this.loading = true
+
+      const { status } = await signUp({
         email: this.email.email,
         password: this.password.password,
         username: this.username.username
-      }).then((res) => {
-        if (res.status) this.status = res.status
-        if (res.status === 1) this.disabledField = true
       })
+
+      if (status) this.status = status
+      if (status === 1) this.disabledField = true
+
+      this.loading = false
     },
     signUpStepBack() {
       this.showPersonalInformationFields = false

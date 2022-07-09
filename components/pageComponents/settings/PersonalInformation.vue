@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="account-preferences">
+    <Popup v-if="showPopup" :content="'Personal settings has been successfully updated!'" />
+    <div class="account-preferences flex">
 
-      <div class="profile-picture"></div>
       <div class="fields">
         <div class="flex">
           <Input
@@ -44,20 +44,31 @@
         </div>
       </div>
 
+      <div class="profile-picture">
+        <h1>test</h1>
+      </div>
     </div>
+
+    <div>
+      <Button :label="'Save settings'" @click-handler="updatePersonalInfo" />
+    </div>
+
   </div>
 </template>
 
 <script>
 import Input from '~/components/Input';
-// import Textarea from "~/components/Textarea";
-// import Button from "~/components/Button";
+import Textarea from "~/components/Textarea";
+import Button from "~/components/Button";
+import Popup from "~/components/Popup";
+import { updateUserPersonalInformation } from "~/api";
 export default {
   name: 'PersonalInformation',
   components: {
     Input,
-    // Textarea
-    // Button
+    Textarea,
+    Button,
+    Popup
   },
   props: {
     personalSettings: {
@@ -67,13 +78,30 @@ export default {
   },
   data() {
     return {
-      personalInfo: {}
+      personalInfo: {},
+      loading: false,
+      showPopup: false
     }
   },
   mounted() {
     this.personalInfo = this.personalSettings
   },
   methods: {
+    async updatePersonalInfo() {
+      this.loading = true
+
+      const { status } = await updateUserPersonalInformation({ ...[this.personalInfo] })
+
+      if (status === 1) {
+        this.showPopup = true
+
+        setTimeout(() => {
+          this.showPopup = false
+        }, 1500)
+      }
+
+      this.loading = false
+    }
   },
 }
 </script>
