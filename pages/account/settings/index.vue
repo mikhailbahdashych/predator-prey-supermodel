@@ -12,7 +12,7 @@
     <div class="side-bar">
       <div v-for="item in accountHeaderItems" :key="item.title" class="flex">
         <div v-if="item.active" class="vertical-line" />
-        <p :class="[item.active ? 'item item-active' : 'item']" @click="changeSubpage(item)">
+        <p :class="[item.active ? 'item item-active' : 'item']" @click="changeSubsection(item)">
           {{ item.title }}
         </p>
       </div>
@@ -65,7 +65,7 @@ export default {
       this.personalSettings = userSettings.personalSettings
       this.securitySettings = userSettings.securitySettings
     },
-    changeSubpage(item) {
+    changeSubsection(item) {
       this.currentSection = item.title
       this.accountHeaderItems.forEach(header => {
         header.active = item.title === header.title

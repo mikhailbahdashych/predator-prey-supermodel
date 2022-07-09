@@ -327,10 +327,11 @@ export default {
         if (this.securityPassword.newPassword === this.securityPassword.newPasswordRepeat) { this.passwordError.passwordMismatch = false }
         this.validPassword()
       }
+    },
+    securitySettings() {
+      if (this.securitySettings.twoFa)
+        this.securityTwoFa.status = 2
     }
-  },
-  mounted() {
-    if (this.securitySettings.twoFa) { this.securityTwoFa.status = 2 }
   },
   methods: {
     openModal(option) {

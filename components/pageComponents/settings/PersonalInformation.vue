@@ -90,8 +90,10 @@ export default {
       showPopup: false
     }
   },
-  mounted() {
-    this.personalInfo = this.personalSettings
+  watch: {
+    personalSettings() {
+      this.personalInfo = this.personalSettings
+    }
   },
   methods: {
     async updatePersonalInfo() {
