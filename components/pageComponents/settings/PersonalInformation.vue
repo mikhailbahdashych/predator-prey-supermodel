@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     async getUserPersonalSettings(token) {
-      this.personalInfo = await getUserSettings(token)
+      this.personalInfo = await getUserSettings(token, 'personal')
 
       if (this.personalInfo.status === -1)
         return this.$router.push('/')

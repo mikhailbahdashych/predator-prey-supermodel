@@ -330,7 +330,7 @@ export default {
   },
   methods: {
     async getUserSecuritySettings(token) {
-      const settings = await getUserSettings(token)
+      const settings = await getUserSettings(token, 'security')
 
       if (settings.status === -1)
         return this.$router.push('/')
