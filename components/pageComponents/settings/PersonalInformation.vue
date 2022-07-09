@@ -44,13 +44,20 @@
         </div>
       </div>
 
-      <div class="profile-picture">
-        <h1>test</h1>
+      <div class="profile-picture flex">
+        <div class="relative">
+          <img class="picture" :src="require('../../../assets/img/testava.jpg')" alt="ava">
+          <div style="bottom: 0; right: 0; position: absolute;">
+            <Button :label="'Change avatar'" />
+          </div>
+        </div>
       </div>
     </div>
 
-    <div>
-      <Button :label="'Save settings'" @click-handler="updatePersonalInfo" />
+    <div class="account-preferences">
+      <div class="button">
+        <Button :label="'Save settings'" :additional-class="'min-width150 mt'" @click-handler="updatePersonalInfo" />
+      </div>
     </div>
 
   </div>

@@ -4,7 +4,6 @@
       <img class='account-header-avatar' src="../../assets/img/testava.jpg" alt="ava">
       <div class='account-header-data'>
         <h1 class='font-second'>{{user.username}}</h1>
-        <Button :label="'Edit profile'" :additional-class="'transparent'" class="buttons" />
         <Button :label="'Settings'" :additional-class="'transparent'" class="buttons" @click-handler="redirect('/account/settings')" />
       </div>
     </div>
