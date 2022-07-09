@@ -1,41 +1,73 @@
 @use "variables" as v;
 
+.account-wrapper {
+  width: 70%;
+  height: 100%;
+  margin: 0 auto;
 
-.account-header {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  position: absolute;
-  .account-header-inner {
-    width: 50%;
-    margin: 0 auto;
+  .avatar {
+    max-width: 500px;
+    width: 225px;
+    margin: 10px 0 0 18px;
+    height: 90px;
     display: flex;
-    border-bottom: 1px solid v.$main-color-light;
-    @media only screen and (max-width: 930px) { width: 100%; }
-    .item-box {
-      height: calc(100% - 15px);
-      padding-top: 15px;
-      margin: 0 auto;
-      .item {
-        cursor: pointer;
-        margin: 0;
-        color: rgba(#fff, 0.5);
-        &.item-active {
-          border-bottom: 3px solid v.$main-color;
-          color: v.$main-color-light;
-          padding-bottom: 15px;
-        }
-        @media screen and (max-width: 520px) { font-size: 12px; }
-      }
-      .item:hover { color: v.$main-color-light; }
+    padding: 10px;
+    transition: .2s;
+    cursor: pointer;
+    .avatar-box {
+      height: 70px;
+      width: 70px;
+      border-radius: 50%;
+    }
+    .avatar-text {
+      padding: 10px 0 0 20px;
+      display: block;
     }
   }
+  .avatar:hover {
+    background-color: rgba(v.$main-color-light, .15);
+    border-radius: 8px;
+  }
+
+  .side-bar {
+    width: 250px;
+    padding-top: 30px;
+    background-color: v.$default-bg;
+    .item {
+      width: 100%;
+      margin: 0 10px 10px;
+      padding-left: 8px;
+      cursor: pointer;
+      transition: .2s;
+      line-height: 38px;
+      &.item-active {
+        background-color: rgba(v.$main-color-light, .15);
+        border-radius: 5px;
+      }
+    }
+    .vertical-line {
+      width: 5px;
+      background-color: v.$main-color;
+      height: 38px;
+      border-radius: 5px;
+    }
+    .item:hover {
+      background-color: rgba(v.$main-color-light, .15);
+      border-radius: 5px;
+    }
+  }
+
 }
 
 .account-preferences {
-  margin: 0 auto;
-  width: 55%;
-  padding-top: 70px;
+  margin-left: 250px;
+
+  .profile-picture {
+    width: 45%;
+  }
+  .fields {
+    width: 55%;
+  }
 
   .item {
     border-bottom: 1px solid rgba(v.$main-color-light, 0.25);
@@ -44,12 +76,7 @@
       align-items: center;
       height: 100%;
       justify-content: space-between;
-      &.texts {
-        display: block;
-        .description {
-          opacity: .5;
-        }
-      }
+      &.texts { display: block; }
     }
     &.danger {
       border-bottom: 1px solid rgba(v.$error, 0.25);

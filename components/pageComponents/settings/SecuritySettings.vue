@@ -6,7 +6,7 @@
         <div v-if="setting.title === 'Set 2FA'" class="item-content">
           <div class="item-content texts">
             <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
-            <p class="description">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
+            <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
           </div>
           <div class="item-content">
             <Button
@@ -18,7 +18,7 @@
         <div v-else class="item-content">
           <div class="item-content texts">
             <h3 :class="`${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
-            <p :class="`description ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
+            <p :class="`opacity ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
             <p v-if="setting.title === 'Close account'" class="paragraph link" @click="stateShowCloseAccMoreInfo">
               {{ !closeAccountMoreInfo ? 'Show more' : 'Show less' }}
             </p>

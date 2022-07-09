@@ -228,13 +228,15 @@ export default {
   watch: {
     'password.password': {
       handler: function () {
-        if (this.password.password === this.password.passwordRepeat) { this.passwordError.passwordMismatch = false }
+        if (this.password.password === this.password.passwordRepeat)
+          this.passwordError.passwordMismatch = false
         this.validPassword()
       }
     },
     'password.passwordRepeat': {
       handler: function () {
-        if (this.password.password === this.password.passwordRepeat) { this.passwordError.passwordMismatch = false }
+        if (this.password.password === this.password.passwordRepeat)
+          this.passwordError.passwordMismatch = false
         this.validPassword()
       }
     },

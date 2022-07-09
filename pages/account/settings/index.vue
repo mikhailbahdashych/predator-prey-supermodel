@@ -1,16 +1,24 @@
 <template>
-  <div>
-    <div class="account-header">
-      <div class="account-header-inner">
-        <div v-for="item in accountHeaderItems" :key="item.title" class="item-box">
-          <p :class="[item.active ? 'item item-active' : 'item']" @click="changeSubpage(item)">
-            {{item.title}}
-          </p>
-        </div>
+  <div class="account-wrapper">
+
+    <div class="avatar" @click="redirect('/account/me')">
+      <img class='avatar-box' src="../../../assets/img/testava.jpg" alt="ava">
+      <div class="avatar-text">
+        <h2 class="nmp">{{ personalSettings.username }}</h2>
+        <p class="paragraph opacity nmp">Public profile</p>
       </div>
     </div>
 
-    <personal-information v-if="currentSection === 'Personal information'" :personal-settings="personalSettings" />
+    <div class="side-bar">
+      <div v-for="item in accountHeaderItems" :key="item.title" class="flex">
+        <div v-if="item.active" class="vertical-line" />
+        <p :class="[item.active ? 'item item-active' : 'item']" @click="changeSubpage(item)">
+          {{ item.title }}
+        </p>
+      </div>
+    </div>
+
+    <personal-information v-if="currentSection === 'Public account'" :personal-settings="personalSettings" />
     <security-settings v-else-if="currentSection === 'Security settings'" :security-settings="securitySettings" />
     <site-settings v-else />
 
@@ -32,14 +40,15 @@ export default {
   data() {
     return {
       accountHeaderItems: [
-        { title: 'Personal information', active: true },
+        { title: 'Public account', active: true },
         { title: 'Security settings', active: false },
-        { title: 'Site settings', active: false }
+        { title: 'Appearance settings', active: false },
+        { title: 'Notifications', active: false }
       ],
-      currentSection: 'Personal information',
+      currentSection: 'Public account',
 
       personalSettings: {},
-      securitySettings: {}
+      securitySettings: {},
     }
   },
   async mounted() {
@@ -61,6 +70,9 @@ export default {
       this.accountHeaderItems.forEach(header => {
         header.active = item.title === header.title
       })
+    },
+    redirect(path) {
+      this.$router.push(path)
     },
   }
 }
