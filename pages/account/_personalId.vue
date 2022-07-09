@@ -38,11 +38,11 @@ export default {
   },
   async mounted() {
     if (!this.$route.params.personalId)
-      return await this.$router.push('/')
+      return this.$router.push('/')
     else if (!validateUserPersonalId(this.$route.params.personalId))
-      return await this.$router.push('/')
+      return this.$router.push('/')
     else if (this.$route.params.personalId === localStorage.getItem('personalId'))
-      return await this.$router.push('/account/me')
+      return this.$router.push('/account/me')
     await this.getUser(this.$route.params.personalId)
   },
   methods: {

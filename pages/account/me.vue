@@ -48,7 +48,7 @@ export default {
     if (localStorage.getItem('token'))
       return await this.getCurrentUser(localStorage.getItem('token'))
     else
-      return await this.$router.push('/')
+      return this.$router.push('/')
   },
   methods: {
     async getCurrentUser(token) {
@@ -57,11 +57,11 @@ export default {
       if (this.user.status === -1) {
         localStorage.removeItem('token')
         localStorage.removeItem('personalId')
-        return await this.$router.push('/')
+        return this.$router.push('/')
       }
     },
     redirect(path) {
-      this.$router.push(path)
+      return this.$router.push(path)
     }
   }
 }

@@ -4,7 +4,7 @@
     <div class="avatar" @click="redirect('/account/me')">
       <img class='avatar-box' src="../../../assets/img/testava.jpg" alt="ava">
       <div class="avatar-text">
-        <h2 class="nmp">{{ personalSettings.username }}</h2>
+        <h2 class="nmp">{{ currentUser.username }}</h2>
         <p class="paragraph opacity nmp">Public profile</p>
       </div>
     </div>
@@ -29,6 +29,7 @@
 import SecuritySettings from '~/components/pageComponents/settings/SecuritySettings'
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
+import { getUserByToken } from "~/api";
 export default {
   name: 'Settings',
   components: {
@@ -45,12 +46,20 @@ export default {
         { title: 'Notifications', active: false }
       ],
       currentSection: 'Public account',
-
-      personalSettings: {},
-      securitySettings: {},
+      currentUser: {}
     }
   },
+  async mounted() {
+    if (localStorage.getItem('token')) await this.getCurrentUser(localStorage.getItem('token'))
+    else return this.$router.push('/')
+  },
   methods: {
+    async getCurrentUser(token) {
+      this.currentUser = await getUserByToken(token)
+
+      if (this.currentUser === -1)
+        return this.redirect('/')
+    },
     changeSubsection(item) {
       this.currentSection = item.title
       this.accountHeaderItems.forEach(header => {
@@ -58,7 +67,7 @@ export default {
       })
     },
     redirect(path) {
-      this.$router.push(path)
+      return this.$router.push(path)
     },
   }
 }

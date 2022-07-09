@@ -187,13 +187,13 @@ export default {
           localStorage.setItem('token', res.token)
           localStorage.setItem('personalId', res.personalId)
           this.loading = false
-          await this.$router.push('/account/me')
+          return this.$router.push('/account/me')
         }
         this.loading = false
       }
     },
     redirect(path) {
-      this.$router.push(path)
+      return this.$router.push(path)
     },
     async returnTwoFa(twoFa) {
       if (twoFa.length !== 6 || twoFa.join('').length !== 6) return

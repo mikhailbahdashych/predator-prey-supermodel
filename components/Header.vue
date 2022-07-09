@@ -68,11 +68,12 @@ export default {
   },
   methods: {
     redirect(path) {
-      this.$router.push(path)
+      return this.$router.push(path)
     },
     logout() {
       localStorage.removeItem('token')
-      this.$router.push('/')
+      localStorage.removeItem('personalId')
+      return this.$router.push('/')
     },
   }
 }

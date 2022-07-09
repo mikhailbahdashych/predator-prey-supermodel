@@ -387,7 +387,7 @@ export default {
 
         if (status === 1) {
           localStorage.removeItem('token')
-          await this.$router.push('/')
+          return this.$router.push('/')
         }
       }
     },
@@ -464,7 +464,7 @@ export default {
       }, 1500)
     },
     redirect(path) {
-      this.$router.push(path)
+      return this.$router.push(path)
     },
     validPassword() {
       const passwordRuleCheck = validatePasswordRules(this.securityPassword.newPassword)

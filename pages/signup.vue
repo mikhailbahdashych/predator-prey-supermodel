@@ -276,7 +276,7 @@ export default {
   },
   methods: {
     redirect(path) {
-      this.$router.push(path)
+      return this.$router.push(path)
     },
     validFields() {
       return this.tac &&
