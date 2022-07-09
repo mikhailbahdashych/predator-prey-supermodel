@@ -1,14 +1,16 @@
 @use "variables" as v;
 
 .login {
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  width: 100%;
   background-color: v.$header-bg;
 
   .login-content {
-    height: 100vh;
+    height: 100%;
     width: 50%;
     background-color: v.$default-bg;
     .login-title {
@@ -51,6 +53,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    &.personal-information {
+      height: 100vh;
+    }
 
     @media only screen and (max-width: 930px) {
       width: 90%;
@@ -60,23 +65,30 @@
 
     .login-inputs-container {
       width: 450px;
-      .login-options {
-        display: flex;
-        .vertical-line {
-          width: 1px;
-          background-color: v.$main-color-light;
-          height: 50px;
-          float: left;
-          opacity: 0.5;
-          margin: 0 20px 0 20px;
-        }
-        .choose {
-          cursor: pointer;
-          transition: .2s;
-          color: v.$main-color-light;
-        }
-        .choose:hover { color: v.$main-color; }
+      &.personal-information {
+        height: 100vh;
+        overflow-y: auto;
+        padding: 20px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
+      &.personal-information::-webkit-scrollbar {
+        display: none;
+      }
+      .vertical-line {
+        width: 1px;
+        background-color: v.$main-color-light;
+        height: 50px;
+        float: left;
+        opacity: 0.5;
+        margin: 0 20px 0 20px;
+      }
+      .choose {
+        cursor: pointer;
+        transition: .2s;
+        color: v.$main-color-light;
+      }
+      .choose:hover { color: v.$main-color; }
 
       .password-requirement {
         border-radius: 5px;

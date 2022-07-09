@@ -6,7 +6,7 @@
         <div v-if="!phone.show && !twoFa.show" class="login-inputs-container">
           <h1>Sign In</h1>
 
-          <div class="login-options">
+          <div class="flex">
             <p class="choose" @click="chooseLogin('email')">With Email</p>
             <div class="vertical-line" />
             <p class="choose" @click="chooseLogin('phone')">With Phone Number</p>

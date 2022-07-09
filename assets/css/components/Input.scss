@@ -16,6 +16,8 @@
   &.textarea {
     padding: 15px;
     font-size: 14px;
+    min-height: 56px;
+    max-height: 200px;
     font-family: "Menlo", sans-serif;
     height: 120px;
     resize: vertical;

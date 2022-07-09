@@ -20,7 +20,7 @@
       <div class="login-inputs-container">
         <h1>Forgot password?</h1>
 
-        <div class="login-options">
+        <div class="flex">
           <p class="choose" @click="chooseOption('email')">Email</p>
           <div class="vertical-line" />
           <p class="choose" @click="chooseOption('phone')">Phone</p>

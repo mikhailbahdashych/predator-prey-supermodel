@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="login-header">
+    <div v-if="!showPersonalInformationFields" class="login-header">
       <p class="paragraph right account-having">Already have account?
         <span class="paragraph link" @click="redirect('/signin')">Sign in!</span>
       </p>
@@ -75,20 +75,20 @@
       </div>
     </div>
 
-    <div v-if="showPersonalInformationFields" class="login-inputs">
-      <div v-if="status !== 1" class="login-inputs-container">
+    <div v-if="showPersonalInformationFields" class="login-inputs personal-information">
+      <div v-if="status !== 1" class="login-inputs-container personal-information">
         <h3>Tell us a little about yourself</h3>
         <p>Don't worry, you can skip this step and fill information you want later</p>
         <hr>
         <div class="flex">
           <Input
-            v-model="personalInformation.firstName"
+            v-model="personalInformation.first_name"
             :title="'First name'"
             :title-class="'small'"
             :additional-class="'small mrl'"
           />
           <Input
-            v-model="personalInformation.lastName"
+            v-model="personalInformation.last_name"
             :title="'Last name'"
             :title-class="'small'"
             :additional-class="'small'"
@@ -109,7 +109,7 @@
           :additional-class="'small'"
         />
         <Input
-          v-model="personalInformation.website"
+          v-model="personalInformation.website_link"
           :title="'Personal website'"
           :title-class="'small'"
           :additional-class="'small'"
@@ -123,10 +123,16 @@
           :additional-class="'small'"
         />
         <Textarea
-          v-model="personalInformation.aboutMe"
+          v-model="personalInformation.about_me"
           :title="'Bio'"
         />
+        <Checkbox v-model="personalInformation.show_email" :label="`Show my email as public email for contact`" />
         <div class="flex">
+          <Button
+            :label="'Go back'"
+            :additional-class="'mt transparent mrl'"
+            @click-handler="signUpStepBack"
+          />
           <Button
             :label="'Skip'"
             :additional-class="'mt transparent mrl'"
@@ -138,8 +144,6 @@
             @click-handler="signUpWithInfo"
           />
         </div>
-
-        <Checkbox v-model="personalInformation.showEmail" :label="`Show my email as public email for contact`" />
         <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
         <p v-else-if="status === -2" class="paragraph error">User with this username already exists!</p>
       </div>
@@ -206,14 +210,14 @@ export default {
 
       showPersonalInformationFields: false,
       personalInformation: {
-        firstName: null,
-        lastName: null,
+        first_name: null,
+        last_name: null,
         title: null,
-        aboutMe: null,
-        website: null,
+        about_me: null,
+        website_link: null,
         twitter: null,
         github: null,
-        showEmail: false
+        show_email: false
       },
 
       disabledField: false,
@@ -301,6 +305,9 @@ export default {
         if (res.status) this.status = res.status
         if (res.status === 1) this.disabledField = true
       })
+    },
+    signUpStepBack() {
+      this.showPersonalInformationFields = false
     },
     showPersonalInfoFields() {
       if (this.validFields()) {
