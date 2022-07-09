@@ -70,7 +70,7 @@
           </div>
         </div>
 
-        <Checkbox v-model="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
+        <Checkbox v-model="tac" :input-value="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
         <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'high-height'" @click-handler="showPersonalInfoFields" />
       </div>
     </div>
@@ -126,7 +126,7 @@
           v-model="personalInformation.about_me"
           :title="'Bio'"
         />
-        <Checkbox v-model="personalInformation.show_email" :label="`Show my email as public email for contact`" />
+        <Checkbox :input-value="personalInformation.show_email" v-model="personalInformation.show_email" :label="`Show my email as public email for contact`" />
         <div class="flex">
           <Button
             :label="'Go back'"
