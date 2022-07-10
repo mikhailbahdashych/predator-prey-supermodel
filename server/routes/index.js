@@ -149,9 +149,9 @@ router.get('/g-b-p/:postId', async (req, res) => {
   }
 });
 
-router.get('/g-f-p/:postId', async (req, res) => {
+router.get('/g-f-t/:threadId', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-forum-post/${req.params.postId}`, {
+    const { data } = await api.get(`/get-forum-thread/${req.params.threadId}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD

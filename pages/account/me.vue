@@ -2,25 +2,29 @@
   <div class="account">
     <div class="side-bar">
       <img class="picture" :src="require('../../assets/img/testava.jpg')" alt="ava">
-      <div class="flex" style="align-items: center">
+
+      <div class="links">
         <img :src="require('../../assets/img/github.svg')" alt="Git" class="link">
         <Input
+          v-model="user.github"
           :additional-class="'small'"
           :readonly="true"
         />
       </div>
 
-      <div class="flex" style="align-items: center">
+      <div class="links">
         <img :src="require('../../assets/img/twitter.svg')" alt="Git" class="link">
         <Input
+          v-model="user.twitter"
           :additional-class="'small'"
           :readonly="true"
         />
       </div>
 
-      <div class="flex" style="align-items: center">
+      <div class="links">
         <img :src="require('../../assets/img/tag.svg')" alt="Git" class="link">
         <Input
+          v-model="user.website_link"
           :additional-class="'small'"
           :readonly="true"
         />

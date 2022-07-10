@@ -13,7 +13,7 @@ export default {
   name: "Checkbox",
   props: {
     label: String,
-    value: Array,
+    value: Boolean,
     inputValue: Boolean,
     disabled: Boolean
   },
