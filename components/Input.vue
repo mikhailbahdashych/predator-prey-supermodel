@@ -7,7 +7,7 @@
       :class="[
         (oneerror ||
         (error.passwordMismatch || error.passwordRequirement || error.passwordRules)
-        && innerValue && innerValue.length > 0 ? `error ${additionalClass}` : additionalClass) ||
+        && innerValue && innerValue.length > 0 ? `error ${additionalClass}` : additionalClass) &&
         readonly ? `readonly ${additionalClass}` : additionalClass]"
       :type="type"
       :disabled="disabled"

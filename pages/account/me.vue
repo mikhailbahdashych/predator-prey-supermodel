@@ -29,21 +29,49 @@
           :readonly="true"
         />
       </div>
+
+      <Button :label="'Send message'" :additional-class="'mt min-width150'" />
+    </div>
+
+    <div class="content">
+      <div class="title">
+        <div class="flex">
+          <h1 class="nmp">{{ user.username }}</h1>
+          <div>
+            <Button
+              @click-handler="redirect('/account/settings')"
+              :label="'Edit profile'"
+              :additional-class="'transparent min-width150 mrl'"
+            />
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="item border">
+          <h2 class='font-second center'>Latest forum posts</h2>
+        </div>
+        <div class="item border">
+          <h2 class='font-second center'>Latest Q&A posts</h2>
+        </div>
+        <div class="item">
+          <h2 class='font-second center'>Latest blog posts</h2>
+        </div>
+      </div>
     </div>
 
   </div>
 </template>
 
 <script>
-// import Button from "~/components/Button";
-// import Skeleton from "~/components/skeleton/Skeleton";
+import Button from "~/components/Button";
 import Input from "~/components/Input";
 import { getUserByToken } from "~/api";
 export default {
   name: "Index",
   components: {
-    // Button,
-    // Skeleton
+    Button,
     Input
   },
   data() {

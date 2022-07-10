@@ -85,6 +85,17 @@ router.get('/g-u-b-t', async (req, res) => {
   }
 });
 
+router.post('/r-t', async (req, res) => {
+  try {
+    const { data } = await api.post('/refresh-token', {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
 router.get('/g-u-b-p-id/:personalId', async (req, res) => {
   try {
     const { data } = await api.get(`/get-user-by-personal-id/${req.params.personalId}`,{
