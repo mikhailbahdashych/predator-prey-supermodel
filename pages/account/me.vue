@@ -2,7 +2,29 @@
   <div class="account">
     <div class="side-bar">
       <img class="picture" :src="require('../../assets/img/testava.jpg')" alt="ava">
+      <div class="flex" style="align-items: center">
+        <img :src="require('../../assets/img/github.svg')" alt="Git" class="link">
+        <Input
+          :additional-class="'small'"
+          :readonly="true"
+        />
+      </div>
 
+      <div class="flex" style="align-items: center">
+        <img :src="require('../../assets/img/twitter.svg')" alt="Git" class="link">
+        <Input
+          :additional-class="'small'"
+          :readonly="true"
+        />
+      </div>
+
+      <div class="flex" style="align-items: center">
+        <img :src="require('../../assets/img/tag.svg')" alt="Git" class="link">
+        <Input
+          :additional-class="'small'"
+          :readonly="true"
+        />
+      </div>
     </div>
 
   </div>
@@ -11,12 +33,14 @@
 <script>
 // import Button from "~/components/Button";
 // import Skeleton from "~/components/skeleton/Skeleton";
+import Input from "~/components/Input";
 import { getUserByToken } from "~/api";
 export default {
   name: "Index",
   components: {
     // Button,
     // Skeleton
+    Input
   },
   data() {
     return {

@@ -6,7 +6,11 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const api = axios.create({
-  baseURL: process.env.NODE_ENV === "development" ? process.env.PNB_API_DEV : process.env.PNB_API_PROD
+  baseURL: process.env.NODE_ENV === "development" ? process.env.PNB_API_DEV : process.env.PNB_API_PROD,
+  auth: {
+    username: process.env.BASIC_AUTH_USERNAME,
+    password: process.env.BASIC_AUTH_PASSWORD
+  }
 })
 
 const router = Router()
