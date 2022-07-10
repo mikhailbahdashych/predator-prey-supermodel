@@ -30,7 +30,11 @@ export const signUp = async payload => {
 
 export const changePassword = async payload => {
   try {
-    const { data } = await api.post('c-p', payload)
+    const { data } = await api.post('c-p', payload, {
+      headers: {
+
+      }
+    })
     return data
   } catch (e) {
     return e.response.data
@@ -58,7 +62,7 @@ export const closeAccount = async payload => {
 export const getUserByToken = async token => {
   try {
     const { data } = await api.get('g-u-b-t', {
-      headers: { 'ato': token }
+      headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
   } catch (e) {
@@ -87,7 +91,7 @@ export const getUserLastActivity = async personalId => {
 export const getUserSettings = async (token, type) => {
   try {
     const { data } = await api.get(`/g-u-s/${type}`, {
-      headers: { 'ato': token }
+      headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
   } catch (e) {
@@ -98,7 +102,7 @@ export const getUserSettings = async (token, type) => {
 export const updateUserPersonalInformation = async payload => {
   try {
     const { data } = await api.patch(`u-u-p-i`, payload, {
-      headers: { 'ato': payload.token }
+      headers: { 'Authorization': `Bearer ${payload.token}` }
     })
     return data
   } catch (e) {

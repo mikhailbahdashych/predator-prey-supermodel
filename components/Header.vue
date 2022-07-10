@@ -64,15 +64,15 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   mounted() {
-    this.tokenStatus = localStorage.getItem('token') ? 1 : -1;
+    this.tokenStatus = sessionStorage.getItem('token') ? 1 : -1;
   },
   methods: {
     redirect(path) {
       return this.$router.push(path)
     },
     logout() {
-      localStorage.removeItem('token')
-      localStorage.removeItem('personalId')
+      sessionStorage.removeItem('token')
+      sessionStorage.removeItem('personalId')
       return this.$router.push('/')
     },
   }

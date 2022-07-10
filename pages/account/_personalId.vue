@@ -1,7 +1,7 @@
 <template>
   <div class='account'>
     <div class='account-content'>
-      <img class='account-header-avatar' src="../../assets/img/testava.jpg" alt="ava">
+      <img class='account-header-avatar' :src="require('../../assets/img/testava.jpg')" alt="ava">
       <div class='account-header-data'>
         <h1 class='font-second'>{{user.username}}</h1>
       </div>
@@ -41,7 +41,7 @@ export default {
       return this.$router.push('/')
     else if (!validateUserPersonalId(this.$route.params.personalId))
       return this.$router.push('/')
-    else if (this.$route.params.personalId === localStorage.getItem('personalId'))
+    else if (this.$route.params.personalId === sessionStorage.getItem('personalId'))
       return this.$router.push('/account/me')
     await this.getUser(this.$route.params.personalId)
   },

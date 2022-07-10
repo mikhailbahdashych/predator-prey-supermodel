@@ -2,7 +2,7 @@
   <div class="account-wrapper">
 
     <div class="avatar" @click="redirect('/account/me')">
-      <img class='avatar-box' src="../../../assets/img/testava.jpg" alt="ava">
+      <img class='avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
       <div class="avatar-text">
         <h2 class="nmp">{{ currentUser.username }}</h2>
         <p class="paragraph opacity nmp">Public profile</p>
@@ -50,7 +50,7 @@ export default {
     }
   },
   async mounted() {
-    if (localStorage.getItem('token')) await this.getCurrentUser(localStorage.getItem('token'))
+    if (sessionStorage.getItem('token')) await this.getCurrentUser(sessionStorage.getItem('token'))
     else return this.$router.push('/')
   },
   methods: {

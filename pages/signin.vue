@@ -146,7 +146,7 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    await verifyClientByToken(this.$router, localStorage.getItem('token'), true)
+    await verifyClientByToken(this.$router, sessionStorage.getItem('token'), true)
     this.chooseLogin('email')
   },
   methods: {
@@ -179,13 +179,13 @@ export default {
           if (res.username) {
             this.showReopeningScreen.status = true
             this.showReopeningScreen.username = res.username
-            localStorage.setItem('token', res.token)
+            sessionStorage.setItem('token', res.token)
             this.loading = false
             return
           }
 
-          localStorage.setItem('token', res.token)
-          localStorage.setItem('personalId', res.personalId)
+          sessionStorage.setItem('token', res.token)
+          sessionStorage.setItem('personalId', res.personalId)
           this.loading = false
           return this.$router.push('/account/me')
         }

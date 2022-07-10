@@ -88,7 +88,7 @@ export default {
     }
   },
   async mounted() {
-    if (localStorage.getItem('token')) await this.getUserPersonalSettings(localStorage.getItem('token'))
+    if (sessionStorage.getItem('token')) await this.getUserPersonalSettings(sessionStorage.getItem('token'))
     else return this.$router.push('/')
   },
   methods: {

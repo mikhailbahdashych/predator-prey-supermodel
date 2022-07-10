@@ -324,7 +324,7 @@ export default {
     }
   },
   async mounted() {
-    if (localStorage.getItem('token')) await this.getUserSecuritySettings(localStorage.getItem('token'))
+    if (sessionStorage.getItem('token')) await this.getUserSecuritySettings(sessionStorage.getItem('token'))
     else return this.$router.push('/')
   },
   methods: {
@@ -360,14 +360,14 @@ export default {
       const { status } = await setTwoFa({
         twoFaCode: this.securityTwoFa.normalCode,
         twoFaToken: this.securityTwoFa.secret,
-        token: localStorage.getItem('token')
+        token: sessionStorage.getItem('token')
       })
       this.securityTwoFa.status = status
     },
     async disableTwoFa() {
       const { status } = await disableTwoFa({
         twoFaCode: this.securityTwoFa.normalCode,
-        token: localStorage.getItem('token')
+        token: sessionStorage.getItem('token')
       })
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
@@ -379,13 +379,13 @@ export default {
         const { status } = await closeAccount({
           password: this.closeAcc.currentPassword,
           twoFa: this.confirmActionTwoFa.normalCode,
-          token: localStorage.getItem('token')
+          token: sessionStorage.getItem('token')
         })
         this.closeAcc.status = status
         this.closeAcc.currentPassword = null
 
         if (status === 1) {
-          localStorage.removeItem('token')
+          sessionStorage.removeItem('token')
           return this.$router.push('/')
         }
       }
@@ -396,7 +396,7 @@ export default {
         this.confirmActionTwoFa.action = 'changePassword'
       } else {
         const { status } = await changePassword({
-          token: localStorage.getItem('token'),
+          token: sessionStorage.getItem('token'),
           currentPassword: this.securityPassword.currentPassword,
           newPassword: this.securityPassword.newPassword,
           newPasswordRepeat: this.securityPassword.newPasswordRepeat,
@@ -411,7 +411,7 @@ export default {
         this.confirmActionTwoFa.action = 'changeEmail'
       } else {
         const { status } = await changeEmail({
-          token: localStorage.getItem('token'),
+          token: sessionStorage.getItem('token'),
           twoFa: this.confirmActionTwoFa.normalCode,
           newEmail: this.changeEmailData.newEmail
         })

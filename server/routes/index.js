@@ -59,7 +59,7 @@ router.post('/c-a', async (req, res) => {
 router.get('/g-u-b-t', async (req, res) => {
   try {
     const { data } = await api.get('/get-user-by-token', {
-      headers: { 'ato': req.headers.ato }
+      headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
   } catch (e) {
@@ -88,7 +88,7 @@ router.get('/g-u-l-a/:personalId', async (req, res) => {
 router.get('/g-u-s/:type', async (req, res) => {
   try {
     const { data } = await api.get(`/get-user-settings/${req.params.type}`, {
-      headers: { 'ato': req.headers.ato }
+      headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
   } catch (e) {
@@ -99,7 +99,7 @@ router.get('/g-u-s/:type', async (req, res) => {
 router.patch('/u-u-p-i', async (req, res) => {
   try {
     const { data } = await api.patch('/update-user-personal-information', req.body, {
-      headers: { 'ato': req.headers.ato }
+      headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
   } catch (e) {
