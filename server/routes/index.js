@@ -7,10 +7,6 @@ dotenv.config()
 
 const api = axios.create({
   baseURL: process.env.NODE_ENV === "development" ? process.env.PNB_API_DEV : process.env.PNB_API_PROD,
-  auth: {
-    username: process.env.BASIC_AUTH_USERNAME,
-    password: process.env.BASIC_AUTH_PASSWORD
-  }
 })
 
 const router = Router()
@@ -51,6 +47,24 @@ router.post('/c-e', async (req, res) => {
   }
 })
 
+router.post('/s-2fa', async (req, res) => {
+  try {
+    const { data } = await api.post('/set-2fa', req.body)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.post('/d-2fa', async (req, res) => {
+  try {
+    const { data } = await api.post('/disable-2fa', req.body)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
 router.post('/c-a', async (req, res) => {
   try {
     const { data } = await api.post('/close-account', req.body)
@@ -73,7 +87,12 @@ router.get('/g-u-b-t', async (req, res) => {
 
 router.get('/g-u-b-p-id/:personalId', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-user-by-personal-id/${req.params.personalId}`)
+    const { data } = await api.get(`/get-user-by-personal-id/${req.params.personalId}`,{
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -82,7 +101,12 @@ router.get('/g-u-b-p-id/:personalId', async (req, res) => {
 
 router.get('/g-u-l-a/:personalId', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-user-last-activity/${req.params.personalId}`)
+    const { data } = await api.get(`/get-user-last-activity/${req.params.personalId}`, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -111,22 +135,47 @@ router.patch('/u-u-p-i', async (req, res) => {
   }
 });
 
-router.post('/s-2fa', async (req, res) => {
+router.get('/g-b-p/:postId', async (req, res) => {
   try {
-    const { data } = await api.post('/set-2fa', req.body)
+    const { data } = await api.get(`/get-blog-post/${req.params.postId}`, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
 });
 
-router.post('/d-2fa', async (req, res) => {
+router.get('/g-f-p/:postId', async (req, res) => {
   try {
-    const { data } = await api.post('/disable-2fa', req.body)
+    const { data } = await api.get(`/get-forum-post/${req.params.postId}`, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
 });
+
+router.get('/g-q/questionId', async (req, res) => {
+  try {
+    const { data } = await api.get(`/get-question/${req.params.questionId}`, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 
 module.exports = router
