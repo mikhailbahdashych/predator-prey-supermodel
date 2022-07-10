@@ -176,10 +176,10 @@ export default {
         else if (res.phone)
           this.phone.show = true
         else if (!res.status) {
-          if (res.username) {
+          if (res.reopening) {
             this.showReopeningScreen.status = true
-            this.showReopeningScreen.username = res.username
-            sessionStorage.setItem('token', res.token)
+            this.showReopeningScreen.username = res.reopening
+            sessionStorage.setItem('token', res.accessToken)
             this.loading = false
             return
           }

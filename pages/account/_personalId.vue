@@ -41,8 +41,6 @@ export default {
       return this.$router.push('/')
     else if (!validateUserPersonalId(this.$route.params.personalId))
       return this.$router.push('/')
-    else if (this.$route.params.personalId === sessionStorage.getItem('personalId'))
-      return this.$router.push('/account/me')
     await this.getUser(this.$route.params.personalId)
   },
   methods: {

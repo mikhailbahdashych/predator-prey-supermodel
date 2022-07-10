@@ -84,8 +84,8 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    if (sessionStorage.getItem('token'))
-      return await this.getCurrentUser(sessionStorage.getItem('token'))
+    if (sessionStorage.getItem('accessToken'))
+      return await this.getCurrentUser(sessionStorage.getItem('accessToken'))
     else
       return this.$router.push('/')
   },
@@ -94,8 +94,8 @@ export default {
       this.user = await getUserByToken(token)
 
       if (this.user.status === -1) {
-        sessionStorage.removeItem('token')
-        sessionStorage.removeItem('personalId')
+        sessionStorage.removeItem('accessToken')
+        sessionStorage.removeItem('refreshToken')
         return this.$router.push('/')
       }
     },

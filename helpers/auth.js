@@ -7,7 +7,8 @@ export const verifyClientByToken = async (router, token, nonRedirect = false) =>
     const client = await getUserByToken(token)
 
     if (!client || client.status === -1) {
-      sessionStorage.removeItem('token')
+      sessionStorage.removeItem('accessToken')
+      sessionStorage.removeItem('refreshToken')
       return await router.push({ path: '/' })
     }
 

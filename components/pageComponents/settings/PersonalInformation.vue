@@ -88,7 +88,7 @@ export default {
     }
   },
   async mounted() {
-    if (sessionStorage.getItem('token')) await this.getUserPersonalSettings(sessionStorage.getItem('token'))
+    if (sessionStorage.getItem('accessToken')) await this.getUserPersonalSettings(sessionStorage.getItem('accessToken'))
     else return this.$router.push('/')
   },
   methods: {
