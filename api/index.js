@@ -50,9 +50,9 @@ export const changeEmail = async payload => {
   }
 }
 
-export const closeAccount = async payload => {
+export const deleteAccount = async payload => {
   try {
-    const { data } = await api.post('c-a', payload)
+    const { data } = await api.post('d-a', payload)
     return data
   } catch (e) {
     return e.response.data

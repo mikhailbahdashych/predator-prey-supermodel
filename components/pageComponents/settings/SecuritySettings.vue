@@ -19,8 +19,8 @@
           <div class="item-content texts">
             <h3 :class="`${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
             <p :class="`opacity ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
-            <p v-if="setting.title === 'Close account'" class="paragraph link" @click="stateShowCloseAccMoreInfo">
-              {{ !closeAccountMoreInfo ? 'Show more' : 'Show less' }}
+            <p v-if="setting.title === 'Delete account'" class="paragraph link" @click="stateShowDeleteAccMoreInfo">
+              {{ !deleteAccountMoreInfo ? 'Show more' : 'Show less' }}
             </p>
           </div>
           <div class="item-content">
@@ -30,8 +30,8 @@
               @click-handler="openModal(setting.title)" />
           </div>
         </div>
-        <div v-if="closeAccountMoreInfo && setting.title === 'Close account'">
-          <p>Closing your account means:</p>
+        <div v-if="deleteAccountMoreInfo && setting.title === 'Delete account'">
+          <p>Deleting your account means:</p>
           <ul>
             <li>Your username will be shown as user1234567890.</li>
             <li>All your personal information will be hidden from other users.</li>
@@ -48,7 +48,7 @@
         This will increase the security of you account.
         Before it, you should download Google Authenticator application.
         Once it is done, click the button below to start."
-        @close="closeModal('Set 2FA')"
+        @close="deleteModal('Set 2FA')"
       >
         <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" :additional-class="'high-height'" @click-handler="generateTwoFa" />
         <div v-if="securityTwoFa.qr" class="center">
@@ -71,7 +71,7 @@
         header="Disable 2FA"
         description="You are about deactivate your Two-factor authentication.
         Be careful! This action will decrease your account security"
-        @close="closeModal('Disable 2FA')"
+        @close="deleteModal('Disable 2FA')"
       >
         <div v-if="securityTwoFa.status === 2" class="center">
           <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
@@ -89,7 +89,7 @@
         header="Change password"
         description="Change your password by providing current password and new password.
         Be careful! After that, because of security reasons, you won't be able to change password for 48 hours."
-        @close="closeModal('Change password')"
+        @close="deleteModal('Change password')"
       >
         <Input
           v-model="securityPassword.currentPassword"
@@ -155,26 +155,26 @@
         v-if="securityShowModal['Change email']"
         header="Change email"
         description="Be careful! You are able to change email only one time."
-        @close="closeModal('Change email')"
+        @close="deleteModal('Change email')"
       >
       </basic-modal>
 
       <basic-modal
-        v-if="securityShowModal['Close account']"
-        header="Close account"
+        v-if="securityShowModal['Delete account']"
+        header="Delete account"
         description="We are very sorry about this :( You can get back any time you want. Hope, to see you again."
-        @close="closeModal('Close account')"
+        @close="deleteModal('Delete account')"
       >
         <Input
-          v-model="closeAcc.currentPassword"
+          v-model="deleteAcc.currentPassword"
           :title="'Current password'"
           :title-class="'on-white-paragraph'"
           :additional-class="'on-white'"
           :type="'password'"
         />
-        <Button :label="'Close account'" :additional-class="'danger-fill high-height'" :disabled="!closeAcc.currentPassword" @click-handler="closeAccount" />
-        <p v-if="closeAcc.status === -2" class="paragraph error">Wrong 2FA code!</p>
-        <p v-else-if="closeAcc.status === -3" class="paragraph error">Invalid password!</p>
+        <Button :label="'Delete account'" :additional-class="'danger-fill high-height'" :disabled="!deleteAcc.currentPassword" @click-handler="deleteAccount" />
+        <p v-if="deleteAcc.status === -2" class="paragraph error">Wrong 2FA code!</p>
+        <p v-else-if="deleteAcc.status === -3" class="paragraph error">Invalid password!</p>
       </basic-modal>
     </div>
 
@@ -182,7 +182,7 @@
       v-if="confirmActionTwoFa.show"
       header="Confirm action"
       description="Confirm action by providing 2FA code in the box below."
-      @close="closeConfirmTwoFa"
+      @close="deleteConfirmTwoFa"
     >
       <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFaConfirmAction" />
       <Button :label="'Confirm action'" :additional-class="'danger-fill high-height'" @click-handler="confirmAction" />
@@ -202,7 +202,7 @@ import { validatePassword, validatePasswordLength, validatePasswordRules } from 
 import {
   changeEmail,
   changePassword,
-  closeAccount,
+  deleteAccount,
   disableTwoFa,
   setTwoFa,
   getUserSettings
@@ -219,7 +219,7 @@ export default {
   data() {
     return {
       showPopup: false,
-      closeAccountMoreInfo: false,
+      deleteAccountMoreInfo: false,
 
       securitySettingsOptions: [
         {
@@ -241,16 +241,16 @@ export default {
           danger: false
         },
         {
-          title: 'Close account',
-          description: 'After closing account all information about it will be deleted.',
-          buttonTitle: 'Close',
+          title: 'Delete account',
+          description: 'After deleting account all information about it will be unavailable.',
+          buttonTitle: 'Delete',
           danger: true
         }
       ],
 
       securityShowModal: {
         'Set 2FA': false,
-        'Close account': false,
+        'Delete account': false,
         'Change email': false,
         'Change password': false,
         'Disable 2FA': false,
@@ -267,7 +267,7 @@ export default {
         disabledButton: true
       },
 
-      closeAcc: { currentPassword: null, status: null },
+      deleteAcc: { currentPassword: null, status: null },
 
       securityPassword: {
         currentPasswordLength: null,
@@ -342,7 +342,7 @@ export default {
         if (item[0] === option) this.securityShowModal[item[0]] = true
       })
     },
-    closeModal(option) {
+    deleteModal(option) {
       Object.entries(this.securityShowModal).forEach(item => {
         if (item[0] === option) this.securityShowModal[item[0]] = false
       })
@@ -371,18 +371,18 @@ export default {
       })
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
-    async closeAccount() {
+    async deleteAccount() {
       if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
         this.confirmActionTwoFa.show = true
-        this.confirmActionTwoFa.action = 'closeAccount'
+        this.confirmActionTwoFa.action = 'deleteAccount'
       } else {
-        const { status } = await closeAccount({
-          password: this.closeAcc.currentPassword,
+        const { status } = await deleteAccount({
+          password: this.deleteAcc.currentPassword,
           twoFa: this.confirmActionTwoFa.normalCode,
           token: sessionStorage.getItem('token')
         })
-        this.closeAcc.status = status
-        this.closeAcc.currentPassword = null
+        this.deleteAcc.status = status
+        this.deleteAcc.currentPassword = null
 
         if (status === 1) {
           sessionStorage.removeItem('token')
@@ -425,8 +425,8 @@ export default {
     },
     async confirmAction() {
       switch (this.confirmActionTwoFa.action) {
-        case 'closeAccount':
-          await this.closeAccount()
+        case 'deleteAccount':
+          await this.deleteAccount()
           break;
         case 'changePassword':
           await this.changePassword()
@@ -438,7 +438,7 @@ export default {
       this.confirmActionTwoFa.show = false
       this.confirmActionTwoFa.normalCode = null
     },
-    closeConfirmTwoFa() {
+    deleteConfirmTwoFa() {
       this.confirmActionTwoFa = {
         show: false,
         code: [],
@@ -480,8 +480,8 @@ export default {
         this.passwordError.passwordRules = false
       }
     },
-    stateShowCloseAccMoreInfo() {
-      this.closeAccountMoreInfo = !this.closeAccountMoreInfo
+    stateShowDeleteAccMoreInfo() {
+      this.deleteAccountMoreInfo = !this.deleteAccountMoreInfo
     }
   }
 }

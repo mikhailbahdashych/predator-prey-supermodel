@@ -1,7 +1,7 @@
 <template>
   <div class="checkbox-container">
     <label class="container">
-      <input type="checkbox" :value="inputValue" :disabled="disabled" v-model="model" >
+      <input v-model="model" type="checkbox" :value="inputValue" :disabled="disabled" >
       <span class="checkmark"></span>
     </label>
     <p class="checkbox-paragraph" v-html="label" />
@@ -12,10 +12,22 @@
 export default {
   name: "Checkbox",
   props: {
-    label: String,
-    value: Boolean,
-    inputValue: Boolean,
-    disabled: Boolean
+    label: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: Boolean,
+      default: false
+    },
+    inputValue: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
