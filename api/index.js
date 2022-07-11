@@ -72,9 +72,7 @@ export const getUserByToken = async token => {
 
 export const refreshToken = async token => {
   try {
-    const { data } = await api.post('r-t', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
+    const { data } = await api.post('r-t', token)
     return data
   } catch (e) {
     return e.response.data

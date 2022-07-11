@@ -87,9 +87,7 @@ router.get('/g-u-b-t', async (req, res) => {
 
 router.post('/r-t', async (req, res) => {
   try {
-    const { data } = await api.post('/refresh-token', {
-      headers: { 'Authorization': req.headers.authorization }
-    })
+    const { data } = await api.post('/refresh-token', req.body)
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)

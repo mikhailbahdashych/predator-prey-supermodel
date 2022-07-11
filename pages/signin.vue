@@ -159,6 +159,7 @@ export default {
           password: this.loginPassword.password,
           twoFa: this.twoFa.normalCode
         })
+        console.log(res)
 
         if (res.status === -1) {
           this.loginError = true
@@ -185,9 +186,8 @@ export default {
           }
 
           sessionStorage.setItem('token', res.token)
-          sessionStorage.setItem('personalId', res.personalId)
           this.loading = false
-          return this.$router.push('/account/me')
+          // return this.$router.push('/account/me')
         }
         this.loading = false
       }
