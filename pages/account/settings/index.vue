@@ -50,7 +50,7 @@ export default {
     }
   },
   async mounted() {
-    if (sessionStorage.getItem('token')) await this.getCurrentUser(sessionStorage.getItem('token'))
+    if (sessionStorage.getItem('accessToken')) await this.getCurrentUser(sessionStorage.getItem('accessToken'))
     else return this.$router.push('/')
   },
   methods: {

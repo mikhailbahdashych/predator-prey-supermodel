@@ -8,7 +8,6 @@ export const verifyClientByToken = async (router, token, nonRedirect = false) =>
 
     if (!client || client.status === -1) {
       sessionStorage.removeItem('accessToken')
-      sessionStorage.removeItem('refreshToken')
       return await router.push({ path: '/' })
     }
 
@@ -19,7 +18,7 @@ export const verifyClientByToken = async (router, token, nonRedirect = false) =>
     if (client.status !== -1) {
       return await router.push({path: `/account/${client.personalId}`})
     } else {
-      sessionStorage.removeItem('token')
+      sessionStorage.removeItem('accessToken')
     }
   }
 }

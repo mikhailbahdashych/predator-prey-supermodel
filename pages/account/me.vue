@@ -95,7 +95,6 @@ export default {
 
       if (this.user.status === -1) {
         sessionStorage.removeItem('accessToken')
-        sessionStorage.removeItem('refreshToken')
         return this.$router.push('/')
       }
     },

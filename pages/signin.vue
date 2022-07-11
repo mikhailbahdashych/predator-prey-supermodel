@@ -146,7 +146,7 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    await verifyClientByToken(this.$router, sessionStorage.getItem('token'), true)
+    await verifyClientByToken(this.$router, sessionStorage.getItem('accessToken'), true)
     this.chooseLogin('email')
   },
   methods: {
@@ -159,7 +159,6 @@ export default {
           password: this.loginPassword.password,
           twoFa: this.twoFa.normalCode
         })
-        console.log(res)
 
         if (res.status === -1) {
           this.loginError = true
@@ -180,14 +179,14 @@ export default {
           if (res.reopening) {
             this.showReopeningScreen.status = true
             this.showReopeningScreen.username = res.reopening
-            sessionStorage.setItem('token', res.accessToken)
+            sessionStorage.setItem('accessToken', res.accessToken)
             this.loading = false
             return
           }
 
-          sessionStorage.setItem('token', res.token)
+          sessionStorage.setItem('accessToken', res.accessToken)
           this.loading = false
-          // return this.$router.push('/account/me')
+          return this.$router.push('/account/me')
         }
         this.loading = false
       }

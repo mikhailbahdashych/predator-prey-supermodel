@@ -72,7 +72,6 @@ export default {
     },
     logout() {
       sessionStorage.removeItem('accessToken')
-      sessionStorage.removeItem('refreshToken')
       return this.$router.push('/')
     },
   }
