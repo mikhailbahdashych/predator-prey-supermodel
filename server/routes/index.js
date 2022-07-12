@@ -13,8 +13,11 @@ const router = Router()
 
 router.post('/s-i', async (req, res) => {
   try {
-    const { data } = await api.post('/sign-in', req.body)
-    res.json(data)
+    const data = await api.post('/sign-in', req.body)
+
+    res.cookie("refreshToken", JSON.stringify(data.headers['set-cookie']), { httpOnly: true, secure: false })
+
+    return res.json(data.data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
