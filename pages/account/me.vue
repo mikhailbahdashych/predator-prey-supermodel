@@ -98,8 +98,8 @@ export default {
         return this.$router.push('/')
       }
 
-      const refreshedToken = await getRefreshedTokens(sessionStorage.getItem('accessToken'))
-      sessionStorage.setItem('accessToken', refreshedToken)
+      const { accessToken } = await getRefreshedTokens(sessionStorage.getItem('accessToken'))
+      sessionStorage.setItem('accessToken', accessToken)
     },
     redirect(path) {
       return this.$router.push(path)
