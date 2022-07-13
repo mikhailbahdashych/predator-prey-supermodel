@@ -87,9 +87,11 @@ router.get('/g-u-b-t', async (req, res) => {
   }
 });
 
-router.post('/r-t', async (req, res) => {
+router.get('/g-r-t', async (req, res) => {
   try {
-    const { data } = await api.post('/refresh-token', req.body)
+    const { data } = await api.get('/get-refreshed-tokens', {
+      headers: { 'Cookie': req.headers.cookie }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)

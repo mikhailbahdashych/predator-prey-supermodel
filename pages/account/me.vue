@@ -39,9 +39,9 @@
           <h1 class="nmp">{{ user.username }}</h1>
           <div>
             <Button
-              @click-handler="redirect('/account/settings')"
               :label="'Edit profile'"
               :additional-class="'transparent min-width150 mrl'"
+              @click-handler="redirect('/account/settings')"
             />
           </div>
         </div>
@@ -67,7 +67,7 @@
 <script>
 import Button from "~/components/Button";
 import Input from "~/components/Input";
-import { getUserByToken } from "~/api";
+import { getUserByAccessToken, getRefreshedTokens } from "~/api";
 export default {
   name: "Index",
   components: {
@@ -91,12 +91,15 @@ export default {
   },
   methods: {
     async getCurrentUser(token) {
-      this.user = await getUserByToken(token)
+      this.user = await getUserByAccessToken(token)
 
       if (this.user.status === -1) {
         sessionStorage.removeItem('accessToken')
         return this.$router.push('/')
       }
+
+      const refreshedToken = await getRefreshedTokens(sessionStorage.getItem('accessToken'))
+      sessionStorage.setItem('accessToken', refreshedToken)
     },
     redirect(path) {
       return this.$router.push(path)

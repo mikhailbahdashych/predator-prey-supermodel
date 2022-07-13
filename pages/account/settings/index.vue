@@ -29,7 +29,7 @@
 import SecuritySettings from '~/components/pageComponents/settings/SecuritySettings'
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
-import { getUserByToken } from "~/api";
+import { getUserByAccessToken } from "~/api";
 export default {
   name: 'Settings',
   components: {
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     async getCurrentUser(token) {
-      this.currentUser = await getUserByToken(token)
+      this.currentUser = await getUserByAccessToken(token)
 
       if (this.currentUser === -1)
         return this.redirect('/')
