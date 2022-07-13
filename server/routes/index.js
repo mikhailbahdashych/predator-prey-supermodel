@@ -34,7 +34,9 @@ router.post('/s-u', async (req, res) => {
 
 router.post('/c-p', async (req, res) => {
   try {
-    const { data } = await api.post('/change-password', req.body)
+    const { data } = await api.post('/change-password', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -43,7 +45,9 @@ router.post('/c-p', async (req, res) => {
 
 router.post('/c-e', async (req, res) => {
   try {
-    const { data } = await api.post('/change-email', req.body)
+    const { data } = await api.post('/change-email', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -63,7 +67,9 @@ router.post('/s-2fa', async (req, res) => {
 
 router.post('/d-2fa', async (req, res) => {
   try {
-    const { data } = await api.post('/disable-2fa', req.body)
+    const { data } = await api.post('/disable-2fa', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -72,7 +78,9 @@ router.post('/d-2fa', async (req, res) => {
 
 router.post('/d-a', async (req, res) => {
   try {
-    const { data } = await api.post('/delete-account', req.body)
+    const { data } = await api.post('/delete-account', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)

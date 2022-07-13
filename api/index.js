@@ -28,12 +28,10 @@ export const signUp = async payload => {
   }
 }
 
-export const changePassword = async payload => {
+export const changePassword = async (payload, token) => {
   try {
     const { data } = await api.post('c-p', payload, {
-      headers: {
-
-      }
+      headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
   } catch (e) {
@@ -41,18 +39,22 @@ export const changePassword = async payload => {
   }
 }
 
-export const changeEmail = async payload => {
+export const changeEmail = async (payload, token) => {
   try {
-    const { data } = await api.post('c-e', payload)
+    const { data } = await api.post('c-e', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
     return data
   } catch (e) {
     return e.response.data
   }
 }
 
-export const deleteAccount = async payload => {
+export const deleteAccount = async (payload, token) => {
   try {
-    const { data } = await api.post('d-a', payload)
+    const { data } = await api.post('d-a', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
     return data
   } catch (e) {
     return e.response.data
@@ -130,9 +132,11 @@ export const setTwoFa = async (payload, token) => {
   }
 }
 
-export const disableTwoFa = async payload => {
+export const disableTwoFa = async (payload, token) => {
   try {
-    const { data } = await api.post('d-2fa', payload)
+    const { data } = await api.post('d-2fa', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
     return data
   } catch (e) {
     return e.response.data

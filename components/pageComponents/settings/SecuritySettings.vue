@@ -365,9 +365,8 @@ export default {
     },
     async disableTwoFa() {
       const { status } = await disableTwoFa({
-        twoFaCode: this.securityTwoFa.normalCode,
-        token: sessionStorage.getItem('accessToken')
-      })
+        twoFaCode: this.securityTwoFa.normalCode
+      }, sessionStorage.getItem('accessToken'))
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
     async deleteAccount() {
@@ -378,8 +377,7 @@ export default {
         const { status } = await deleteAccount({
           password: this.deleteAcc.currentPassword,
           twoFa: this.confirmActionTwoFa.normalCode,
-          token: sessionStorage.getItem('accessToken')
-        })
+        }, sessionStorage.getItem('accessToken'))
         this.deleteAcc.status = status
         this.deleteAcc.currentPassword = null
 
@@ -396,12 +394,11 @@ export default {
         this.confirmActionTwoFa.action = 'changePassword'
       } else {
         const { status } = await changePassword({
-          token: sessionStorage.getItem('accessToken'),
           currentPassword: this.securityPassword.currentPassword,
           newPassword: this.securityPassword.newPassword,
           newPasswordRepeat: this.securityPassword.newPasswordRepeat,
           twoFa: this.confirmActionTwoFa.normalCode
-        })
+        }, sessionStorage.getItem('accessToken'))
         this.securityPassword.status = status
       }
     },
@@ -411,10 +408,9 @@ export default {
         this.confirmActionTwoFa.action = 'changeEmail'
       } else {
         const { status } = await changeEmail({
-          token: sessionStorage.getItem('accessToken'),
           twoFa: this.confirmActionTwoFa.normalCode,
           newEmail: this.changeEmailData.newEmail
-        })
+        }, sessionStorage.getItem('accessToken'))
         this.changeEmailData.status = status
       }
     },
