@@ -119,9 +119,11 @@ export const updateUserPersonalInformation = async payload => {
   }
 }
 
-export const setTwoFa = async payload => {
+export const setTwoFa = async (payload, token) => {
   try {
-    const { data } = await api.post('s-2fa', payload)
+    const { data } = await api.post('s-2fa', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
     return data
   } catch (e) {
     return e.response.data

@@ -359,9 +359,8 @@ export default {
     async setTwoFa() {
       const { status } = await setTwoFa({
         twoFaCode: this.securityTwoFa.normalCode,
-        twoFaToken: this.securityTwoFa.secret,
-        token: sessionStorage.getItem('accessToken')
-      })
+        twoFaToken: this.securityTwoFa.secret
+      }, sessionStorage.getItem('accessToken'))
       this.securityTwoFa.status = status
     },
     async disableTwoFa() {

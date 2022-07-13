@@ -52,7 +52,9 @@ router.post('/c-e', async (req, res) => {
 
 router.post('/s-2fa', async (req, res) => {
   try {
-    const { data } = await api.post('/set-2fa', req.body)
+    const { data } = await api.post('/set-2fa', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
