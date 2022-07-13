@@ -95,7 +95,7 @@ import Input from "~/components/Input";
 import Button from "~/components/Button";
 import InputTwoFa from "~/components/InputTwoFa";
 import { validateEmail, validatePasswordLength } from "~/helpers/frontValidator";
-import { verifyClientByToken } from "~/helpers/auth";
+import { verifyUserByToken } from "~/helpers/auth";
 import { signIn } from "~/api";
 export default {
   name: "Signin",
@@ -146,7 +146,7 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    await verifyClientByToken(this.$router, sessionStorage.getItem('accessToken'), true)
+    await verifyUserByToken(this.$router, sessionStorage.getItem('accessToken'), true)
     this.chooseLogin('email')
   },
   methods: {

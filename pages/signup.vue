@@ -179,7 +179,7 @@ import Checkbox from "~/components/Checkbox";
 import Textarea from "~/components/Textarea";
 import { validateEmail, validatePassword, validatePasswordRules } from "~/helpers/frontValidator";
 import { signUp } from "~/api";
-import { verifyClientByToken } from "~/helpers/auth";
+import { verifyUserByToken } from "~/helpers/auth";
 export default {
   name: "Signup",
   components: {
@@ -272,7 +272,7 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    await verifyClientByToken(this.$router, sessionStorage.getItem('accessToken'), true)
+    await verifyUserByToken(this.$router, sessionStorage.getItem('accessToken'), true)
   },
   methods: {
     redirect(path) {

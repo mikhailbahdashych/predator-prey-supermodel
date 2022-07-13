@@ -1,22 +1,22 @@
 import {getUserByAccessToken} from "~/api";
 
-export const verifyClientByToken = async (router, token, nonRedirect = false) => {
+export const verifyUserByToken = async (router, token, nonRedirect = false) => {
   if (!nonRedirect) {
     if (!token) return await router.push({ path: '/' })
 
-    const client = await getUserByAccessToken(token)
+    const user = await getUserByAccessToken(token)
 
-    if (!client || client.status === -1) {
+    if (!user || user.status === -1) {
       sessionStorage.removeItem('accessToken')
       return await router.push({ path: '/' })
     }
 
-    return client
+    return user
   }
   if (token) {
-    const client = await getUserByAccessToken(token)
-    if (client.status !== -1) {
-      return await router.push({path: `/account/${client.personalId}`})
+    const user = await getUserByAccessToken(token)
+    if (user.status !== -1) {
+      return await router.push({path: `/account/${user.personalId}`})
     } else {
       sessionStorage.removeItem('accessToken')
     }
