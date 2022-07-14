@@ -83,7 +83,7 @@
         <Button
           :label="'Here we go'"
           :additional-class="'big modal-size'"
-          @click-handler="redirect(`/account/me`)"
+          @click-handler="redirect(`/account/${personalId}`)"
         />
       </div>
     </div>
@@ -96,6 +96,7 @@ import Button from "~/components/Button";
 import InputTwoFa from "~/components/InputTwoFa";
 import { validateEmail, validatePasswordLength } from "~/helpers/frontValidator";
 import { verifyUserByToken } from "~/helpers/auth";
+import { verifyToken } from "~/helpers/crypto";
 import { signIn } from "~/api";
 export default {
   name: "Signin",
@@ -127,7 +128,8 @@ export default {
 
       showReopeningScreen: { status: false, username: null },
 
-      loading: true
+      loading: true,
+      personalId: null
     }
   },
   watch: {
@@ -178,6 +180,8 @@ export default {
         else if (!res.status) {
           sessionStorage.setItem('_at', res._at)
           this.loading = false
+          const { personalId } = verifyToken(res._at)
+          this.personalId = personalId
 
           if (res.reopening) {
             this.showReopeningScreen.status = true
@@ -185,7 +189,7 @@ export default {
             return
           }
 
-          return this.$router.push('/account/me')
+          return this.$router.push(`/account/${this.personalId}`)
         }
         this.loading = false
       }
