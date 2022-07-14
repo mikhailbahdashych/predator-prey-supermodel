@@ -122,7 +122,7 @@
         <p>What do you want to tell this world?</p>
         <hr>
         <Input
-          v-model="personalInformation.title"
+          v-model="personalInformation.status"
           :disabled="loading"
           :title="'Title (will be shown as status in your account)'"
           :title-class="'small'"
@@ -227,7 +227,7 @@ export default {
       personalInformation: {
         first_name: null,
         last_name: null,
-        title: null,
+        status: null,
         about_me: null,
         website_link: null,
         twitter: null,

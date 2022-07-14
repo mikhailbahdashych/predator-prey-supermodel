@@ -14,9 +14,7 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 .body-margin {
   padding: 0 !important;
@@ -33,9 +31,7 @@ p, h1, h2, h3, h4, h5, li {
   margin-left: 5px;
 }
 
-li {
-  font-size: 18px;
-}
+li { font-size: 18px; }
 
 .nuxt-link {
   text-decoration: none;
@@ -64,25 +60,17 @@ a {
   color: v.$main-color;
 }
 
-.center {
-  text-align: center;
-}
+.center { text-align: center; }
 
-.flex {
-  display: flex;
-}
+.flex { display: flex; }
 
-.relative {
-  position: relative;
-}
+.relative { position: relative; }
 
-.block {
-  display: block;
-}
+.block { display: block; }
 
-li {
-  margin: 10px;
-}
+.baseline { align-items: baseline; }
+
+li { margin: 10px; }
 
 .mt { margin-top: 10px; }
 .mrl { margin-right: 10px; margin-left: 10px }
@@ -95,9 +83,7 @@ li {
   position: relative;
   min-height: 100vh;
   background-color: v.$default-bg;
-  .content-wrap {
-    padding-bottom: 50px;
-  }
+  .content-wrap { padding-bottom: 50px; }
 }
 
 .code-block {
@@ -106,8 +92,6 @@ li {
   padding: 4px;
 }
 
-hr {
-  opacity: .25;
-}
+hr { opacity: .25; }
 
-.opacity { opacity: 0.5; }
+.opacity { opacity: .5; }

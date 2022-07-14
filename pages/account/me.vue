@@ -1,7 +1,10 @@
 <template>
   <div class="account">
     <div class="side-bar">
-      <img class="picture" :src="require('../../assets/img/testava.jpg')" alt="ava">
+      <div class="relative flex">
+        <img class="picture" :src="require('../../assets/img/testava.jpg')" alt="ava">
+        <p v-if="user.title" class="status nmp">{{ user.title }}</p>
+      </div>
 
       <div class="links">
         <img :src="require('../../assets/img/github.svg')" alt="Git" class="link">
@@ -30,21 +33,23 @@
         />
       </div>
 
-      <Button :label="'Send message'" :additional-class="'mt min-width150'" />
+      <Button
+        :label="'Edit profile'"
+        :additional-class="'transparent min-width150 mt'"
+        @click-handler="redirect('/account/settings')"
+      />
     </div>
 
     <div class="content">
       <div class="title">
-        <div class="flex">
+        <div class="flex baseline">
           <h1 class="nmp">{{ user.username }}</h1>
-          <div>
-            <Button
-              :label="'Edit profile'"
-              :additional-class="'transparent min-width150 mrl'"
-              @click-handler="redirect('/account/settings')"
-            />
-          </div>
+          <p v-if="user.first_name || user.last_name" class="paragraph">
+            aka {{ user.first_name }} {{ user.last_name }}
+          </p>
+          <p class="paragraph">({{ user.personalId }})</p>
         </div>
+        <p class="paragraph opacity">{{ user.about_me }}</p>
         <div>
         </div>
       </div>
