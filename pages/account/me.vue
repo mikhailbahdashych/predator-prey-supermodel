@@ -68,6 +68,7 @@ import Button from "~/components/Button";
 import Popup from "~/components/Popup";
 import Input from "~/components/Input";
 import { getUserByAccessToken, getRefreshedTokens } from "~/api";
+// import { verifyToken } from "~/helpers/crypto";
 export default {
   name: "Index",
   components: {
@@ -100,7 +101,7 @@ export default {
         return this.$router.push('/')
       }
 
-      const { _at } = await getRefreshedTokens(sessionStorage.getItem('_at'))
+      const { _at } = await getRefreshedTokens()
       sessionStorage.setItem('_at', _at)
     },
     redirect(path) {
