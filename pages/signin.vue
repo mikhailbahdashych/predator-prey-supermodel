@@ -176,16 +176,15 @@ export default {
         else if (res.phone)
           this.phone.show = true
         else if (!res.status) {
+          sessionStorage.setItem('_at', res._at)
+          this.loading = false
+
           if (res.reopening) {
             this.showReopeningScreen.status = true
             this.showReopeningScreen.username = res.reopening
-            sessionStorage.setItem('_at', res._at)
-            this.loading = false
             return
           }
 
-          sessionStorage.setItem('_at', res._at)
-          this.loading = false
           return this.$router.push('/account/me')
         }
         this.loading = false
