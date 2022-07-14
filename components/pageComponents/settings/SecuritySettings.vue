@@ -324,7 +324,7 @@ export default {
     }
   },
   async mounted() {
-    if (sessionStorage.getItem('accessToken')) await this.getUserSecuritySettings(sessionStorage.getItem('accessToken'))
+    if (sessionStorage.getItem('_at')) await this.getUserSecuritySettings(sessionStorage.getItem('_at'))
     else return this.$router.push('/')
   },
   methods: {
@@ -360,13 +360,13 @@ export default {
       const { status } = await setTwoFa({
         twoFaCode: this.securityTwoFa.normalCode,
         twoFaToken: this.securityTwoFa.secret
-      }, sessionStorage.getItem('accessToken'))
+      }, sessionStorage.getItem('_at'))
       this.securityTwoFa.status = status
     },
     async disableTwoFa() {
       const { status } = await disableTwoFa({
         twoFaCode: this.securityTwoFa.normalCode
-      }, sessionStorage.getItem('accessToken'))
+      }, sessionStorage.getItem('_at'))
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
     async deleteAccount() {
@@ -377,13 +377,13 @@ export default {
         const { status } = await deleteAccount({
           password: this.deleteAcc.currentPassword,
           twoFa: this.confirmActionTwoFa.normalCode,
-        }, sessionStorage.getItem('accessToken'))
+        }, sessionStorage.getItem('_at'))
         this.deleteAcc.status = status
         this.deleteAcc.currentPassword = null
 
         if (status === 1) {
-          sessionStorage.removeItem('accessToken')
-          sessionStorage.removeItem('refreshToken')
+          sessionStorage.removeItem('_at')
+          sessionStorage.removeItem('_rt')
           return this.$router.push('/')
         }
       }
@@ -398,7 +398,7 @@ export default {
           newPassword: this.securityPassword.newPassword,
           newPasswordRepeat: this.securityPassword.newPasswordRepeat,
           twoFa: this.confirmActionTwoFa.normalCode
-        }, sessionStorage.getItem('accessToken'))
+        }, sessionStorage.getItem('_at'))
         this.securityPassword.status = status
       }
     },
@@ -410,7 +410,7 @@ export default {
         const { status } = await changeEmail({
           twoFa: this.confirmActionTwoFa.normalCode,
           newEmail: this.changeEmailData.newEmail
-        }, sessionStorage.getItem('accessToken'))
+        }, sessionStorage.getItem('_at'))
         this.changeEmailData.status = status
       }
     },

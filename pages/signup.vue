@@ -272,7 +272,7 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    await verifyUserByToken(this.$router, sessionStorage.getItem('accessToken'), true)
+    await verifyUserByToken(this.$router, sessionStorage.getItem('_at'), true)
   },
   methods: {
     redirect(path) {

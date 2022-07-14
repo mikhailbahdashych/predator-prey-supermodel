@@ -14,8 +14,8 @@ router.post('/s-i', async (req, res) => {
   try {
     const { data } = await api.post('/sign-in', req.body)
 
-    res.cookie("refreshToken", data.refreshToken, { httpOnly: true, secure: false })
-    delete data.refreshToken
+    res.cookie("_rt", data._rt, { httpOnly: true, secure: false })
+    delete data._rt
 
     return res.json(data)
   } catch (e) {
@@ -104,8 +104,8 @@ router.get('/g-r-t', async (req, res) => {
       headers: { 'Cookie': req.headers.cookie }
     })
 
-    res.cookie("refreshToken", data.refreshToken, { httpOnly: true, secure: false })
-    delete data.refreshToken
+    res.cookie("_rt", data._rt, { httpOnly: true, secure: false })
+    delete data._rt
 
     res.json(data)
   } catch (e) {

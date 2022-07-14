@@ -64,14 +64,14 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   mounted() {
-    this.tokenStatus = sessionStorage.getItem('accessToken') ? 1 : -1;
+    this.tokenStatus = sessionStorage.getItem('_at') ? 1 : -1;
   },
   methods: {
     redirect(path) {
       return this.$router.push(path)
     },
     logout() {
-      sessionStorage.removeItem('accessToken')
+      sessionStorage.removeItem('_at')
       return this.$router.push('/')
     },
   }

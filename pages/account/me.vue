@@ -65,7 +65,7 @@
 
 <script>
 import Button from "~/components/Button";
-import Popup from '~/components/Popup';
+import Popup from "~/components/Popup";
 import Input from "~/components/Input";
 import { getUserByAccessToken, getRefreshedTokens } from "~/api";
 export default {
@@ -86,8 +86,8 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    if (sessionStorage.getItem('accessToken'))
-      return await this.getCurrentUser(sessionStorage.getItem('accessToken'))
+    if (sessionStorage.getItem('_at'))
+      return await this.getCurrentUser(sessionStorage.getItem('_at'))
     else
       return this.$router.push('/')
   },
@@ -96,12 +96,12 @@ export default {
       this.user = await getUserByAccessToken(token)
 
       if (this.user.status === -1) {
-        sessionStorage.removeItem('accessToken')
+        sessionStorage.removeItem('_at')
         return this.$router.push('/')
       }
 
-      const { accessToken } = await getRefreshedTokens(sessionStorage.getItem('accessToken'))
-      sessionStorage.setItem('accessToken', accessToken)
+      const { _at } = await getRefreshedTokens(sessionStorage.getItem('_at'))
+      sessionStorage.setItem('_at', _at)
     },
     redirect(path) {
       return this.$router.push(path)
