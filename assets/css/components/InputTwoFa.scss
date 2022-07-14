@@ -14,7 +14,8 @@
   color: v.$main-color-light;
   background-color: v.$default-bg;
   border-radius: 6px;
-  border: 1px solid rgba(v.$main-color, 0.5);
+  caret-color: transparent;
+  border: none;
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     display: none;
@@ -28,6 +29,10 @@
 
 .input-two-fa:disabled {
   background-color: rgba(v.$default-bg, 0.25);
+}
+
+.input-two-fa:focus {
+  border: 1px solid rgba(v.$main-color, 0.5);
 }
 
 .on-white {

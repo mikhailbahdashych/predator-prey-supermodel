@@ -2,6 +2,7 @@
   <div :class="onwhite ? 'on-white' : ''">
     <input
       :id="`n1`"
+      ref="n1"
       v-model="i1"
       class="input-two-fa center"
       type="number"
@@ -10,10 +11,11 @@
       max="9"
       autocomplete="off"
       autofocus
-      oninput="if (this.value === '') { if (this.previousElementSibling) {this.previousElementSibling.focus()} } else { this.nextElementSibling.focus() }"
+      oninput="this.nextElementSibling.focus()"
     >
     <input
       :id="`n2`"
+      ref="n2"
       v-model="i2"
       class="input-two-fa center"
       type="number"
@@ -22,10 +24,12 @@
       max="9"
       autocomplete="off"
       autofocus
-      oninput="if (this.value === '') { this.previousElementSibling.focus() } else { this.nextElementSibling.focus() }"
+      oninput="this.nextElementSibling.focus()"
+      @keyup.delete="handleDeleteClick('n1')"
     >
     <input
       :id="`n3`"
+      ref="n3"
       v-model="i3"
       class="input-two-fa center"
       type="number"
@@ -34,10 +38,12 @@
       max="9"
       autocomplete="off"
       autofocus
-      oninput="if (this.value === '') { this.previousElementSibling.focus() } else { this.nextElementSibling.focus() }"
+      oninput="this.nextElementSibling.focus()"
+      @keyup.delete="handleDeleteClick('n2')"
     >
     <input
       :id="`n4`"
+      ref="n4"
       v-model="i4"
       class="input-two-fa center"
       type="number"
@@ -46,10 +52,12 @@
       max="9"
       autocomplete="off"
       autofocus
-      oninput="if (this.value === '') { this.previousElementSibling.focus() } else { this.nextElementSibling.focus() }"
+      oninput="this.nextElementSibling.focus()"
+      @keyup.delete="handleDeleteClick('n3')"
     >
     <input
       :id="`n5`"
+      ref="n5"
       v-model="i5"
       class="input-two-fa center"
       type="number"
@@ -58,10 +66,12 @@
       max="9"
       autocomplete="off"
       autofocus
-      oninput="if (this.value === '') { this.previousElementSibling.focus() } else { this.nextElementSibling.focus() }"
+      oninput="this.nextElementSibling.focus()"
+      @keyup.delete="handleDeleteClick('n4')"
     >
     <input
       :id="`n6`"
+      ref="n6"
       v-model="i6"
       class="input-two-fa center"
       type="number"
@@ -70,7 +80,8 @@
       max="9"
       autocomplete="off"
       autofocus
-      oninput="if (this.value === '') { this.previousElementSibling.focus() } else { if (this.nextElementSibling) { this.nextElementSibling.focus() } }"
+      oninput="this.nextElementSibling.focus()"
+      @keyup.delete="handleDeleteClick('n5')"
     >
   </div>
 </template>
@@ -107,6 +118,14 @@ export default {
     returnTwoFa() {
       this.$emit('returnTwoFa', this.twoFaCode)
     },
+    handleDeleteClick(ref) {
+      if (document.getElementById(`${ref}`).value && ref !== 'n5') {
+        this.$refs[ref].focus()
+        document.getElementById(`${ref}`).value = ''
+      } else if (ref === 'n5') {
+        this.$refs[ref].focus()
+      }
+    }
   }
 }
 </script>
