@@ -1,7 +1,7 @@
 <template>
   <div class="account-wrapper">
 
-    <div class="avatar" @click="redirect('/account/me')">
+    <div class="avatar" @click="redirect(`/account/${decodeToken()}`)">
       <img class='avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
       <div class="avatar-text">
         <h2 class="nmp">{{ currentUser.username }}</h2>
@@ -30,6 +30,7 @@ import SecuritySettings from '~/components/pageComponents/settings/SecuritySetti
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
 import { getUserByAccessToken } from "~/api";
+import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Settings',
   components: {
@@ -59,6 +60,10 @@ export default {
 
       if (this.currentUser === -1)
         return this.redirect('/')
+    },
+    decodeToken() {
+      const { personalId } = verifyToken(sessionStorage.getItem('_at'))
+      return personalId
     },
     changeSubsection(item) {
       this.currentSection = item.title

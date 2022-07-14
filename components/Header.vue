@@ -33,7 +33,7 @@
         <div v-else class="content">
           <div class="button">
             <skeleton v-if='loading' :text="'My account'" />
-            <Button v-else :label="'My account'" @click-handler="redirect('/account/me')" />
+            <Button v-else :label="'My account'" @click-handler="redirect(`/account/${decodeToken()}`)" />
           </div>
           <div class="button">
             <skeleton v-if='loading' :text="'Log Out'" />
@@ -48,6 +48,7 @@
 <script>
 import Button from "~/components/Button";
 import Skeleton from '~/components/skeleton/Skeleton';
+import { verifyToken } from "~/helpers/crypto";
 export default {
   name: 'Header',
   components: {
@@ -67,6 +68,10 @@ export default {
     this.tokenStatus = sessionStorage.getItem('_at') ? 1 : -1;
   },
   methods: {
+    decodeToken() {
+      const { personalId } = verifyToken(sessionStorage.getItem('_at'))
+      return personalId
+    },
     redirect(path) {
       return this.$router.push(path)
     },
