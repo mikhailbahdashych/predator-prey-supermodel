@@ -50,6 +50,7 @@ export default {
       currentUser: {}
     }
   },
+  // @TODO Refactor pages that require _at + look at getUserByAccessToken func
   async mounted() {
     if (sessionStorage.getItem('_at')) await this.getCurrentUser(sessionStorage.getItem('_at'))
     else return this.$router.push('/')

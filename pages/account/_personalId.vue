@@ -68,7 +68,6 @@ import Button from "~/components/Button";
 import Popup from "~/components/Popup";
 import Input from "~/components/Input";
 import { getRefreshedTokens, getUserByAccessToken } from '~/api'
-// import { getUserByAccessToken, getRefreshedTokens } from "~/api";
 export default {
   name: 'PersonalId',
   components: {
