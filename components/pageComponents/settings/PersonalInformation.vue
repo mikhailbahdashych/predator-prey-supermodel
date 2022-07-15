@@ -95,7 +95,7 @@ export default {
       const token = sessionStorage.getItem('_at')
       this.personalInfo = await getUserSettings(token, 'personal')
 
-      if (this.personalInfo.status === -1)
+      if (this.personalInfo.status === -1 || this.personalInfo.status === 401)
         return this.$router.push('/')
     },
     async updatePersonalInfo() {

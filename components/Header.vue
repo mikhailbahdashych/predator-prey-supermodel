@@ -20,7 +20,7 @@
             <h3 class="links">BLOG</h3>
           </nuxt-link>
         </div>
-        <div v-if="tokenStatus === -1" class="content">
+        <div v-if="userData.status === -1" class="content">
           <div class="button">
             <skeleton v-if='loading' :text="'SIGN IN'" />
             <Button v-else :label="'SIGN IN'" :additional-class="'transparent'" @click-handler="redirect('/signin')" />
@@ -33,7 +33,7 @@
         <div v-else class="content">
           <div class="button">
             <skeleton v-if='loading' :text="'My account'" />
-            <Button v-else :label="'My account'" @click-handler="redirect(`/account/${decodeToken()}`)" />
+            <Button v-else :label="'My account'" @click-handler="redirect(`/account/${userData.personalId}`)" />
           </div>
           <div class="button">
             <skeleton v-if='loading' :text="'Log Out'" />
@@ -46,9 +46,9 @@
 </template>
 
 <script>
-import Button from "~/components/Button";
-import Skeleton from '~/components/skeleton/Skeleton';
-import { verifyToken } from "~/helpers/crypto";
+import Button from '~/components/Button'
+import Skeleton from '~/components/skeleton/Skeleton'
+import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Header',
   components: {
@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      tokenStatus: -1,
+      userData: {},
       loading: true
     }
   },
@@ -65,12 +65,19 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   mounted() {
-    this.tokenStatus = sessionStorage.getItem('_at') ? 1 : -1;
+    const tokenData = this.decodeToken()
+    if (tokenData.message) {
+      sessionStorage.removeItem('_at')
+      return this.$router.push('/')
+    } else {
+      this.userData.status = 1;
+      this.userData.personalId = tokenData.personalId
+    }
   },
   methods: {
     decodeToken() {
-      const { personalId } = verifyToken(sessionStorage.getItem('_at'))
-      return personalId
+      const token = sessionStorage.getItem('_at')
+      return verifyToken(token)
     },
     redirect(path) {
       return this.$router.push(path)

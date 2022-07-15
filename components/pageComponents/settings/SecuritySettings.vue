@@ -324,14 +324,14 @@ export default {
     }
   },
   async mounted() {
-    if (sessionStorage.getItem('_at')) await this.getUserSecuritySettings(sessionStorage.getItem('_at'))
-    else return this.$router.push('/')
+    await this.getUserSecuritySettings()
   },
   methods: {
-    async getUserSecuritySettings(token) {
+    async getUserSecuritySettings() {
+      const token = sessionStorage.getItem('_at')
       this.userSettings = await getUserSettings(token, 'security')
 
-      if (this.userSettings.status === -1)
+      if (this.userSettings.status === -1 || this.userSettings.status === 401)
         return this.$router.push('/')
 
       if (this.userSettings.twoFa)
