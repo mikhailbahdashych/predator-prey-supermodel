@@ -417,7 +417,10 @@ export default {
     },
     generateTwoFa() {
       const { username } = verifyToken(localStorage.getItem('_at'))
-      const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: username })
+      const { qr, secret } = node2fa.generateSecret({
+        name: 'PNB - Pentesters Notes Blog',
+        account: username
+      })
       this.securityTwoFa.qr = qr
       this.securityTwoFa.secret = secret
     },
