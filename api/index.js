@@ -61,17 +61,6 @@ export const deleteAccount = async (payload, token) => {
   }
 }
 
-export const getUserByAccessToken = async token => {
-  try {
-    const { data } = await api.get('g-u-b-t', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
 export const getRefreshedTokens = async () => {
   try {
     const { data } = await api.get('g-r-t')

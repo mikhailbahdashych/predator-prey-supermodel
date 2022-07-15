@@ -1,10 +1,10 @@
 <template>
   <div class="account-wrapper">
 
-    <div class="avatar" @click="redirect(`/account/${decodeToken()}`)">
+    <div class="avatar" @click="redirect(`/account/${decodeToken().personalId}`)">
       <img class='avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
       <div class="avatar-text">
-        <h2 class="nmp">{{ currentUser.username }}</h2>
+        <h2 class="nmp">{{ decodeToken().username }}</h2>
         <p class="paragraph opacity nmp">Public profile</p>
       </div>
     </div>
@@ -29,8 +29,8 @@
 import SecuritySettings from '~/components/pageComponents/settings/SecuritySettings'
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
-import { getUserByAccessToken } from "~/api";
 import { verifyToken } from '~/helpers/crypto'
+
 export default {
   name: 'Settings',
   components: {
@@ -50,21 +50,12 @@ export default {
       currentUser: {}
     }
   },
-  // @TODO Refactor pages that require _at + look at getUserByAccessToken func
-  async mounted() {
-    if (sessionStorage.getItem('_at')) await this.getCurrentUser(sessionStorage.getItem('_at'))
-    else return this.$router.push('/')
+  mounted() {
+    this.currentUser = this.decodeToken()
   },
   methods: {
-    async getCurrentUser(token) {
-      this.currentUser = await getUserByAccessToken(token)
-
-      if (this.currentUser === -1)
-        return this.redirect('/')
-    },
     decodeToken() {
-      const { personalId } = verifyToken(sessionStorage.getItem('_at'))
-      return personalId
+      return verifyToken(sessionStorage.getItem('_at'))
     },
     changeSubsection(item) {
       this.currentSection = item.title

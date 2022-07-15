@@ -27,7 +27,14 @@
         </div>
 
         <Button
+          v-if="isOwner"
           :label="'Edit profile'"
+          :additional-class="'transparent min-width150 mt'"
+          @click-handler="redirect('/account/settings')"
+        />
+        <Button
+          v-else
+          :label="'Send message'"
           :additional-class="'transparent min-width150 mt'"
           @click-handler="redirect('/account/settings')"
         />
@@ -67,7 +74,8 @@
 import Button from "~/components/Button";
 import Popup from "~/components/Popup";
 import Input from "~/components/Input";
-import { getRefreshedTokens, getUserByAccessToken } from '~/api'
+import { getUserByPersonalId } from "~/api";
+import { verifyToken } from "~/helpers/crypto";
 export default {
   name: 'PersonalId',
   components: {
@@ -79,27 +87,22 @@ export default {
     return {
       user: {},
       loading: true,
-      showPopup: false
+      showPopup: false,
+      isOwner: false
     }
   },
   created() {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    if (sessionStorage.getItem('_at')) return await this.getCurrentUser(sessionStorage.getItem('_at'))
-    else return this.$router.push('/')
+    return await this.getCurrentUser()
   },
   methods: {
-    async getCurrentUser(token) {
-      this.user = await getUserByAccessToken(token)
+    async getCurrentUser() {
+      this.user = await getUserByPersonalId(this.$route.params.personalId)
 
-      if (this.user.status === -1) {
-        sessionStorage.removeItem('_at')
-        return this.$router.push('/')
-      }
-
-      const { _at } = await getRefreshedTokens()
-      sessionStorage.setItem('_at', _at)
+      if (this.user.personalId === verifyToken(sessionStorage.getItem('_at')).personalId)
+        this.isOwner = true
     },
     redirect(path) {
       return this.$router.push(path)
