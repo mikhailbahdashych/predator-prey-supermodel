@@ -4,7 +4,7 @@
     <div class="avatar" @click="redirect(`/account/${decodeToken().personalId}`)">
       <img class='avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
       <div class="avatar-text">
-        <h2 class="nmp">{{ decodeToken().username }}</h2>
+        <h2 class="nmp">{{ currentUser.username }}</h2>
         <p class="paragraph opacity nmp">Public profile</p>
       </div>
     </div>
@@ -55,7 +55,8 @@ export default {
   },
   methods: {
     decodeToken() {
-      return verifyToken(sessionStorage.getItem('_at'))
+      const token = sessionStorage.getItem('_at')
+      return verifyToken(token)
     },
     changeSubsection(item) {
       this.currentSection = item.title

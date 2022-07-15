@@ -88,11 +88,11 @@ export default {
     }
   },
   async mounted() {
-    if (sessionStorage.getItem('_at')) await this.getUserPersonalSettings(sessionStorage.getItem('_at'))
-    else return this.$router.push('/')
+    await this.getUserPersonalSettings()
   },
   methods: {
-    async getUserPersonalSettings(token) {
+    async getUserPersonalSettings() {
+      const token = sessionStorage.getItem('_at')
       this.personalInfo = await getUserSettings(token, 'personal')
 
       if (this.personalInfo.status === -1)
