@@ -198,6 +198,7 @@ import BasicModal from '~/components/BasicModal'
 import InputTwoFa from '~/components/InputTwoFa'
 import Input from '~/components/Input'
 import Popup from '~/components/Popup'
+import { verifyToken } from "~/helpers/crypto";
 import { validatePassword, validatePasswordLength, validatePasswordRules } from '~/helpers/frontValidator'
 import {
   changeEmail,
@@ -415,7 +416,8 @@ export default {
       }
     },
     generateTwoFa() {
-      const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: this.userSettings.username })
+      const { username } = verifyToken(localStorage.getItem('_at'))
+      const { qr, secret } = node2fa.generateSecret({ name: 'PNB - Pentesters Notes Blog', account: username })
       this.securityTwoFa.qr = qr
       this.securityTwoFa.secret = secret
     },
