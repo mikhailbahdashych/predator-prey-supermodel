@@ -99,10 +99,10 @@ export const getUserSettings = async (token, type) => {
   }
 }
 
-export const updateUserPersonalInformation = async payload => {
+export const updateUserPersonalInformation = async (payload, token) => {
   try {
     const { data } = await api.patch(`u-u-p-i`, payload, {
-      headers: { 'Authorization': `Bearer ${payload.token}` }
+      headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
   } catch (e) {

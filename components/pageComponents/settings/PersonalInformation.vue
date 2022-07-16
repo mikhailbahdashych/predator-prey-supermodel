@@ -18,10 +18,6 @@
             :additional-class="'small'"
           />
         </div>
-        <Textarea
-          v-model="personalInfo.about_me"
-          :title="'About'"
-        />
         <div class="flex">
           <Input
             v-model="personalInfo.website_link"
@@ -42,6 +38,10 @@
             :additional-class="'small'"
           />
         </div>
+        <Textarea
+          v-model="personalInfo.about_me"
+          :title="'About'"
+        />
       </div>
 
       <div class="profile-picture flex">
@@ -101,7 +101,9 @@ export default {
     async updatePersonalInfo() {
       this.loading = true
 
-      const { status } = await updateUserPersonalInformation({ ...[this.personalInfo] })
+      const { status } = await updateUserPersonalInformation({
+        ...this.personalInfo
+      }, sessionStorage.getItem('_at'))
 
       if (status === 1) {
         this.showPopup = true
