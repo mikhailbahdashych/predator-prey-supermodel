@@ -1,211 +1,209 @@
 <template>
-  <div>
+  <div class="account-preferences">
     <Popup v-if="showPopup" :content="'Copied!'" />
-    <div class="account-preferences">
-      <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`item ${setting.danger ? 'danger' : ''}`">
-        <div v-if="setting.title === 'Set 2FA'" class="item-content">
-          <div class="item-content texts">
-            <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
-            <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description }}</p>
-          </div>
-          <div class="item-content">
-            <Button
-              :label="securityTwoFa.status === 2 ? 'Disable 2FA' : setting.buttonTitle"
-              :additional-class="`transparent min-width150`"
-              @click-handler="openModal(securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title)" />
-          </div>
+    <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`item ${setting.danger ? 'danger' : ''}`">
+      <div v-if="setting.title === 'Set 2FA'" class="item-content">
+        <div class="item-content texts">
+          <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
+          <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description }}</p>
         </div>
-
-        <div v-else-if="setting.title === 'Change email'" class="item-content">
-          <div class="item-content texts">
-            <h3>{{ setting.title }}</h3>
-            <p class="opacity">{{ changeEmailData.status === -1 ? 'You have have changed your email.' : setting.description }}</p>
-          </div>
-          <div class="item-content">
-            <Button
-              :disabled="changeEmailData.status === -1"
-              :label="changeEmailData.status === -1 ? 'Email has been changed' : setting.buttonTitle"
-              :additional-class="`transparent min-width150`"
-              @click-handler="openModal(setting.title)" />
-          </div>
-        </div>
-
-        <div v-else-if="setting.title === 'Change password'" class="item-content">
-          <div class="item-content texts">
-            <h3>{{ setting.title }}</h3>
-            <p class="opacity">{{ securityPassword.status === -5 ? 'You are able to change password in 48 hours after previous change' : setting.description }}</p>
-          </div>
-          <div class="item-content">
-            <Button
-              :disabled="securityPassword.status === -5"
-              :label="setting.buttonTitle"
-              :additional-class="`transparent min-width150`"
-              @click-handler="openModal(setting.title)" />
-          </div>
-        </div>
-
-        <div v-else class="item-content">
-          <div class="item-content texts">
-            <h3 :class="`${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
-            <p :class="`opacity ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
-            <p v-if="setting.title === 'Delete account'" class="paragraph link" @click="stateShowDeleteAccMoreInfo">
-              {{ !deleteAccountMoreInfo ? 'Show more' : 'Show less' }}
-            </p>
-          </div>
-          <div class="item-content">
-            <Button
-              :label="setting.buttonTitle"
-              :additional-class="`transparent min-width150 ${setting.danger ? 'danger' : ''}`"
-              @click-handler="openModal(setting.title)" />
-          </div>
-        </div>
-        <div v-if="deleteAccountMoreInfo && setting.title === 'Delete account'">
-          <p>Deleting your account means:</p>
-          <ul>
-            <li>Your username will be shown as user1234567890.</li>
-            <li>All your personal information will be hidden from other users.</li>
-            <li>You can restore your account any time just by signing in back.</li>
-          </ul>
-          <p>For more information see <span class="paragraph link" @click="redirect('tac')">terms and conditions</span>.</p>
+        <div class="item-content">
+          <Button
+            :label="securityTwoFa.status === 2 ? 'Disable 2FA' : setting.buttonTitle"
+            :additional-class="`transparent min-width150`"
+            @click-handler="openModal(securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title)" />
         </div>
       </div>
 
-      <basic-modal
-        v-if="securityShowModal['Set 2FA']"
-        header="Activate 2FA"
-        description="We strongly recommend you to set up 2FA.
+      <div v-else-if="setting.title === 'Change email'" class="item-content">
+        <div class="item-content texts">
+          <h3>{{ setting.title }}</h3>
+          <p class="opacity">{{ changeEmailData.status === -1 ? 'You have have changed your email.' : setting.description }}</p>
+        </div>
+        <div class="item-content">
+          <Button
+            :disabled="changeEmailData.status === -1"
+            :label="changeEmailData.status === -1 ? 'Email has been changed' : setting.buttonTitle"
+            :additional-class="`transparent min-width150`"
+            @click-handler="openModal(setting.title)" />
+        </div>
+      </div>
+
+      <div v-else-if="setting.title === 'Change password'" class="item-content">
+        <div class="item-content texts">
+          <h3>{{ setting.title }}</h3>
+          <p class="opacity">{{ securityPassword.status === -5 ? 'You are able to change password in 48 hours after previous change' : setting.description }}</p>
+        </div>
+        <div class="item-content">
+          <Button
+            :disabled="securityPassword.status === -5"
+            :label="setting.buttonTitle"
+            :additional-class="`transparent min-width150`"
+            @click-handler="openModal(setting.title)" />
+        </div>
+      </div>
+
+      <div v-else class="item-content">
+        <div class="item-content texts">
+          <h3 :class="`${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
+          <p :class="`opacity ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
+          <p v-if="setting.title === 'Delete account'" class="paragraph link" @click="stateShowDeleteAccMoreInfo">
+            {{ !deleteAccountMoreInfo ? 'Show more' : 'Show less' }}
+          </p>
+        </div>
+        <div class="item-content">
+          <Button
+            :label="setting.buttonTitle"
+            :additional-class="`transparent min-width150 ${setting.danger ? 'danger' : ''}`"
+            @click-handler="openModal(setting.title)" />
+        </div>
+      </div>
+      <div v-if="deleteAccountMoreInfo && setting.title === 'Delete account'">
+        <p>Deleting your account means:</p>
+        <ul>
+          <li>Your username will be shown as user1234567890.</li>
+          <li>All your personal information will be hidden from other users.</li>
+          <li>You can restore your account any time just by signing in back.</li>
+        </ul>
+        <p>For more information see <span class="paragraph link" @click="redirect('tac')">terms and conditions</span>.</p>
+      </div>
+    </div>
+
+    <basic-modal
+      v-if="securityShowModal['Set 2FA']"
+      header="Activate 2FA"
+      description="We strongly recommend you to set up 2FA.
         This will increase the security of you account.
         Before it, you should download Google Authenticator application.
         Once it is done, click the button below to start."
-        @close="deleteModal('Set 2FA')"
-      >
-        <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" :additional-class="'high-height'" @click-handler="generateTwoFa" />
-        <div v-if="securityTwoFa.qr" class="center">
-          <img :src="securityTwoFa.qr" alt="2fa">
+      @close="deleteModal('Set 2FA')"
+    >
+      <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" :additional-class="'high-height'" @click-handler="generateTwoFa" />
+      <div v-if="securityTwoFa.qr" class="center">
+        <img :src="securityTwoFa.qr" alt="2fa">
 
-          <p class="paragraph on-white-paragraph">In case if you are unable to scan this QR code, copy (click to copy) this key and paste it in Google Authenticator application as setup key.</p>
-          <input id="secret" :value="`${securityTwoFa.secret}`" type="hidden" />
-          <p class="paragraph link" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
+        <p class="paragraph on-white-paragraph">In case if you are unable to scan this QR code, copy (click to copy) this key and paste it in Google Authenticator application as setup key.</p>
+        <input id="secret" :value="`${securityTwoFa.secret}`" type="hidden" />
+        <p class="paragraph link" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
 
-          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA code'" :additional-class="'high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
+        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
+        <Button :label="'Confirm 2FA code'" :additional-class="'high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
 
-          <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
-          <p v-else-if="securityTwoFa.status === -1" class="paragraph error">Wrong code!</p>
-        </div>
-      </basic-modal>
+        <p v-if="securityTwoFa.status === 1" class="paragraph success">2FA has been successfully set!</p>
+        <p v-else-if="securityTwoFa.status === -1" class="paragraph error">Wrong code!</p>
+      </div>
+    </basic-modal>
 
-      <basic-modal
-        v-if="securityShowModal['Disable 2FA']"
-        header="Disable 2FA"
-        description="You are about deactivate your Two-factor authentication.
+    <basic-modal
+      v-if="securityShowModal['Disable 2FA']"
+      header="Disable 2FA"
+      description="You are about deactivate your Two-factor authentication.
         Be careful! This action will decrease your account security"
-        @close="deleteModal('Disable 2FA')"
-      >
-        <div v-if="securityTwoFa.status === 2" class="center">
-          <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
+      @close="deleteModal('Disable 2FA')"
+    >
+      <div v-if="securityTwoFa.status === 2" class="center">
+        <p class="paragraph on-white-paragraph">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
 
-          <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 0" @returnTwoFa="returnTwoFa" />
-          <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
+        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 0" @returnTwoFa="returnTwoFa" />
+        <Button :label="'Confirm 2FA disable'" :additional-class="'danger-fill high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
 
-          <p v-if="securityTwoFa.disableStatus === 0" class="paragraph success">2FA has been successfully disabled!</p>
-          <p v-else-if="securityTwoFa.disableStatus === -1" class="paragraph error">Wrong code!</p>
-        </div>
-      </basic-modal>
+        <p v-if="securityTwoFa.disableStatus === 0" class="paragraph success">2FA has been successfully disabled!</p>
+        <p v-else-if="securityTwoFa.disableStatus === -1" class="paragraph error">Wrong code!</p>
+      </div>
+    </basic-modal>
 
-      <basic-modal
-        v-if="securityShowModal['Change password']"
-        header="Change password"
-        description="Change your password by providing current password and new password.
+    <basic-modal
+      v-if="securityShowModal['Change password']"
+      header="Change password"
+      description="Change your password by providing current password and new password.
         Be careful! After that, because of security reasons, you won't be able to change password for 48 hours."
-        @close="deleteModal('Change password')"
-      >
-        <Input
-          v-model="securityPassword.currentPassword"
-          :oneerror="securityPassword.currentPasswordLength"
-          :title="'Current password'"
-          :title-class="'on-white-paragraph'"
-          :additional-class="'on-white'"
-          :type="'password'"
-        />
-        <Input
-          v-model="securityPassword.newPassword"
-          :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
-          :title="'New password'"
-          :title-class="'on-white-paragraph'"
-          :additional-class="'on-white'"
-          :type="'password'"
-        />
-        <Input
-          v-model="securityPassword.newPasswordRepeat"
-          :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
-          :title="'Repeat new password'"
-          :title-class="'on-white-paragraph'"
-          :additional-class="'on-white'"
-          :type="'password'"
-        />
+      @close="deleteModal('Change password')"
+    >
+      <Input
+        v-model="securityPassword.currentPassword"
+        :oneerror="securityPassword.currentPasswordLength"
+        :title="'Current password'"
+        :title-class="'on-white-paragraph'"
+        :additional-class="'on-white'"
+        :type="'password'"
+      />
+      <Input
+        v-model="securityPassword.newPassword"
+        :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+        :title="'New password'"
+        :title-class="'on-white-paragraph'"
+        :additional-class="'on-white'"
+        :type="'password'"
+      />
+      <Input
+        v-model="securityPassword.newPasswordRepeat"
+        :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+        :title="'Repeat new password'"
+        :title-class="'on-white-paragraph'"
+        :additional-class="'on-white'"
+        :type="'password'"
+      />
 
-        <p v-if="securityPassword.status === 1" class="paragraph success">Password has been successfully changed!</p>
-        <p v-else-if="securityPassword.status === -2" class="paragraph error">Wrong password!</p>
-        <p v-else-if="securityPassword.status === -3" class="paragraph error">Wrong 2FA code!</p>
-        <p v-else-if="securityPassword.status === -4" class="paragraph error">New password can't be the same as current one!</p>
+      <p v-if="securityPassword.status === 1" class="paragraph success">Password has been successfully changed!</p>
+      <p v-else-if="securityPassword.status === -2" class="paragraph error">Wrong password!</p>
+      <p v-else-if="securityPassword.status === -3" class="paragraph error">Wrong 2FA code!</p>
+      <p v-else-if="securityPassword.status === -4" class="paragraph error">New password can't be the same as current one!</p>
 
-        <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
-        <p v-else-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
+      <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
+      <p v-else-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
 
-        <div v-if="passwordError.passwordRules">
+      <div v-if="passwordError.passwordRules">
 
-          <div v-for="rule in passwordRulesList" :key="rule.text" class="password-requirements">
-            <div v-for="(item, i) in Object.entries(rule)" :key="i">
-              <p class="item">
-                <span v-if="item[0] === 'text'" class="paragraph on-white-paragraph">{{ item[1] }}</span>
-                <span v-else>
+        <div v-for="rule in passwordRulesList" :key="rule.text" class="password-requirements">
+          <div v-for="(item, i) in Object.entries(rule)" :key="i">
+            <p class="item">
+              <span v-if="item[0] === 'text'" class="paragraph on-white-paragraph">{{ item[1] }}</span>
+              <span v-else>
                   <img v-if="item[1]" class="status" src="../../../assets/img/greencircle.svg" alt="NOT OK" />
                   <img v-else class="status" src="../../../assets/img/redcircle.svg" alt="OK" />
                 </span>
-              </p>
-            </div>
+            </p>
           </div>
         </div>
-        <Button
-          :label="'Change password'"
-          :disabled="
+      </div>
+      <Button
+        :label="'Change password'"
+        :disabled="
            !securityPassword.currentPassword ||
            passwordError.passwordMismatch ||
            passwordError.passwordRequirement ||
            securityPassword.error ||
            !securityPassword.newPassword ||
            !securityPassword.newPasswordRepeat"
-          :additional-class="'high-height'"
-          @click-handler="changePassword"/>
-      </basic-modal>
+        :additional-class="'high-height'"
+        @click-handler="changePassword"/>
+    </basic-modal>
 
-      <basic-modal
-        v-if="securityShowModal['Change email']"
-        header="Change email"
-        description="Be careful! You are able to change email only one time."
-        @close="deleteModal('Change email')"
-      >
-      </basic-modal>
+    <basic-modal
+      v-if="securityShowModal['Change email']"
+      header="Change email"
+      description="Be careful! You are able to change email only one time."
+      @close="deleteModal('Change email')"
+    >
+    </basic-modal>
 
-      <basic-modal
-        v-if="securityShowModal['Delete account']"
-        header="Delete account"
-        description="We are very sorry about this :( You can get back any time you want. Hope, to see you again."
-        @close="deleteModal('Delete account')"
-      >
-        <Input
-          v-model="deleteAcc.currentPassword"
-          :title="'Current password'"
-          :title-class="'on-white-paragraph'"
-          :additional-class="'on-white'"
-          :type="'password'"
-        />
-        <Button :label="'Delete account'" :additional-class="'danger-fill high-height'" :disabled="!deleteAcc.currentPassword" @click-handler="deleteAccount" />
-        <p v-if="deleteAcc.status === -2" class="paragraph error">Wrong 2FA code!</p>
-        <p v-else-if="deleteAcc.status === -3" class="paragraph error">Invalid password!</p>
-      </basic-modal>
-    </div>
+    <basic-modal
+      v-if="securityShowModal['Delete account']"
+      header="Delete account"
+      description="We are very sorry about this :( You can get back any time you want. Hope, to see you again."
+      @close="deleteModal('Delete account')"
+    >
+      <Input
+        v-model="deleteAcc.currentPassword"
+        :title="'Current password'"
+        :title-class="'on-white-paragraph'"
+        :additional-class="'on-white'"
+        :type="'password'"
+      />
+      <Button :label="'Delete account'" :additional-class="'danger-fill high-height'" :disabled="!deleteAcc.currentPassword" @click-handler="deleteAccount" />
+      <p v-if="deleteAcc.status === -2" class="paragraph error">Wrong 2FA code!</p>
+      <p v-else-if="deleteAcc.status === -3" class="paragraph error">Invalid password!</p>
+    </basic-modal>
 
     <basic-modal
       v-if="confirmActionTwoFa.show"

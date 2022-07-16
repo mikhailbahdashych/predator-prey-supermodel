@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="account-preferences">
     <Popup v-if="showPopup" :content="'Personal settings has been successfully updated!'" />
-    <div class="account-preferences flex">
+    <div class="flex">
 
       <div class="fields">
         <div class="flex">
@@ -54,10 +54,8 @@
       </div>
     </div>
 
-    <div class="account-preferences">
-      <div class="button">
-        <Button :label="'Save settings'" :additional-class="'min-width150 mt'" @click-handler="updatePersonalInfo" />
-      </div>
+    <div class="button">
+      <Button :label="'Save settings'" :additional-class="'min-width150 mt'" @click-handler="updatePersonalInfo" />
     </div>
 
   </div>
