@@ -6,7 +6,7 @@
         <div v-if="setting.title === 'Set 2FA'" class="item-content">
           <div class="item-content texts">
             <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
-            <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description}}</p>
+            <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description }}</p>
           </div>
           <div class="item-content">
             <Button
@@ -15,6 +15,35 @@
               @click-handler="openModal(securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title)" />
           </div>
         </div>
+
+        <div v-else-if="setting.title === 'Change email'" class="item-content">
+          <div class="item-content texts">
+            <h3>{{ setting.title }}</h3>
+            <p class="opacity">{{ changeEmailData.status === -1 ? 'You have have changed you email.' : setting.description }}</p>
+          </div>
+          <div class="item-content">
+            <Button
+              :disabled="changeEmailData.status === -1"
+              :label="changeEmailData.status === -1 ? 'Email has been changed' : setting.buttonTitle"
+              :additional-class="`transparent min-width150`"
+              @click-handler="openModal(setting.title)" />
+          </div>
+        </div>
+
+        <div v-else-if="setting.title === 'Change password'" class="item-content">
+          <div class="item-content texts">
+            <h3>{{ setting.title }}</h3>
+            <p class="opacity">{{ securityPassword.status === -5 ? 'You are able to change password in 48 hours after previous change' : setting.description }}</p>
+          </div>
+          <div class="item-content">
+            <Button
+              :disable="securityPassword.status === -5"
+              :label="setting.buttonTitle"
+              :additional-class="`transparent min-width150`"
+              @click-handler="openModal(setting.title)" />
+          </div>
+        </div>
+
         <div v-else class="item-content">
           <div class="item-content texts">
             <h3 :class="`${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
@@ -301,8 +330,6 @@ export default {
         normalCode: null,
         action: null
       },
-
-      userSettings: {}
     }
   },
   watch: {
@@ -330,13 +357,21 @@ export default {
   methods: {
     async getUserSecuritySettings() {
       const token = sessionStorage.getItem('_at')
-      this.userSettings = await getUserSettings(token, 'security')
+      const userSettings = await getUserSettings(token, 'security')
 
-      if (this.userSettings.status === -1 || this.userSettings.status === 401)
+      if (userSettings.status === -1 || userSettings.status === 401)
         return this.$router.push('/')
 
-      if (this.userSettings.twoFa)
+      if (userSettings.twoFa)
         this.securityTwoFa.status = 2
+
+      if (userSettings.changedEmail) {
+        this.changeEmailData.status = -1
+      }
+
+      if (userSettings.changedPasswordAt) {
+        this.securityPassword.status = -5
+      }
     },
     openModal(option) {
       Object.entries(this.securityShowModal).forEach(item => {
@@ -371,7 +406,7 @@ export default {
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
     async deleteAccount() {
-      if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
+      if (this.securityTwoFa.status === 2 && !this.confirmActionTwoFa.normalCode) {
         this.confirmActionTwoFa.show = true
         this.confirmActionTwoFa.action = 'deleteAccount'
       } else {
@@ -384,13 +419,12 @@ export default {
 
         if (status === 1) {
           sessionStorage.removeItem('_at')
-          sessionStorage.removeItem('_rt')
           return this.$router.push('/')
         }
       }
     },
     async changePassword() {
-      if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
+      if (this.securityTwoFa.status === 2 && !this.confirmActionTwoFa.normalCode) {
         this.confirmActionTwoFa.show = true
         this.confirmActionTwoFa.action = 'changePassword'
       } else {
@@ -404,7 +438,7 @@ export default {
       }
     },
     async changeEmail() {
-      if (this.userSettings.twoFa && !this.confirmActionTwoFa.normalCode) {
+      if (this.securityTwoFa.status === 2 && !this.confirmActionTwoFa.normalCode) {
         this.confirmActionTwoFa.show = true
         this.confirmActionTwoFa.action = 'changeEmail'
       } else {
