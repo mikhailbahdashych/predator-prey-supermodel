@@ -66,8 +66,9 @@ export default {
   },
   mounted() {
     const tokenData = this.decodeToken()
-    if (tokenData.message) {
+    if (tokenData.message === 'invalid-token') {
       sessionStorage.removeItem('_at')
+      this.userData.status = -1
       return this.$router.push('/')
     } else {
       this.userData.status = 1;
