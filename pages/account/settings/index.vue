@@ -9,18 +9,20 @@
       </div>
     </div>
 
-    <div class="side-bar">
-      <div v-for="item in accountHeaderItems" :key="item.title" class="flex">
-        <div v-if="item.active" class="vertical-line" />
-        <p :class="[item.active ? 'item item-active' : 'item']" @click="changeSubsection(item)">
-          {{ item.title }}
-        </p>
+    <div class="flex">
+      <div class="side-bar">
+        <div v-for="item in accountHeaderItems" :key="item.title" class="flex">
+          <div v-if="item.active" class="vertical-line" />
+          <p :class="[item.active ? 'item item-active' : 'item']" @click="changeSubsection(item)">
+            {{ item.title }}
+          </p>
+        </div>
       </div>
-    </div>
 
-    <personal-information v-if="currentSection === 'Public account'" />
-    <security-settings v-else-if="currentSection === 'Security settings'" />
-    <site-settings v-else />
+      <personal-information v-if="currentSection === 'Public account'" />
+      <security-settings v-else-if="currentSection === 'Security settings'" />
+      <site-settings v-else />
+    </div>
 
   </div>
 </template>

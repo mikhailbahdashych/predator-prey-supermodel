@@ -40,7 +40,7 @@
         />
       </div>
 
-      <div class="content">
+      <div>
         <div class="title">
           <div class="flex baseline">
             <h1 class="nmp">{{ user.username }}</h1>
