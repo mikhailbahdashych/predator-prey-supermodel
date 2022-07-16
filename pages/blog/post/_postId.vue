@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'PostId',
+  name: 'Id',
   components: {
   },
   data() {

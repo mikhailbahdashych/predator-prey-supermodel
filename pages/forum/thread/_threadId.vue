@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'ThreadId',
+  name: 'Id',
   layout: 'default',
   data() {
     return {

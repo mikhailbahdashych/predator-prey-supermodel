@@ -141,6 +141,15 @@ router.get('/g-u-s/:type', async (req, res) => {
   }
 });
 
+router.post('/s', async (req, res) => {
+  try {
+    const { data } = await api.post('/search', req.body)
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 router.patch('/u-u-p-i', async (req, res) => {
   try {
     const { data } = await api.patch('/update-user-personal-information', req.body, {
@@ -152,9 +161,20 @@ router.patch('/u-u-p-i', async (req, res) => {
   }
 });
 
-router.get('/g-b-p/:postId', async (req, res) => {
+router.patch('/v/:id/:type', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-blog-post/${req.params.postId}`, {
+    const { data } = await api.patch(`/vote/${req.params.id}/${req.params.type}`, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.get('/g-b-p/:id', async (req, res) => {
+  try {
+    const { data } = await api.get(`/get-blog-post/${req.params.id}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -166,9 +186,9 @@ router.get('/g-b-p/:postId', async (req, res) => {
   }
 });
 
-router.get('/g-f-t/:threadId', async (req, res) => {
+router.get('/g-f-t/:id', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-forum-thread/${req.params.threadId}`, {
+    const { data } = await api.get(`/get-forum-thread/${req.params.id}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -180,13 +200,46 @@ router.get('/g-f-t/:threadId', async (req, res) => {
   }
 });
 
-router.get('/g-q/questionId', async (req, res) => {
+router.get('/g-q/:id', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-question/${req.params.questionId}`, {
+    const { data } = await api.get(`/get-question/${req.params.id}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
       }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.post('/c-b-p', async (req, res) => {
+  try {
+    const { data } = await api.post('/create-blog-post', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.post('/c-f-p', async (req, res) => {
+  try {
+    const { data } = await api.post('/create-forum-post', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.post('/c-q-p', async (req, res) => {
+  try {
+    const { data } = await api.post('/create-question-post', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
   } catch (e) {

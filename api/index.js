@@ -50,6 +50,28 @@ export const changeEmail = async (payload, token) => {
   }
 }
 
+export const setTwoFa = async (payload, token) => {
+  try {
+    const { data } = await api.post('s-2fa', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const disableTwoFa = async (payload, token) => {
+  try {
+    const { data } = await api.post('d-2fa', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const deleteAccount = async (payload, token) => {
   try {
     const { data } = await api.post('d-a', payload, {
@@ -99,6 +121,15 @@ export const getUserSettings = async (token, type) => {
   }
 }
 
+export const search = async payload => {
+  try {
+    const { data } = await api.post('/s', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const updateUserPersonalInformation = async (payload, token) => {
   try {
     const { data } = await api.patch(`u-u-p-i`, payload, {
@@ -110,9 +141,9 @@ export const updateUserPersonalInformation = async (payload, token) => {
   }
 }
 
-export const setTwoFa = async (payload, token) => {
+export const vote = async (payload, token) => {
   try {
-    const { data } = await api.post('s-2fa', payload, {
+    const { data } = await api.patch(`/v/${payload.id}/${payload.type}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -121,9 +152,58 @@ export const setTwoFa = async (payload, token) => {
   }
 }
 
-export const disableTwoFa = async (payload, token) => {
+export const getBlogPost = async id => {
   try {
-    const { data } = await api.post('d-2fa', payload, {
+    const { data } = await api.get(`/g-b-p/${id}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getForumThread = async id => {
+  try {
+    const { data } = await api.get(`/g-f-t/${id}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getQuestion = async id => {
+  try {
+    const { data } = await api.get(`/g-q/${id}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const createBlogPost = async (payload, token) => {
+  try {
+    const { data } = await api.post('/c-b-p', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const createForumPost = async (payload, token) => {
+  try {
+    const { data } = await api.post('/c-f-p', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const createQuestionPost = async (payload, token) => {
+  try {
+    const { data } = await api.post('/c-q-p', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data

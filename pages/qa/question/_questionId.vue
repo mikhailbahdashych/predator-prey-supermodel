@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'QuestionId',
+  name: 'Id',
   layout: 'default',
   data() {
     return {
