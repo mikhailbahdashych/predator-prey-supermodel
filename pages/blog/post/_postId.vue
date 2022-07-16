@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Blog',
+  name: 'PostId',
   components: {
   },
   data() {
@@ -19,5 +19,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/css/pages/blog";
+@import "../../../assets/css/pages/blog";
 </style>
