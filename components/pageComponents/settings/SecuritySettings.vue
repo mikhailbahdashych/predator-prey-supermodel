@@ -19,7 +19,7 @@
         <div v-else-if="setting.title === 'Change email'" class="item-content">
           <div class="item-content texts">
             <h3>{{ setting.title }}</h3>
-            <p class="opacity">{{ changeEmailData.status === -1 ? 'You have have changed you email.' : setting.description }}</p>
+            <p class="opacity">{{ changeEmailData.status === -1 ? 'You have have changed your email.' : setting.description }}</p>
           </div>
           <div class="item-content">
             <Button
