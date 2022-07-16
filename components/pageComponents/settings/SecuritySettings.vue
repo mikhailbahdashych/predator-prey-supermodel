@@ -37,7 +37,7 @@
           </div>
           <div class="item-content">
             <Button
-              :disable="securityPassword.status === -5"
+              :disabled="securityPassword.status === -5"
               :label="setting.buttonTitle"
               :additional-class="`transparent min-width150`"
               @click-handler="openModal(setting.title)" />
@@ -160,8 +160,8 @@
               <p class="item">
                 <span v-if="item[0] === 'text'" class="paragraph on-white-paragraph">{{ item[1] }}</span>
                 <span v-else>
-                  <img v-if="item[1]" class="status" src="../../../assets/img/redcircle.svg" alt="NOT OK" />
-                  <img v-else class="status" src="../../../assets/img/greencircle.svg" alt="OK" />
+                  <img v-if="item[1]" class="status" src="../../../assets/img/greencircle.svg" alt="NOT OK" />
+                  <img v-else class="status" src="../../../assets/img/redcircle.svg" alt="OK" />
                 </span>
               </p>
             </div>

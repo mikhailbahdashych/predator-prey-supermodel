@@ -72,3 +72,7 @@
   background-color: rgba(v.$main-color, 0.35);
   cursor: auto;
 }
+.basic-button:disabled:hover {
+  background-color: rgba(v.$main-color, 0.35);
+  cursor: auto;
+}
