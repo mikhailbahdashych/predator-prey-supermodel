@@ -1,10 +1,11 @@
 <template>
   <div class="basic-input-container">
     <input
+      v-model="inputString"
       placeholder="Search..."
       class="bi search"
-      :value="inputString"
     >
+    <div v-if="showResult" class="search-result"></div>
   </div>
 </template>
 
@@ -13,7 +14,13 @@ export default {
   name: 'InputSearch',
   data() {
     return {
-      inputString: ''
+      inputString: '',
+      showResult: false
+    }
+  },
+  watch: {
+    inputString() {
+      this.showResult = this.inputString.length > 0
     }
   },
   methods: {
