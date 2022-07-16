@@ -91,9 +91,9 @@
 </template>
 
 <script>
-import Input from "~/components/Input";
-import Button from "~/components/Button";
-import InputTwoFa from "~/components/InputTwoFa";
+import Input from "~/components/basicComponents/Input";
+import Button from "~/components/basicComponents/Button";
+import InputTwoFa from "~/components/basicComponents/InputTwoFa";
 import { validateEmail, validatePasswordLength } from "~/helpers/frontValidator";
 import { verifyToken } from "~/helpers/crypto";
 import { signIn } from "~/api";
@@ -233,5 +233,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/css/signup";
+@import "../assets/css/pages/signup";
 </style>

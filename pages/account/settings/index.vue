@@ -72,5 +72,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/css/edit";
+@import "../../../assets/css/pages/edit";
 </style>

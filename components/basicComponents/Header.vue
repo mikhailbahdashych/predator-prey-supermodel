@@ -8,15 +8,15 @@
             <h3 class="links logo">pNb</h3>
           </nuxt-link>
           <skeleton v-if='loading' :text="'FORUM'" />
-          <nuxt-link v-else to="/" class='nuxt-link'>
+          <nuxt-link v-else to="/forum" class='nuxt-link'>
             <h3 class="links">FORUM</h3>
           </nuxt-link>
           <skeleton v-if='loading' :text="'Q&A'" />
-          <nuxt-link v-else to="/" class='nuxt-link'>
+          <nuxt-link v-else to="/qa" class='nuxt-link'>
             <h3 class="links">Q&A</h3>
           </nuxt-link>
           <skeleton v-if='loading' :text="'BLOG'" />
-          <nuxt-link v-else to="/" class='nuxt-link'>
+          <nuxt-link v-else to="/blog" class='nuxt-link'>
             <h3 class="links">BLOG</h3>
           </nuxt-link>
         </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import Button from '~/components/Button'
+import Button from '~/components/basicComponents/Button'
 import Skeleton from '~/components/skeleton/Skeleton'
 import { verifyToken } from '~/helpers/crypto'
 export default {
@@ -92,5 +92,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import '../assets/css/components/Header';
+@import '../../assets/css/basicComponents/Header';
 </style>

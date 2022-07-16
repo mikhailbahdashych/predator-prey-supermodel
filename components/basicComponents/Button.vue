@@ -36,5 +36,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/css/components/Button";
+@import "../../assets/css/basicComponents/Button";
 </style>

@@ -131,5 +131,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/css/components/InputTwoFa";
+@import "../../assets/css/basicComponents/InputTwoFa";
 </style>

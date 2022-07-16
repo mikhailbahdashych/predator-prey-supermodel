@@ -77,5 +77,4 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "../assets/css/search";
 </style>

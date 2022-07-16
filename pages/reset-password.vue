@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import InputWithButton from "~/components/InputWithButton";
-import Button from "~/components/Button";
+import InputWithButton from "~/components/basicComponents/InputWithButton";
+import Button from "~/components/basicComponents/Button";
 import { validateEmail } from "~/helpers/frontValidator";
 export default {
   name: "ResetPassword",
@@ -132,5 +132,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/css/signup";
+@import "../assets/css/pages/signup";
 </style>

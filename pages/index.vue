@@ -18,5 +18,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "../assets/css/homepage";
+@import "../assets/css/pages/homepage";
 </style>

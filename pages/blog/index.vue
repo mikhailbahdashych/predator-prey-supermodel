@@ -42,9 +42,9 @@
 </template>
 
 <script>
-import Footer from '~/components/Footer';
-import SideBar from '~/components/SideBar';
-import Search from '~/components/Search';
+import Footer from '~/components/basicComponents/Footer';
+import SideBar from '~/components/basicComponents/SideBar';
+import Search from '~/components/basicComponents/Search';
 export default {
   name: 'Blog',
   components: {
@@ -76,6 +76,4 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "../../assets/css/blog";
-@import "../../assets/css/search";
 </style>

@@ -19,5 +19,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/css/components/Popup";
+@import "../../assets/css/basicComponents/Popup";
 </style>

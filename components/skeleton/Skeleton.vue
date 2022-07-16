@@ -17,5 +17,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/css/components/Skeleton";
+@import "../../assets/css/skeleton/Skeleton";
 </style>

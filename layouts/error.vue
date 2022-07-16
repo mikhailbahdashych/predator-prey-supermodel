@@ -25,6 +25,6 @@ export default {
 </script>
 
 <style lang='scss'>
-@import '../assets/css/error';
+@import '../assets/css/pages/error';
 @import '../assets/css/main';
 </style>

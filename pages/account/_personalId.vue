@@ -71,9 +71,9 @@
 </template>
 
 <script>
-import Button from "~/components/Button";
-import Popup from "~/components/Popup";
-import Input from "~/components/Input";
+import Button from "~/components/basicComponents/Button";
+import Popup from "~/components/basicComponents/Popup";
+import Input from "~/components/basicComponents/Input";
 import { getUserByPersonalId } from "~/api";
 import { verifyToken } from "~/helpers/crypto";
 export default {
@@ -123,5 +123,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "../../assets/css/account";
+@import "../../assets/css/pages/account";
 </style>

@@ -70,9 +70,9 @@ import html from 'highlight.js/lib/languages/xml';
 import csharp from 'highlight.js/lib/languages/csharp';
 
 import vClickOutside from 'v-click-outside';
-import Footer from '~/components/Footer';
-import SideBar from '~/components/SideBar';
-import Search from '~/components/Search';
+import Footer from '~/components/basicComponents/Footer';
+import SideBar from '~/components/basicComponents/SideBar';
+import Search from '~/components/basicComponents/Search';
 
 import 'highlight.js/styles/github-dark-dimmed.css';
 hljs.registerLanguage('javascript', javascript);
@@ -156,7 +156,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "../../../assets/css/post";
-@import "../../../assets/css/blog";
-@import "../../../assets/css/search";
+
 </style>

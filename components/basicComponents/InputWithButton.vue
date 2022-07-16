@@ -113,6 +113,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/css/components/InputWithButton";
-@import "../assets/css/components/Button";
+@import "../../assets/css/basicComponents/InputWithButton";
+@import "../../assets/css/basicComponents/Button";
 </style>

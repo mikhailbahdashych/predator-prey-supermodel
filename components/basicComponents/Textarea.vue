@@ -33,5 +33,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/css/components/Input";
+@import "../../assets/css/basicComponents/Input";
 </style>
