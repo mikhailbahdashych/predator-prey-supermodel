@@ -20,6 +20,9 @@
             <h3 class="links">BLOG</h3>
           </nuxt-link>
         </div>
+        <div class="content">
+          <input-search />
+        </div>
         <div v-if="userData.status === -1" class="content">
           <div class="button">
             <skeleton v-if='loading' :text="'SIGN IN'" />
@@ -48,12 +51,14 @@
 <script>
 import Button from '~/components/basicComponents/Button'
 import Skeleton from '~/components/skeleton/Skeleton'
+import InputSearch from '~/components/basicComponents/InputSearch'
 import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Header',
   components: {
     Button,
-    Skeleton
+    Skeleton,
+    InputSearch
   },
   data() {
     return {

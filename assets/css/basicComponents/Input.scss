@@ -23,6 +23,10 @@
     resize: vertical;
     &.textarea:focus { border: 1px solid rgba(v.$main-color, .5); }
   }
+  &.search {
+    height: 38px;
+    &.search:focus { border: 1px solid rgba(v.$main-color, .5); }
+  }
 }
 
 .basic-input-container {
