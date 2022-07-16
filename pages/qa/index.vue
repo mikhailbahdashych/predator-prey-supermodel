@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'ThreadId',
+  name: 'Index',
   layout: 'default',
   data() {
     return {
@@ -18,5 +18,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/css/pages/forum";
+@import "../../assets/css/pages/qa";
 </style>

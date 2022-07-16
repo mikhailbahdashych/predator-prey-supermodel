@@ -13,5 +13,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/css/pages/edit";
+@import "../../../assets/css/pages/account/settings";
 </style>

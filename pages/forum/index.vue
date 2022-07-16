@@ -4,10 +4,19 @@
 
 <script>
 export default {
-  name: 'Index'
+  name: 'Index',
+  layout: 'default',
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+
+  }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@import "../../assets/css/pages/forum";
 </style>

@@ -123,5 +123,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "../../assets/css/pages/account";
+@import "../../assets/css/pages/account/account";
 </style>
