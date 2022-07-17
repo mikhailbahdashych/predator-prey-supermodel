@@ -16,7 +16,15 @@
 
 <script>
 export default {
-  name: "Footer"
+  name: "Footer",
+  data() {
+    return {
+      loading: true
+    }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
+  },
 }
 </script>
 

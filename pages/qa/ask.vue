@@ -1,16 +1,27 @@
 <template>
   <div class="ask-wrapper">
+
     <Input
       v-model="title"
       :title="'Question title'"
     />
+
     <client-only>
       <vue-editor v-model="content" class="VueEditor" />
     </client-only>
+
+    <Checkbox
+      v-model="notify"
+      :input-value="notify"
+      :disabled="loading"
+      :label="'Notify me, when someone answers'"
+    />
+
     <Button
       :label="'Ask question'"
       @click-handler="postQuestion"
     />
+
   </div>
 </template>
 
@@ -18,13 +29,15 @@
 import { getQuestionBySlug, createQuestionPost } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
+import Checkbox from '~/components/basicComponents/Checkbox'
 import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Ask',
   components: {
     VueEditor: async () => process.client ? (await import("vue2-editor")).VueEditor : "",
     Input,
-    Button
+    Button,
+    Checkbox
   },
   layout: 'default',
   data() {
@@ -32,13 +45,17 @@ export default {
       slugPosts: [],
       title: null,
       content: null,
-      notify: false
+      notify: false,
+      loading: true
     }
   },
   watch: {
     async title() {
       await this.getPostsBySlug()
     }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   mounted() {
     if (!sessionStorage.getItem('_at')) return this.$router.push('/')

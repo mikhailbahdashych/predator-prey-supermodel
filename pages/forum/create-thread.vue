@@ -4,7 +4,15 @@
 
 <script>
 export default {
-  name: 'CreateThread'
+  name: 'CreateThread',
+  data() {
+    return {
+      loading: true
+    }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
+  },
 }
 </script>
 

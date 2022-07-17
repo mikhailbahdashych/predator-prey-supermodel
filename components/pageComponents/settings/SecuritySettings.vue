@@ -246,6 +246,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       showPopup: false,
       deleteAccountMoreInfo: false,
 
@@ -348,6 +349,9 @@ export default {
         this.validPassword()
       }
     }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
     await this.getUserSecuritySettings()

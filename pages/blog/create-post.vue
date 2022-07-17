@@ -4,7 +4,15 @@
 
 <script>
 export default {
-  name: 'CreatePost'
+  name: 'CreatePost',
+  data() {
+    return {
+      loading: true
+    }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
+  },
 }
 </script>
 

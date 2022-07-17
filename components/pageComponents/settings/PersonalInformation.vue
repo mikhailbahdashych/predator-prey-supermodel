@@ -85,6 +85,9 @@ export default {
       showPopup: false
     }
   },
+  created() {
+    this.$nextTick(() => { this.loading = false })
+  },
   async mounted() {
     await this.getUserPersonalSettings()
   },

@@ -8,7 +8,15 @@
 
 <script>
 export default {
-  name: 'SiteSettings'
+  name: 'SiteSettings',
+  data() {
+    return {
+      loading: true
+    }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
+  },
 }
 </script>
 

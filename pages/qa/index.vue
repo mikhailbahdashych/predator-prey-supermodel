@@ -52,6 +52,7 @@ export default {
   layout: 'default',
   data() {
     return {
+      loading: true,
       sortType: {
         latest: true,
         hottest: false,
@@ -61,6 +62,9 @@ export default {
       sort: 'latest',
       question: []
     }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
     await this.getQuestions()

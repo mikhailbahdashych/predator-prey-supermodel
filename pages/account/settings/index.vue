@@ -41,6 +41,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       accountHeaderItems: [
         { title: 'Public account', active: true },
         { title: 'Security settings', active: false },
@@ -50,6 +51,9 @@ export default {
       currentSection: 'Public account',
       currentUser: {}
     }
+  },
+  created() {
+    this.$nextTick(() => { this.loading = false })
   },
   mounted() {
     this.currentUser = this.decodeToken()
