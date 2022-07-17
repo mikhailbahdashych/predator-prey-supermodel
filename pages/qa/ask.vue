@@ -55,12 +55,13 @@ export default {
         this.slugPosts = await getQuestionBySlug(this.title.split(' ').join('-').toLowerCase())
     },
     async postQuestion() {
-      const { status } = await createQuestionPost({
+      const data = await createQuestionPost({
         title: this.title,
         content: this.content,
         notify: this.notify
       }, sessionStorage.getItem('_at'))
-      // if (status === 1)
+      if (data.status === 1)
+        return this.$router.push(`/qa/question/${data.questionId}`)
     }
   }
 }
