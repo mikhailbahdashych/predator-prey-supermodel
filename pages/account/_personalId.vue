@@ -8,19 +8,19 @@
           <p v-if="user.status" class="status nmp">{{ user.status }}</p>
         </div>
 
-        <div class="links pointer" @click="copy('gh')">
+        <div v-if="user.github" class="links pointer" @click="copy('gh')">
           <img :src="require('../../assets/img/github.svg')" alt="Git" class="link">
           <Input v-model="user.github" :additional-class="'small pointer'" :readonly="true" />
           <input id="gh" :value="`${user.github}`" type="hidden">
         </div>
 
-        <div class="links pointer" @click="copy('tw')">
+        <div v-if="user.twitter" class="links pointer" @click="copy('tw')">
           <img :src="require('../../assets/img/twitter.svg')" alt="Git" class="link">
           <Input v-model="user.twitter" :additional-class="'small pointer'" :readonly="true" />
           <input id="tw" :value="`${user.twitter}`" type="hidden">
         </div>
 
-        <div class="links pointer" @click="copy('wl')">
+        <div v-if="user.website_link" class="links pointer" @click="copy('wl')">
           <img :src="require('../../assets/img/tag.svg')" alt="Git" class="link">
           <Input v-model="user.website_link" :additional-class="'small pointer'" :readonly="true" />
           <input id="wl" :value="`${user.website_link}`" type="hidden">

@@ -152,6 +152,33 @@ export const vote = async (payload, token) => {
   }
 }
 
+export const getBlogPosts = async by => {
+  try {
+    const { data } = await api.get(`/g-b-ps/${by}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getForumThreads = async by => {
+  try {
+    const { data } = await api.get(`/g-f-ts/${by}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getQuestions = async by => {
+  try {
+    const { data } = await api.get(`g-qs/${by}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getBlogPost = async id => {
   try {
     const { data } = await api.get(`/g-b-p/${id}`)

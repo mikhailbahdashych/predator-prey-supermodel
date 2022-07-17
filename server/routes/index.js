@@ -143,7 +143,12 @@ router.get('/g-u-s/:type', async (req, res) => {
 
 router.post('/s', async (req, res) => {
   try {
-    const { data } = await api.post('/search', req.body)
+    const { data } = await api.post('/search', req.body, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -165,6 +170,48 @@ router.patch('/v/:id/:v/:postType', async (req, res) => {
   try {
     const { data } = await api.patch(`/vote/${req.params.id}/${req.params.v}/${req.params.postType}`, {
       headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.get('/g-b-ps/:by', async (req, res) => {
+  try {
+    const { data } = await api.get(`/get-blog-posts/${req.params.by}`, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.get('/g-f-ts/:by', async (req, res) => {
+  try {
+    const { data } = await api.get(`/get-forum-threads/${req.params.by}`, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.get('/g-qs/:by', async (req, res) => {
+  try {
+    const { data } = await api.get(`/get-questions/${req.params.by}`, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
     })
     res.json(data)
   } catch (e) {
