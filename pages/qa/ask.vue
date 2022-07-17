@@ -58,14 +58,19 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   mounted() {
-    if (!sessionStorage.getItem('_at')) return this.$router.push('/')
-    else return this.decodeToken()
+    this.decodeToken()
   },
   methods: {
     decodeToken() {
       const token = sessionStorage.getItem('_at')
-      const result = verifyToken(token)
-      if (result.message === 'invalid-token') return this.$router.push('/')
+
+      if (!token)
+        return this.$router.push('/')
+
+      const tokenData = verifyToken(token)
+
+      if (tokenData.message === 'invalid-token')
+        return this.$router.push('/')
     },
     async getPostsBySlug() {
       if (this.title.length > 0)

@@ -1,7 +1,7 @@
 <template>
   <div class="account-wrapper">
 
-    <div class="avatar" @click="redirect(`/account/${decodeToken().personalId}`)">
+    <div class="avatar" @click="redirect(`/account/${currentUser.personalId}`)">
       <img class='avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
       <div class="avatar-text">
         <h2 class="nmp">{{ currentUser.username }}</h2>
@@ -56,13 +56,19 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   mounted() {
-    this.currentUser = this.decodeToken()
+    this.decodeToken()
   },
   methods: {
     decodeToken() {
       const token = sessionStorage.getItem('_at')
-      const result = verifyToken(token)
-      if (result.message === 'invalid-token') return this.$router.push('/')
+
+      if (!token)
+        return this.$router.push('/')
+
+      const tokenData = verifyToken(token)
+
+      if (tokenData.message === 'invalid-token') return this.$router.push('/')
+      else this.currentUser = tokenData
     },
     changeSubsection(item) {
       this.currentSection = item.title

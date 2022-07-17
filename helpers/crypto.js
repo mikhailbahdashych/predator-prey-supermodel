@@ -6,6 +6,6 @@ export const verifyToken = token => {
     return jwt.verify(token, jwtKey)
   } catch (e) {
     if (e instanceof jwt.TokenExpiredError || e instanceof jwt.JsonWebTokenError)
-      return { message: "token-expired" }
+      return { message: "invalid-token" }
   }
 }

@@ -70,20 +70,26 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   mounted() {
-    const tokenData = this.decodeToken()
-    if (tokenData.message === 'invalid-token') {
-      sessionStorage.removeItem('_at')
-      this.userData.status = -1
-      return this.$router.push('/')
-    } else {
-      this.userData.status = 1;
-      this.userData.personalId = tokenData.personalId
-    }
+    this.decodeToken()
   },
   methods: {
     decodeToken() {
       const token = sessionStorage.getItem('_at')
-      return verifyToken(token)
+
+      if (!token) {
+        this.userData.status = -1
+        return
+      }
+
+      const tokenData = verifyToken(token)
+      if (tokenData.message === 'invalid-token') {
+        sessionStorage.removeItem('_at')
+        this.userData.status = -1
+        return this.$router.push('/')
+      } else {
+        this.userData.status = 1;
+        this.userData.personalId = tokenData.personalId
+      }
     },
     redirect(path) {
       return this.$router.push(path)
