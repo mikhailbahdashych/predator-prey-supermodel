@@ -85,6 +85,7 @@ import Popup from "~/components/basicComponents/Popup"
 import Input from "~/components/basicComponents/Input"
 import { getUserByPersonalId } from "~/api"
 import { verifyToken } from "~/helpers/crypto"
+import { validateUserPersonalId } from '~/helpers/frontValidator'
 export default {
   name: 'PersonalId',
   components: {
@@ -93,6 +94,7 @@ export default {
     Popup,
     Input
   },
+  validate({ params }) { return validateUserPersonalId(parseInt(params.personalId)) },
   data() {
     return {
       user: {},

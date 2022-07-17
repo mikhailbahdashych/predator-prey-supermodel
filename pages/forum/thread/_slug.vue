@@ -3,9 +3,11 @@
 </template>
 
 <script>
+import { validateSlug } from '~/helpers/frontValidator'
 export default {
-  name: 'Id',
+  name: 'Slug',
   layout: 'default',
+  validate({ params }) { return validateSlug(parseInt(params.slug)) },
   data() {
     return {
       loading: true

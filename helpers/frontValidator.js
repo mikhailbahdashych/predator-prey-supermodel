@@ -1,4 +1,4 @@
-export const validateEmail = (email) => {
+export const validateEmail = email => {
   if (email) {
     const regex = new RegExp('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')
     return regex.test(email);
@@ -9,7 +9,7 @@ export const validateEmail = (email) => {
   }
 }
 
-export const validatePassword = (password) => {
+export const validatePassword = password => {
   if (password) {
     const regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
     return regex.test(password)
@@ -18,7 +18,7 @@ export const validatePassword = (password) => {
   }
 }
 
-export const validatePasswordLength = (password) => {
+export const validatePasswordLength = password => {
   if (password) {
     return password.length >= 8
   } else {
@@ -26,7 +26,7 @@ export const validatePasswordLength = (password) => {
   }
 }
 
-export const validatePasswordRules = (password) => {
+export const validatePasswordRules = password => {
   const legitPassword = {
     eightChars: false,
     uppCase: false,
@@ -54,12 +54,17 @@ export const validatePasswordRules = (password) => {
   return legitPassword
 }
 
-export const validate2fa = (i) => {
+export const validate2fa = i => {
   if (i.length > 1) { i = i.slice(0, 1) }
   return i
 }
 
-export const validateUserPersonalId = (id) => {
+export const validateUserPersonalId = id => {
   const regex = new RegExp('^\\d{10}$')
   return regex.test(id)
+}
+
+export const validateSlug = slug => {
+  const regex = new RegExp('^[a-z0-9]+(?:-[a-z0-9]+)*$')
+  return regex.test(slug)
 }
