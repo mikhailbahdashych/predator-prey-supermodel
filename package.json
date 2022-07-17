@@ -24,7 +24,8 @@
     "moment": "^2.29.1",
     "node-2fa": "^2.0.3",
     "nuxt": "^2.15.7",
-    "v-click-outside": "^3.1.2"
+    "v-click-outside": "^3.1.2",
+    "vue2-editor": "^2.10.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

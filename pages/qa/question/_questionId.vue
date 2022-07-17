@@ -18,5 +18,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/css/pages/qa";
+@import "../../../assets/css/pages/qa/index";
 </style>
