@@ -57,7 +57,8 @@ export default {
   methods: {
     decodeToken() {
       const token = sessionStorage.getItem('_at')
-      return verifyToken(token)
+      const result = verifyToken(token)
+      if (result.message === 'invalid-token') return this.$router.push('/')
     },
     changeSubsection(item) {
       this.currentSection = item.title
