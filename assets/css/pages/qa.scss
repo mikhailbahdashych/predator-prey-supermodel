@@ -1,1 +1,23 @@
 @use "../variables" as v;
+
+.question-wrapper {
+  width: 70%;
+  margin: 0 auto;
+  .question-header {
+    .question-header-button { width: 150px; }
+    display: flex;
+    border-bottom: 1px solid rgba(v.$main-color-light, .25);
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .question-content {
+    width: 70%;
+    margin: 15px auto 0;
+    &.sort {
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

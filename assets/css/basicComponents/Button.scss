@@ -29,15 +29,15 @@
     .label { color: v.$main-color-light; }
   }
   &.transparent:hover {
-    background-color: rgba(v.$main-color, 0.25);
+    background-color: rgba(v.$main-color, .25);
   }
 
   &.danger {
-    border: 1px solid rgba(v.$error, 0.5);
+    border: 1px solid rgba(v.$error, .5);
     color: v.$error;
   }
   &.danger:hover {
-    background-color: rgba(v.$error, 0.25);
+    background-color: rgba(v.$error, .25);
   }
   &.danger-fill {
     border: none;
@@ -50,11 +50,12 @@
   &.danger-fill:disabled {
     border: none;
     color: v.$main-color-light;
-    background-color: rgba(v.$error, 0.35);
+    background-color: rgba(v.$error, .35);
   }
 
   &.min-width150 { width: 150px; }
   &.high-height { height: 48px; }
+  &.rounded { border-radius: 16px }
 
   .label {
     margin: 0;
@@ -69,10 +70,10 @@
   background-color: v.$main-color-dark;
 }
 .basic-button:disabled {
-  background-color: rgba(v.$main-color, 0.35);
+  background-color: rgba(v.$main-color, .35);
   cursor: auto;
 }
 .basic-button:disabled:hover {
-  background-color: rgba(v.$main-color, 0.35);
+  background-color: rgba(v.$main-color, .35);
   cursor: auto;
 }

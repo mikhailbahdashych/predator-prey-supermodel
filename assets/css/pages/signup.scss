@@ -80,7 +80,7 @@
         background-color: v.$main-color-light;
         height: 50px;
         float: left;
-        opacity: 0.5;
+        opacity: .5;
         margin: 0 20px 0 20px;
       }
       .choose {
@@ -92,12 +92,12 @@
 
       .password-requirement {
         border-radius: 5px;
-        border: 1px solid rgba(#fff,0.9);
+        border: 1px solid rgba(#fff,.9);
         .password-requirement-item {
           padding-left: 15px;
           font-size: 10px;
           color: v.$main-color-light;
-          opacity: 0.9;
+          opacity: .9;
         }
         .status {
           width: 20px;

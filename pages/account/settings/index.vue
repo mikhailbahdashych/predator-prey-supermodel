@@ -32,7 +32,6 @@ import SecuritySettings from '~/components/pageComponents/settings/SecuritySetti
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
 import { verifyToken } from '~/helpers/crypto'
-
 export default {
   name: 'Settings',
   components: {
