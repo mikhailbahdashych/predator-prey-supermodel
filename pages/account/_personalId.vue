@@ -8,32 +8,36 @@
           <p v-if="user.status" class="status nmp">{{ user.status }}</p>
         </div>
 
-        <div v-if="user.github" class="links pointer" @click="copy('gh')">
+        <skeleton v-if="loading" />
+        <skeleton v-if="loading" />
+        <skeleton v-if="loading" />
+
+        <div v-if="user.github && !loading" class="links pointer" @click="copy('gh')">
           <img :src="require('../../assets/img/github.svg')" alt="Git" class="link">
           <Input v-model="user.github" :additional-class="'small pointer'" :readonly="true" />
           <input id="gh" :value="`${user.github}`" type="hidden">
         </div>
 
-        <div v-if="user.twitter" class="links pointer" @click="copy('tw')">
+        <div v-if="user.twitter && !loading" class="links pointer" @click="copy('tw')">
           <img :src="require('../../assets/img/twitter.svg')" alt="Git" class="link">
           <Input v-model="user.twitter" :additional-class="'small pointer'" :readonly="true" />
           <input id="tw" :value="`${user.twitter}`" type="hidden">
         </div>
 
-        <div v-if="user.website_link" class="links pointer" @click="copy('wl')">
+        <div v-if="user.website_link && !loading" class="links pointer" @click="copy('wl')">
           <img :src="require('../../assets/img/tag.svg')" alt="Git" class="link">
           <Input v-model="user.website_link" :additional-class="'small pointer'" :readonly="true" />
           <input id="wl" :value="`${user.website_link}`" type="hidden">
         </div>
 
         <Button
-          v-if="isOwner"
+          v-if="isOwner && !loading"
           :label="'Edit profile'"
           :additional-class="'transparent min-width150 mt'"
           @click-handler="redirect('/account/settings')"
         />
         <Button
-          v-else
+          v-else-if="!isOwner && !loading"
           :label="'Send message'"
           :additional-class="'transparent min-width150 mt'"
           @click-handler="redirect('/account/settings')"
@@ -42,16 +46,20 @@
 
       <div class="last-activity">
         <div class="title">
-          <div class="flex baseline">
+          <skeleton v-if="loading" />
+          <div v-else class="flex baseline">
             <h1 class="nmp">{{ user.username }}</h1>
             <p v-if="user.first_name || user.last_name" class="paragraph">
               aka {{ user.first_name }} {{ user.last_name }}
             </p>
             <p class="paragraph">({{ user.personalId }})</p>
           </div>
-          <p class="paragraph opacity">{{ user.about_me }}</p>
-          <div>
+          <div v-if="loading">
+            <div v-for="(s, i) of 3" :key="i">
+              <skeleton :width="250" />
+            </div>
           </div>
+          <p v-else class="paragraph opacity">{{ user.about_me }}</p>
         </div>
         <div class="flex">
           <div class="item border">
@@ -71,14 +79,16 @@
 </template>
 
 <script>
-import Button from "~/components/basicComponents/Button";
-import Popup from "~/components/basicComponents/Popup";
-import Input from "~/components/basicComponents/Input";
-import { getUserByPersonalId } from "~/api";
-import { verifyToken } from "~/helpers/crypto";
+import Skeleton from '~/components/skeleton/Skeleton'
+import Button from "~/components/basicComponents/Button"
+import Popup from "~/components/basicComponents/Popup"
+import Input from "~/components/basicComponents/Input"
+import { getUserByPersonalId } from "~/api"
+import { verifyToken } from "~/helpers/crypto"
 export default {
   name: 'PersonalId',
   components: {
+    Skeleton,
     Button,
     Popup,
     Input

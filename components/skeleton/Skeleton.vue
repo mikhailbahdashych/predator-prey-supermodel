@@ -1,5 +1,5 @@
 <template>
-  <div class="skeleton">
+  <div class="skeleton" :style="[width !== 0 ? {'width': `${width}px`} : {}]">
     <p class="skeleton-text">{{ text }}</p>
   </div>
 </template>
@@ -11,6 +11,10 @@ export default {
     text: {
       type: String,
       default: ''
+    },
+    width: {
+      type: Number,
+      default: 0
     }
   }
 }
