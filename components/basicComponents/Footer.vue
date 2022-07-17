@@ -4,7 +4,7 @@
       <div class='right-side-footer'>
         <nuxt-link to='/' class='nuxt-link'><p class='texts'>Home</p></nuxt-link>
         <nuxt-link to='/forum' class='nuxt-link'><p class='texts'>Forum</p></nuxt-link>
-        <nuxt-link to='/qanda' class='nuxt-link'><p class='texts'>Q&A</p></nuxt-link>
+        <nuxt-link to='/qa' class='nuxt-link'><p class='texts'>Q&A</p></nuxt-link>
         <nuxt-link to='/blog' class='nuxt-link'><p class='texts'>Blog</p></nuxt-link>
       </div>
       <div class='left-side-footer'>

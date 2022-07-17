@@ -194,9 +194,9 @@ router.get('/g-q-b-s', async (req, res) => {
   }
 })
 
-router.get('/q-b-p-b-s-t/:by', async (req, res) => {
+router.get('/g-b-ps/:by', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-blog-posts-by-sort-type/${req.params.by}`, {
+    const { data } = await api.get(`/get-blog-posts/${req.params.by}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -208,9 +208,9 @@ router.get('/q-b-p-b-s-t/:by', async (req, res) => {
   }
 })
 
-router.get('/q-f-t-b-s-t/:by', async (req, res) => {
+router.get('/g-f-ts/:by', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-forum-threads-by-sort-type/${req.params.by}`, {
+    const { data } = await api.get(`/get-forum-threads/${req.params.by}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -222,9 +222,9 @@ router.get('/q-f-t-b-s-t/:by', async (req, res) => {
   }
 })
 
-router.get('/g-q-b-s-t/:by', async (req, res) => {
+router.get('/g-qs/:by', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-questions-by-sort-type/${req.params.by}`, {
+    const { data } = await api.get(`/get-questions/${req.params.by}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD

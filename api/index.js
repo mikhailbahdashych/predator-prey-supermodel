@@ -165,7 +165,7 @@ export const getQuestionBySlug = async (slug) => {
 
 export const getBlogPosts = async by => {
   try {
-    const { data } = await api.get(`/q-b-p-b-s-t/${by}`)
+    const { data } = await api.get(`/g-b-ps/${by}`)
     return data
   } catch (e) {
     return e.response.data
@@ -174,7 +174,7 @@ export const getBlogPosts = async by => {
 
 export const getForumThreads = async by => {
   try {
-    const { data } = await api.get(`/q-f-t-b-s-t/${by}`)
+    const { data } = await api.get(`/g-f-ts/${by}`)
     return data
   } catch (e) {
     return e.response.data
@@ -183,7 +183,7 @@ export const getForumThreads = async by => {
 
 export const getQuestions = async by => {
   try {
-    const { data } = await api.get(`g-q-b-s-t/${by}`)
+    const { data } = await api.get(`/g-qs/${by}`)
     return data
   } catch (e) {
     return e.response.data

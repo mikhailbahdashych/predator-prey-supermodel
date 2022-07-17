@@ -36,12 +36,18 @@
     </div>
 
     <div class="question-content">
-
+      <div v-for="(q, i) in questions" :key="i" class="question">
+        <div class="flex baseline">
+          <p class="paragraph large nmp">{{ q.title }}</p>
+          <p class="paragraph opacity">Asked at {{ q.created_at }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 import Button from '~/components/basicComponents/Button'
 import { getQuestions } from '~/api'
 export default {
@@ -60,7 +66,7 @@ export default {
         month: false
       },
       sort: 'latest',
-      question: []
+      questions: []
     }
   },
   created() {
@@ -76,7 +82,8 @@ export default {
       await this.getQuestions()
     },
     async getQuestions() {
-      this.question = await getQuestions(this.sort)
+      this.questions = await getQuestions(this.sort)
+      this.questions.forEach(question => { question.created_at = moment(question.created_at).format('YYYY-MM-DD HH:mm:ss') })
     },
     redirect(path) {
       this.$router.push(path)
