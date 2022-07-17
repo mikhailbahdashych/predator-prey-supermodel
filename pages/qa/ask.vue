@@ -1,26 +1,39 @@
 <template>
   <div class="ask-wrapper">
 
-    <Input
-      v-model="title"
-      :title="'Question title'"
-    />
+    <div class="mb">
+      <Input
+        v-model="title"
+        :disabled="loading"
+        :additional-class="'small white-stroke'"
+        :title="'Question title'"
+      />
+    </div>
 
     <client-only>
-      <vue-editor v-model="content" class="VueEditor" />
+      <div class="editor">
+        <vue-editor
+          v-model="content"
+        />
+      </div>
     </client-only>
 
-    <Checkbox
-      v-model="notify"
-      :input-value="notify"
-      :disabled="loading"
-      :label="'Notify me, when someone answers'"
-    />
-
-    <Button
-      :label="'Ask question'"
-      @click-handler="postQuestion"
-    />
+    <div class="editor">
+      <Checkbox
+        v-model="notify"
+        :input-value="notify"
+        :disabled="loading"
+        :label="'Notify me, when the question is answered'"
+      />
+      <div class="ask-button">
+        <Button
+          :disabled="loading"
+          :label="'Ask question'"
+          :additional-class="'min-width150'"
+          @click-handler="postQuestion"
+        />
+      </div>
+    </div>
 
   </div>
 </template>
@@ -89,6 +102,26 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import "../../assets/css/pages/qa/ask";
+<style scoped>
+.ask-wrapper {
+  width: 45%;
+  margin: 0 auto;
+}
+.ask-button {
+  width: 150px;
+}
+
+.editor {
+  padding: 0 5px 0 5px;
+}
+
+::v-deep .ql-toolbar.ql-snow {
+  border-radius: 8px 8px 0 0;
+  border: 1px solid rgba(225, 232, 236, .25);
+  border-bottom: none;
+}
+::v-deep #quill-container {
+  border-radius: 0 0 8px 8px;
+  border: 1px solid rgba(225, 232, 236, .25);
+}
 </style>
