@@ -177,9 +177,12 @@ router.patch('/v/:id/:v/:postType', async (req, res) => {
   }
 })
 
-router.get('/g-q-b-s/:s', async (req, res) => {
+router.get('/g-q-b-s', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-question-by-slug/${req.params.s}`, {
+    const { data } = await api.get(`/get-question-by-slug`, {
+      params: {
+        slug: req.query.slug
+      },
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD

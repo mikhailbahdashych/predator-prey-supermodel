@@ -154,7 +154,9 @@ export const vote = async (payload, token) => {
 
 export const getQuestionBySlug = async (slug) => {
   try {
-    const { data } = await api.get(`/g-q-b-s/${slug}`)
+    const { data } = await api.get(`/g-q-b-s`, {
+      params: { slug }
+    })
     return data
   } catch (e) {
     return e.response.data

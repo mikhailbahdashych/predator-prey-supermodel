@@ -52,7 +52,7 @@ export default {
     },
     async getPostsBySlug() {
       if (this.title.length > 0)
-        this.slugPosts = await getQuestionBySlug(this.title.split(' ').join('-').toLowerCase())
+        this.slugPosts = await getQuestionBySlug(this.title.split(' ').join('+').toLowerCase())
     },
     async postQuestion() {
       const data = await createQuestionPost({
