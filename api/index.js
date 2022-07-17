@@ -123,7 +123,7 @@ export const getUserSettings = async (token, type) => {
 
 export const search = async payload => {
   try {
-    const { data } = await api.post('/s', payload)
+    const { data } = await api.get('/s', payload)
     return data
   } catch (e) {
     return e.response.data

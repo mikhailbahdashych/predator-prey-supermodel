@@ -8,6 +8,9 @@
         :additional-class="'small white-stroke'"
         :title="'Question title'"
       />
+      <div class="similar-questions">
+
+      </div>
     </div>
 
     <client-only>
@@ -55,15 +58,22 @@ export default {
   layout: 'default',
   data() {
     return {
-      slugPosts: [],
+      similarQuestions: [],
+
       title: null,
+      titleLength: null,
       content: null,
       notify: false,
+
+      showSimilarQuestions: false,
       loading: true
     }
   },
   watch: {
-    async title() {
+    title() {
+      this.titleLength = this.title.split(' ')
+    },
+    'titleLength.length': async function () {
       await this.getPostsBySlug()
     }
   },
@@ -86,17 +96,26 @@ export default {
         return this.$router.push('/')
     },
     async getPostsBySlug() {
-      if (this.title.length > 0)
-        this.slugPosts = await getQuestionBySlug(this.title.split(' ').join('+').toLowerCase())
+      if (this.title.length > 0) {
+        this.similarQuestions = await getQuestionBySlug(this.title.split(' ').join('+').toLowerCase())
+        this.showSimilarQuestions = true
+      } else {
+        this.showSimilarQuestions = false
+      }
     },
     async postQuestion() {
+      this.loading = true
+
       const data = await createQuestionPost({
         title: this.title,
         content: this.content,
         notify: this.notify
       }, sessionStorage.getItem('_at'))
+
       if (data.status === 1)
         return this.$router.push(`/qa/question/${data.questionId}`)
+
+      this.loading = false
     }
   }
 }
@@ -107,14 +126,14 @@ export default {
   width: 45%;
   margin: 0 auto;
 }
+.similar-questions {
+}
 .ask-button {
   width: 150px;
 }
-
 .editor {
   padding: 0 5px 0 5px;
 }
-
 ::v-deep .ql-toolbar.ql-snow {
   border-radius: 8px 8px 0 0;
   border: 1px solid rgba(225, 232, 236, .25);

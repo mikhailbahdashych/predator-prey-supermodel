@@ -141,9 +141,9 @@ router.get('/g-u-s/:type', async (req, res) => {
   }
 });
 
-router.post('/s', async (req, res) => {
+router.get('/s', async (req, res) => {
   try {
-    const { data } = await api.post('/search', req.body, {
+    const { data } = await api.get('/search', {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
