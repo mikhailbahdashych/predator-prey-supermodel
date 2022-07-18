@@ -30,6 +30,10 @@ export default {
   created() {
     this.$nextTick(() => { this.loading = false })
   },
+  mounted() {
+    const theme = localStorage.getItem('_t')
+    this.darkTheme = theme === '_d'
+  },
   methods: {
     changeTheme() {
       this.darkTheme = !this.darkTheme
