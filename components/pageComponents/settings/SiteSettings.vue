@@ -1,12 +1,14 @@
 <template>
   <div class="account-preferences">
-    <div class="item-content">
-      <div class="item-content texts">
-        <h3>Change light theme</h3>
-        <p class="opacity">Change theme between dark and light.</p>
-      </div>
+    <div class="item">
       <div class="item-content">
-        <toggle-switch :value="lightTheme" @input="changeTheme" />
+        <div class="item-content texts">
+          <h3>Change color theme</h3>
+          <p class="opacity">Change theme between dark and light.</p>
+        </div>
+        <div class="item-content">
+          <toggle-switch :value="lightTheme" @input="changeTheme" />
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +33,7 @@ export default {
   methods: {
     changeTheme() {
       this.lightTheme = !this.lightTheme
+      document.documentElement.setAttribute("data-theme", this.lightTheme ? "dark" : "light");
     }
   }
 }
