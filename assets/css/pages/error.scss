@@ -4,10 +4,10 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: v.$default-bg;
+  background-color: var(--default-bg);
   .text {
     font-family: "Lato", sans-serif;
-    color: v.$main-color-light;
+    color: var(--font-color);
   }
   .head {
     font-size: 52px;

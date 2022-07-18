@@ -18,7 +18,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--header-bg-page);
+  background-color: var(--header-bg-pale);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -31,7 +31,7 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: v.$main-color-light;
+  background-color: var(--font-color);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

@@ -11,8 +11,8 @@
   font-size: 32px;
   font-weight: 900;
   outline: none;
-  color: v.$main-color-light;
-  background-color: v.$default-bg;
+  color: var(--font-color);
+  background-color: var(--default-bg);
   border-radius: 6px;
   caret-color: transparent;
   border: none;
@@ -28,7 +28,7 @@
 }
 
 .input-two-fa:disabled {
-  background-color: rgba(v.$default-bg, .25);
+  background-color: rgba(var(--default-bg), .25);
 }
 
 .input-two-fa:focus {
@@ -37,8 +37,8 @@
 
 .on-white {
   input {
-    border: 1px solid v.$default-bg;
+    border: 1px solid var(--default-bg);
     background-color: rgba(#fff, .5);
-    color: v.$default-bg;
+    color: var(--default-bg);
   }
 }

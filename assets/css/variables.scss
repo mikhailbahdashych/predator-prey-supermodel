@@ -1,4 +1,4 @@
-$header-bg-page: rgb(31, 36, 54);
+$header-bg-pale: rgb(31, 36, 54);
 $header-bg: rgb(22, 27, 34);
 $default-bg: rgb(13, 17, 23);
 
@@ -12,15 +12,15 @@ $error-pale: rgb(248, 107, 107);
 
 
 [data-theme="dark"] {
-  --header-bg-page: rgb(31, 36, 54);
+  --header-bg-pale: rgb(31, 36, 54);
   --header-bg: rgb(22, 27, 34);
   --default-bg: rgb(13, 17, 23);
   --font-color: rgb(225, 232, 236);
 }
 
 [data-theme="light"] {
-  --header-bg-page: rgb(204, 204, 204);
-  --header-bg: rgba(239, 239, 239, 0.81);
-  --default-bg: rgba(185, 185, 185, 0.81);
+  --header-bg-pale: rgb(204, 204, 204);
+  --header-bg: rgba(215, 215, 215);
+  --default-bg: rgba(239, 239, 239);
   --font-color: rgb(13, 17, 23);
 }

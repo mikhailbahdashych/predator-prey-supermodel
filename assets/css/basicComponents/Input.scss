@@ -12,7 +12,7 @@
   font-size: 16px;
   line-height: 24px;
   transition: .3s;
-  color: v.$main-color-light;
+  color: var(--font-color);
   font-family: "Inter", sans-serif;
   &.textarea {
     padding: 15px;
@@ -46,15 +46,15 @@
     &.error:focus { border: 1px solid rgba(v.$error, .5); }
     &.pointer { cursor: pointer }
     &.readonly { border: 1px solid rgba(v.$main-color, .5); }
-    &.white-stroke { border: 1px solid rgba(v.$main-color-light, .25); }
+    &.white-stroke { border: 1px solid rgba(var(--font-color), .25); }
   }
   .basic-input:focus { border: 1px solid rgba(v.$main-color, .5); }
-  .basic-input:disabled { background-color: rgba(v.$main-color-light, .1) }
+  .basic-input:disabled { background-color: rgba(var(--font-color), .1) }
 
   .on-white {
-    border: 1px solid rgba(v.$default-bg, .5);
+    border: 1px solid rgba(var(--default-bg), .5);
     background-color: rgba(#fff, .5);
-    color: v.$default-bg;
+    color: var(--default-bg);
   }
 }
 

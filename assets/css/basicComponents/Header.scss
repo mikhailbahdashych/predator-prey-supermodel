@@ -34,7 +34,7 @@
         }
       }
       .link:hover {
-        background-color: rgba(v.$main-color-light, .24);
+        background-color: rgba(var(--font-color), .24);
       }
     }
   }

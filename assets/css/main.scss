@@ -25,7 +25,7 @@ p, h1, h2, h3, h4, h5, li {
   // Source Sans Pro
   font-family: "Inter", sans-serif;
   font-weight: 200;
-  color: v.$main-color-light;
+  color: var(--font-color);
   opacity: .8;
   margin-right: 5px;
   margin-left: 5px;
@@ -33,19 +33,19 @@ p, h1, h2, h3, h4, h5, li {
 
 .nuxt-link {
   text-decoration: none;
-  color: v.$main-color-light;
+  color: var(--font-color);
 }
 
 .paragraph {
   font-size: 14px;
   opacity: .9;
-  color: v.$main-color-light;
+  color: var(--font-color);
   &.small { font-size: 12px }
   &.average { font-size: 16px; }
   &.medium { font-size: 18px; }
   &.large { font-size: 24px; }
   &.right { float: right; }
-  &.on-white-paragraph { color: v.$default-bg; }
+  &.on-white-paragraph { color: var(--default-bg); }
   &.error { color: v.$error }
   &.link { color: v.$main-color; cursor: pointer; text-decoration: underline }
   &.success { color: lightgreen }
@@ -78,7 +78,7 @@ a {
 .page-content {
   position: relative;
   min-height: 100vh;
-  background-color: v.$default-bg;
+  background-color: var(--default-bg);
   .content-wrap { padding-bottom: 50px; }
 }
 

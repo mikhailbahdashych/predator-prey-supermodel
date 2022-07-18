@@ -25,13 +25,13 @@
     }
   }
   .avatar:hover {
-    background-color: rgba(v.$main-color-light, .15);
+    background-color: rgba(var(--font-color), .15);
     border-radius: 8px;
   }
 
   .side-bar {
     width: 250px;
-    background-color: v.$default-bg;
+    background-color: var(--default-bg);
     .item {
       width: 100%;
       margin: 0 10px 10px;
@@ -40,7 +40,7 @@
       transition: .2s;
       line-height: 38px;
       &.item-active {
-        background-color: rgba(v.$main-color-light, .15);
+        background-color: rgba(var(--font-color), .15);
         border-radius: 5px;
       }
     }
@@ -51,7 +51,7 @@
       border-radius: 5px;
     }
     .item:hover {
-      background-color: rgba(v.$main-color-light, .15);
+      background-color: rgba(var(--font-color), .15);
       border-radius: 5px;
     }
   }
@@ -83,7 +83,7 @@
   }
 
   .item {
-    border-bottom: 1px solid rgba(v.$main-color-light, .25);
+    border-bottom: 1px solid rgba(var(--font-color), .25);
     .item-content {
       display: flex;
       align-items: center;
