@@ -4,7 +4,7 @@
   border-radius: 5px;
   outline: none;
   border: 1px solid rgba(0,0,0,0);
-  background-color: rgba(#000, .5);
+  background-color: var(--input-background);
   padding: 0 16px 0 16px;
   width: 100%;
   box-sizing: border-box;
@@ -64,6 +64,7 @@
   width: 400px;
   height: 300px;
   background-color: var(--header-bg);
+  color: var(--font-color);
   border-radius: 8px;
   border: 1px solid rgba(v.$main-color, .5);
   top: 70px;
