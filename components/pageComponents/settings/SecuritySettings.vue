@@ -82,7 +82,7 @@
       <div v-if="securityTwoFa.qr" class="center">
         <img :src="securityTwoFa.qr" alt="2fa">
 
-        <p class="paragraph">In case if you are unable to scan this QR code, copy (click to copy) this key and paste it in Google Authenticator application as setup key.</p>
+        <p class="paragraph on-white-paragraph">In case if you are unable to scan this QR code, copy (click to copy) this key and paste it in Google Authenticator application as setup key.</p>
         <input id="secret" :value="`${securityTwoFa.secret}`" type="hidden" />
         <p class="paragraph link" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
 

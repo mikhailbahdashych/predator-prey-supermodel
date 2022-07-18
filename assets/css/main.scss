@@ -45,7 +45,7 @@ p, h1, h2, h3, h4, h5, li {
   &.medium { font-size: 18px; }
   &.large { font-size: 24px; }
   &.right { float: right; }
-  &.on-white-paragraph { color: var(--default-bg); }
+  &.on-white-paragraph { color: v.$on-white; }
   &.error { color: v.$error }
   &.link { color: v.$main-color; cursor: pointer; text-decoration: underline }
   &.success { color: lightgreen }

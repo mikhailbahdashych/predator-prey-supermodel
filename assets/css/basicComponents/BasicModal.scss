@@ -41,12 +41,12 @@
 
       h3 {
         position: absolute;
-        color: var(--font-color);
+        color: v.$on-white;
       }
     }
     .modal-description {
       letter-spacing: 0;
-      color: var(--font-color);
+      color: v.$on-white;
       width: 85%;
       text-align: center;
       margin-bottom: 25px;
