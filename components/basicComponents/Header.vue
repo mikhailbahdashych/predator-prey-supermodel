@@ -93,7 +93,7 @@ export default {
       if (tokenData.message === 'invalid-token') {
         sessionStorage.removeItem('_at')
         this.userData.status = -1
-        return this.$router.push('/')
+        return this.$router.push('/signin')
       } else {
         this.userData.status = 1;
         this.userData.personalId = tokenData.personalId

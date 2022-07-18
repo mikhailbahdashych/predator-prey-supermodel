@@ -97,7 +97,7 @@ export default {
       this.personalInfo = await getUserSettings(token, 'personal')
 
       if (this.personalInfo.status === -1 || this.personalInfo.status === 401)
-        return this.$router.push('/')
+        return this.$router.push('/signin')
     },
     async updatePersonalInfo() {
       this.loading = true

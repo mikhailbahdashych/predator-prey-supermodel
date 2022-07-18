@@ -88,12 +88,12 @@ export default {
       const token = sessionStorage.getItem('_at')
 
       if (!token)
-        return this.$router.push('/')
+        return this.$router.push('/signin')
 
       const tokenData = verifyToken(token)
 
       if (tokenData.message === 'invalid-token')
-        return this.$router.push('/')
+        return this.$router.push('/signin')
     },
     async getPostsBySlug() {
       if (this.title.length > 0) {

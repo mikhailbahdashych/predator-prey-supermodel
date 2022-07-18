@@ -362,7 +362,7 @@ export default {
       const userSettings = await getUserSettings(token, 'security')
 
       if (userSettings.status === -1 || userSettings.status === 401)
-        return this.$router.push('/')
+        return this.$router.push('/signin')
 
       if (userSettings.twoFa)
         this.securityTwoFa.status = 2
