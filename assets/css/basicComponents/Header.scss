@@ -3,7 +3,7 @@
 .header {
   display: flex;
   width: 100%;
-  height: 60px;
+  height: 50px;
   background-color: v.$header-bg;
   .inner-header {
     margin: 0 auto;
@@ -19,18 +19,39 @@
         display: flex;
         margin-left: 20px;
       }
-      .links {
-        font-size: 16px;
-        transition: .3s;
-        &.logo {
-          font-size: 30px;
-          padding-right: 15px;
+
+      .link {
+        height: 70%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        transition: .2s;
+        margin: 0 5px;
+        .link-title {
+          transition: .3s;
+          font-size: 14px;
         }
       }
-      .links:hover {
-        color: v.$main-color;
-        transform: scale(1.1);
+      .link:hover {
+        background-color: rgba(v.$main-color-light, .24);
       }
+    }
+  }
+
+  .link-logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    .logo {
+      font-size: 25px;
+      margin: 0;
+      padding-left: 15px;
+      transition: .2s;
+    }
+    .logo:hover {
+      transform: scale(1.1);
+      color: v.$main-color
     }
   }
 }

@@ -1,24 +1,32 @@
 <template>
   <div class="header">
+    <div v-if='loading' class="link-logo"><skeleton :text="'pNb'" /></div>
+    <div v-else class="link-logo">
+      <nuxt-link no-prefetch to="/">
+        <h3 class='logo'>pNb</h3>
+      </nuxt-link>
+    </div>
     <div class="inner-header">
       <div class="content">
         <div class="content">
-          <skeleton v-if='loading' :text="'pNb'" />
-          <nuxt-link v-else to="/" class='nuxt-link'>
-            <h3 class="links logo">pNb</h3>
-          </nuxt-link>
-          <skeleton v-if='loading' :text="'FORUM'" />
-          <nuxt-link v-else to="/forum" class='nuxt-link'>
-            <h3 class="links">FORUM</h3>
-          </nuxt-link>
           <skeleton v-if='loading' :text="'Q&A'" />
-          <nuxt-link v-else to="/qa" class='nuxt-link'>
-            <h3 class="links">Q&A</h3>
-          </nuxt-link>
+          <div v-else class="link">
+            <nuxt-link no-prefetch to="/qa" class='nuxt-link'>
+              <p class="link-title">Q&A</p>
+            </nuxt-link>
+          </div>
+          <skeleton v-if='loading' :text="'FORUM'" />
+          <div v-else class="link">
+            <nuxt-link no-prefetch to="/forum" class='nuxt-link'>
+              <p class="link-title">Forum</p>
+            </nuxt-link>
+          </div>
           <skeleton v-if='loading' :text="'BLOG'" />
-          <nuxt-link v-else to="/blog" class='nuxt-link'>
-            <h3 class="links">BLOG</h3>
-          </nuxt-link>
+          <div v-else class="link">
+            <nuxt-link no-prefetch to="/blog" class='nuxt-link'>
+              <p class="link-title">Blog</p>
+            </nuxt-link>
+          </div>
         </div>
         <div class="content">
           <input-search />
