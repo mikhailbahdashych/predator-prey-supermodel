@@ -230,7 +230,7 @@ export const createBlogPost = async (payload, token) => {
 
 export const createForumPost = async (payload, token) => {
   try {
-    const { data } = await api.post('/c-f-p', payload, {
+    const { data } = await api.post('/c-f-t', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -241,7 +241,7 @@ export const createForumPost = async (payload, token) => {
 
 export const createQuestionPost = async (payload, token) => {
   try {
-    const { data } = await api.post('/c-q-p', payload, {
+    const { data } = await api.post('/c-q', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data

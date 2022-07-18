@@ -52,6 +52,10 @@
     color: var(--font-color);
     background-color: rgba(v.$error, .35);
   }
+  &.danger-fill:disabled:hover {
+    cursor: auto;
+    background-color: rgba(v.$error, .35);
+  }
 
   &.min-width150 { width: 150px; }
   &.high-height { height: 48px; }

@@ -289,9 +289,9 @@ router.post('/c-b-p', async (req, res) => {
   }
 });
 
-router.post('/c-f-p', async (req, res) => {
+router.post('/c-f-t', async (req, res) => {
   try {
-    const { data } = await api.post('/create-forum-post', req.body, {
+    const { data } = await api.post('/create-forum-thread', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -300,9 +300,9 @@ router.post('/c-f-p', async (req, res) => {
   }
 });
 
-router.post('/c-q-p', async (req, res) => {
+router.post('/c-q', async (req, res) => {
   try {
-    const { data } = await api.post('/create-question-post', req.body, {
+    const { data } = await api.post('/create-question', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
