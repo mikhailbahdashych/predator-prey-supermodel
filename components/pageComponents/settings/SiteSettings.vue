@@ -7,7 +7,7 @@
           <p class="opacity">Change theme between dark and light.</p>
         </div>
         <div class="item-content">
-          <toggle-switch :value="lightTheme" @input="changeTheme" />
+          <toggle-switch :value="darkTheme" @input="changeTheme" />
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       loading: true,
-      lightTheme: false
+      darkTheme: true
     }
   },
   created() {
@@ -32,8 +32,9 @@ export default {
   },
   methods: {
     changeTheme() {
-      this.lightTheme = !this.lightTheme
-      document.documentElement.setAttribute("data-theme", this.lightTheme ? "dark" : "light");
+      this.darkTheme = !this.darkTheme
+      document.documentElement.setAttribute("data-theme", this.darkTheme ? "dark" : "light");
+      localStorage.setItem('_t', this.darkTheme ? "_d" : "_l")
     }
   }
 }

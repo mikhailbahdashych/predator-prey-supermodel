@@ -47,7 +47,6 @@ module.exports = {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxtjs/google-fonts'
-    // '@nuxtjs/vuetify'
   ],
 
   googleFonts: {
@@ -72,6 +71,9 @@ module.exports = {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
 
+  router: {
+    middleware: 'theme'
+  }
 }
