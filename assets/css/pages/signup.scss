@@ -21,7 +21,7 @@
         transition: .2s;
       }
       .login-title-header:hover {
-        color: v.$main-color;
+        color: var(--main-color);
         font-size: 60px;
       }
     }
@@ -88,7 +88,7 @@
         transition: .2s;
         color: var(--font-color);
       }
-      .choose:hover { color: v.$main-color; }
+      .choose:hover { color: var(--main-color); }
 
       .password-requirement {
         border-radius: 5px;

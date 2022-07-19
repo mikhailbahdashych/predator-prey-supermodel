@@ -13,7 +13,7 @@
     }
   }
   .basic-input-button:focus {
-    border: 1px solid rgba(v.$main-color, .5);
+    border: 1px solid var(--main-color-border);
   }
   .basic-input-button:disabled {
     color: rgba(#fff, .5);

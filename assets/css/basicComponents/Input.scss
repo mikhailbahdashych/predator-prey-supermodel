@@ -3,7 +3,7 @@
 .bi {
   border-radius: 5px;
   outline: none;
-  border: 1px solid rgba(0,0,0,0);
+  border: 1px solid var(--line);
   background-color: var(--input-background);
   padding: 0 16px 0 16px;
   width: 100%;
@@ -21,12 +21,12 @@
     max-height: 200px;
     height: 120px;
     resize: vertical;
-    &.textarea:focus { border: 1px solid rgba(v.$main-color, .5); }
+    &.textarea:focus { border: 1px solid var(--main-color-border); }
   }
   &.search {
     height: 38px;
     font-size: 14px;
-    &.search:focus { border: 1px solid rgba(v.$main-color, .5); }
+    &.search:focus { border: 1px solid var(--main-color-border); }
   }
 }
 
@@ -45,10 +45,10 @@
     &.error { border: 1px solid rgba(v.$error, .5); }
     &.error:focus { border: 1px solid rgba(v.$error, .5); }
     &.pointer { cursor: pointer }
-    &.readonly { border: 1px solid rgba(v.$main-color, .5); }
+    &.readonly { border: 1px solid var(--main-color-border); }
     &.white-stroke { border: 1px solid rgba(var(--font-color), .25); }
   }
-  .basic-input:focus { border: 1px solid rgba(v.$main-color, .5); }
+  .basic-input:focus { border: 1px solid var(--main-color-border); }
   .basic-input:disabled { background-color: rgba(var(--font-color), .1) }
 
   .on-white {
@@ -66,7 +66,7 @@
   background-color: var(--header-bg);
   color: var(--font-color);
   border-radius: 8px;
-  border: 1px solid rgba(v.$main-color, .5);
+  border: 1px solid var(--main-color-border);
   top: 70px;
   left: 0;
   right: 0;

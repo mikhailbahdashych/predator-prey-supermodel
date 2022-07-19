@@ -12,7 +12,7 @@
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: v.$main-color;
+  background-color: var(--main-color);
   font-weight: 300;
   width: 100%;
   min-width: 100px;
@@ -25,11 +25,11 @@
   &.transparent {
     background-color: transparent;
     color: var(--font-color);
-    border: 1px solid v.$main-color;
+    border: 1px solid var(--main-color);
     .label { color: var(--font-color); }
   }
   &.transparent:hover {
-    background-color: rgba(v.$main-color, .25);
+    background-color: var(--main-color-hover);
   }
 
   &.danger {
@@ -68,16 +68,16 @@
 }
 
 .basic-button:hover {
-  background-color: v.$main-color-page;
+  background-color: var(--main-color-pale);
 }
 .basic-button:active {
-  background-color: v.$main-color-dark;
+  background-color: var(--main-color-dark);
 }
 .basic-button:disabled {
-  background-color: rgba(v.$main-color, .35);
+  background-color: var(--main-color-disable);
   cursor: auto;
 }
 .basic-button:disabled:hover {
-  background-color: rgba(v.$main-color, .35);
+  background-color: var(--main-color-disable);
   cursor: auto;
 }

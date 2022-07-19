@@ -46,7 +46,7 @@
     }
     .vertical-line {
       width: 5px;
-      background-color: v.$main-color;
+      background-color: var(--main-color);
       height: 38px;
       border-radius: 5px;
     }

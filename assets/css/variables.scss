@@ -1,11 +1,6 @@
-$main-color: rgb(88, 167, 254);
-$main-color-page: rgb(124, 185, 252);
-$main-color-dark: rgb(57, 153, 255);
-$main-color-light: rgb(225, 232, 236);
-
 $error: rgb(255, 51, 51);
 $error-pale: rgb(248, 107, 107);
-$on-white: rgba(0, 0, 0, .65);
+$on-white: rgba(0, 0, 0, .35);
 
 [data-theme="dark"] {
   --header-bg-pale: rgb(31, 36, 54);
@@ -16,15 +11,30 @@ $on-white: rgba(0, 0, 0, .65);
   --hover: rgba(255, 255, 255, .15);
   --line: rgba(255, 255, 255, .25);
   --shadow: rgba(255, 255, 255, 0);
+
+  --main-color: rgb(88, 167, 254);
+  --main-color-border: rgba(88, 167, 254, .5);
+  --main-color-disable: rgba(88, 167, 254, .35);
+  --main-color-hover: rgba(88, 167, 254, .25);
+  --main-color-dark: rgb(57, 153, 255);
+  --main-color-pale: rgb(124, 185, 252);
+  --main-color-light: rgb(225, 232, 236);
 }
 
 [data-theme="light"] {
   --header-bg-pale: rgb(204, 204, 204);
-  --header-bg: rgba(230, 230, 230);
-  --default-bg: rgba(239, 239, 239);
+  --header-bg: rgba(239, 239, 239);
+  --default-bg: rgba(255, 255, 255);
   --font-color: rgb(13, 17, 23);
-  --input-background: rgba(255, 255, 255, .5);
+  --input-background: rgba(239, 239, 239, .1);
   --hover: rgba(0, 0, 0, .15);
   --line: rgba(0, 0, 0, .25);
   --shadow: rgba(0, 0, 0, .1);
+  --main-color: rgb(57, 153, 255);
+  --main-color-border: rgba(57, 153, 255);
+  --main-color-disable: rgba(88, 167, 254, .35);
+  --main-color-hover: rgba(88, 167, 254, .25);
+  --main-color-dark: rgb(88, 167, 254);
+  --main-color-pale: rgb(124, 185, 252);
+  --main-color-light: rgb(225, 232, 236);
 }

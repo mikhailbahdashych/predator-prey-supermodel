@@ -32,7 +32,7 @@
 }
 
 .input-two-fa:focus {
-  border: 1px solid rgba(v.$main-color, .5);
+  border: 1px solid var(--main-color-border);
 }
 
 .on-white {
