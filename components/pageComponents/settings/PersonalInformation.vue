@@ -6,13 +6,13 @@
       <div class="fields">
         <div class="flex">
           <Input
-            v-model="personalInfo.first_name"
+            v-model="personalInformation.first_name"
             :title="'First name'"
             :title-class="'small'"
             :additional-class="'small'"
           />
           <Input
-            v-model="personalInfo.last_name"
+            v-model="personalInformation.last_name"
             :title="'Last name'"
             :title-class="'small'"
             :additional-class="'small'"
@@ -20,26 +20,26 @@
         </div>
         <div class="flex">
           <Input
-            v-model="personalInfo.website_link"
+            v-model="personalInformation.website_link"
             :title="'Website'"
             :title-class="'small'"
             :additional-class="'small'"
           />
           <Input
-            v-model="personalInfo.twitter"
+            v-model="personalInformation.twitter"
             :title="'Twitter'"
             :title-class="'small'"
             :additional-class="'small'"
           />
           <Input
-            v-model="personalInfo.github"
+            v-model="personalInformation.github"
             :title="'GitHub'"
             :title-class="'small'"
             :additional-class="'small'"
           />
         </div>
         <Textarea
-          v-model="personalInfo.about_me"
+          v-model="personalInformation.about_me"
           :title="'About'"
         />
       </div>
@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      personalInfo: {},
+      personalInformation: {},
       loading: false,
       showPopup: false
     }
@@ -94,16 +94,16 @@ export default {
   methods: {
     async getUserPersonalSettings() {
       const token = sessionStorage.getItem('_at')
-      this.personalInfo = await getUserSettings(token, 'personal')
+      this.personalInformation = await getUserSettings(token, 'personal')
 
-      if (this.personalInfo.status === -1 || this.personalInfo.status === 401)
+      if (this.personalInformation.status === -1 || this.personalInformation.status === 401)
         return this.$router.push('/signin')
     },
     async updatePersonalInfo() {
       this.loading = true
 
       const { status } = await updateUserPersonalInformation({
-        ...this.personalInfo
+        ...this.personalInformation
       }, sessionStorage.getItem('_at'))
 
       if (status === 1) {
