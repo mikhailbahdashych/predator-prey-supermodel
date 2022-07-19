@@ -36,9 +36,9 @@ export default {
   },
   methods: {
     changeTheme() {
-      this.$store.commit('theme/setTheme', !this.darkTheme)
       this.darkTheme = !this.darkTheme
-      document.documentElement.setAttribute("data-theme", this.darkTheme ? "dark" : "light");
+      document.documentElement.setAttribute('data-theme', this.darkTheme ? "dark" : "light");
+      localStorage.setItem('_t', this.darkTheme ? '_d' : '_l');
     }
   }
 }
