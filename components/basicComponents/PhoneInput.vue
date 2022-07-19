@@ -93,7 +93,7 @@
 import { allCountries } from 'country-telephone-data'
 import { getAvailableFlags } from '~/api'
 export default {
-  name: 'AwesomePhoneInput',
+  name: 'PhoneInput',
   inject: ['$validator'],
   props: {
     value: {

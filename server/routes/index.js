@@ -144,6 +144,9 @@ router.get('/g-u-s/:type', async (req, res) => {
 router.get('/s', async (req, res) => {
   try {
     const { data } = await api.get('/search', {
+      params: {
+        slug: req.query.slug
+      },
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD

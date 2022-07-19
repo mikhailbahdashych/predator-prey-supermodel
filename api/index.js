@@ -121,9 +121,11 @@ export const getUserSettings = async (token, type) => {
   }
 }
 
-export const search = async payload => {
+export const search = async slug => {
   try {
-    const { data } = await api.get('/s', payload)
+    const { data } = await api.get('/s', {
+      params: { slug }
+    })
     return data
   } catch (e) {
     return e.response.data
