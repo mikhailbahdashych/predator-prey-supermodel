@@ -46,6 +46,7 @@ module.exports = {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/color-mode',
     '@nuxtjs/google-fonts'
   ],
 
@@ -72,8 +73,4 @@ module.exports = {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-
-  router: {
-    middleware: 'theme'
-  }
 }
