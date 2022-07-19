@@ -155,10 +155,8 @@ export default {
         this.loading = true
 
         const payload = { email: this.loginEmail.email, password: this.loginPassword.password }
-        if (this.loginPhone.phone)
-          payload.phone = this.loginPhone.phone
-        if (this.twoFa.normalCode)
-          payload.twoFa = this.twoFa.normalCode
+        if (this.loginPhone.phone) payload.phone = this.loginPhone.phone
+        if (this.twoFa.normalCode) payload.twoFa = this.twoFa.normalCode
 
         const res = await signIn(payload)
 

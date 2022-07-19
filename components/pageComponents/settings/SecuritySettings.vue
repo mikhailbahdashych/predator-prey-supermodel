@@ -396,14 +396,14 @@ export default {
     },
     async setTwoFa() {
       const { status } = await setTwoFa({
-        twoFaCode: this.securityTwoFa.normalCode,
+        twoFa: this.securityTwoFa.normalCode,
         twoFaToken: this.securityTwoFa.secret
       }, sessionStorage.getItem('_at'))
       this.securityTwoFa.status = status
     },
     async disableTwoFa() {
       const { status } = await disableTwoFa({
-        twoFaCode: this.securityTwoFa.normalCode
+        twoFa: this.securityTwoFa.normalCode
       }, sessionStorage.getItem('_at'))
       this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
     },
@@ -431,7 +431,7 @@ export default {
         this.confirmActionTwoFa.action = 'changePassword'
       } else {
         const { status } = await changePassword({
-          currentPassword: this.securityPassword.currentPassword,
+          password: this.securityPassword.currentPassword,
           newPassword: this.securityPassword.newPassword,
           newPasswordRepeat: this.securityPassword.newPasswordRepeat,
           twoFa: this.confirmActionTwoFa.normalCode
@@ -446,7 +446,7 @@ export default {
       } else {
         const { status } = await changeEmail({
           twoFa: this.confirmActionTwoFa.normalCode,
-          newEmail: this.changeEmailData.newEmail
+          email: this.changeEmailData.newEmail
         }, sessionStorage.getItem('_at'))
         this.changeEmailData.status = status
       }
