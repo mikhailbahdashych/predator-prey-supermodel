@@ -6,10 +6,10 @@
   .basic-input-button {
     margin-right: 15px;
     &.error {
-      border: 1px solid rgba(v.$error, .5);
+      border: 1px solid var(--error-border);
     }
     &.error:focus {
-      border: 1px solid rgba(v.$error, .5);
+      border: 1px solid var(--error-border);
     }
   }
   .basic-input-button:focus {

@@ -33,28 +33,28 @@
   }
 
   &.danger {
-    border: 1px solid rgba(v.$error, .5);
-    color: v.$error;
+    border: 1px solid var(--error-border);
+    color: var(--error);
   }
   &.danger:hover {
-    background-color: rgba(v.$error, .25);
+    background-color: var(--error-hover);
   }
   &.danger-fill {
     border: none;
     color: var(--font-color);
-    background-color: v.$error;
+    background-color: var(--error);
   }
   &.danger-fill:hover {
-    background-color: v.$error-pale;
+    background-color: var(--error-pale);
   }
   &.danger-fill:disabled {
     border: none;
     color: var(--font-color);
-    background-color: rgba(v.$error, .35);
+    background-color: var(--error-disabled);
   }
   &.danger-fill:disabled:hover {
     cursor: auto;
-    background-color: rgba(v.$error, .35);
+    background-color: var(--error-disabled);
   }
 
   &.min-width150 { width: 150px; }
