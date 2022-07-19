@@ -154,9 +154,29 @@ export const vote = async (payload, token) => {
   }
 }
 
-export const getQuestionBySlug = async (slug) => {
+export const getQuestion = async slug => {
   try {
-    const { data } = await api.get(`/g-q-b-s`, {
+    const { data } = await api.get(`/g-q`, {
+      params: { slug }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getQuestions = async sort => {
+  try {
+    const { data } = await api.get(`/g-qs/${sort}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getBlogPost = async slug => {
+  try {
+    const { data } = await api.get(`/g-b-p`, {
       params: { slug }
     })
     return data
@@ -174,45 +194,20 @@ export const getBlogPosts = async by => {
   }
 }
 
+export const getForumThread = async slug => {
+  try {
+    const { data } = await api.get(`/g-f-t`, {
+      params: { slug }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getForumThreads = async by => {
   try {
     const { data } = await api.get(`/g-f-ts/${by}`)
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const getQuestions = async sort => {
-  try {
-    const { data } = await api.get(`/g-qs/${sort}`)
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const getBlogPost = async id => {
-  try {
-    const { data } = await api.get(`/g-b-p/${id}`)
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const getForumThread = async id => {
-  try {
-    const { data } = await api.get(`/g-f-t/${id}`)
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const getQuestion = async id => {
-  try {
-    const { data } = await api.get(`/g-q/${id}`)
     return data
   } catch (e) {
     return e.response.data

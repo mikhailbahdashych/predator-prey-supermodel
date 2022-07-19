@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { getQuestionBySlug } from '~/api'
+import { getQuestion } from '~/api'
 // import { validateSlug } from '~/helpers/frontValidator'
 export default {
   name: 'Slug',
@@ -21,7 +21,7 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    this.question = await getQuestionBySlug(this.$route.params.slug)
+    this.question = await getQuestion(this.$route.params.slug)
   },
   methods: {
 

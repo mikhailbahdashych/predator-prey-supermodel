@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { getQuestionBySlug, createQuestionPost } from '~/api'
+import { getQuestion, createQuestionPost } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
 import Checkbox from '~/components/basicComponents/Checkbox'
@@ -97,7 +97,7 @@ export default {
     },
     async getPostsBySlug() {
       if (this.title.length > 0) {
-        this.similarQuestions = await getQuestionBySlug(this.title.split(' ').join('+').toLowerCase())
+        this.similarQuestions = await getQuestion(this.title.split(' ').join('+').toLowerCase())
         this.showSimilarQuestions = true
       } else {
         this.showSimilarQuestions = false
