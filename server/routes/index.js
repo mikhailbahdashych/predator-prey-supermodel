@@ -225,9 +225,9 @@ router.get('/g-f-ts/:by', async (req, res) => {
   }
 })
 
-router.get('/g-qs/:by', async (req, res) => {
+router.get('/g-qs/:sort', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-questions/${req.params.by}`, {
+    const { data } = await api.get(`/get-questions/${req.params.sort}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD

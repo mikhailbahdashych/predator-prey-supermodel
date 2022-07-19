@@ -183,9 +183,9 @@ export const getForumThreads = async by => {
   }
 }
 
-export const getQuestions = async by => {
+export const getQuestions = async sort => {
   try {
-    const { data } = await api.get(`/g-qs/${by}`)
+    const { data } = await api.get(`/g-qs/${sort}`)
     return data
   } catch (e) {
     return e.response.data

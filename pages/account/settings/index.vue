@@ -21,7 +21,8 @@
 
       <personal-information v-if="currentSection === 'Public account'" />
       <security-settings v-else-if="currentSection === 'Security settings'" />
-      <site-settings v-else />
+      <site-settings v-else-if="currentSection === 'Appearance settings'" />
+      <notifications v-else />
     </div>
 
   </div>
@@ -31,13 +32,15 @@
 import SecuritySettings from '~/components/pageComponents/settings/SecuritySettings'
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
+import Notifications from '~/components/pageComponents/settings/Notifications'
 import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Settings',
   components: {
     SecuritySettings,
     PersonalInformation,
-    SiteSettings
+    SiteSettings,
+    Notifications
   },
   data() {
     return {
