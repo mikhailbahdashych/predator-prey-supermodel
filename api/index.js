@@ -249,3 +249,8 @@ export const createQuestionPost = async (payload, token) => {
     return e.response.data
   }
 }
+
+export const getAvailableFlags = async payload => {
+  const { data } = await api.get('https://flagcdn.com/en/codes.json')
+  return data
+}
