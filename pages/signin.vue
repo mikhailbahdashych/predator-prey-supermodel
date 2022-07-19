@@ -153,12 +153,14 @@ export default {
     async signin() {
       if (!this.loginEmail.loginEmailError && !this.loginPassword.loginPasswordError) {
         this.loading = true
-        const res = await signIn({
-          email: this.loginEmail.email,
-          phone: this.loginPhone.phone,
-          password: this.loginPassword.password,
-          twoFa: this.twoFa.normalCode
-        })
+
+        const payload = { email: this.loginEmail.email, password: this.loginPassword.password }
+        if (this.loginPhone.phone)
+          payload.phone = this.loginPhone.phone
+        if (this.twoFa.normalCode)
+          payload.twoFa = this.twoFa.normalCode
+
+        const res = await signIn(payload)
 
         if (res.status === -1) {
           this.loginError = true
