@@ -1,16 +1,16 @@
 <template>
   <div>
-    
+
   </div>
 </template>
 
 <script>
 import { getQuestionBySlug } from '~/api'
-import { validateSlug } from '~/helpers/frontValidator'
+// import { validateSlug } from '~/helpers/frontValidator'
 export default {
   name: 'Slug',
   layout: 'default',
-  validate({ params }) { return validateSlug(params.slug) },
+  // validate({ params }) { return validateSlug(params.slug) },
   data() {
     return {
       loading: true,
