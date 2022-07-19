@@ -68,19 +68,19 @@
             :key="dialCodeFilter"
           >
             <li
-              v-for="country in filteredDialCodes"
-              :key="country.name"
+              v-for="c in filteredDialCodes"
+              :key="c.name"
 
               :class="{ active: false }"
 
-              @click="disabled ? null : inputSelectedCountry = country; disabled ? null : showDialList = false;"
+              @click="disabled ? null : inputSelectedCountry = c; disabled ? null : showDialList = false;"
             >
               <img
-                :src="getFlagUrlByCode({ code: country.country.toLowerCase() })"
+                :src="getFlagUrlByCode({ code: c.country.toLowerCase() })"
                 alt="Flag"
               />
-              <span>{{ country.name }}</span>
-              <span>+ {{ country.dial }}</span>
+              <span>{{ c.name }}</span>
+              <span>+ {{ c.dial }}</span>
             </li>
           </ul>
         </transition>
