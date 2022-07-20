@@ -1,0 +1,44 @@
+@mixin centers($align-content, $align-items, $justify-content) {
+  align-content: $align-content;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+@mixin margin($top: unset, $right: unset, $bottom: unset, $left: unset) {
+  margin: $top $right $bottom $left;
+}
+
+@mixin padding($top: unset, $right: unset, $bottom: unset, $left: unset) {
+  padding: $top $right $bottom $left;
+}
+
+@mixin positions($top: unset, $right: unset, $bottom: unset, $left: unset) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+}
+
+@mixin size($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin display($position, $display) {
+  position: $position;
+  display: $display;
+}
+
+@mixin font($font-style, $font-size, $font-weight, $font-family, $line-height, $opacity, $color) {
+  color: $color;
+  font-style: $font-style;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  font-family: $font-family;
+  line-height: $line-height;
+  opacity: $opacity;
+}

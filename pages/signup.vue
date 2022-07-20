@@ -7,7 +7,7 @@
       </h1>
       <div class="login-welcome-texts">
         <h1 class="center">Welcome, @username, feel free to join pNb community</h1>
-        <ul class="login-community">
+        <ul class="login-welcome-texts login-community">
           <li>Be in charge of everything that happens in world of cybersecurity</li>
           <li>Teach and learn - share you knowledge and learn from other</li>
           <li>Feel free to rise up any topic you are interested in on forum</li>

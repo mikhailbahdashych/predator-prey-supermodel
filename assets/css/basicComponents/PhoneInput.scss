@@ -1,5 +1,5 @@
 @use "../variables" as v;
-@import "../_mixins.scss";
+@import "../mixins";
 
 div.awesome-phone-input {
   width: 100%;
@@ -199,8 +199,6 @@ div.awesome-phone-input {
     max-height: 160px;
     height: 160px;
     overflow-x: scroll;
-
-    @include hideScrollbars();
 
     > li {
       width: 100%;

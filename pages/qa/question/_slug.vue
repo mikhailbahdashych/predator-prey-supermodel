@@ -9,6 +9,10 @@
       <p class="paragraph" v-html='question.content' />
     </div>
 
+    <div>
+      <p class="paragraph">{{ answers }}</p>
+    </div>
+
     <h3>Your answer:</h3>
     <client-only>
       <div class="editor">

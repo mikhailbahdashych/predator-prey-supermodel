@@ -1,17 +1,14 @@
 @use "assets/css/variables" as v;
+@import "../mixins";
 
 .login {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100%;
+  @include centers(unset, center, center);
+  @include size(100vh, 100%);
+  @include display(fixed, flex);
   background-color: var(--header-bg);
 
   .login-content {
-    height: 100%;
-    width: 50%;
+    @include size(100%, 50%);
     background-color: var(--default-bg);
     .login-title {
       height: 25%;
@@ -26,33 +23,27 @@
       }
     }
     .login-welcome-texts {
-      margin: 0 auto;
-      width: 90%;
-      height: 50%;
-      .login-community {
-        width: 75%;
-        margin: 0 auto;
+      @include size(50%, 90%);
+      @include margin(0, auto, 0, auto);
+      &.login-community {
+        @include size(unset, 75%);
       }
     }
     @media only screen and (max-width: 930px) { display: none; }
   }
 
   .login-header {
-    width: 100%;
-    height: 50px;
-    position: absolute;
+    @include size(50px, 100%);
+    @include display(absolute, unset);
     top: 0;
     .account-having { padding: 15px; }
   }
 
   .login-inputs {
-    width: 600px;
-    height: 500px;
-    position: relative;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include size(500px, 600px);
+    @include display(relative, flex);
+    @include margin(0, auto, 0, auto);
+    @include centers(unset, center, center);
     &.personal-information {
       height: 100vh;
     }
