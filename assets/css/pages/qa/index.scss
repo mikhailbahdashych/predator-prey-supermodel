@@ -33,9 +33,12 @@
       .on-hover { color: var(--main-color) }
     }
     .preview-block {
-      border: 1px solid var(--line);
+      border: 1px solid var(--main-color-disable);
       border-radius: 5px;
       padding: 5px;
+      &.answer { border: 1px solid var(--success); }
+      &.answered { background-color: var(--background-success); }
+      &.low-quality-question { border: 1px solid var(--error); }
     }
     .asked-by {
       border-radius: 50%;

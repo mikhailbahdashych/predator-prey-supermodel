@@ -9,18 +9,16 @@
       <p class="paragraph" v-html='question.content' />
     </div>
 
+    <h3>Your answer:</h3>
     <client-only>
       <div class="editor">
-        <vue-editor
-          v-model="answer"
-        />
+        <vue-editor v-model="answer" />
       </div>
     </client-only>
 
-    <p class="paragraph">{{ answers }}</p>
-
     <Button
       :label="'Post answer'"
+      :additional-class="'min-width150 mt'"
       @click-handler="answerQuestion"
     />
 

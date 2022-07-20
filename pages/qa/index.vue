@@ -44,8 +44,11 @@
         <div class="flex space-between">
           <div class="flex">
             <p class="paragraph preview-block">Views: 100</p>
-            <p class="paragraph preview-block">Votes: {{ q.votes }}</p>
             <p class="paragraph preview-block">Answers: {{ q.count || 0 }}</p>
+            <p
+              class="paragraph preview-block answer"
+              :class="q.is_answered ? 'answered' : q.votes < 0 ? 'low-quality-question' : ''"
+            >Votes: {{ q.votes  }}</p>
           </div>
           <div class="flex asked-by">
             <img class="avatar-box" :src="require('../../assets/img/testava.jpg')" alt="ava" width='50' height='50'>

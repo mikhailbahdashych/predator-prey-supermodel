@@ -33,13 +33,13 @@
         <Button
           v-if="isOwner && !loading"
           :label="'Edit profile'"
-          :additional-class="'transparent min-width150 mt'"
+          :additional-class="'transparent mt'"
           @click-handler="redirect('/account/settings')"
         />
         <Button
           v-else-if="!isOwner && !loading"
           :label="'Send message'"
-          :additional-class="'transparent min-width150 mt'"
+          :additional-class="'transparent mt'"
           @click-handler="redirect('/account/settings')"
         />
       </div>
