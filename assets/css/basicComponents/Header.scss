@@ -1,4 +1,5 @@
 @use "../variables" as v;
+@import "../mixins";
 
 .header {
   display: flex;
@@ -7,8 +8,7 @@
   background-color: var(--header-bg);
   box-shadow: 0 8px 6px -6px var(--shadow);
   .inner-header {
-    margin: 0 auto;
-    width: 75%;
+    @include wrapper(75%, 0, auto, 0, auto);
     .content {
       display: flex;
       height: 100%;

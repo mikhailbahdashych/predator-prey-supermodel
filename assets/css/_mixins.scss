@@ -1,4 +1,10 @@
-@mixin centers($align-content, $align-items, $justify-content, $display: unset, $flex-direction: unset) {
+@mixin centers(
+  $align-content: unset,
+  $align-items: unset,
+  $justify-content: unset,
+  $display: unset,
+  $flex-direction: unset
+  ) {
   align-content: $align-content;
   align-items: $align-items;
   justify-content: $justify-content;
@@ -32,7 +38,7 @@
   max-width: $max-width;
 }
 
-@mixin display($position, $display, $flex-direction: unset) {
+@mixin display($position: unset, $display: unset, $flex-direction: unset) {
   position: $position;
   display: $display;
   flex-direction: $flex-direction;
