@@ -8,21 +8,41 @@
     <div>
       <p class="paragraph" v-html='question.content' />
     </div>
+
+    <client-only>
+      <div class="editor">
+        <vue-editor
+          v-model="answer"
+        />
+      </div>
+    </client-only>
+
+    <Button
+      :label="'Post answer'"
+      @click-handler="answerQuestion"
+    />
+
   </div>
 </template>
 
 <script>
-import { getQuestion } from '~/api'
+import { getQuestion, answerQuestion } from '~/api'
 import { validateSlug } from '~/helpers/frontValidator'
+import Button from '~/components/basicComponents/Button'
 export default {
   name: 'Slug',
+  components: {
+    VueEditor: async () => process.client ? (await import("vue2-editor")).VueEditor : "",
+    Button
+  },
   layout: 'default',
   validate({ params }) { return validateSlug(params.slug) },
   data() {
     return {
       loading: true,
       question: {},
-      answers: []
+      answers: [],
+      answer: null
     }
   },
   created() {
@@ -34,7 +54,12 @@ export default {
     this.answers = answers
   },
   methods: {
-
+    async answerQuestion() {
+      await answerQuestion({
+        question_id: this.question.id,
+        answer_text: this.answer
+      })
+    }
   }
 }
 </script>
