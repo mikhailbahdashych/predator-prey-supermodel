@@ -22,12 +22,6 @@
     </client-only>
 
     <div class="editor">
-      <Checkbox
-        v-model="notify"
-        :input-value="notify"
-        :disabled="loading"
-        :label="'Notify me, when the question is answered'"
-      />
       <div class="ask-button">
         <Button
           :disabled="loading"
@@ -45,15 +39,13 @@
 import { getQuestion, createQuestionPost } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
-import Checkbox from '~/components/basicComponents/Checkbox'
 import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Ask',
   components: {
     VueEditor: async () => process.client ? (await import("vue2-editor")).VueEditor : "",
     Input,
-    Button,
-    Checkbox
+    Button
   },
   layout: 'default',
   data() {
@@ -63,7 +55,6 @@ export default {
       title: null,
       titleLength: null,
       content: null,
-      notify: false,
 
       showSimilarQuestions: false,
       loading: true
@@ -109,11 +100,10 @@ export default {
       const data = await createQuestionPost({
         title: this.title,
         content: this.content,
-        notify: this.notify
       }, sessionStorage.getItem('_at'))
 
       if (data.status === 1)
-        return this.$router.push(`/qa/question/${data.questionId}`)
+        return this.$router.push(`/qa/question/${data.slug}`)
 
       this.loading = false
     }
