@@ -1,11 +1,12 @@
 <template>
   <div class="error-page center">
-    <h1 class='text head'>You shouldn't be here! >:(</h1>
-    <p class='text paragraph'>
+    <h1 class="text head">Page not found</h1>
+    <p class="text paragraph">Sorry, but we are unable to find whatever you are looking for.</p>
+    <p class="text paragraph">
       <nuxt-link class='nuxt-link' to='/'>
-        Go
+        Go back
       </nuxt-link>
-      and find some cool staff out of here!
+      and try one more time.
     </p>
   </div>
 </template>
@@ -13,7 +14,7 @@
 <script>
 export default {
   name: "Error",
-  layout: 'empty',
+  layout: 'header-only',
   head () {
     return {
       bodyAttrs: {

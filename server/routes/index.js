@@ -211,6 +211,17 @@ router.get('/g-qs/:sort', async (req, res) => {
   }
 })
 
+router.post('/a-q', async (req, res) => {
+  try {
+    const { data } = await api.post('/answer-question', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 router.get('/g-b-p', async (req, res) => {
   try {
     const { data } = await api.get(`/get-blog-post`, {

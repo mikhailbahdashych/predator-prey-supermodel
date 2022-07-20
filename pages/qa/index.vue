@@ -37,9 +37,15 @@
 
     <div class="question-content">
       <div v-for="(q, i) in questions" :key="i" class="question" @click="redirect(`/qa/question/${q.slug}`)">
-        <div class="flex baseline">
+        <div class="flex baseline space-between">
           <p class="paragraph large nmp on-hover">{{ q.title }}</p>
           <p class="paragraph opacity">Asked at {{ q.created_at }}</p>
+        </div>
+        <div class="question-preview">
+          <div>
+            <p class="paragraph">Votes: {{ questions.votes }}</p>
+          </div>
+          <div>ava</div>
         </div>
       </div>
     </div>

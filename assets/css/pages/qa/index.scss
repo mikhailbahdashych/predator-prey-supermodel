@@ -32,6 +32,10 @@
       border-bottom: 1px solid var(--main-color);
       .on-hover { color: var(--main-color) }
     }
+    .question-preview {
+      display: flex;
+      justify-content: space-between;
+    }
   }
   &.asked-question {
     width: 55%;

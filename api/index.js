@@ -174,6 +174,15 @@ export const getQuestions = async sort => {
   }
 }
 
+export const answerQuestion = async payload => {
+  try {
+    const { data } = await api.post('/a-q', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getBlogPost = async slug => {
   try {
     const { data } = await api.get(`/g-b-p`, {
