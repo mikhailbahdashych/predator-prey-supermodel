@@ -32,9 +32,14 @@
       border-bottom: 1px solid var(--main-color);
       .on-hover { color: var(--main-color) }
     }
-    .question-preview {
-      display: flex;
-      justify-content: space-between;
+    .preview-block {
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 5px;
+    }
+    .asked-by {
+      border-radius: 50%;
+      .avatar-box { border-radius: 50%;}
     }
   }
   &.asked-question {

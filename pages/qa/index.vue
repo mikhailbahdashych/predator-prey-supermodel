@@ -39,13 +39,17 @@
       <div v-for="(q, i) in questions" :key="i" class="question" @click="redirect(`/qa/question/${q.slug}`)">
         <div class="flex baseline space-between">
           <p class="paragraph large nmp on-hover">{{ q.title }}</p>
-          <p class="paragraph opacity">Asked at {{ q.created_at }}</p>
+          <p class="paragraph opacity">Asked at: {{ q.created_at }}</p>
         </div>
-        <div class="question-preview">
-          <div>
-            <p class="paragraph">Votes: {{ questions.votes }}</p>
+        <div class="flex space-between">
+          <div class="flex">
+            <p class="paragraph preview-block">Views: 100</p>
+            <p class="paragraph preview-block">Votes: {{ q.votes }}</p>
+            <p class="paragraph preview-block">Answers:</p>
           </div>
-          <div>ava</div>
+          <div class="flex asked-by">
+            <img class="avatar-box" :src="require('../../assets/img/testava.jpg')" alt="ava" width='50' height='50'>
+          </div>
         </div>
       </div>
     </div>
