@@ -50,8 +50,8 @@
               :class="q.is_answered ? 'answered' : q.votes < 0 ? 'low-quality-question' : ''"
             >Votes: {{ q.votes  }}</p>
           </div>
-          <div class="flex asked-by">
-            <img class="avatar-box" :src="require('../../assets/img/testava.jpg')" alt="ava" width='50' height='50'>
+          <div class="flex">
+            <img class="avatar-box" :src="require('../../assets/img/testava.jpg')" alt="ava">
           </div>
         </div>
       </div>

@@ -4,8 +4,8 @@
     <div class="avatar" @click="redirect(`/account/${currentUser.personalId}`)">
       <img class='avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
       <div class="avatar-text">
-        <h2 class="nmp">{{ currentUser.username }}</h2>
-        <p class="paragraph opacity nmp">Public profile</p>
+        <h2>{{ currentUser.username }}</h2>
+        <p class="paragraph opacity">Public profile</p>
       </div>
     </div>
 

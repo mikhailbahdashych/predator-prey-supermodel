@@ -44,7 +44,7 @@
         />
       </div>
 
-      <div class="profile-picture flex">
+      <div class="profile-picture">
         <div class="relative">
           <img class="picture" :src="require('../../../assets/img/testava.jpg')" alt="ava">
           <div style="bottom: 0; right: 0; position: absolute;">

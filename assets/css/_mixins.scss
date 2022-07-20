@@ -1,7 +1,9 @@
-@mixin centers($align-content, $align-items, $justify-content) {
+@mixin centers($align-content, $align-items, $justify-content, $display: unset, $flex-direction: unset) {
   align-content: $align-content;
   align-items: $align-items;
   justify-content: $justify-content;
+  display: $display;
+  flex-direction: $flex-direction;
 }
 
 @mixin margin($top: unset, $right: unset, $bottom: unset, $left: unset) {
@@ -23,14 +25,17 @@
   opacity: $opacity;
 }
 
-@mixin size($height, $width) {
+@mixin size($height: unset, $width: unset, $max-height: unset, $max-width: unset) {
   height: $height;
   width: $width;
+  max-height: $max-height;
+  max-width: $max-width;
 }
 
-@mixin display($position, $display) {
+@mixin display($position, $display, $flex-direction: unset) {
   position: $position;
   display: $display;
+  flex-direction: $flex-direction;
 }
 
 @mixin font($font-style, $font-size, $font-weight, $font-family, $line-height, $opacity, $color) {
@@ -41,4 +46,17 @@
   font-family: $font-family;
   line-height: $line-height;
   opacity: $opacity;
+}
+
+@mixin wrapper($width, $top, $right, $bottom, $left) {
+  width: $width;
+  margin: $top $right $bottom $left;
+}
+
+@mixin avatar-box($height: unset, $width: unset, $max-height: unset, $max-width: unset) {
+  height: $height;
+  width: $width;
+  max-height: $max-height;
+  max-width: $max-width;
+  border-radius: 50%;
 }

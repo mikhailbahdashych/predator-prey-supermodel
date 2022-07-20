@@ -1,8 +1,8 @@
 @use "../../variables" as v;
+@import "../../mixins";
 
 .question-wrapper {
-  width: 70%;
-  margin: 0 auto;
+  @include wrapper(70%, 0, auto, 0, auto);
   .question-header {
     .question-header-button { width: 150px; }
     display: flex;
@@ -12,16 +12,14 @@
   }
 
   .question-content {
-    width: 70%;
-    margin: 15px auto 0;
+    @include wrapper(70%, 15px, auto, auto, auto);
     &.sort {
       height: 50px;
       display: flex;
       align-items: center;
     }
     .question {
-      width: 100%;
-      height: 100px;
+      @include size(100px, 100%);
       border-bottom: 1px solid var(--line);
       margin-bottom: 15px;
       transition: .2s;
@@ -40,10 +38,7 @@
       &.answered { background-color: var(--background-success); }
       &.low-quality-question { border: 1px solid var(--error); }
     }
-    .asked-by {
-      border-radius: 50%;
-      .avatar-box { border-radius: 50%;}
-    }
+    .avatar-box { @include avatar-box(50px, 50px); }
   }
   &.asked-question {
     width: 55%;

@@ -1,9 +1,9 @@
 @use "assets/css/variables" as v;
+@import "../mixins";
 
 .error-page {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  @include display($position: absolute);
+  @include size(100%, 100%);
   background-color: var(--default-bg);
   .text {
     font-family: "Lato", sans-serif;

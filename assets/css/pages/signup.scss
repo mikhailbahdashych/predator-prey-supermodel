@@ -2,7 +2,7 @@
 @import "../mixins";
 
 .login {
-  @include centers(unset, center, center);
+  @include centers($align-items: center, $justify-content: center);
   @include size(100vh, 100%);
   @include display(fixed, flex);
   background-color: var(--header-bg);
@@ -25,33 +25,28 @@
     .login-welcome-texts {
       @include size(50%, 90%);
       @include margin(0, auto, 0, auto);
-      &.login-community {
-        @include size(unset, 75%);
-      }
+      &.login-community { @include size($width: 75%); }
     }
     @media only screen and (max-width: 930px) { display: none; }
   }
 
   .login-header {
     @include size(50px, 100%);
-    @include display(absolute, unset);
-    top: 0;
-    .account-having { padding: 15px; }
+    @include display($position: absolute);
+    @include positions(0);
+    .account-having { @include padding(15px, 15px, 15px, 15px)}
   }
 
   .login-inputs {
     @include size(500px, 600px);
     @include display(relative, flex);
     @include margin(0, auto, 0, auto);
-    @include centers(unset, center, center);
-    &.personal-information {
-      height: 100vh;
-    }
+    @include centers($align-items: center, $justify-content: center);
+    &.personal-information { @include size(100vh); }
 
     @media only screen and (max-width: 930px) {
-      width: 90%;
-      height: 100vh;
-      margin-top: 50px;
+      @include size(100vh, 90%);
+      @include margin(50px);
     }
 
     .login-inputs-container {
@@ -90,10 +85,7 @@
           color: var(--font-color);
           opacity: .9;
         }
-        .status {
-          width: 20px;
-          height: 20px;
-        }
+        .status { @include size(20px, 20px); }
       }
 
     }
