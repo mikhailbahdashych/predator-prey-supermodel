@@ -17,6 +17,8 @@
       </div>
     </client-only>
 
+    <p class="paragraph">{{ answers }}</p>
+
     <Button
       :label="'Post answer'"
       @click-handler="answerQuestion"
@@ -58,7 +60,7 @@ export default {
       await answerQuestion({
         question_id: this.question.id,
         answer_text: this.answer
-      })
+      }, sessionStorage.getItem('_at'))
     }
   }
 }

@@ -45,7 +45,7 @@
           <div class="flex">
             <p class="paragraph preview-block">Views: 100</p>
             <p class="paragraph preview-block">Votes: {{ q.votes }}</p>
-            <p class="paragraph preview-block">Answers:</p>
+            <p class="paragraph preview-block">Answers: {{ q.count || 0 }}</p>
           </div>
           <div class="flex asked-by">
             <img class="avatar-box" :src="require('../../assets/img/testava.jpg')" alt="ava" width='50' height='50'>

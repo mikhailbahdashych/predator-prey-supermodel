@@ -174,9 +174,11 @@ export const getQuestions = async sort => {
   }
 }
 
-export const answerQuestion = async payload => {
+export const answerQuestion = async (payload, token) => {
   try {
-    const { data } = await api.post('/a-q', payload)
+    const { data } = await api.post('/a-q', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
     return data
   } catch (e) {
     return e.response.data
