@@ -5,10 +5,7 @@
       ref="name"
       class="bi basic-input"
       :class="[
-        (oneerror ||
-        (error.passwordMismatch || error.passwordRequirement || error.passwordRules)
-        && innerValue && innerValue.length > 0 ? `error ${additionalClass}` : additionalClass) &&
-        readonly ? `readonly ${additionalClass}` : additionalClass]"
+        (oneerror && innerValue && innerValue.length > 0 ? `error ${additionalClass}` : readonly ? `readonly ${additionalClass}` : additionalClass)]"
       :type="type"
       :disabled="disabled"
       :readonly="readonly"
@@ -59,10 +56,6 @@ export default {
     titleClass: {
       type: String,
       default: ''
-    },
-    error: {
-      type: Object,
-      default: function () { return {} }
     },
     focus: {
       type: Boolean,

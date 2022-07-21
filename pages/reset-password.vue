@@ -28,7 +28,6 @@
 
         <InputWithButton
           v-model="resetPasswordEmail.email"
-          :error="resetPasswordEmail.emailError"
           :button-click-on="() => {}"
           :title="'Email'"
           :focus="resetPasswordEmail.emailFocus"

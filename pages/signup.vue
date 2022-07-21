@@ -1,178 +1,184 @@
 <template>
-  <div class="login">
+  <div>
+    <Popup
+      v-if="showPopup"
+      :content="status === -1 ? 'User with this email already exists!' : 'User with this username already exists!'"
+    />
 
-    <div class="login-content">
-      <h1 class="login-title center" @click="redirect('/')">
-        <span class="login-title-header">pNb</span>
-      </h1>
-      <div class="login-welcome-texts">
-        <h1 class="center">Welcome, @username, feel free to join pNb community</h1>
-        <ul class="login-welcome-texts login-community">
-          <li>Be in charge of everything that happens in world of cybersecurity</li>
-          <li>Teach and learn - share you knowledge and learn from other</li>
-          <li>Feel free to rise up any topic you are interested in on forum</li>
-          <li>Anybody can ask - anybody can answer</li>
-        </ul>
+    <div class="login">
+
+      <div class="login-content">
+        <h1 class="login-title center" @click="redirect('/')">
+          <span class="login-title-header">pNb</span>
+        </h1>
+        <div class="login-welcome-texts">
+          <h1 class="center">Welcome, @username, feel free to join pNb community</h1>
+          <ul class="login-welcome-texts login-community">
+            <li>Be in charge of everything that happens in world of cybersecurity</li>
+            <li>Teach and learn - share you knowledge and learn from other</li>
+            <li>Feel free to rise up any topic you are interested in on forum</li>
+            <li>Anybody can ask - anybody can answer</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div v-if="!showPersonalInformationFields" class="login-header">
-      <p class="paragraph right account-having">Already have account?
-        <span class="paragraph link" @click="redirect('/signin')">Sign in!</span>
-      </p>
-    </div>
+      <div v-if="!showPersonalInformationFields" class="login-header">
+        <p class="paragraph right account-having">Already have account?
+          <span class="paragraph link" @click="redirect('/signin')">Sign in!</span>
+        </p>
+      </div>
 
-    <div v-if="!showPersonalInformationFields" class="login-inputs">
-      <div class="login-inputs-container">
-        <h1>Sign up</h1>
-        <Input
-          v-model="email.email"
-          :oneerror="email.emailError"
-          :disabled="disabledField"
-          :title="'Email'"
-          :type="'text'"
-        />
-        <Input
-          v-model="username.username"
-          :oneerror="username.usernameError"
-          :disabled="disabledField"
-          :title="'Username'"
-          :type="'text'"
-        />
-        <Input
-          v-model="password.password"
-          :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
-          :disabled="disabledField"
-          :title="'Password'"
-          :type="'password'"
-        />
-        <Input
-          v-model="password.passwordRepeat"
-          :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
-          :disabled="disabledField"
-          :title="'Repeat password'"
-          :type="'password'"
-        />
-        <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
-        <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
-        <div v-if="passwordError.passwordRules" class="password-requirement">
+      <div v-if="!showPersonalInformationFields" class="login-inputs">
+        <div class="login-inputs-container">
+          <h1>Sign up</h1>
+          <Input
+            v-model="email.email"
+            :oneerror="email.emailError"
+            :disabled="disabledField"
+            :title="'Email'"
+            :type="'text'"
+          />
+          <Input
+            v-model="username.username"
+            :oneerror="username.usernameError"
+            :disabled="disabledField"
+            :title="'Username'"
+            :type="'text'"
+          />
+          <Input
+            v-model="password.password"
+            :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+            :disabled="disabledField"
+            :title="'Password'"
+            :type="'password'"
+          />
+          <Input
+            v-model="password.passwordRepeat"
+            :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+            :disabled="disabledField"
+            :title="'Repeat password'"
+            :type="'password'"
+          />
+          <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
+          <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
+          <div v-if="passwordError.passwordRules" class="password-requirement">
 
-          <div v-for="rule in passwordRulesList" :key="rule.text" class="flex">
-            <div v-for="(item, i) in Object.entries(rule)" :key="i">
-              <p class="password-requirement-item">
-                <span v-if="item[0] === 'text'" class="paragraph">{{ item[1] }}</span>
-                <span v-else>
+            <div v-for="rule in passwordRulesList" :key="rule.text" class="flex">
+              <div v-for="(item, i) in Object.entries(rule)" :key="i">
+                <p class="password-requirement-item">
+                  <span v-if="item[0] === 'text'" class="paragraph">{{ item[1] }}</span>
+                  <span v-else>
                   <img v-if="item[1]" class="status" src="../assets/img/greencircle.svg" alt="OK" />
                   <img v-else class="status" src="../assets/img/redcircle.svg" alt="NOT OK" />
                 </span>
-              </p>
+                </p>
+              </div>
             </div>
           </div>
+
+          <Checkbox v-model="tac" :input-value="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
+          <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'high-height'" @click-handler="showPersonalInfoFields" />
         </div>
-
-        <Checkbox v-model="tac" :input-value="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
-        <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'high-height'" @click-handler="showPersonalInfoFields" />
       </div>
-    </div>
 
-    <div v-if="showPersonalInformationFields" class="login-inputs personal-information">
-      <div v-if="status !== 1" class="login-inputs-container personal-information">
-        <h3>Tell us a little about yourself</h3>
-        <p>Don't worry, you can skip this step and fill information you want later</p>
-        <hr>
-        <div class="flex">
+      <div v-if="showPersonalInformationFields" class="login-inputs personal-information">
+        <div v-if="status !== 1" class="login-inputs-container personal-information">
+          <h3>Tell us a little about yourself</h3>
+          <p>Don't worry, you can skip this step and fill information you want later</p>
+          <hr>
+          <div class="flex">
+            <Input
+              v-model="personalInformation.first_name"
+              :disabled="loading"
+              :title="'First name'"
+              :title-class="'small'"
+              :additional-class="'small mrl'"
+            />
+            <Input
+              v-model="personalInformation.last_name"
+              :disabled="loading"
+              :title="'Last name'"
+              :title-class="'small'"
+              :additional-class="'small'"
+            />
+          </div>
+          <p>Provide your nickname or link</p>
+          <hr>
           <Input
-            v-model="personalInformation.first_name"
+            v-model="personalInformation.twitter"
             :disabled="loading"
-            :title="'First name'"
-            :title-class="'small'"
-            :additional-class="'small mrl'"
-          />
-          <Input
-            v-model="personalInformation.last_name"
-            :disabled="loading"
-            :title="'Last name'"
+            :title="'Twitter'"
             :title-class="'small'"
             :additional-class="'small'"
           />
+          <Input
+            v-model="personalInformation.github"
+            :disabled="loading"
+            :title="'GitHub'"
+            :title-class="'small'"
+            :additional-class="'small'"
+          />
+          <Input
+            v-model="personalInformation.website_link"
+            :disabled="loading"
+            :title="'Personal website'"
+            :title-class="'small'"
+            :additional-class="'small'"
+          />
+          <p>What do you want to tell this world?</p>
+          <hr>
+          <Input
+            v-model="personalInformation.status"
+            :disabled="loading"
+            :title="'Title (will be shown as status in your account)'"
+            :title-class="'small'"
+            :additional-class="'small'"
+          />
+          <Textarea
+            v-model="personalInformation.about_me"
+            :disabled="loading"
+            :title="'Bio'"
+          />
+          <Checkbox
+            v-model="personalInformation.show_email"
+            :input-value="personalInformation.show_email"
+            :disabled="loading"
+            :label="`Show my email as public email for contact`"
+          />
+          <div class="flex">
+            <Button
+              :label="'Go back'"
+              :additional-class="'mt transparent mrl'"
+              :disabled="loading"
+              @click-handler="signUpStepBack"
+            />
+            <Button
+              :label="'Skip'"
+              :additional-class="'mt transparent mrl'"
+              :disabled="loading"
+              @click-handler="signUpWithoutInfo"
+            />
+            <Button
+              :label="'Sign up'"
+              :additional-class="'mt mrl'"
+              :disabled="loading"
+              @click-handler="signUpWithInfo"
+            />
+          </div>
         </div>
-        <p>Provide your nickname or link</p>
-        <hr>
-        <Input
-          v-model="personalInformation.twitter"
-          :disabled="loading"
-          :title="'Twitter'"
-          :title-class="'small'"
-          :additional-class="'small'"
-        />
-        <Input
-          v-model="personalInformation.github"
-          :disabled="loading"
-          :title="'GitHub'"
-          :title-class="'small'"
-          :additional-class="'small'"
-        />
-        <Input
-          v-model="personalInformation.website_link"
-          :disabled="loading"
-          :title="'Personal website'"
-          :title-class="'small'"
-          :additional-class="'small'"
-        />
-        <p>What do you want to tell this world?</p>
-        <hr>
-        <Input
-          v-model="personalInformation.status"
-          :disabled="loading"
-          :title="'Title (will be shown as status in your account)'"
-          :title-class="'small'"
-          :additional-class="'small'"
-        />
-        <Textarea
-          v-model="personalInformation.about_me"
-          :disabled="loading"
-          :title="'Bio'"
-        />
-        <Checkbox
-          v-model="personalInformation.show_email"
-          :input-value="personalInformation.show_email"
-          :disabled="loading"
-          :label="`Show my email as public email for contact`"
-        />
-        <div class="flex">
-          <Button
-            :label="'Go back'"
-            :additional-class="'mt transparent mrl'"
-            :disabled="loading"
-            @click-handler="signUpStepBack"
-          />
-          <Button
-            :label="'Skip'"
-            :additional-class="'mt transparent mrl'"
-            :disabled="loading"
-            @click-handler="signUpWithoutInfo"
-          />
-          <Button
-            :label="'Sign up'"
-            :additional-class="'mt mrl'"
-            :disabled="loading"
-            @click-handler="signUpWithInfo"
-          />
+        <div v-else class="login-inputs-container">
+          <h1>Confirmation email has been sent.</h1>
+          <p class="paragraph medium">Please, follow the instruction in the email to complete registration process.</p>
+          <p class="paragraph medium">The link will be valid for 24 hours.</p>
         </div>
-        <p v-if="status === -1" class="paragraph error">User with this email already exists!</p>
-        <p v-else-if="status === -2" class="paragraph error">User with this username already exists!</p>
       </div>
-      <div v-else class="login-inputs-container">
-        <h1>Confirmation email has been sent.</h1>
-        <p class="paragraph medium">Please, follow the instruction in the email to complete registration process.</p>
-        <p class="paragraph medium">The link will be valid for 24 hours.</p>
-      </div>
-    </div>
 
+    </div>
   </div>
 </template>
 
 <script>
+import Popup from '~/components/basicComponents/Popup'
 import Input from "~/components/basicComponents/Input";
 import Button from "~/components/basicComponents/Button";
 import Checkbox from "~/components/basicComponents/Checkbox";
@@ -182,6 +188,7 @@ import { signUp } from "~/api";
 export default {
   name: "Signup",
   components: {
+    Popup,
     Input,
     Button,
     Checkbox,
@@ -236,7 +243,8 @@ export default {
 
       disabledField: false,
 
-      loading: true
+      loading: true,
+      showPopup: false,
     }
   },
   watch: {
@@ -310,6 +318,12 @@ export default {
 
       if (status) this.status = status
       if (status === 1) this.disabledField = true
+      if (status === -1 || status === -2) {
+        this.showPopup = true
+        setTimeout(() => {
+          this.showPopup = false
+        }, 1500)
+      }
 
       this.loading = false
     },
@@ -324,6 +338,12 @@ export default {
 
       if (status) this.status = status
       if (status === 1) this.disabledField = true
+      if (status === -1 || status === -2) {
+        this.showPopup = true
+        setTimeout(() => {
+          this.showPopup = false
+        }, 1500)
+      }
 
       this.loading = false
     },
