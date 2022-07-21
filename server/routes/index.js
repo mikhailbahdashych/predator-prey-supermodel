@@ -211,6 +211,18 @@ router.get('/g-qs/:sort', async (req, res) => {
   }
 })
 
+router.post('/c-q', async (req, res) => {
+  try {
+    const { data } = await api.post('/create-question', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+
 router.post('/a-q', async (req, res) => {
   try {
     const { data } = await api.post('/answer-question', req.body, {
@@ -253,6 +265,28 @@ router.get('/g-b-ps/:by', async (req, res) => {
   }
 })
 
+router.post('/c-b-p', async (req, res) => {
+  try {
+    const { data } = await api.post('/create-blog-post', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.post('/comment-b-p', async (req, res) => {
+  try {
+    const { data } = await api.post('/comment-blog-post', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 router.get('/g-f-t', async (req, res) => {
   try {
     const { data } = await api.get(`/get-forum-thread`, {
@@ -284,17 +318,6 @@ router.get('/g-f-ts/:by', async (req, res) => {
   }
 })
 
-router.post('/c-b-p', async (req, res) => {
-  try {
-    const { data } = await api.post('/create-blog-post', req.body, {
-      headers: { 'Authorization': req.headers.authorization }
-    })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-});
-
 router.post('/c-f-t', async (req, res) => {
   try {
     const { data } = await api.post('/create-forum-thread', req.body, {
@@ -304,11 +327,11 @@ router.post('/c-f-t', async (req, res) => {
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
   }
-});
+})
 
-router.post('/c-q', async (req, res) => {
+router.post('/comment-f-t', async (req, res) => {
   try {
-    const { data } = await api.post('/create-question', req.body, {
+    const { data } = await api.post('/comment-forum-thread', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -316,6 +339,5 @@ router.post('/c-q', async (req, res) => {
     return res.status(e.response.status).json(e.response.data)
   }
 })
-
 
 module.exports = router

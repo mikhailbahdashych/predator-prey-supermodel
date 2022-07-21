@@ -9,14 +9,14 @@
       <p class="paragraph" v-html="question.content" />
     </div>
 
-    <h3>Your answer:</h3>
+    <h3>Post your answer:</h3>
     <custom-vue-editor
       v-model="answer"
     />
 
     <div class="elem button">
       <Button
-        :label="'Post answer'"
+        :label="isQuestionOwner ? 'Yes, I want to answer my own question' : 'Yes, I want to answer'"
         :additional-class="'min-width150'"
         @click-handler="answerQuestion"
       />
@@ -28,6 +28,7 @@
 <script>
 import { getQuestion, answerQuestion } from '~/api'
 import { validateSlug } from '~/helpers/frontValidator'
+import { verifyToken } from '~/helpers/crypto'
 import Button from '~/components/basicComponents/Button'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
 export default {
@@ -43,7 +44,10 @@ export default {
       loading: true,
       question: {},
       answers: [],
-      answer: null
+      answer: null,
+      wantToAsk: false,
+      showWantToAsk: false,
+      isQuestionOwner: false
     }
   },
   created() {
@@ -53,6 +57,8 @@ export default {
     const { question, answers } = await getQuestion(this.$route.params.slug)
     this.question = question
     this.answers = answers
+
+    this.isQuestionOwner = verifyToken(sessionStorage.getItem('_at')).username === question.username
   },
   methods: {
     async answerQuestion() {

@@ -174,6 +174,17 @@ export const getQuestions = async sort => {
   }
 }
 
+export const createQuestionPost = async (payload, token) => {
+  try {
+    const { data } = await api.post('/c-q', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const answerQuestion = async (payload, token) => {
   try {
     const { data } = await api.post('/a-q', payload, {
@@ -205,6 +216,28 @@ export const getBlogPosts = async by => {
   }
 }
 
+export const createBlogPost = async (payload, token) => {
+  try {
+    const { data } = await api.post('/c-b-p', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const commentBlogPost = async (payload, token) => {
+  try {
+    const { data } = await api.post('/comment-b-p', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getForumThread = async slug => {
   try {
     const { data } = await api.get(`/g-f-t`, {
@@ -225,17 +258,6 @@ export const getForumThreads = async by => {
   }
 }
 
-export const createBlogPost = async (payload, token) => {
-  try {
-    const { data } = await api.post('/c-b-p', payload, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
 export const createForumPost = async (payload, token) => {
   try {
     const { data } = await api.post('/c-f-t', payload, {
@@ -247,9 +269,9 @@ export const createForumPost = async (payload, token) => {
   }
 }
 
-export const createQuestionPost = async (payload, token) => {
+export const commentForumThread = async (payload, token) => {
   try {
-    const { data } = await api.post('/c-q', payload, {
+    const { data } = await api.post('/comment-f-t', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
