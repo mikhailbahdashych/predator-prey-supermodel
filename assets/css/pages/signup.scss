@@ -9,32 +9,44 @@
 
   .login-content {
     @include size(100%, 50%);
+    @include centers($align-items: center);
     background-color: var(--default-bg);
-    .login-title {
-      height: 25%;
-      font-size: 52px;
-      .login-title-header {
-        cursor: pointer;
-        transition: .2s;
-      }
-      .login-title-header:hover {
-        color: var(--main-color);
-        font-size: 60px;
-      }
-    }
-    .login-welcome-texts {
-      @include size(50%, 90%);
-      @include margin($right: auto, $left: auto);
-      &.login-community { @include size($width: 75%); }
+    display: flex;
+    h1 {
+      @include margin($left: 130px, $right: 130px);
+      font-size: 36px;
     }
     @media only screen and (max-width: 930px) { display: none; }
+
+    .community-text {
+      display: block;
+      h1 { text-align: center }
+      .community-points {
+        @include margin(35px, auto, 0, auto);
+        width: 70%;
+        font-size: 18px;
+      }
+    }
   }
 
   .login-header {
     @include size(50px, 100%);
-    @include display($position: absolute);
+    @include display($position: absolute, $display: flex);
     @include positions(0);
-    .account-having { @include padding(15px, 15px, 15px, 15px)}
+    justify-content: space-between;
+    .login-header-btn {
+      display: flex;
+      align-items: baseline;
+      padding: 15px;
+    }
+    .login-title {
+      @include margin($top: 15px, $right: 30px, $left: 30px);
+      transition: .2s;
+      cursor: pointer;
+    }
+    .login-title:hover {
+      color: var(--main-color)
+    }
   }
 
   .login-inputs {
@@ -49,8 +61,19 @@
       @include margin(50px);
     }
 
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      .btn {
+        width: 100%;
+        @include margin($left: 5px, $right: 5px);
+      }
+    }
+
     .login-inputs-container {
       width: 450px;
+      .two-fa { text-align: center }
+      .sign-in-btn { padding: 5px; }
       &.personal-information {
         height: 100vh;
         overflow-y: auto;
@@ -58,36 +81,52 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
-      &.personal-information::-webkit-scrollbar {
-        display: none;
+      &.personal-information::-webkit-scrollbar { display: none; }
+
+      .options {
+        display: flex;
+        .vertical-line {
+          @include margin(0, 20px, 0, 20px);
+          width: 1px;
+          background-color: var(--font-color);
+          height: 50px;
+          float: left;
+          opacity: .5;
+        }
+        .choose {
+          cursor: pointer;
+          transition: .2s;
+          color: var(--font-color);
+        }
+        .choose:hover { color: var(--main-color); }
       }
-      .vertical-line {
-        width: 1px;
-        background-color: var(--font-color);
-        height: 50px;
-        float: left;
-        opacity: .5;
-        margin: 0 20px 0 20px;
-      }
-      .choose {
-        cursor: pointer;
-        transition: .2s;
-        color: var(--font-color);
-      }
-      .choose:hover { color: var(--main-color); }
 
       .password-requirement {
         border-radius: 5px;
         border: 1px solid rgba(#fff,.9);
+        .password-requirements {
+          display: flex;
+        }
         .password-requirement-item {
           padding-left: 15px;
-          font-size: 10px;
+          @include margin(5px, 0, 5px, 0);
+          font-size: 14px;
           color: var(--font-color);
           opacity: .9;
         }
         .status { @include size(20px, 20px); }
       }
-
     }
+  }
+}
+
+.reopening {
+  @include centers($align-items: center, $justify-content: center);
+  @include size(100vh, 100%);
+  @include display(fixed, flex);
+  background-color: var(--header-bg);
+  .reopening-block {
+    text-align: center;
+    display: block;
   }
 }

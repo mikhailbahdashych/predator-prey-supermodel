@@ -2,12 +2,14 @@
   $align-content: unset,
   $align-items: unset,
   $justify-content: unset,
-  $flex-direction: unset
+  $flex-direction: unset,
+  $text-align: unset
   ) {
   align-content: $align-content;
   align-items: $align-items;
   justify-content: $justify-content;
   flex-direction: $flex-direction;
+  text-align: $text-align
 }
 
 @mixin margin($top: 0, $right: 0, $bottom: 0, $left: 0) {

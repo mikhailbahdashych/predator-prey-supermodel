@@ -8,12 +8,9 @@
     <div class="login">
 
       <div class="login-content">
-        <h1 class="login-title center" @click="redirect('/')">
-          <span class="login-title-header">pNb</span>
-        </h1>
-        <div class="login-welcome-texts">
-          <h1 class="center">Welcome, @username, feel free to join pNb community</h1>
-          <ul class="login-welcome-texts login-community">
+        <div class="community-text">
+          <h1 class="source-sans-pro bold">Welcome, @username, feel free to join pNb community</h1>
+          <ul class="community-points">
             <li>Be in charge of everything that happens in world of cybersecurity</li>
             <li>Teach and learn - share you knowledge and learn from other</li>
             <li>Feel free to rise up any topic you are interested in on forum</li>
@@ -23,14 +20,17 @@
       </div>
 
       <div v-if="!showPersonalInformationFields" class="login-header">
-        <p class="paragraph right account-having">Already have account?
-          <span class="paragraph link" @click="redirect('/signin')">Sign in!</span>
-        </p>
+        <h1 class="login-title" @click="redirect('/')">pNb</h1>
+        <div class="login-header-btn">
+          <p class="paragraph">Already have account?
+            <span class="link" @click="redirect('/signin')">Sign in!</span>
+          </p>
+        </div>
       </div>
 
       <div v-if="!showPersonalInformationFields" class="login-inputs">
         <div class="login-inputs-container">
-          <h1>Sign up</h1>
+          <h1 class="source-sans-pro bold">Sign up</h1>
           <Input
             v-model="email.email"
             :oneerror="email.emailError"
@@ -59,14 +59,14 @@
             :title="'Repeat password'"
             :type="'password'"
           />
-          <p v-if="passwordError.passwordMismatch" class="paragraph error">Passwords have to match!</p>
-          <p v-if="passwordError.passwordRequirement" class="paragraph error">Password are requirement!</p>
+          <p v-if="passwordError.passwordMismatch" class="error">Passwords have to match!</p>
+          <p v-if="passwordError.passwordRequirement" class="error">Password are requirement!</p>
           <div v-if="passwordError.passwordRules" class="password-requirement">
 
-            <div v-for="rule in passwordRulesList" :key="rule.text" class="flex">
+            <div v-for="rule in passwordRulesList" :key="rule.text" class="password-requirements">
               <div v-for="(item, i) in Object.entries(rule)" :key="i">
                 <p class="password-requirement-item">
-                  <span v-if="item[0] === 'text'" class="paragraph">{{ item[1] }}</span>
+                  <span v-if="item[0] === 'text'">{{ item[1] }}</span>
                   <span v-else>
                   <img v-if="item[1]" class="status" src="../assets/img/greencircle.svg" alt="OK" />
                   <img v-else class="status" src="../assets/img/redcircle.svg" alt="NOT OK" />
@@ -76,8 +76,10 @@
             </div>
           </div>
 
-          <Checkbox v-model="tac" :input-value="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
-          <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'high-height'" @click-handler="showPersonalInfoFields" />
+          <div class="sign-in-btn">
+            <Checkbox v-model="tac" :input-value="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
+            <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'high-height'" @click-handler="showPersonalInfoFields" />
+          </div>
         </div>
       </div>
 
@@ -145,22 +147,23 @@
             :disabled="loading"
             :label="`Show my email as public email for contact`"
           />
-          <div class="flex">
+          <div class="buttons">
             <Button
               :label="'Go back'"
-              :additional-class="'mt transparent mrl'"
+              :additional-class="'transparent'"
               :disabled="loading"
               @click-handler="signUpStepBack"
             />
-            <Button
-              :label="'Skip'"
-              :additional-class="'mt transparent mrl'"
-              :disabled="loading"
-              @click-handler="signUpWithoutInfo"
-            />
+            <div class='btn'>
+              <Button
+                :label="'Skip'"
+                :additional-class="'transparent'"
+                :disabled="loading"
+                @click-handler="signUpWithoutInfo"
+              />
+            </div>
             <Button
               :label="'Sign up'"
-              :additional-class="'mt mrl'"
               :disabled="loading"
               @click-handler="signUpWithInfo"
             />

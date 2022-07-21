@@ -4,9 +4,9 @@
 
       <div class="login-inputs">
         <div v-if="!phone.show && !twoFa.show" class="login-inputs-container">
-          <h1>Sign In</h1>
+          <h1 class="source-sans-pro bold">Sign In</h1>
 
-          <div class="flex">
+          <div class="options">
             <p class="choose" @click="chooseLogin('email')">With Email</p>
             <div class="vertical-line" />
             <p class="choose" @click="chooseLogin('phone')">With Phone Number</p>
@@ -35,24 +35,26 @@
             :type="'password'"
             @keyup.enter.native="signin"
           />
-          <p v-if="loginError" class="paragraph error">Wrong credentials!</p>
-          <Button
-            :label="'Sign In'"
-            :disabled="loginEmail.loginEmailError || loginPassword.loginPasswordError || !loginPassword.password || !loginEmail.email"
-            :additional-class="'mt high-height'"
-            @click-handler="signin"
-          />
-          <p class="paragraph right link" @click="redirect('reset-password')">Forgot password?</p>
+          <p v-if="loginError" class="error">Wrong credentials!</p>
+          <div class="sign-in-btn">
+            <Button
+              :label="'Sign In'"
+              :disabled="loginEmail.loginEmailError || loginPassword.loginPasswordError || !loginPassword.password || !loginEmail.email"
+              :additional-class="'high-height'"
+              @click-handler="signin"
+            />
+            <p class="link" @click="redirect('reset-password')">Forgot password?</p>
+          </div>
 
         </div>
 
-        <div v-else-if="twoFa.show" class="login-inputs-container">
-          <div class="center">
+        <div v-if="twoFa.show" class="login-inputs-container">
+          <div class="two-fa">
             <h1>Two-Factor authentication</h1>
             <p class="paragraph">Please, provide Google Authenticator code to continue</p>
             <InputTwoFa :twofa="twoFa.code" @returnTwoFa="returnTwoFa" />
-            <p v-if="twoFa.error" class="paragraph error">Wrong code!</p>
-            <p class="paragraph right link">Unable to login with 2FA?</p>
+            <p v-if="twoFa.error" class="error">Wrong code!</p>
+            <p class="paragraph link">Unable to login with 2FA?</p>
           </div>
         </div>
 
@@ -61,24 +63,22 @@
       </div>
 
       <div class="login-content">
-        <h1 class="login-title center" @click="redirect('/')">
-          <span class="login-title-header">pNb</span>
-        </h1>
-        <div class="login-welcome-texts">
-          <h1 class="center">Welcome back, @username, glad to see you again</h1>
-        </div>
+        <h1 class="source-sans-pro bold">Welcome back, @username, glad to see you again</h1>
       </div>
 
       <div class="login-header">
-        <p class="paragraph account-having left">Don't have account yet?
-          <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
-        </p>
+        <div class="login-header-btn">
+          <p class="paragraph">Don't have account yet?
+            <span class="link" @click="redirect('/signup')">Sign up now!</span>
+          </p>
+        </div>
+        <h1 class="login-title" @click="redirect('/')">pNb</h1>
       </div>
 
     </div>
 
-    <div v-if="showReopeningScreen.status" class="login">
-      <div class="center block">
+    <div v-if="showReopeningScreen.status" class="reopening">
+      <div class="reopening-block">
         <h1>There you are! Nice to see you again, {{ showReopeningScreen.username }}!</h1>
         <Button
           :label="'Here we go'"
