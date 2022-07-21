@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { getQuestion, createQuestionPost } from '~/api'
+import { createQuestionPost } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
@@ -58,9 +58,9 @@ export default {
     title() {
       this.titleLength = this.title.split(' ')
     },
-    'titleLength.length': async function () {
-      await this.getPostsBySlug()
-    }
+    // 'titleLength.length': async function () {
+    //   await this.getPostsBySlug()
+    // }
   },
   created() {
     this.$nextTick(() => { this.loading = false })
@@ -80,14 +80,14 @@ export default {
       if (tokenData.message === 'invalid-token')
         return this.$router.push('/signin')
     },
-    async getPostsBySlug() {
-      if (this.title.length > 0) {
-        this.similarQuestions = await getQuestion(this.title.split(' ').join('+').toLowerCase())
-        this.showSimilarQuestions = true
-      } else {
-        this.showSimilarQuestions = false
-      }
-    },
+    // async getPostsBySlug() {
+    //   if (this.title.length > 0) {
+    //     this.similarQuestions = await getQuestion(this.title.split(' ').join('+').toLowerCase())
+    //     this.showSimilarQuestions = true
+    //   } else {
+    //     this.showSimilarQuestions = false
+    //   }
+    // },
     async postQuestion() {
       this.loading = true
 
