@@ -2,22 +2,18 @@
 @import "../../mixins";
 
 .question-wrapper {
-  @include wrapper(70%, 0, auto, 0, auto);
+  @include wrapper(70%, 0, auto, 0, auto, block);
+
   .question-header {
-    .question-header-button { width: 150px; }
+    @include centers($align-items: center, $justify-content: space-between);
     display: flex;
     border-bottom: 1px solid var(--line);
-    justify-content: space-between;
-    align-items: center;
+    .question-header-button { width: 150px; }
   }
 
   .question-content {
-    @include wrapper(70%, 15px, auto, auto, auto);
-    &.sort {
-      height: 50px;
-      display: flex;
-      align-items: center;
-    }
+    @include wrapper(70%, 15px, auto, 0, auto);
+    display: block;
     .question {
       @include size(100px, 100%);
       border-bottom: 1px solid var(--line);
@@ -39,8 +35,22 @@
       &.low-quality-question { border: 1px solid var(--error); }
     }
     .avatar-box { @include avatar-box(50px, 50px); }
+    &.sort {
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }
   }
-  &.asked-question {
-    width: 55%;
+}
+
+.ask-wrapper {
+  @include wrapper(50%, 0, auto, 0, auto);
+  display: block;
+  .elem {
+    @include margin($top: 15px, $bottom: 15px);
+    &.button { @include margin($left: 5px, $top: 15px, $bottom: 15px) }
+  }
+  .question-title {
+    border-bottom: 1px solid var(--line);
   }
 }

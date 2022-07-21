@@ -1,35 +1,28 @@
 <template>
   <div class="ask-wrapper">
 
-    <div class="mb">
+    <div class="elem">
       <Input
         v-model="title"
         :disabled="loading"
         :additional-class="'small white-stroke'"
         :title="'Question title'"
       />
-      <div class="similar-questions">
-
-      </div>
     </div>
 
-    <client-only>
-      <div class="editor">
-        <vue-editor
-          v-model="content"
-        />
-      </div>
-    </client-only>
+    <div class="elem">
+      <custom-vue-editor
+        v-model="content"
+      />
+    </div>
 
-    <div class="editor">
-      <div class="ask-button">
-        <Button
-          :disabled="loading"
-          :label="'Ask question'"
-          :additional-class="'min-width150'"
-          @click-handler="postQuestion"
-        />
-      </div>
+    <div class="elem button">
+      <Button
+        :disabled="loading"
+        :label="'Ask question'"
+        :additional-class="'min-width150'"
+        @click-handler="postQuestion"
+      />
     </div>
 
   </div>
@@ -39,13 +32,14 @@
 import { getQuestion, createQuestionPost } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
+import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
 import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Ask',
   components: {
-    VueEditor: async () => process.client ? (await import("vue2-editor")).VueEditor : "",
     Input,
-    Button
+    Button,
+    CustomVueEditor
   },
   layout: 'default',
   data() {
@@ -111,26 +105,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.ask-wrapper {
-  width: 45%;
-  margin: 0 auto;
-}
-.similar-questions {
-}
-.ask-button {
-  width: 150px;
-}
-.editor {
-  padding: 0 5px 0 5px;
-}
-::v-deep .ql-toolbar.ql-snow {
-  border-radius: 8px 8px 0 0;
-  border: 1px solid rgba(225, 232, 236, .25);
-  border-bottom: none;
-}
-::v-deep #quill-container {
-  border-radius: 0 0 8px 8px;
-  border: 1px solid rgba(225, 232, 236, .25);
-}
+<style lang="scss">
+@import "../../assets/css/pages/qa";
 </style>

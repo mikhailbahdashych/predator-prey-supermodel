@@ -2,17 +2,15 @@
   $align-content: unset,
   $align-items: unset,
   $justify-content: unset,
-  $display: unset,
   $flex-direction: unset
   ) {
   align-content: $align-content;
   align-items: $align-items;
   justify-content: $justify-content;
-  display: $display;
   flex-direction: $flex-direction;
 }
 
-@mixin margin($top: unset, $right: unset, $bottom: unset, $left: unset) {
+@mixin margin($top: 0, $right: 0, $bottom: 0, $left: 0) {
   margin: $top $right $bottom $left;
 }
 
@@ -54,9 +52,10 @@
   opacity: $opacity;
 }
 
-@mixin wrapper($width, $top, $right, $bottom, $left) {
+@mixin wrapper($width, $top, $right, $bottom, $left, $display: unset) {
   width: $width;
   margin: $top $right $bottom $left;
+  display: $display;
 }
 
 @mixin avatar-box($height: unset, $width: unset, $max-height: unset, $max-width: unset) {

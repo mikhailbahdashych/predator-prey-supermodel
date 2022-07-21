@@ -24,7 +24,7 @@
     }
     .login-welcome-texts {
       @include size(50%, 90%);
-      @include margin(0, auto, 0, auto);
+      @include margin($right: auto, $left: auto);
       &.login-community { @include size($width: 75%); }
     }
     @media only screen and (max-width: 930px) { display: none; }
@@ -40,7 +40,7 @@
   .login-inputs {
     @include size(500px, 600px);
     @include display(relative, flex);
-    @include margin(0, auto, 0, auto);
+    @include margin($right: auto, $left: auto);
     @include centers($align-items: center, $justify-content: center);
     &.personal-information { @include size(100vh); }
 

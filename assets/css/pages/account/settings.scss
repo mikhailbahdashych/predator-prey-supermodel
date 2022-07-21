@@ -3,7 +3,7 @@
 
 .account-wrapper {
   @include size(100%, 70%);
-  @include margin(0, auto, 0, auto);
+  @include margin($right: auto, $left: auto);
 
   .avatar {
     @include size(90px, 225px, $max-width: 500px);
@@ -15,7 +15,7 @@
     .avatar-box { @include avatar-box(70px, 70px) }
     .avatar-text {
       @include padding(10px, 0, 0, 20px);
-      h2, p { @include margin(0, 0, 0, 0); }
+      h2, p { @include margin(); }
     }
   }
   .avatar:hover {
@@ -54,8 +54,9 @@
 .account-preferences {
   width: 100%;
   .profile-picture {
-    @include margin(0, 15px, 0, 15px);
-    @include centers($display: flex, $flex-direction: column, $align-items: center);
+    @include margin($right: 15px, $left: 15px);
+    display: flex;
+    @include centers($flex-direction: column, $align-items: center);
     width: 30%;
     padding-top: 10px;
     float: right;
@@ -72,7 +73,8 @@
   .item {
     border-bottom: 1px solid var(--line);
     .item-content {
-      @include centers($display: flex, $justify-content: space-between, $align-items: center);
+      @include centers($justify-content: space-between, $align-items: center);
+      display: flex;
       height: 100%;
       &.texts { display: block; }
     }
@@ -83,7 +85,7 @@
   .password-requirements {
     width: 450px;
     display: flex;
-    .item { @include margin(0, 0, 10px, 10px); }
+    .item { @include margin($bottom: 10px, $left: 10px); }
     .status { @include size(20px, 20px); }
   }
 }

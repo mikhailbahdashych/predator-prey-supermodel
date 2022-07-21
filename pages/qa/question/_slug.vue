@@ -1,30 +1,26 @@
 <template>
-  <div class="question-wrapper asked-question">
+  <div class="ask-wrapper">
 
-    <div class="question-header">
+    <div class="question-title">
       <h1>{{ question.title }}</h1>
     </div>
 
-    <div>
-      <p class="paragraph" v-html='question.content' />
-    </div>
-
-    <div>
-      <p class="paragraph">{{ answers }}</p>
+    <div class="question-title">
+      <p class="paragraph" v-html="question.content" />
     </div>
 
     <h3>Your answer:</h3>
-    <client-only>
-      <div class="editor">
-        <vue-editor v-model="answer" />
-      </div>
-    </client-only>
-
-    <Button
-      :label="'Post answer'"
-      :additional-class="'min-width150 mt'"
-      @click-handler="answerQuestion"
+    <custom-vue-editor
+      v-model="answer"
     />
+
+    <div class="elem button">
+      <Button
+        :label="'Post answer'"
+        :additional-class="'min-width150'"
+        @click-handler="answerQuestion"
+      />
+    </div>
 
   </div>
 </template>
@@ -33,10 +29,11 @@
 import { getQuestion, answerQuestion } from '~/api'
 import { validateSlug } from '~/helpers/frontValidator'
 import Button from '~/components/basicComponents/Button'
+import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
 export default {
   name: 'Slug',
   components: {
-    VueEditor: async () => process.client ? (await import("vue2-editor")).VueEditor : "",
+    CustomVueEditor,
     Button
   },
   layout: 'default',
@@ -69,5 +66,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/css/pages/qa/index";
+@import "../../../assets/css/pages/qa";
 </style>

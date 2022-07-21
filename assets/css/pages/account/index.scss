@@ -20,7 +20,8 @@
       @include positions($bottom: 0, $right: 0);
     }
     .links {
-      @include centers($display: flex, $align-items: center);
+      display: flex;
+      @include centers($align-items: center);
       .link {
         @include size(30px, 30px);
         @include margin($top: 10px);

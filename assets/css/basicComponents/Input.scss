@@ -46,7 +46,7 @@
     &.error:focus { border: 1px solid var(--error-border); }
     &.pointer { cursor: pointer }
     &.readonly { border: 1px solid var(--main-color-border); }
-    &.white-stroke { border: 1px solid rgba(var(--font-color), .25); }
+    &.white-stroke { border: 1px solid var(--stroke); }
   }
   .basic-input:focus { border: 1px solid var(--main-color-border); }
   .basic-input:disabled { background-color: rgba(var(--font-color), .1) }
