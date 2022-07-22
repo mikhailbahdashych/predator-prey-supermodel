@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <p :class="`paragraph`">{{ title }}</p>
+  <div class="basic-input-container">
+    <p class="small">{{ title }}</p>
     <textarea
       ref="input"
       :value="value"
-      class="bi textarea"
+      class="bi bi--textarea"
       @input="updateValue($event.target.value)"
     ></textarea>
   </div>

@@ -6,7 +6,7 @@
       <div class="question-header-button">
         <Button
           :label="'Ask question'"
-          :additional-class="'min-width150 transparent'"
+          :btn-class="'min-width150 transparent'"
           @click-handler="redirect('/qa/ask')"
         />
       </div>
@@ -15,22 +15,22 @@
     <div class="question-content sort">
       <Button
         :label="'Latest'"
-        :additional-class="`${sortType.latest ? 'mrl rounded': 'mrl rounded transparent'}`"
+        :btn-class="`${sortType.latest ? 'mrl rounded': 'mrl rounded transparent'}`"
         @click-handler="sortBy('latest')"
       />
       <Button
         :label="'Hottest'"
-        :additional-class="`${sortType.hottest ? 'mrl rounded': 'mrl rounded transparent'}`"
+        :btn-class="`${sortType.hottest ? 'mrl rounded': 'mrl rounded transparent'}`"
         @click-handler="sortBy('hottest')"
       />
       <Button
         :label="'Top week'"
-        :additional-class="`${sortType.week ? 'mrl rounded': 'mrl rounded transparent'}`"
+        :btn-class="`${sortType.week ? 'mrl rounded': 'mrl rounded transparent'}`"
         @click-handler="sortBy('topOfTheWeek')"
       />
       <Button
         :label="'Top month'"
-        :additional-class="`${sortType.month ? 'mrl rounded': 'mrl rounded transparent'}`"
+        :btn-class="`${sortType.month ? 'mrl rounded': 'mrl rounded transparent'}`"
         @click-handler="sortBy('topOfTheMonth')"
       />
     </div>
@@ -38,8 +38,8 @@
     <div class="question-content">
       <div v-for="(q, i) in questions" :key="i" class="question" @click="redirect(`/qa/question/${q.slug}`)">
         <div class="flex baseline space-between">
-          <p class="paragraph large nmp on-hover">{{ q.title }}</p>
-          <p class="paragraph opacity">Asked at: {{ q.created_at }}</p>
+          <p>{{ q.title }}</p>
+          <p class="opacity">Asked at: {{ q.created_at }}</p>
         </div>
         <div class="flex space-between">
           <div class="flex">

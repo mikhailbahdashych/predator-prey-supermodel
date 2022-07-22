@@ -8,9 +8,9 @@
     <div class="login">
 
       <div class="login-content">
-        <div class="community-text">
+        <div class="login-content__community-text">
           <h1 class="source-sans-pro bold">Welcome, @username, feel free to join pNb community</h1>
-          <ul class="community-points">
+          <ul class="login-content__community-points">
             <li>Be in charge of everything that happens in world of cybersecurity</li>
             <li>Teach and learn - share you knowledge and learn from other</li>
             <li>Feel free to rise up any topic you are interested in on forum</li>
@@ -20,144 +20,144 @@
       </div>
 
       <div v-if="!showPersonalInformationFields" class="login-header">
-        <h1 class="login-title" @click="redirect('/')">pNb</h1>
-        <div class="login-header-btn">
-          <p class="paragraph">Already have account?
+        <h1 class="login-header__login-title" @click="redirect('/')">pNb</h1>
+        <div class="login-header__login-header-btn">
+          <p>Already have account?
             <span class="link" @click="redirect('/signin')">Sign in!</span>
           </p>
         </div>
       </div>
 
       <div v-if="!showPersonalInformationFields" class="login-inputs">
-        <div class="login-inputs-container">
+        <div class="login-inputs__login-inputs-container">
           <h1 class="source-sans-pro bold">Sign up</h1>
           <Input
             v-model="email.email"
-            :oneerror="email.emailError"
+            :on-error="email.emailError"
             :disabled="disabledField"
             :title="'Email'"
             :type="'text'"
           />
           <Input
             v-model="username.username"
-            :oneerror="username.usernameError"
+            :on-error="username.usernameError"
             :disabled="disabledField"
             :title="'Username'"
             :type="'text'"
           />
           <Input
             v-model="password.password"
-            :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+            :on-error="passwordError.passwordMismatch || passwordError.passwordRequirement"
             :disabled="disabledField"
             :title="'Password'"
             :type="'password'"
           />
           <Input
             v-model="password.passwordRepeat"
-            :oneerror="passwordError.passwordMismatch || passwordError.passwordRequirement"
+            :on-error="passwordError.passwordMismatch || passwordError.passwordRequirement"
             :disabled="disabledField"
             :title="'Repeat password'"
             :type="'password'"
           />
           <p v-if="passwordError.passwordMismatch" class="error">Passwords have to match!</p>
           <p v-if="passwordError.passwordRequirement" class="error">Password are requirement!</p>
-          <div v-if="passwordError.passwordRules" class="password-requirement">
 
-            <div v-for="rule in passwordRulesList" :key="rule.text" class="password-requirements">
+          <div v-if="passwordError.passwordRules" class="login-inputs__login-inputs-container__password-requirement">
+            <div v-for="rule in passwordRulesList" :key="rule.text" class="login-inputs__login-inputs-container__password-requirement__password-requirements">
               <div v-for="(item, i) in Object.entries(rule)" :key="i">
-                <p class="password-requirement-item">
+                <p class="login-inputs__login-inputs-container__password-requirement__password-requirement-item">
                   <span v-if="item[0] === 'text'">{{ item[1] }}</span>
                   <span v-else>
-                  <img v-if="item[1]" class="status" src="../assets/img/greencircle.svg" alt="OK" />
-                  <img v-else class="status" src="../assets/img/redcircle.svg" alt="NOT OK" />
+                  <img v-if="item[1]" class="login-inputs__login-inputs-container__password-requirement__status" src="../assets/img/greencircle.svg" alt="OK" />
+                  <img v-else class="login-inputs__login-inputs-container__password-requirement__status" src="../assets/img/redcircle.svg" alt="NOT OK" />
                 </span>
                 </p>
               </div>
             </div>
           </div>
 
-          <div class="sign-in-btn">
+          <div class="login-inputs__login-inputs-container__sign-in-btn">
             <Checkbox v-model="tac" :input-value="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
-            <Button :label="'Sign up'" :disabled="!validFields()" :additional-class="'high-height'" @click-handler="showPersonalInfoFields" />
+            <Button
+              :label="'Sign up'"
+              :disabled="!validFields()"
+              :btn-class="'basic-button--high-height'"
+              @click-handler="showPersonalInfoFields"
+            />
           </div>
         </div>
       </div>
 
-      <div v-if="showPersonalInformationFields" class="login-inputs personal-information">
-        <div v-if="status !== 1" class="login-inputs-container personal-information">
-          <h3>Tell us a little about yourself</h3>
+      <div v-if="showPersonalInformationFields" class="login-inputs login-inputs--personal-information">
+        <div v-if="status !== 1" class="login-inputs__login-inputs-container login-inputs__login-inputs-container--personal-information">
+          <h3 class="source-sans-pro bold">Tell us a little about yourself</h3>
           <p>Don't worry, you can skip this step and fill information you want later</p>
-          <hr>
           <div class="flex">
             <Input
               v-model="personalInformation.first_name"
               :disabled="loading"
               :title="'First name'"
-              :title-class="'small'"
-              :additional-class="'small mrl'"
+              :input-class="'bi--basic-input__small'"
             />
             <Input
               v-model="personalInformation.last_name"
               :disabled="loading"
               :title="'Last name'"
-              :title-class="'small'"
-              :additional-class="'small'"
+              :input-class="'bi--basic-input__small'"
             />
           </div>
-          <p>Provide your nickname or link</p>
+          <p class="source-sans-pro bold">Provide your nickname or link</p>
           <hr>
           <Input
             v-model="personalInformation.twitter"
             :disabled="loading"
             :title="'Twitter'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
           <Input
             v-model="personalInformation.github"
             :disabled="loading"
             :title="'GitHub'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
           <Input
             v-model="personalInformation.website_link"
             :disabled="loading"
             :title="'Personal website'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
-          <p>What do you want to tell this world?</p>
+          <p class="source-sans-pro bold">What do you want to tell this world?</p>
           <hr>
           <Input
             v-model="personalInformation.status"
             :disabled="loading"
             :title="'Title (will be shown as status in your account)'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
           <Textarea
             v-model="personalInformation.about_me"
             :disabled="loading"
             :title="'Bio'"
           />
-          <Checkbox
-            v-model="personalInformation.show_email"
-            :input-value="personalInformation.show_email"
-            :disabled="loading"
-            :label="`Show my email as public email for contact`"
-          />
-          <div class="buttons">
+          <div class="login-inputs__buttons">
+            <Checkbox
+              v-model="personalInformation.show_email"
+              :input-value="personalInformation.show_email"
+              :disabled="loading"
+              :label="`Show my email as public email for contact`"
+            />
+          </div>
+          <div class="login-inputs__buttons">
             <Button
               :label="'Go back'"
-              :additional-class="'transparent'"
+              :btn-class="'basic-button--transparent'"
               :disabled="loading"
               @click-handler="signUpStepBack"
             />
-            <div class='btn'>
+            <div class='login-inputs__buttons__btn'>
               <Button
                 :label="'Skip'"
-                :additional-class="'transparent'"
+                :btn-class="'basic-button--transparent'"
                 :disabled="loading"
                 @click-handler="signUpWithoutInfo"
               />
@@ -169,10 +169,15 @@
             />
           </div>
         </div>
-        <div v-else class="login-inputs-container">
+        <div v-else class="login-inputs__login-inputs-container">
           <h1>Confirmation email has been sent.</h1>
-          <p class="paragraph medium">Please, follow the instruction in the email to complete registration process.</p>
-          <p class="paragraph medium">The link will be valid for 24 hours.</p>
+          <p>Please, follow the instruction in the email to complete registration process.</p>
+          <p>The link will be valid for 24 hours.</p>
+          <Button
+            :label="'Go to sign in'"
+            :btn-class="'basic-button--transparent'"
+            @click-handler="redirect('/signin')"
+          />
         </div>
       </div>
 

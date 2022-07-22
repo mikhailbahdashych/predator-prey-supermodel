@@ -8,7 +8,9 @@
     @include centers($align-items: center, $justify-content: space-between);
     display: flex;
     border-bottom: 1px solid var(--line);
-    .question-header-button { width: 150px; }
+    .question-header-button {
+      width: 150px;
+    }
   }
 
   .question-content {
@@ -20,21 +22,33 @@
       margin-bottom: 15px;
       transition: .2s;
       cursor: pointer;
-      .on-hover { transition: .2s }
-    }
-    .question:hover {
-      border-bottom: 1px solid var(--main-color);
-      .on-hover { color: var(--main-color) }
+      .on-hover {
+        transition: .2s
+      }
+      &:hover {
+        border-bottom: 1px solid var(--main-color);
+        .on-hover {
+          color: var(--main-color)
+        }
+      }
     }
     .preview-block {
       border: 1px solid var(--main-color-disable);
       border-radius: 5px;
       padding: 5px;
-      &.answer { border: 1px solid var(--success); }
-      &.answered { background-color: var(--background-success); }
-      &.low-quality-question { border: 1px solid var(--error); }
+      &.answer {
+        border: 1px solid var(--success);
+      }
+      &.answered {
+        background-color: var(--background-success);
+      }
+      &.low-quality-question {
+        border: 1px solid var(--error);
+      }
     }
-    .avatar-box { @include avatar-box(50px, 50px); }
+    .avatar-box {
+      @include avatar-box(50px, 50px);
+    }
     &.sort {
       height: 50px;
       display: flex;
@@ -48,7 +62,9 @@
   display: block;
   .elem {
     @include margin($top: 15px, $bottom: 15px);
-    &.button { @include margin($left: 5px, $top: 15px, $bottom: 15px) }
+    &.button {
+      @include margin($left: 5px, $top: 15px, $bottom: 15px);
+    }
   }
   .question-title {
     border-bottom: 1px solid var(--line);

@@ -5,7 +5,7 @@
       <Input
         v-model="title"
         :disabled="loading"
-        :additional-class="'small white-stroke'"
+        :input-class="'small white-stroke'"
         :title="'Question title'"
       />
     </div>
@@ -20,7 +20,7 @@
       <Button
         :disabled="loading"
         :label="'Ask question'"
-        :additional-class="'min-width150'"
+        :btn-class="'min-width150'"
         @click-handler="postQuestion"
       />
     </div>

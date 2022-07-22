@@ -5,87 +5,121 @@
   @include size(100%, 70%);
   @include margin($right: auto, $left: auto);
 
-  .avatar {
+  .account-wrapper__avatar {
     @include size(90px, 225px, $max-width: 500px);
     @include margin(10px, 0, 10px, 18px);
     @include padding(10px, 10px, 10px, 10px);
     display: flex;
     transition: .2s;
     cursor: pointer;
-    .avatar-box { @include avatar-box(70px, 70px) }
-    .avatar-text {
-      @include padding(10px, 0, 0, 20px);
-      h2, p { @include margin(); }
+    .account-wrapper__avatar__avatar-box {
+      @include avatar-box(70px, 70px);
     }
-  }
-  .avatar:hover {
-    background-color: var(--hover);
-    border-radius: 8px;
-  }
-
-  .side-bar {
-    width: 250px;
-    background-color: var(--default-bg);
-    .item {
-      width: 100%;
-      margin: 0 10px 10px;
-      padding-left: 8px;
-      cursor: pointer;
-      transition: .2s;
-      line-height: 38px;
-      &.item-active {
-        background-color: var(--hover);
-        border-radius: 5px;
+    .account-wrapper__avatar__avatar-text {
+      @include padding(10px, 0, 0, 20px);
+      h2, p {
+        @include margin();
       }
     }
-    .vertical-line {
-      @include size(38px, 5px);
-      background-color: var(--main-color);
-      border-radius: 5px;
-    }
-    .item:hover {
+    &:hover {
       background-color: var(--hover);
-      border-radius: 5px;
+      border-radius: 8px;
     }
   }
 
+  .account-wrapper__side-bar-wrapper {
+    display: flex;
+    .account-wrapper__side-bar-wrapper__side-bar {
+      width: 250px;
+      background-color: var(--default-bg);
+      .account-wrapper__side-bar-wrapper__side-bar__box {
+        display: flex;
+      }
+      .account-wrapper__side-bar-wrapper__side-bar__vertical-line {
+        @include size(38px, 5px);
+        background-color: var(--main-color);
+        border-radius: 5px;
+      }
+      .account-wrapper__side-bar-wrapper__side-bar__item {
+        width: 100%;
+        margin: 0 10px 10px;
+        padding-left: 8px;
+        cursor: pointer;
+        transition: .2s;
+        line-height: 38px;
+        &.account-wrapper__side-bar-wrapper__side-bar__item--item-active {
+          background-color: var(--hover);
+          border-radius: 5px;
+        }
+        &:hover {
+          background-color: var(--hover);
+          border-radius: 5px;
+        }
+      }
+    }
+  }
 }
 
 .account-preferences {
   width: 100%;
-  .profile-picture {
+  .account-preferences__profile-picture {
+    @include centers($flex-direction: column, $align-items: center);
     @include margin($right: 15px, $left: 15px);
     display: flex;
-    @include centers($flex-direction: column, $align-items: center);
     width: 30%;
     padding-top: 10px;
     float: right;
-    .picture { @include avatar-box(auto, 100%, $max-width: 225px); }
+    .account-preferences__profile-picture__box {
+      position: relative;
+      .account-preferences__profile-picture__box__picture {
+        @include avatar-box(auto, 100%, $max-width: 225px);
+      }
+      .account-preferences__profile-picture__box__button {
+        bottom: 0;
+        right: 0;
+        position: absolute;
+      }
+    }
   }
-  .fields {
-    width: 70%;
+  .account-preferences__fields-wrap {
+    display: flex;
+    .account-preferences__fields-wrap__fields {
+      width: 70%;
+    }
   }
-  .button {
+  .account-preferences__button {
     float: left;
     padding: 5px;
+    &.account-preferences__button--modal {
+      width: 100%;
+    }
   }
 
-  .item {
+  .account-preferences__item {
     border-bottom: 1px solid var(--line);
-    .item-content {
+    .account-preferences__item__item-content {
       @include centers($justify-content: space-between, $align-items: center);
       display: flex;
       height: 100%;
-      &.texts { display: block; }
+      &.account-preferences__item__item-content--texts {
+        display: block;
+      }
     }
-    &.danger {
+    &.account-preferences__item--danger {
       border-bottom: 1px solid var(--error-hover);
     }
   }
   .password-requirements {
     width: 450px;
     display: flex;
-    .item { @include margin($bottom: 10px, $left: 10px); }
-    .status { @include size(20px, 20px); }
+    .item {
+      @include margin($bottom: 10px, $left: 10px);
+    }
+    .status {
+      @include size(20px, 20px);
+    }
+  }
+  .account-preferences__flex {
+    @include centers($text-align: center);
   }
 }

@@ -17,7 +17,7 @@
     <div class="elem button">
       <Button
         :label="isQuestionOwner ? 'Yes, I want to answer my own question' : 'Yes, I want to answer'"
-        :additional-class="'min-width150'"
+        :btn-class="'min-width150'"
         @click-handler="answerQuestion"
       />
     </div>

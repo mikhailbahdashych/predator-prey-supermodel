@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-fade" mode="out-in">
     <div class="popup fade-in-class">
-      <p class="paragraph">{{ content }}</p>
+      <p>{{ content }}</p>
     </div>
   </transition>
 </template>

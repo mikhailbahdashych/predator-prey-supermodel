@@ -1,11 +1,11 @@
 <template>
-  <div class="basic-input-container">
-    <p :class="`paragraph ${titleClass}`">{{ title }}</p>
+  <div :class="onWhite ? `basic-input-container basic-input-container--on-white` : `basic-input-container`">
+    <p class="small">{{ title }}</p>
     <input
       ref="name"
-      class="bi basic-input"
+      class="bi bi--basic-input"
       :class="[
-        (oneerror && innerValue && innerValue.length > 0 ? `error ${additionalClass}` : readonly ? `readonly ${additionalClass}` : additionalClass)]"
+        (onError && innerValue && innerValue.length > 0 ? `bi--basic-input__error ${inputClass}` : readonly ? `bi--basic-input__readonly ${inputClass}` : inputClass)]"
       :type="type"
       :disabled="disabled"
       :readonly="readonly"
@@ -49,11 +49,7 @@ export default {
       type: String,
       default: ''
     },
-    additionalClass: {
-      type: String,
-      default: ''
-    },
-    titleClass: {
+    inputClass: {
       type: String,
       default: ''
     },
@@ -61,7 +57,11 @@ export default {
       type: Boolean,
       default: false
     },
-    oneerror: {
+    onError: {
+      type: Boolean,
+      default: false
+    },
+    onWhite: {
       type: Boolean,
       default: false
     }

@@ -1,4 +1,6 @@
 @use "../variables" as v;
+@import "../mixins";
+
 
 .bi {
   border-radius: 5px;
@@ -14,19 +16,23 @@
   transition: .3s;
   color: var(--font-color);
   font-family: "Inter", sans-serif;
-  &.textarea {
+  &.bi--textarea {
     padding: 15px;
     font-size: 14px;
     min-height: 56px;
     max-height: 200px;
     height: 120px;
     resize: vertical;
-    &.textarea:focus { border: 1px solid var(--main-color-border); }
+    &:focus {
+      border: 1px solid var(--main-color-border);
+    }
   }
-  &.search {
+  &.bi--search {
     height: 38px;
     font-size: 14px;
-    &.search:focus { border: 1px solid var(--main-color-border); }
+    &:focus {
+      border: 1px solid var(--main-color-border);
+    }
   }
 }
 
@@ -34,42 +40,57 @@
   width: 100%;
   padding: 0 5px;
 
-  .basic-input {
+  &.basic-input-container--on-white {
+    p {
+      color: var(--default-bg);
+    }
+    .bi--basic-input {
+      border: 1px solid var(--on-white);
+      background-color: rgba(#fff, .5);
+      color: var(--on-white);
+    }
+  }
+
+  .bi--basic-input {
     margin-bottom: 10px;
-    &.small {
+    &.bi--basic-input__small {
       font-size: 14px;
       height: 36px;
       padding: 0 8px 0 8px;
       margin: 0;
     }
-    &.error { border: 1px solid var(--error-border); }
-    &.error:focus { border: 1px solid var(--error-border); }
-    &.pointer { cursor: pointer }
-    &.readonly { border: 1px solid var(--main-color-border); }
-    &.white-stroke { border: 1px solid var(--stroke); }
+    &.bi--basic-input__error {
+      border: 1px solid var(--error-border);
+      &:focus {
+        border: 1px solid var(--error-border);
+      }
+    }
+    &.bi--basic-input__pointer {
+      cursor: pointer;
+    }
+    &.bi--basic-input__readonly {
+      border: 1px solid var(--main-color-border);
+    }
+    &.bi--basic-input__white-stroke {
+      border: 1px solid var(--stroke);
+    }
+    &:focus {
+      border: 1px solid var(--main-color-border);
+    }
+    &:disabled {
+      background-color: rgba(var(--font-color), .1);
+    }
   }
-  .basic-input:focus { border: 1px solid var(--main-color-border); }
-  .basic-input:disabled { background-color: rgba(var(--font-color), .1) }
 
-  .on-white {
-    border: 1px solid var(--on-white);
-    background-color: rgba(#fff, .5);
-    color: var(--on-white);
-  }
-
-  .search-result {
+  .bi--search__search-result {
+    @include size(400px, 550px);
+    @include positions($top: 70px, $left: 0, $right: 0);
+    @include margin($left: auto, $right: auto);
     z-index: 2;
     position: absolute;
-    width: 400px;
-    height: 300px;
     background-color: var(--header-bg);
     color: var(--font-color);
     border-radius: 8px;
     border: 1px solid var(--main-color-border);
-    top: 70px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
   }
 }

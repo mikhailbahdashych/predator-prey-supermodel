@@ -1,8 +1,8 @@
 <template>
   <div class="error-page center">
     <h1 class="text head">Page not found</h1>
-    <p class="text paragraph">Sorry, but we are unable to find whatever you are looking for.</p>
-    <p class="text paragraph">
+    <p class="text">Sorry, but we are unable to find whatever you are looking for.</p>
+    <p class="text">
       <nuxt-link class='nuxt-link' to='/'>
         Go back
       </nuxt-link>

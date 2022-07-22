@@ -3,10 +3,10 @@
     <button
       class="basic-button"
       :disabled="disabled"
-      :class="additionalClass"
+      :class="btnClass"
       @click="$emit('click-handler')"
     >
-      <p class="label">{{ label }}</p>
+      <p class="basic-button__label">{{ label }}</p>
     </button>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    additionalClass: {
+    btnClass: {
       type: String,
       default: ''
     }

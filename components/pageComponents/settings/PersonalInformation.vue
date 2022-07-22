@@ -1,41 +1,36 @@
 <template>
   <div class="account-preferences">
     <Popup v-if="showPopup" :content="'Personal settings has been successfully updated!'" />
-    <div class="flex">
 
-      <div class="fields">
-        <div class="flex">
+    <div class="account-preferences__fields-wrap">
+      <div class="account-preferences__fields-wrap__fields">
+        <div class="account-preferences__fields-wrap">
           <Input
             v-model="personalInformation.first_name"
             :title="'First name'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
           <Input
             v-model="personalInformation.last_name"
             :title="'Last name'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
         </div>
-        <div class="flex">
+        <div class="account-preferences__fields-wrap">
           <Input
             v-model="personalInformation.website_link"
             :title="'Website'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
           <Input
             v-model="personalInformation.twitter"
             :title="'Twitter'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
           <Input
             v-model="personalInformation.github"
             :title="'GitHub'"
-            :title-class="'small'"
-            :additional-class="'small'"
+            :input-class="'bi--basic-input__small'"
           />
         </div>
         <Textarea
@@ -44,18 +39,18 @@
         />
       </div>
 
-      <div class="profile-picture">
-        <div class="relative">
-          <img class="picture" :src="require('../../../assets/img/testava.jpg')" alt="ava">
-          <div style="bottom: 0; right: 0; position: absolute;">
+      <div class="account-preferences__profile-picture">
+        <div class="account-preferences__profile-picture__box">
+          <img class="account-preferences__profile-picture__box__picture" :src="require('../../../assets/img/testava.jpg')" alt="ava">
+          <div class="account-preferences__profile-picture__box__button">
             <Button :label="'Change avatar'" />
           </div>
         </div>
       </div>
     </div>
 
-    <div class="button">
-      <Button :label="'Save settings'" :additional-class="'min-width150 mt'" @click-handler="updatePersonalInfo" />
+    <div class="account-preferences__button">
+      <Button :label="'Save settings'" :btn-class="'basic-button--min-width'" @click-handler="updatePersonalInfo" />
     </div>
 
   </div>

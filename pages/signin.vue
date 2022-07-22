@@ -3,18 +3,18 @@
     <div v-if="!showReopeningScreen.status" class="login">
 
       <div class="login-inputs">
-        <div v-if="!phone.show && !twoFa.show" class="login-inputs-container">
+        <div v-if="!phone.show && !twoFa.show" class="login-inputs__login-inputs-container">
           <h1 class="source-sans-pro bold">Sign In</h1>
 
-          <div class="options">
-            <p class="choose" @click="chooseLogin('email')">With Email</p>
-            <div class="vertical-line" />
-            <p class="choose" @click="chooseLogin('phone')">With Phone Number</p>
+          <div class="login-inputs__login-inputs-container__options">
+            <p class="login-inputs__login-inputs-container__options__choose" @click="chooseLogin('email')">With Email</p>
+            <div class="login-inputs__login-inputs-container__options__vertical-line" />
+            <p class="login-inputs__login-inputs-container__options__choose" @click="chooseLogin('phone')">With Phone Number</p>
           </div>
 
           <Input
             v-model="loginEmail.email"
-            :oneerror="loginEmail.loginEmailError"
+            :on-error="loginEmail.loginEmailError"
             :style="[!loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
             :focus="loginEmail.emailFocus"
             :title="'Email'"
@@ -30,17 +30,17 @@
 
           <Input
             v-model="loginPassword.password"
-            :oneerror="loginPassword.loginPasswordError"
+            :on-error="loginPassword.loginPasswordError"
             :title="'Password'"
             :type="'password'"
             @keyup.enter.native="signin"
           />
           <p v-if="loginError" class="error">Wrong credentials!</p>
-          <div class="sign-in-btn">
+          <div class="login-inputs__login-inputs-container__sign-in-btn">
             <Button
               :label="'Sign In'"
               :disabled="loginEmail.loginEmailError || loginPassword.loginPasswordError || !loginPassword.password || !loginEmail.email"
-              :additional-class="'high-height'"
+              :btn-class="'basic-button--high-height'"
               @click-handler="signin"
             />
             <p class="link" @click="redirect('reset-password')">Forgot password?</p>
@@ -59,30 +59,30 @@
         </div>
 
         <div v-else-if="phone.show" class="login-inputs-container"></div>
-
       </div>
 
       <div class="login-content">
-        <h1 class="source-sans-pro bold">Welcome back, @username, glad to see you again</h1>
+        <div class="login-content__center">
+          <h1 class="source-sans-pro bold">Welcome back, @username, glad to see you again</h1>
+        </div>
       </div>
 
       <div class="login-header">
-        <div class="login-header-btn">
-          <p class="paragraph">Don't have account yet?
+        <div class="login-header__login-header-btn">
+          <p>Don't have account yet?
             <span class="link" @click="redirect('/signup')">Sign up now!</span>
           </p>
         </div>
-        <h1 class="login-title" @click="redirect('/')">pNb</h1>
+        <h1 class="login-header__login-title" @click="redirect('/')">pNb</h1>
       </div>
-
     </div>
 
     <div v-if="showReopeningScreen.status" class="reopening">
-      <div class="reopening-block">
+      <div class="reopening__reopening-block">
         <h1>There you are! Nice to see you again, {{ showReopeningScreen.username }}!</h1>
         <Button
           :label="'Here we go'"
-          :additional-class="'big modal-size'"
+          :btn-class="'big modal-size'"
           @click-handler="redirect(`/account/${personalId}`)"
         />
       </div>

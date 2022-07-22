@@ -2,74 +2,76 @@
   <div>
     <Popup v-if="showPopup" :content="'Copied!'" />
     <div class="account">
-      <div class="side-bar">
-        <div class="relative flex">
-          <img class="picture" :src="require('../../assets/img/testava.jpg')" alt="ava">
-          <p v-if="user.status" class="status nmp">{{ user.status }}</p>
+      <div class="account__side-bar">
+        <div class="account__side-bar__ava">
+          <img class="account__side-bar__ava__picture" :src="require('../../assets/img/testava.jpg')" alt="ava">
+          <p v-if="user.status" class="account__side-bar__ava__status">{{ user.status }}</p>
         </div>
 
         <skeleton v-if="loading" />
         <skeleton v-if="loading" />
         <skeleton v-if="loading" />
 
-        <div v-if="user.github && !loading" class="links pointer" @click="copy('gh')">
-          <img :src="require('../../assets/img/github.svg')" alt="Git" class="link">
-          <Input v-model="user.github" :additional-class="'small pointer'" :readonly="true" />
+        <div v-if="user.github && !loading" class="account__side-bar__links" @click="copy('gh')">
+          <img :src="require('../../assets/img/github.svg')" alt="Git" class="account__side-bar__links__link">
+          <Input v-model="user.github" :input-class="'bi--basic-input__small bi--basic-input__pointer'" :readonly="true" />
           <input id="gh" :value="`${user.github}`" type="hidden">
         </div>
 
-        <div v-if="user.twitter && !loading" class="links pointer" @click="copy('tw')">
-          <img :src="require('../../assets/img/twitter.svg')" alt="Git" class="link">
-          <Input v-model="user.twitter" :additional-class="'small pointer'" :readonly="true" />
+        <div v-if="user.twitter && !loading" class="account__side-bar__links" @click="copy('tw')">
+          <img :src="require('../../assets/img/twitter.svg')" alt="Git" class="account__side-bar__links__link">
+          <Input v-model="user.twitter" :input-class="'bi--basic-input__small bi--basic-input__pointer'" :readonly="true" />
           <input id="tw" :value="`${user.twitter}`" type="hidden">
         </div>
 
-        <div v-if="user.website_link && !loading" class="links pointer" @click="copy('wl')">
-          <img :src="require('../../assets/img/tag.svg')" alt="Git" class="link">
-          <Input v-model="user.website_link" :additional-class="'small pointer'" :readonly="true" />
+        <div v-if="user.website_link && !loading" class="account__side-bar__links" @click="copy('wl')">
+          <img :src="require('../../assets/img/tag.svg')" alt="Git" class="account__side-bar__links__link">
+          <Input v-model="user.website_link" :input-class="'bi--basic-input__small bi--basic-input__pointer'" :readonly="true" />
           <input id="wl" :value="`${user.website_link}`" type="hidden">
         </div>
 
-        <Button
-          v-if="isOwner && !loading"
-          :label="'Edit profile'"
-          :additional-class="'transparent mt'"
-          @click-handler="redirect('/account/settings')"
-        />
-        <Button
-          v-else-if="!isOwner && !loading"
-          :label="'Send message'"
-          :additional-class="'transparent mt'"
-          @click-handler="redirect('/account/settings')"
-        />
+        <div class="account__side-bar_buttons">
+          <Button
+            v-if="isOwner && !loading"
+            :label="'Edit profile'"
+            :btn-class="'basic-button--transparent'"
+            @click-handler="redirect('/account/settings')"
+          />
+          <Button
+            v-else-if="!isOwner && !loading"
+            :label="'Send message'"
+            :btn-class="'basic-button--transparent'"
+            @click-handler="redirect('/account/settings')"
+          />
+        </div>
       </div>
 
-      <div class="last-activity">
-        <div class="title">
+      <div class="account__last-activity">
+        <div class="account__last-activity__title">
           <skeleton v-if="loading" />
-          <div v-else class="flex baseline">
-            <h1 class="nmp">{{ user.username }}</h1>
-            <p v-if="user.first_name || user.last_name" class="paragraph">
+          <div v-else class="account__last-activity__title__info">
+            <h1>{{ user.username }}</h1>
+            <p v-if="user.first_name || user.last_name">
               aka {{ user.first_name }} {{ user.last_name }}
             </p>
-            <p class="paragraph">({{ user.personalId }})</p>
+            <p class="account__last-activity__title__info__id" >({{ user.personalId }})</p>
           </div>
           <div v-if="loading">
             <div v-for="(s, i) of 3" :key="i">
               <skeleton :width="250" />
             </div>
           </div>
-          <p v-else class="paragraph opacity">{{ user.about_me }}</p>
+          <p v-else class="account__last-activity__title__title">{{ user.about_me }}</p>
         </div>
-        <div class="flex">
-          <div class="item border">
-            <h2 class='font-second center'>Latest forum posts</h2>
+        <div class="account__last-activity__list">
+          <div class="account__last-activity__item account__last-activity__item--border">
+            <h2>Latest forum posts</h2>
           </div>
-          <div class="item border">
-            <h2 class='font-second center'>Latest Q&A posts</h2>
+          <div class="account__last-activity__item account__last-activity__item--border">
+            <h2>Latest Q&A posts</h2>
           </div>
-          <div class="item">
-            <h2 class='font-second center'>Latest blog posts</h2>
+          <div class="account__last-activity__item">
+            <h2>Latest blog posts</h2>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="paragraph">{{ title }}</p>
+    <p>{{ title }}</p>
     <div class="main-class" :class="additionalClass">
       <input
         ref="name"
@@ -15,12 +15,14 @@
         @input="onInput"
       >
       <div @click="buttonClickOn">
-        <button
-          class="basic-button input-with-button"
-          @click="$emit('click-handler')"
-        >
-          <p class="label">{{ buttonTitle }}</p>
-        </button>
+        <div class="button-container">
+          <button
+            class="basic-button basic-button--input-with-button"
+            @click="$emit('click-handler')"
+          >
+            <span class="label on-white">{{ buttonTitle }}</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

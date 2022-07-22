@@ -1,12 +1,12 @@
 <template>
   <div class="account-preferences">
-    <div class="item">
-      <div class="item-content">
-        <div class="item-content texts">
+    <div class="account-preferences__item">
+      <div class="account-preferences__item__item-content">
+        <div class="account-preferences__item__item-content account-preferences__item__item-content--texts">
           <h3>Change color theme</h3>
           <p class="opacity">Change theme between dark and light.</p>
         </div>
-        <div class="item-content">
+        <div class="account-preferences__item__item-content">
           <toggle-switch :value="darkTheme" @input="changeTheme" />
         </div>
       </div>

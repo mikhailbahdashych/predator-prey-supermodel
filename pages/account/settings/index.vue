@@ -1,19 +1,23 @@
 <template>
   <div class="account-wrapper">
 
-    <div class="avatar" @click="redirect(`/account/${currentUser.personalId}`)">
-      <img class='avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
-      <div class="avatar-text">
+    <div class="account-wrapper__avatar" @click="redirect(`/account/${currentUser.personalId}`)">
+      <img class='account-wrapper__avatar__avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
+      <div class="account-wrapper__avatar__avatar-text">
         <h2>{{ currentUser.username }}</h2>
-        <p class="paragraph opacity">Public profile</p>
+        <p class="opacity">Public profile</p>
       </div>
     </div>
 
-    <div class="flex">
-      <div class="side-bar">
-        <div v-for="item in accountHeaderItems" :key="item.title" class="flex">
-          <div v-if="item.active" class="vertical-line" />
-          <p :class="[item.active ? 'item item-active' : 'item']" @click="changeSubsection(item)">
+    <div class="account-wrapper__side-bar-wrapper">
+      <div class="account-wrapper__side-bar-wrapper__side-bar">
+        <div v-for="item in accountHeaderItems" :key="item.title" class="account-wrapper__side-bar-wrapper__side-bar__box">
+          <div v-if="item.active" class="account-wrapper__side-bar-wrapper__side-bar__vertical-line" />
+          <p :class="[
+            item.active ?
+            'account-wrapper__side-bar-wrapper__side-bar__item account-wrapper__side-bar-wrapper__side-bar__item--item-active' :
+             'account-wrapper__side-bar-wrapper__side-bar__item']"
+             @click="changeSubsection(item)">
             {{ item.title }}
           </p>
         </div>

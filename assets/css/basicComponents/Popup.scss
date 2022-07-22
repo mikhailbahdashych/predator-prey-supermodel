@@ -2,15 +2,15 @@
 @import "../mixins";
 
 .popup {
+  @include margin($right: auto, $left: auto);
+  @include positions($top: 10%, $right: 0, $left: 0);
   position: fixed;
   background-color: var(--header-bg);
   border: 1px solid var(--line);
   text-align: center;
-  z-index: 2;
+  z-index: 3;
   max-width: 280px;
   border-radius: 8px;
-  @include margin($right: auto, $left: auto);
-  @include positions($top: 10%, $right: 0, $left: 0)
 }
 
 .fade-in-class {

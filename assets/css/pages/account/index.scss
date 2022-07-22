@@ -4,39 +4,74 @@
 .account {
   @include wrapper(70%, 20px, auto, auto, auto);
   display: flex;
-  .side-bar {
+  .account__side-bar {
     @include size(100%, 240px);
     @include padding(10px, 10px, 10px, 10px);
     @include display($display: flex, $flex-direction: column);
     background-color: var(--default-bg);
-    .picture { @include avatar-box(225px, 225px); }
-    .status {
-      position: absolute;
-      background-color: var(--header-bg);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 14px;
-      border: 1px solid var(--main-color-border);
-      @include positions($bottom: 0, $right: 0);
-    }
-    .links {
+    .account__side-bar__ava {
       display: flex;
+      position: relative;
+      .account__side-bar__ava__picture {
+        @include avatar-box(225px, 225px);
+      }
+      .account__side-bar__ava__status {
+        @include positions($bottom: 0, $right: 0);
+        position: absolute;
+        background-color: var(--header-bg);
+        border-radius: 8px;
+        font-size: 14px;
+        border: 1px solid var(--main-color-border);
+        padding: 10px;
+        margin: 0;
+      }
+    }
+    .account__side-bar__links {
       @include centers($align-items: center);
-      .link {
+      display: flex;
+      .account__side-bar__links__link {
         @include size(30px, 30px);
         @include margin($top: 10px);
       }
     }
+    .account__side-bar_buttons {
+      margin-top: 10px;
+      padding: 5px;
+    }
   }
-  .last-activity {
+  .account__last-activity {
     width: 100%;
-    .title {
+    .account__last-activity__list {
+      display: flex;
+    }
+    .account__last-activity__title {
       height: 230px;
       padding-top: 10px;
+      .account__last-activity__title__info {
+        display: flex;
+        align-items: baseline;
+        .account__last-activity__title__info__id {
+          margin-left: 5px;
+        }
+        h1 {
+          padding: 0;
+          margin: 0 5px 0 0;
+        }
+      }
+      .account__last-activity__title__title {
+        margin: 0;
+        padding: 0;
+        opacity: .5;
+      }
     }
-    .item {
+    .account__last-activity__item {
       @include size(500px, 100%);
-      &.border { border-right: 1px solid var(--line); }
+      h2 {
+        text-align: center;
+      }
+      &.account__last-activity__item--border {
+        border-right: 1px solid var(--line);
+      }
     }
   }
 }

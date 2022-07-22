@@ -1,4 +1,4 @@
-@use "assets/css/variables" as v;
+@use "../variables" as v;
 @import "../mixins";
 
 .login {
@@ -6,117 +6,135 @@
   @include size(100vh, 100%);
   @include display(fixed, flex);
   background-color: var(--header-bg);
+}
 
-  .login-content {
-    @include size(100%, 50%);
-    @include centers($align-items: center);
-    background-color: var(--default-bg);
-    display: flex;
+.login-content {
+  @include size(100%, 50%);
+  @include centers($align-items: center);
+  background-color: var(--default-bg);
+  display: flex;
+  h1 {
+    @include margin($left: 130px, $right: 130px);
+    font-size: 36px;
+  }
+  .login-content__community-text {
+    display: block;
     h1 {
-      @include margin($left: 130px, $right: 130px);
-      font-size: 36px;
+      text-align: center
     }
-    @media only screen and (max-width: 930px) { display: none; }
-
-    .community-text {
-      display: block;
-      h1 { text-align: center }
-      .community-points {
-        @include margin(35px, auto, 0, auto);
-        width: 70%;
-        font-size: 18px;
-      }
+    .login-content__community-points {
+      @include margin(35px, auto, 0, auto);
+      width: 70%;
+      font-size: 18px;
     }
   }
+  .login-content__center {
+    text-align: center;
+    width: 100%;
+  }
+  @media only screen and (max-width: 930px) {
+    display: none;
+  }
+}
 
-  .login-header {
-    @include size(50px, 100%);
-    @include display($position: absolute, $display: flex);
-    @include positions(0);
-    justify-content: space-between;
-    .login-header-btn {
-      display: flex;
-      align-items: baseline;
-      padding: 15px;
-    }
-    .login-title {
-      @include margin($top: 15px, $right: 30px, $left: 30px);
-      transition: .2s;
-      cursor: pointer;
-    }
-    .login-title:hover {
+.login-header {
+  @include size(50px, 100%);
+  @include display($position: absolute, $display: flex);
+  @include positions(0);
+  justify-content: space-between;
+  .login-header__login-header-btn {
+    display: flex;
+    align-items: baseline;
+    padding: 15px;
+  }
+  .login-header__login-title {
+    @include margin($top: 15px, $right: 30px, $left: 30px);
+    transition: .2s;
+    cursor: pointer;
+    &:hover {
       color: var(--main-color)
     }
   }
+}
 
-  .login-inputs {
-    @include size(500px, 600px);
-    @include display(relative, flex);
-    @include margin($right: auto, $left: auto);
-    @include centers($align-items: center, $justify-content: center);
-    &.personal-information { @include size(100vh); }
+.login-inputs {
+  @include size(500px, 600px);
+  @include display(relative, flex);
+  @include margin($right: auto, $left: auto);
+  @include centers($align-items: center, $justify-content: center);
+  &.login-inputs--personal-information {
+    @include size($height: 100vh);
+  }
 
-    @media only screen and (max-width: 930px) {
-      @include size(100vh, 90%);
-      @include margin(50px);
+  .login-inputs__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    .login-inputs__buttons__btn {
+      width: 100%;
+      @include margin($left: 5px, $right: 5px);
     }
+  }
 
-    .buttons {
+  .login-inputs__login-inputs-container {
+    width: 450px;
+    .login-inputs__login-inputs-container__two-fa {
+      text-align: center;
+    }
+    .login-inputs__login-inputs-container__sign-in-btn {
+      padding: 5px;
+    }
+    .login-inputs__login-inputs-container__options {
       display: flex;
-      justify-content: space-between;
-      .btn {
-        width: 100%;
-        @include margin($left: 5px, $right: 5px);
+      .login-inputs__login-inputs-container__options__vertical-line {
+        @include margin(0, 20px, 0, 20px);
+        width: 1px;
+        background-color: var(--font-color);
+        height: 50px;
+        float: left;
+        opacity: .5;
+      }
+      .login-inputs__login-inputs-container__options__choose {
+        cursor: pointer;
+        transition: .2s;
+        color: var(--font-color);
+        &:hover {
+          color: var(--main-color);
+        }
       }
     }
-
-    .login-inputs-container {
-      width: 450px;
-      .two-fa { text-align: center }
-      .sign-in-btn { padding: 5px; }
-      &.personal-information {
-        height: 100vh;
-        overflow-y: auto;
-        padding: 20px;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      &.personal-information::-webkit-scrollbar { display: none; }
-
-      .options {
+    .login-inputs__login-inputs-container__password-requirement {
+      border-radius: 5px;
+      border: 1px solid rgba(#fff,.9);
+      .login-inputs__login-inputs-container__password-requirement__password-requirements {
         display: flex;
-        .vertical-line {
-          @include margin(0, 20px, 0, 20px);
-          width: 1px;
-          background-color: var(--font-color);
-          height: 50px;
-          float: left;
-          opacity: .5;
-        }
-        .choose {
-          cursor: pointer;
-          transition: .2s;
-          color: var(--font-color);
-        }
-        .choose:hover { color: var(--main-color); }
       }
-
-      .password-requirement {
-        border-radius: 5px;
-        border: 1px solid rgba(#fff,.9);
-        .password-requirements {
-          display: flex;
-        }
-        .password-requirement-item {
-          padding-left: 15px;
-          @include margin(5px, 0, 5px, 0);
-          font-size: 14px;
-          color: var(--font-color);
-          opacity: .9;
-        }
-        .status { @include size(20px, 20px); }
+      .login-inputs__login-inputs-container__password-requirement__password-requirement-item {
+        @include margin(5px, 0, 5px, 0);
+        padding-left: 15px;
+        font-size: 14px;
+        color: var(--font-color);
+        opacity: .9;
+      }
+      .login-inputs__login-inputs-container__password-requirement__status {
+        @include size(20px, 20px);
       }
     }
+    &.login-inputs__login-inputs-container--personal-information {
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 930px) {
+    @include size(100vh, 90%);
+    @include margin(0);
   }
 }
 
@@ -125,7 +143,7 @@
   @include size(100vh, 100%);
   @include display(fixed, flex);
   background-color: var(--header-bg);
-  .reopening-block {
+  .reopening__reopening-block {
     text-align: center;
     display: block;
   }

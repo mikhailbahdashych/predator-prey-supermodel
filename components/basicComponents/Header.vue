@@ -34,21 +34,38 @@
         <div v-if="userData.status === -1" class="content">
           <div class="button">
             <skeleton v-if='loading' :text="'SIGN IN'" />
-            <Button v-else :label="'SIGN IN'" :additional-class="'transparent'" @click-handler="redirect('/signin')" />
+            <Button
+              v-else
+              :label="'SIGN IN'"
+              :btn-class="'basic-button--transparent'"
+              @click-handler="redirect('/signin')"
+            />
           </div>
           <div class="button">
             <skeleton v-if='loading' :text="'SIGN UP'" />
-            <Button v-else :label="'SIGN UP'" @click-handler="redirect('/signup')" />
+            <Button
+              v-else :label="'SIGN UP'"
+              @click-handler="redirect('/signup')"
+            />
           </div>
         </div>
         <div v-else class="content">
           <div class="button">
             <skeleton v-if='loading' :text="'My account'" />
-            <Button v-else :label="'My account'" @click-handler="redirect(`/account/${userData.personalId}`)" />
+            <Button
+              v-else
+              :label="'My account'"
+              @click-handler="redirect(`/account/${userData.personalId}`)"
+            />
           </div>
           <div class="button">
             <skeleton v-if='loading' :text="'Log Out'" />
-            <Button v-else :label="'Log Out'" :additional-class="'transparent'" @click-handler="logout" />
+            <Button
+              v-else
+              :label="'Log Out'"
+              :btn-class="'basic-button--transparent'"
+              @click-handler="logout"
+            />
           </div>
         </div>
       </div>

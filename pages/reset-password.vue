@@ -2,28 +2,29 @@
   <div class="login">
 
     <div class="login-content">
-      <h1 class="login-title center" @click="redirect('/')">
-        <span class="login-title-header">pNb</span>
-      </h1>
-      <div class="login-welcome-texts">
-        <h1 class="center">Forgot your password? Nah... not a big deal</h1>
+      <div class="login-content__center">
+        <h1 class="source-sans-pro bold">Forgot your password?</h1>
+        <h1 class="source-sans-pro bold">Nah... not a big deal</h1>
       </div>
     </div>
 
     <div class="login-header">
-      <p class="paragraph account-having right">Don't have account yet?
-        <span class="paragraph link" @click="redirect('/signup')">Sign up now!</span>
-      </p>
+      <h1 class="login-header__login-title" @click="redirect('/')">pNb</h1>
+      <div class="login-header__login-header-btn">
+        <p>Don't have account yet?
+          <span class="link" @click="redirect('/signup')">Sign up now!</span>
+        </p>
+      </div>
     </div>
 
     <div class="login-inputs">
-      <div class="login-inputs-container">
-        <h1>Forgot password?</h1>
+      <div class="login-inputs__login-inputs-container">
+        <h1 class="source-sans-pro bold">Forgot password?</h1>
 
-        <div class="flex">
-          <p class="choose" @click="chooseOption('email')">Email</p>
-          <div class="vertical-line" />
-          <p class="choose" @click="chooseOption('phone')">Phone</p>
+        <div class="login-inputs__login-inputs-container__options">
+          <p class="login-inputs__login-inputs-container__options__choose" @click="chooseOption('email')">With Email</p>
+          <div class="login-inputs__login-inputs-container__options__vertical-line" />
+          <p class="login-inputs__login-inputs-container__options__choose" @click="chooseOption('phone')">With Phone Number</p>
         </div>
 
         <InputWithButton
@@ -44,7 +45,13 @@
         />
 
         <Input :title="'Verification code'" @keyup.enter.native="() => {}" />
-        <Button :label="'Submit'" :additional-class="'mt high-height'" @click-handler="() => {}" />
+        <div class="login-inputs__login-inputs-container__sign-in-btn">
+          <Button
+            :label="'Submit'"
+            :btn-class="'basic-button--high-height'"
+            @click-handler="() => {}"
+          />
+        </div>
       </div>
     </div>
 
@@ -54,12 +61,14 @@
 <script>
 import InputWithButton from "~/components/basicComponents/InputWithButton";
 import Button from "~/components/basicComponents/Button";
+import Input from '~/components/basicComponents/Input'
 import { validateEmail } from "~/helpers/frontValidator";
 export default {
   name: "ResetPassword",
   components: {
     InputWithButton,
-    Button
+    Button,
+    Input
   },
   layout: 'empty',
   data() {

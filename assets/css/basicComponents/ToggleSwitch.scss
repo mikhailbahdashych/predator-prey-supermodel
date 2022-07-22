@@ -1,62 +1,53 @@
 @use "../variables" as v;
+@import "../mixins";
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+  @include size(34px, 60px);
 
-.switch input {
-  display: none;
-}
+  input {
+    display: none;
+  }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--header-bg-pale);
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
+  .toggle-img {
+    z-index: 5;
+    @include positions($top: 0, $bottom: 0);
+    @include margin(auto, 0, auto, 5px);
+    position: absolute;
+    &.right {
+      @include positions($right: 0);
+      @include margin(7px, 5px, auto, 0);
+    }
+  }
 
-.slider:before {
-  z-index: 2;
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: var(--font-color);
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
+  .slider {
+    z-index: 4;
+    @include positions(0, 0, 0, 0);
+    position: absolute;
+    cursor: pointer;
+    background-color: var(--header-bg-pale);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    &:before {
+      @include size(26px, 26px);
+      @include positions($left: 4px, $bottom: 4px);
+      position: absolute;
+      content: "";
+      background-color: var(--font-color);
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+    &.round {
+      border-radius: 34px;
+      &:before {
+        border-radius: 50%;
+      }
+    }
+  }
 
-input:checked + .slider:before {
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-.toggle-img {
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto 0 auto 5px;
-  &.right {
-    right: 0;
-    margin: auto 5px auto 0;
+  input:checked + .slider:before {
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
   }
 }

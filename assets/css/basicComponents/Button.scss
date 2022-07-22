@@ -1,81 +1,85 @@
 @use "../variables" as v;
+@import "../mixins";
 
 .button-container {
   width: 100%;
   display: flex;
-}
 
-.basic-button {
-  height: 36px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  background-color: var(--main-color);
-  font-weight: 300;
-  width: 100%;
-  min-width: 100px;
-  &.input-with-button {
-    width: 75px;
-    margin-top: 0;
-    height: 48px;
-  }
-
-  &.transparent {
-    background-color: transparent;
-    color: var(--font-color);
-    border: 1px solid var(--main-color);
-    .label { color: var(--font-color); }
-  }
-  &.transparent:hover {
-    background-color: var(--main-color-hover);
-  }
-
-  &.danger {
-    border: 1px solid var(--error-border);
-    color: var(--error);
-  }
-  &.danger:hover {
-    background-color: var(--error-hover);
-  }
-  &.danger-fill {
+  .basic-button {
+    @include size(36px, 100%);
+    background-color: var(--main-color);
+    border-radius: 5px;
+    cursor: pointer;
     border: none;
-    color: var(--font-color);
-    background-color: var(--error);
-  }
-  &.danger-fill:hover {
-    background-color: var(--error-pale);
-  }
-  &.danger-fill:disabled {
-    border: none;
-    color: var(--font-color);
-    background-color: var(--error-disabled);
-  }
-  &.danger-fill:disabled:hover {
-    cursor: auto;
-    background-color: var(--error-disabled);
+    min-width: 100px;
+    &.basic-button--input-with-button {
+      width: 75px;
+      margin-top: 0;
+      height: 48px;
+    }
+    &.basic-button--transparent {
+      background-color: transparent;
+      color: var(--font-color);
+      border: 1px solid var(--main-color);
+      .basic-button__label {
+        color: var(--font-color);
+      }
+    }
+    &.basic-button--min-width {
+      min-width: 150px;
+    }
+    &.basic-button--transparent:hover {
+      background-color: var(--main-color-hover);
+    }
+    &.basic-button--danger {
+      border: 1px solid var(--error-border);
+      color: var(--error);
+    }
+    &.basic-button--danger:hover {
+      background-color: var(--error-hover);
+    }
+    &.basic-button--danger-fill {
+      border: none;
+      color: var(--font-color);
+      background-color: var(--error);
+    }
+    &.basic-button--danger-fill:hover {
+      background-color: var(--error-pale);
+    }
+    &.basic-button--danger-fill:disabled {
+      border: none;
+      color: var(--font-color);
+      background-color: var(--error-disabled);
+    }
+    &.basic-button--danger-fill:disabled:hover {
+      cursor: auto;
+      background-color: var(--error-disabled);
+    }
+    &.basic-button--high-height {
+      height: 48px;
+    }
+    &.basic-button--rounded {
+      border-radius: 16px
+    }
+    &:hover {
+      background-color: var(--main-color-pale);
+    }
+    &:active {
+      background-color: var(--main-color-dark);
+    }
+    &:disabled {
+      background-color: var(--main-color-disable);
+      cursor: auto;
+    }
+    &:disabled:hover {
+      background-color: var(--main-color-disable);
+      cursor: auto;
+    }
+
+    .basic-button__label {
+      margin: 0;
+      color: var(--default-bg);
+    }
   }
 
-  &.min-width150 { width: 150px; }
-  &.high-height { height: 48px; }
-  &.rounded { border-radius: 16px }
-
-  .label {
-    margin: 0;
-    color: var(--default-bg);
-  }
-}
-
-.basic-button:hover {
-  background-color: var(--main-color-pale);
-}
-.basic-button:active {
-  background-color: var(--main-color-dark);
-}
-.basic-button:disabled {
-  background-color: var(--main-color-disable);
-  cursor: auto;
-}
-.basic-button:disabled:hover {
-  background-color: var(--main-color-disable);
-  cursor: auto;
 }

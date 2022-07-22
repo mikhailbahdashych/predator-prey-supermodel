@@ -3,9 +3,9 @@
     <input
       v-model="inputString"
       placeholder="Search..."
-      class="bi search"
+      class="bi bi--search"
     >
-    <div v-if="showResult" class="search-result"></div>
+    <div v-if="showResult" class="bi--search__search-result"></div>
   </div>
 </template>
 
