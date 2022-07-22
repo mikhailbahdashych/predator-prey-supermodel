@@ -1,38 +1,38 @@
 <template>
   <div class="header">
-    <div v-if='loading' class="link-logo"><skeleton :text="'pNb'" /></div>
-    <div v-else class="link-logo">
+    <div v-if='loading' class="header__link-logo"><skeleton :text="'pNb'" /></div>
+    <div v-else class="header__link-logo__logo">
       <nuxt-link no-prefetch to="/">
-        <h3 class='logo'>pNb</h3>
+        <h3>pNb</h3>
       </nuxt-link>
     </div>
-    <div class="inner-header">
-      <div class="content">
-        <div class="content">
+    <div class="header__inner-header">
+      <div class="header__inner-header__content">
+        <div class="header__inner-header__content">
           <skeleton v-if='loading' :text="'Q&A'" />
-          <div v-else class="link">
+          <div v-else class="header__inner-header__content__link">
             <nuxt-link no-prefetch to="/qa" class='nuxt-link'>
-              <p class="link-title">Q&A</p>
+              <p class="header__inner-header__content__link__link-title">Q&A</p>
             </nuxt-link>
           </div>
           <skeleton v-if='loading' :text="'FORUM'" />
-          <div v-else class="link">
+          <div v-else class="header__inner-header__content__link">
             <nuxt-link no-prefetch to="/forum" class='nuxt-link'>
-              <p class="link-title">Forum</p>
+              <p class="header__inner-header__content__link__link-title">Forum</p>
             </nuxt-link>
           </div>
           <skeleton v-if='loading' :text="'BLOG'" />
-          <div v-else class="link">
+          <div v-else class="header__inner-header__content__link">
             <nuxt-link no-prefetch to="/blog" class='nuxt-link'>
-              <p class="link-title">Blog</p>
+              <p class="header__inner-header__content__link__link-title">Blog</p>
             </nuxt-link>
           </div>
         </div>
-        <div class="content">
+        <div class="header__inner-header__content">
           <input-search />
         </div>
-        <div v-if="userData.status === -1" class="content">
-          <div class="button">
+        <div v-if="userData.status === -1" class="header__inner-header__content">
+          <div class="header__inner-header__content__button">
             <skeleton v-if='loading' :text="'SIGN IN'" />
             <Button
               v-else
@@ -41,7 +41,7 @@
               @click-handler="redirect('/signin')"
             />
           </div>
-          <div class="button">
+          <div class="header__inner-header__content__button">
             <skeleton v-if='loading' :text="'SIGN UP'" />
             <Button
               v-else :label="'SIGN UP'"
@@ -49,8 +49,8 @@
             />
           </div>
         </div>
-        <div v-else class="content">
-          <div class="button">
+        <div v-else class="header__inner-header__content">
+          <div class="header__inner-header__content__button">
             <skeleton v-if='loading' :text="'My account'" />
             <Button
               v-else
@@ -58,7 +58,7 @@
               @click-handler="redirect(`/account/${userData.personalId}`)"
             />
           </div>
-          <div class="button">
+          <div class="header__inner-header__content__button">
             <skeleton v-if='loading' :text="'Log Out'" />
             <Button
               v-else

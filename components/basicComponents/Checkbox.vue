@@ -1,10 +1,10 @@
 <template>
   <div class="checkbox-container">
-    <label class="container">
+    <label class="checkbox-container__container">
       <input v-model="model" type="checkbox" :value="inputValue" :disabled="disabled" >
       <span class="checkmark"></span>
     </label>
-    <p class="checkbox-paragraph" v-html="label" />
+    <p class="checkbox-container__checkbox-paragraph" v-html="label" />
   </div>
 </template>
 
