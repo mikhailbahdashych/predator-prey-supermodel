@@ -396,7 +396,7 @@ export default {
     },
     async setTwoFa() {
       const { status } = await setTwoFa({
-        twoFa: this.securityTwoFa.normalCode,
+        twoFaCode: this.securityTwoFa.normalCode,
         twoFaToken: this.securityTwoFa.secret
       }, sessionStorage.getItem('_at'))
       this.securityTwoFa.status = status
@@ -452,7 +452,8 @@ export default {
       }
     },
     generateTwoFa() {
-      const { username } = verifyToken(sessionStorage.getItem('_at'))
+      const token = sessionStorage.getItem('_at')
+      const { username } = verifyToken(token)
       const { qr, secret } = node2fa.generateSecret({
         name: 'PNB - Pentesters Notes Blog',
         account: username

@@ -17,7 +17,7 @@
   border: none;
   text-align: center;
   &:disabled {
-    background-color: rgba(var(--default-bg), .25);
+    background-color: var(--disabled);
   }
   &:focus {
     border: 1px solid var(--main-color-border);

@@ -78,7 +78,7 @@
       border: 1px solid var(--main-color-border);
     }
     &:disabled {
-      background-color: rgba(var(--font-color), .1);
+      background-color: var(--disabled);
     }
   }
 
