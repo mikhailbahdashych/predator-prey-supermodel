@@ -5,17 +5,18 @@
   @include display($position: absolute);
   @include size(100%, 100%);
   background-color: var(--default-bg);
-  .text {
+  text-align: center;
+  .error-page__text {
     font-family: "Lato", sans-serif;
     color: var(--font-color);
-  }
-  .head {
-    font-size: 52px;
-  }
-  .paragraph {
-    font-size: 28px;
-  }
-  .nuxt-link {
-    color: #69BEEB;
+    &.error-page__text--head {
+      font-size: 78px;
+    }
+    &.error-page__text--paragraph {
+      font-size: 28px;
+    }
+    &.error-page__text--nuxt-link {
+      color: #69BEEB;
+    }
   }
 }

@@ -175,7 +175,7 @@
           <p>The link will be valid for 24 hours.</p>
           <Button
             :label="'Go to sign in'"
-            :btn-class="'basic-button--transparent'"
+            :btn-class="'basic-button--transparent basic-button--high-height'"
             @click-handler="redirect('/signin')"
           />
         </div>

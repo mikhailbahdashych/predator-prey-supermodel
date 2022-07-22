@@ -47,7 +47,7 @@ p, h1, h2, h3, h4, h5, li, span {
     color: var(--main-color); cursor: pointer; text-decoration: underline;
   }
   &.success {
-    color: lightgreen;
+    color: #3be83b;
   }
   &.opacity {
     opacity: .5;

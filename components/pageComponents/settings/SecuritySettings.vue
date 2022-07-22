@@ -141,10 +141,12 @@
         :type="'password'"
       />
 
-      <p v-if="securityPassword.status === 1" class="success">Password has been successfully changed!</p>
-      <p v-else-if="securityPassword.status === -2" class="error">Wrong password!</p>
-      <p v-else-if="securityPassword.status === -3" class="error">Wrong 2FA code!</p>
-      <p v-else-if="securityPassword.status === -4" class="error">New password can't be the same as current one!</p>
+      <div class="account-preferences__button account-preferences__button--modal">
+        <p v-if="securityPassword.status === 1" class="success">Password has been successfully changed!</p>
+        <p v-else-if="securityPassword.status === -2" class="error">Wrong password!</p>
+        <p v-else-if="securityPassword.status === -3" class="error">Wrong 2FA code!</p>
+        <p v-else-if="securityPassword.status === -4" class="error">New password can't be the same as current one!</p>
+      </div>
 
       <p v-if="passwordError.passwordMismatch" class="error">Passwords have to match!</p>
       <p v-else-if="passwordError.passwordRequirement" class="error">Password are requirement!</p>
@@ -450,7 +452,7 @@ export default {
       }
     },
     generateTwoFa() {
-      const { username } = verifyToken(localStorage.getItem('_at'))
+      const { username } = verifyToken(sessionStorage.getItem('_at'))
       const { qr, secret } = node2fa.generateSecret({
         name: 'PNB - Pentesters Notes Blog',
         account: username
