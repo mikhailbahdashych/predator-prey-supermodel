@@ -63,6 +63,10 @@
           </div>
         </div>
 
+        <div v-if="user.show_email" class="account__side-bar__social-title">
+          <h4>Contact email</h4>
+        </div>
+
         <div class="account__side-bar_buttons">
           <Button
             v-if="isOwner && !loading"
