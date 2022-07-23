@@ -29,9 +29,12 @@
         border-radius: 8px;
         transition: .2s;
         margin: 0 5px;
+        padding: 0 5px;
         .header__inner-header__content__link__link-title {
-          transition: .3s;
-          font-size: 14px;
+          p {
+            transition: .3s;
+            font-size: 14px;
+          }
         }
         &:hover {
           background-color: var(--hover);
@@ -46,12 +49,17 @@
     align-items: center;
     .header__link-logo__logo {
       font-size: 25px;
-      margin: 0;
-      padding-left: 15px;
+      margin-left: 15px;
       transition: .2s;
+      h3 {
+        margin: 0;
+        transition: .2s;
+      }
       &:hover {
         transform: scale(1.1);
-        color: var(--main-color)
+        h3 {
+          color: var(--main-color);
+        }
       }
     }
   }

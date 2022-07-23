@@ -1,8 +1,8 @@
 <template>
   <div class="header">
     <div v-if='loading' class="header__link-logo"><skeleton :text="'pNb'" /></div>
-    <div v-else class="header__link-logo__logo">
-      <nuxt-link no-prefetch to="/">
+    <div v-else class="header__link-logo">
+      <nuxt-link class="header__link-logo__logo" no-prefetch to="/">
         <h3>pNb</h3>
       </nuxt-link>
     </div>
@@ -11,20 +11,20 @@
         <div class="header__inner-header__content">
           <skeleton v-if='loading' :text="'Q&A'" />
           <div v-else class="header__inner-header__content__link">
-            <nuxt-link no-prefetch to="/qa" class='nuxt-link'>
-              <p class="header__inner-header__content__link__link-title">Q&A</p>
+            <nuxt-link no-prefetch to="/qa" class='header__inner-header__content__link__link-title'>
+              <p>Q&A</p>
             </nuxt-link>
           </div>
           <skeleton v-if='loading' :text="'FORUM'" />
           <div v-else class="header__inner-header__content__link">
-            <nuxt-link no-prefetch to="/forum" class='nuxt-link'>
-              <p class="header__inner-header__content__link__link-title">Forum</p>
+            <nuxt-link no-prefetch to="/forum" class='header__inner-header__content__link__link-title'>
+              <p>Forum</p>
             </nuxt-link>
           </div>
           <skeleton v-if='loading' :text="'BLOG'" />
           <div v-else class="header__inner-header__content__link">
-            <nuxt-link no-prefetch to="/blog" class='nuxt-link'>
-              <p class="header__inner-header__content__link__link-title">Blog</p>
+            <nuxt-link no-prefetch to="/blog" class='header__inner-header__content__link__link-title'>
+              <p>Blog</p>
             </nuxt-link>
           </div>
         </div>

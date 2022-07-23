@@ -1,7 +1,7 @@
 <template>
   <div class="ask-wrapper">
 
-    <div class="elem">
+    <div class="ask-wrapper__elem">
       <Input
         v-model="title"
         :disabled="loading"
@@ -10,13 +10,13 @@
       />
     </div>
 
-    <div class="elem">
+    <div class="ask-wrapper__elem">
       <custom-vue-editor
         v-model="content"
       />
     </div>
 
-    <div class="elem button">
+    <div class="ask-wrapper__elem ask-wrapper__elem--button">
       <Button
         :disabled="loading"
         :label="'Ask question'"

@@ -1,12 +1,12 @@
 <template>
   <div class="ask-wrapper">
 
-    <div class="question-title">
+    <div class="ask-wrapper__question-title">
       <h1>{{ question.title }}</h1>
     </div>
 
-    <div class="question-title">
-      <p class="paragraph" v-html="question.content" />
+    <div class="ask-wrapper__question-title">
+      <p v-html="question.content" />
     </div>
 
     <h3>Post your answer:</h3>
@@ -14,7 +14,7 @@
       v-model="answer"
     />
 
-    <div class="elem button">
+    <div class="ask-wrapper__elem ask-wrapper__elem--button">
       <Button
         :label="isQuestionOwner ? 'Yes, I want to answer my own question' : 'Yes, I want to answer'"
         :btn-class="'min-width150'"

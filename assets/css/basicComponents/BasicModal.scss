@@ -16,7 +16,7 @@
     background: white 0 0 no-repeat padding-box;
     border-radius: 6px;
     display: flex;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
     @media screen and (max-width: 520px) {
       width: auto;
       margin: 15px;
@@ -47,9 +47,8 @@
       margin-bottom: 25px;
     }
 
-    .settings-modal-container__settings-modal-wrapper__modal-content {
-      @include padding($left: 20px, $right: 20px);
-      width: 100%;
+    .settings-modal-container__settings-modal-wrapper {
+      width: 90%;
     }
   }
 }

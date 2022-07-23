@@ -6,7 +6,7 @@
         <h3>{{header}}</h3>
       </div>
       <p class="settings-modal-container__settings-modal-wrapper__modal-description">{{description}}</p>
-      <div class="settings-modal-container__settings-modal-wrapper__modal-content">
+      <div class="settings-modal-container__settings-modal-wrapper">
         <slot/>
       </div>
     </div>

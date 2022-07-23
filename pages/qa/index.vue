@@ -1,9 +1,9 @@
 <template>
   <div class="question-wrapper">
 
-    <div class="question-header">
+    <div class="question-wrapper__question-header">
       <h1>Q&A - Ask and answer</h1>
-      <div class="question-header-button">
+      <div class="question-wrapper__question-header__question-header-button">
         <Button
           :label="'Ask question'"
           :btn-class="'min-width150 transparent'"
@@ -12,46 +12,54 @@
       </div>
     </div>
 
-    <div class="question-content sort">
-      <Button
-        :label="'Latest'"
-        :btn-class="`${sortType.latest ? 'mrl rounded': 'mrl rounded transparent'}`"
-        @click-handler="sortBy('latest')"
-      />
-      <Button
-        :label="'Hottest'"
-        :btn-class="`${sortType.hottest ? 'mrl rounded': 'mrl rounded transparent'}`"
-        @click-handler="sortBy('hottest')"
-      />
-      <Button
-        :label="'Top week'"
-        :btn-class="`${sortType.week ? 'mrl rounded': 'mrl rounded transparent'}`"
-        @click-handler="sortBy('topOfTheWeek')"
-      />
-      <Button
-        :label="'Top month'"
-        :btn-class="`${sortType.month ? 'mrl rounded': 'mrl rounded transparent'}`"
-        @click-handler="sortBy('topOfTheMonth')"
-      />
+    <div class="question-wrapper__question-content question-wrapper__question-content--sort">
+      <div class="question-wrapper__question-content--sort__item">
+        <Button
+          :label="'Latest'"
+          :btn-class="`${sortType.latest ? 'basic-button--rounded': 'mrl basic-button--rounded basic-button--transparent'}`"
+          @click-handler="sortBy('latest')"
+        />
+      </div>
+      <div class="question-wrapper__question-content--sort__item">
+        <Button
+          :label="'Hottest'"
+          :btn-class="`${sortType.hottest ? 'basic-button--rounded': 'mrl basic-button--rounded basic-button--transparent'}`"
+          @click-handler="sortBy('hottest')"
+        />
+      </div>
+      <div class="question-wrapper__question-content--sort__item">
+        <Button
+          :label="'Top week'"
+          :btn-class="`${sortType.week ? 'basic-button--rounded': 'mrl basic-button--rounded basic-button--transparent'}`"
+          @click-handler="sortBy('topOfTheWeek')"
+        />
+      </div>
+      <div class="question-wrapper__question-content--sort__item">
+        <Button
+          :label="'Top month'"
+          :btn-class="`${sortType.month ? 'basic-button--rounded': 'mrl basic-button--rounded basic-button--transparent'}`"
+          @click-handler="sortBy('topOfTheMonth')"
+        />
+      </div>
     </div>
 
-    <div class="question-content">
-      <div v-for="(q, i) in questions" :key="i" class="question" @click="redirect(`/qa/question/${q.slug}`)">
-        <div class="flex baseline space-between">
-          <p>{{ q.title }}</p>
+    <div class="question-wrapper__question-content">
+      <div v-for="(q, i) in questions" :key="i" class="question-wrapper__question-content__question" @click="redirect(`/qa/question/${q.slug}`)">
+        <div class="question-wrapper__question-content__question__title-box">
+          <h3 class="question-wrapper__question-content__question__title-box__hover">{{ q.title }}</h3>
           <p class="opacity">Asked at: {{ q.created_at }}</p>
         </div>
-        <div class="flex space-between">
-          <div class="flex">
-            <p class="paragraph preview-block">Views: 100</p>
-            <p class="paragraph preview-block">Answers: {{ q.count || 0 }}</p>
+        <div style='display: flex; justify-content: space-between;'>
+          <div style='display: flex'>
+            <p class="question-wrapper__question-content__preview-block">Views: 100</p>
+            <p class="question-wrapper__question-content__preview-block">Answers: {{ q.count || 0 }}</p>
             <p
-              class="paragraph preview-block answer"
-              :class="q.is_answered ? 'answered' : q.votes < 0 ? 'low-quality-question' : ''"
+              class="question-wrapper__question-content__preview-block question-wrapper__question-content__preview-block--answer"
+              :class="q.is_answered ? 'question-wrapper__question-content__preview-block--answered' : q.votes < 0 ? 'question-wrapper__question-content__preview-block--low-quality-question' : ''"
             >Votes: {{ q.votes  }}</p>
           </div>
-          <div class="flex">
-            <img class="avatar-box" :src="require('../../assets/img/testava.jpg')" alt="ava">
+          <div style='display:flex;'>
+            <img class="question-wrapper__question-content__avatar-box" :src="require('../../assets/img/testava.jpg')" alt="ava">
           </div>
         </div>
       </div>
