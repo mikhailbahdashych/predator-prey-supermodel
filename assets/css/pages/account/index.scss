@@ -34,9 +34,20 @@
         @include margin($top: 10px);
       }
     }
+    .account__side-bar__locs {
+      .account__side-bar__locs--item {
+        display: flex;
+      }
+    }
     .account__side-bar_buttons {
       margin-top: 10px;
       padding: 5px;
+    }
+    .account__side-bar__social-title {
+      margin-top: 15px;
+      h4 {
+        margin: 0;
+      }
     }
   }
   .account__last-activity {

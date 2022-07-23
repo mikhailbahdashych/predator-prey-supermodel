@@ -12,6 +12,11 @@
         <skeleton v-if="loading" />
         <skeleton v-if="loading" />
 
+        <div v-if="user.github || user.twitter || user.website_link" class="account__side-bar__social-title">
+          <h4>Social media</h4>
+          <hr>
+        </div>
+
         <div v-if="user.github && !loading" class="account__side-bar__links" @click="copy('gh')">
           <img :src="require('../../assets/img/github.svg')" alt="Git" class="account__side-bar__links__link">
           <Input v-model="user.github" :input-class="'bi--basic-input__small bi--basic-input__pointer'" :readonly="true" />
@@ -28,6 +33,34 @@
           <img :src="require('../../assets/img/tag.svg')" alt="Git" class="account__side-bar__links__link">
           <Input v-model="user.website_link" :input-class="'bi--basic-input__small bi--basic-input__pointer'" :readonly="true" />
           <input id="wl" :value="`${user.website_link}`" type="hidden">
+        </div>
+
+        <div v-if="user.company || user.location" class="account__side-bar__social-title">
+          <h4 v-if="user.location && !user.company">Location</h4>
+          <h4 v-else-if="user.company && !user.location">Place of work</h4>
+          <h4 v-else>Location and place of work</h4>
+          <hr>
+        </div>
+
+        <div v-if="user.company || user.location">
+          <div v-if="user.location && !user.company" class="account__side-bar__links">
+            <img :src="require('../../assets/img/location.svg')" alt="Loc" class="account__side-bar__links__link">
+            {{ user.location }}
+          </div>
+          <div v-else-if="user.company && !user.location" class="account__side-bar__links">
+            <img :src="require('../../assets/img/company.png')" alt="Company" class="account__side-bar__links__link">
+            <p>{{ user.company }}</p>
+          </div>
+          <div v-else>
+            <div class="account__side-bar__links">
+              <img :src="require('../../assets/img/location.svg')" alt="Loc" class="account__side-bar__links__link">
+              <Input v-model="user.location" :input-class="'bi--basic-input__small'" :readonly="true" />
+            </div>
+            <div class="account__side-bar__links">
+              <img :src="require('../../assets/img/company.png')" alt="Company" class="account__side-bar__links__link">
+              <Input v-model="user.company" :input-class="'bi--basic-input__small'" :readonly="true" />
+            </div>
+          </div>
         </div>
 
         <div class="account__side-bar_buttons">
