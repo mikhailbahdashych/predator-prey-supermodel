@@ -2,9 +2,10 @@
 @import "../mixins";
 
 .checkbox-container {
-  @include padding($top: 12px, $bottom: 20px);
   display: flex;
-  .checkbox-container__container {
+  padding-top: 12px;
+  padding-bottom: 20px;
+  .container {
     display: block;
     position: relative;
     max-width: 12px;
@@ -15,16 +16,14 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-    }
-    &:hover input ~ .checkmark {
-      background-color: #ccc;
-    }
+  }
+
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
   }
 
   .checkmark {
@@ -35,6 +34,10 @@
     width: 25px;
     background-color: #eee;
     border-radius: 5px;
+  }
+
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
   }
 
   .container input:checked ~ .checkmark {
@@ -62,11 +65,10 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-
-  .checkbox-container__checkbox-paragraph {
+  .checkbox-paragraph {
     padding-top: 4px;
     margin: 0;
     font-size: 12px;
-    color: var(--main-color-light);
+    color: white;
   }
 }
