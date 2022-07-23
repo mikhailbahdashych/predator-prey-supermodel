@@ -1,5 +1,8 @@
 <template>
-  <div></div>
+  <div class="account-preferences">
+    <h1 class="account-preferences__header">Notification settings</h1>
+    <hr>
+  </div>
 </template>
 
 <script>

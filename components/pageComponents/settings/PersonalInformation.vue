@@ -2,46 +2,76 @@
   <div class="account-preferences">
     <Popup v-if="showPopup" :content="'Personal settings has been successfully updated!'" />
 
+    <h1 class="account-preferences__header">Public profile</h1>
+    <hr>
     <div class="account-preferences__fields-wrap">
       <div class="account-preferences__fields-wrap__fields">
-        <div class="account-preferences__fields-wrap">
-          <Input
-            v-model="personalInformation.first_name"
-            :title="'First name'"
-            :input-class="'bi--basic-input__small'"
-          />
-          <Input
-            v-model="personalInformation.last_name"
-            :title="'Last name'"
-            :input-class="'bi--basic-input__small'"
-          />
-        </div>
-        <div class="account-preferences__fields-wrap">
-          <Input
-            v-model="personalInformation.website_link"
-            :title="'Website'"
-            :input-class="'bi--basic-input__small'"
-          />
-          <Input
-            v-model="personalInformation.twitter"
-            :title="'Twitter'"
-            :input-class="'bi--basic-input__small'"
-          />
-          <Input
-            v-model="personalInformation.github"
-            :title="'GitHub'"
-            :input-class="'bi--basic-input__small'"
-          />
-        </div>
+        <p class="account-preferences__fields-wrap__fields__subtitle">Personal information</p>
+        <hr>
+        <Input
+          v-model="personalInformation.first_name"
+          :title="'First name'"
+          :input-class="'bi--basic-input__small'"
+        />
+        <Input
+          v-model="personalInformation.last_name"
+          :title="'Last name'"
+          :input-class="'bi--basic-input__small'"
+        />
         <Input
           v-model="personalInformation.status"
           :title="'Status'"
+          :input-class="'bi--basic-input__small'"
+        />
+        <div class="account-preferences__fields-wrap__fields__annotation">
+          <span class="source-sans-pro opacity">
+            Your first and last name will be shown only in your profile.
+            You can remove it anu time you want.
+          </span>
+        </div>
+        <Input
+          v-model="personalInformation.company"
+          :title="'Company'"
+          :input-class="'bi--basic-input__small'"
+        />
+        <Input
+          v-model="personalInformation.location"
+          :title="'Location'"
           :input-class="'bi--basic-input__small'"
         />
         <Textarea
           v-model="personalInformation.about_me"
           :title="'About'"
         />
+        <div class="account-preferences__fields-wrap__fields__annotation">
+          <span class="source-sans-pro opacity">You can
+            <span class="source-sans-pro bold">@mention</span>
+            your company’s PNB organization to link it.</span>
+        </div>
+        <p class="account-preferences__fields-wrap__fields__subtitle">Social media</p>
+        <hr>
+        <Input
+          v-model="personalInformation.website_link"
+          :title="'Website'"
+          :input-class="'bi--basic-input__small'"
+        />
+        <Input
+          v-model="personalInformation.twitter"
+          :title="'Twitter'"
+          :input-class="'bi--basic-input__small'"
+        />
+        <Input
+          v-model="personalInformation.github"
+          :title="'GitHub'"
+          :input-class="'bi--basic-input__small'"
+        />
+        <div class="account-preferences__button">
+          <Checkbox
+            v-model="personalInformation.show_email"
+            :label="`Show my email as public email for contact`"
+          />
+          <Button :label="'Save settings'" @click-handler="updatePersonalInfo" />
+        </div>
       </div>
 
       <div class="account-preferences__profile-picture">
@@ -54,16 +84,13 @@
       </div>
     </div>
 
-    <div class="account-preferences__button">
-      <Button :label="'Save settings'" :btn-class="'basic-button--min-width'" @click-handler="updatePersonalInfo" />
-    </div>
-
   </div>
 </template>
 
 <script>
-import Input from '~/components/basicComponents/Input';
+import Input from "~/components/basicComponents/Input";
 import Textarea from "~/components/basicComponents/Textarea";
+import Checkbox from "~/components/basicComponents/Checkbox";
 import Button from "~/components/basicComponents/Button";
 import Popup from "~/components/basicComponents/Popup";
 import {
@@ -75,6 +102,7 @@ export default {
   components: {
     Input,
     Textarea,
+    Checkbox,
     Button,
     Popup
   },

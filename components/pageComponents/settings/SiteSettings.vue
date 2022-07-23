@@ -1,5 +1,7 @@
 <template>
   <div class="account-preferences">
+    <h1 class="account-preferences__header">Site appearance settings</h1>
+    <hr>
     <div class="account-preferences__item">
       <div class="account-preferences__item__item-content">
         <div class="account-preferences__item__item-content account-preferences__item__item-content--texts">

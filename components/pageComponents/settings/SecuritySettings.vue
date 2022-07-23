@@ -1,6 +1,8 @@
 <template>
   <div class="account-preferences">
     <Popup v-if="showPopup" :content="'Copied!'" />
+    <h1 class="account-preferences__header">Security settings</h1>
+    <hr>
     <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`account-preferences__item ${setting.danger ? 'account-preferences__item--danger' : ''}`">
       <div v-if="setting.title === 'Set 2FA'" class="account-preferences__item__item-content">
         <div class="account-preferences__item__item-content account-preferences__item__item-content--texts">
