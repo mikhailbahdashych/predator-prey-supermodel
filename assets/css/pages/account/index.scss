@@ -61,6 +61,7 @@
       .account__last-activity__title__info {
         display: flex;
         align-items: baseline;
+        justify-content: space-between;
         .account__last-activity__title__info__id {
           margin-left: 5px;
         }

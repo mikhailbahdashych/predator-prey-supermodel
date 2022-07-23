@@ -83,11 +83,16 @@
         <div class="account__last-activity__title">
           <skeleton v-if="loading" />
           <div v-else class="account__last-activity__title__info">
-            <h1>{{ user.username }}</h1>
-            <p v-if="user.first_name || user.last_name">
-              aka {{ user.first_name }} {{ user.last_name }}
-            </p>
-            <p class="account__last-activity__title__info__id" >({{ user.personalId }})</p>
+            <div class="account__last-activity__title__info">
+              <h1>{{ user.username }}</h1>
+              <p v-if="user.first_name || user.last_name">
+                aka {{ user.first_name }} {{ user.last_name }}
+              </p>
+              <p class="account__last-activity__title__info__id" >({{ user.personalId }})</p>
+            </div>
+            <div>
+              <p><span class="source-sans-pro bold">Reputation: </span>{{ user.reputation }}</p>
+            </div>
           </div>
           <div v-if="loading">
             <div v-for="(s, i) of 3" :key="i">
