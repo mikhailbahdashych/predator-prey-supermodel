@@ -33,6 +33,11 @@
             :input-class="'bi--basic-input__small'"
           />
         </div>
+        <Input
+          v-model="personalInformation.status"
+          :title="'Status'"
+          :input-class="'bi--basic-input__small'"
+        />
         <Textarea
           v-model="personalInformation.about_me"
           :title="'About'"
