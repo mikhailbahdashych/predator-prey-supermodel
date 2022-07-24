@@ -235,7 +235,7 @@ import {
   deleteAccount,
   disableTwoFa,
   setTwoFa,
-  getUserSettings
+  getUserSettings, getRefreshedTokens
 } from '~/api'
 export default {
   name: 'SecuritySettings',
@@ -361,17 +361,22 @@ export default {
   methods: {
     async getUserSecuritySettings() {
       const token = sessionStorage.getItem('_at')
-      const userSettings = await getUserSettings(token, 'security')
+      let userSettings = await getUserSettings(token, 'security')
 
-      if (userSettings.status === -1 || userSettings.status === 401)
-        return this.$router.push('/signin')
+      if (userSettings.status === 401) {
+        const refreshedToken = await getRefreshedTokens()
+
+        if (refreshedToken.status === 401) return this.$router.push('/signin')
+        else sessionStorage.setItem('_at', refreshedToken._at)
+
+        userSettings = await getUserSettings(refreshedToken._at, 'security')
+      }
 
       if (userSettings.twoFa)
         this.securityTwoFa.status = 2
 
-      if (userSettings.changedEmail) {
+      if (userSettings.changedEmail)
         this.changeEmailData.status = -1
-      }
 
       if (userSettings.changedPasswordAt) {
         this.securityPassword.status = -5

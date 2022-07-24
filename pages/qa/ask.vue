@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { createQuestionPost } from '~/api'
+import { createQuestionPost, getRefreshedTokens } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
@@ -90,6 +90,14 @@ export default {
     // },
     async postQuestion() {
       this.loading = true
+
+      const tokenData = verifyToken(sessionStorage.getItem('_at'))
+
+      if (tokenData.message === 'invalid-token') {
+        const refreshedToken = await getRefreshedTokens()
+        if (refreshedToken.status === 401) return this.$router.push('/signin')
+        else sessionStorage.setItem('_at', refreshedToken._at)
+      }
 
       const data = await createQuestionPost({
         title: this.title,
