@@ -95,7 +95,7 @@
               <p class="account__last-activity__title__info__id" >({{ user.personalId }})</p>
             </div>
             <div>
-              <p><span class="source-sans-pro bold">Reputation: </span>{{ user.reputation }}</p>
+              <h3><span class="source-sans-pro bold">Reputation: </span>{{ user.reputation }}</h3>
             </div>
           </div>
           <div v-if="loading">
@@ -108,12 +108,30 @@
         <div class="account__last-activity__list">
           <div class="account__last-activity__item account__last-activity__item--border">
             <h2>Latest forum posts</h2>
+            <div v-if="!userLastActivity.forumPosts.length">
+              <p class="opacity">No forum posts yet.</p>
+            </div>
+            <div v-else>
+              <p>{{ userLastActivity.forumPosts }}</p>
+            </div>
           </div>
           <div class="account__last-activity__item account__last-activity__item--border">
             <h2>Latest Q&A posts</h2>
+            <div v-if="!userLastActivity.usersQuestions.length">
+              <p class="opacity">No Q&A posts yet.</p>
+            </div>
+            <div v-else>
+              <p>{{ userLastActivity.usersQuestions }}</p>
+            </div>
           </div>
           <div class="account__last-activity__item">
             <h2>Latest blog posts</h2>
+            <div v-if="!userLastActivity.usersBlogPosts.length">
+              <p class="opacity">No blog posts yet.</p>
+            </div>
+            <div v-else>
+              <p>{{ userLastActivity.usersBlogPosts }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -127,7 +145,7 @@ import Skeleton from '~/components/skeleton/Skeleton'
 import Button from "~/components/basicComponents/Button"
 import Popup from "~/components/basicComponents/Popup"
 import Input from "~/components/basicComponents/Input"
-import { getUserByPersonalId } from "~/api"
+import { getUserByPersonalId, getUserLastActivity } from "~/api"
 import { verifyToken } from "~/helpers/crypto"
 import { validateUserPersonalId } from '~/helpers/frontValidator'
 export default {
@@ -142,6 +160,11 @@ export default {
   data() {
     return {
       user: {},
+      userLastActivity: {
+        forumPosts: [],
+        usersQuestions: [],
+        usersBlogPosts: []
+      },
       loading: true,
       showPopup: false,
       isOwner: false
@@ -151,14 +174,19 @@ export default {
     this.$nextTick(() => { this.loading = false })
   },
   async mounted() {
-    return await this.getCurrentUser()
+    await this.getCurrentUser()
+    await this.getUserLastActivity()
   },
   methods: {
+    async getUserLastActivity() {
+      const { forumPosts, usersQuestions, usersBlogPosts } = await getUserLastActivity(this.$route.params.personalId)
+      this.userLastActivity.forumPosts = forumPosts
+      this.userLastActivity.usersQuestions = usersQuestions
+      this.userLastActivity.usersBlogPosts = usersBlogPosts
+    },
     async getCurrentUser() {
       this.user = await getUserByPersonalId(this.$route.params.personalId)
-
-      if (this.user.personalId === verifyToken(sessionStorage.getItem('_at')).personalId)
-        this.isOwner = true
+      this.isOwner = this.user.personalId === verifyToken(sessionStorage.getItem('_at')).personalId
     },
     redirect(path) {
       return this.$router.push(path)

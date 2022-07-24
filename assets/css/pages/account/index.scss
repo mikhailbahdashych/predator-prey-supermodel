@@ -59,9 +59,8 @@
       height: 230px;
       padding-top: 10px;
       .account__last-activity__title__info {
+        @include centers($align-items: baseline, $justify-content: space-between);
         display: flex;
-        align-items: baseline;
-        justify-content: space-between;
         .account__last-activity__title__info__id {
           margin-left: 5px;
         }
@@ -77,8 +76,8 @@
       }
     }
     .account__last-activity__item {
-      @include size(500px, 100%);
-      h2 {
+      width: 100%;
+      p, h2 {
         text-align: center;
       }
       &.account__last-activity__item--border {
