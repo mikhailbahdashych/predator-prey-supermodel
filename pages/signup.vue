@@ -129,7 +129,7 @@
           <p class="source-sans-pro bold">What do you want to tell this world?</p>
           <hr>
           <Input
-            v-model="personalInformation.status"
+            v-model="personalInformation.user_status"
             :disabled="loading"
             :title="'Title (will be shown as status in your account)'"
             :input-class="'bi--basic-input__small'"
@@ -241,7 +241,7 @@ export default {
       personalInformation: {
         first_name: null,
         last_name: null,
-        status: null,
+        user_status: null,
         about_me: null,
         website_link: null,
         twitter: null,

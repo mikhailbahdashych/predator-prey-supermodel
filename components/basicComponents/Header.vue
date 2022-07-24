@@ -77,7 +77,7 @@
 import Button from '~/components/basicComponents/Button'
 import Skeleton from '~/components/skeleton/Skeleton'
 import InputSearch from '~/components/basicComponents/InputSearch'
-import { verifyToken } from '~/helpers/crypto'
+// import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Header',
   components: {
@@ -103,18 +103,18 @@ export default {
 
       if (!token) {
         this.userData.status = -1
-        return
+        // return
       }
 
-      const tokenData = verifyToken(token)
-      if (tokenData.message === 'invalid-token') {
-        sessionStorage.removeItem('_at')
-        this.userData.status = -1
-        return this.$router.push('/signin')
-      } else {
-        this.userData.status = 1;
-        this.userData.personalId = tokenData.personalId
-      }
+      // const tokenData = verifyToken(token)
+      // if (tokenData.message === 'invalid-token') {
+      //   sessionStorage.removeItem('_at')
+      //   this.userData.status = -1
+      //   return this.$router.push('/signin')
+      // } else {
+      //   this.userData.status = 1;
+      //   this.userData.personalId = tokenData.personalId
+      // }
     },
     redirect(path) {
       return this.$router.push(path)

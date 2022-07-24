@@ -95,6 +95,7 @@ import Button from "~/components/basicComponents/Button";
 import Popup from "~/components/basicComponents/Popup";
 import {
   updateUserPersonalInformation,
+  getRefreshedTokens,
   getUserSettings
 } from "~/api";
 export default {
@@ -124,8 +125,14 @@ export default {
       const token = sessionStorage.getItem('_at')
       this.personalInformation = await getUserSettings(token, 'personal')
 
-      if (this.personalInformation.status === -1 || this.personalInformation.status === 401)
-        return this.$router.push('/signin')
+      if (this.personalInformation.status === 401) {
+        const refreshedToken = await getRefreshedTokens()
+
+        if (refreshedToken.status === 401) return this.$router.push('/signin')
+        else sessionStorage.setItem('_at', refreshedToken._at)
+
+        this.personalInformation = await getUserSettings(refreshedToken._at, 'personal')
+      }
     },
     async updatePersonalInfo() {
       this.loading = true
