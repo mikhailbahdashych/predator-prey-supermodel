@@ -18,12 +18,25 @@
 
     <div class="ask-wrapper__question-title">
       <div class="ask-wrapper__question-title__content">
-        <div class="ask-wrapper__question-title__content__votes"></div>
-        <p v-html="question.content" />
+        <div class="ask-wrapper__question-title__content__votes">
+          <p class="ask-wrapper__question-title__content__vote ask-wrapper__question-title__content__vote--up"
+             @click="voteForQuestion('up')"
+          >
+            Upvote
+          </p>
+          <p class="ask-wrapper__question-title__content__vote ask-wrapper__question-title__content__vote--down"
+             @click="voteForQuestion('down')"
+          >
+            Downvote
+          </p>
+        </div>
+        <div class="ask-wrapper__question-title__content__content">
+          <p v-html="question.content" />
+        </div>
       </div>
     </div>
 
-    <div class="ask-wrapper__question-title">
+    <div class="ask-wrapper__question-title ask-wrapper__question-title--no-border">
       <div v-if="!answers.length" class="ask-wrapper__question-title__no-answers">
         <p v-if="!showWantToAsk" class="source-sans-pro opacity">There are no answers for this question yet.</p>
         <p v-if="!showWantToAsk" class="source-sans-pro opacity">If you know the answer, go on and post it!</p>
@@ -58,7 +71,7 @@
 </template>
 
 <script>
-import { getQuestion, answerQuestion } from '~/api'
+import { getQuestion, answerQuestion, vote } from '~/api'
 import { validateSlug } from '~/helpers/frontValidator'
 import { verifyToken } from '~/helpers/crypto'
 import Button from '~/components/basicComponents/Button'
@@ -74,6 +87,7 @@ export default {
   data() {
     return {
       loading: true,
+      status: null,
       question: {},
       answers: [],
       answer: null,
@@ -94,6 +108,12 @@ export default {
   methods: {
     showAnswerEditor() {
       this.showWantToAsk = true
+    },
+    async voteForQuestion(type) {
+      const { status } = await vote({
+        id: this.question.id, vote: type, type: 'question'
+      }, sessionStorage.getItem('_at'))
+      this.status = status
     },
     async answerQuestion() {
       await answerQuestion({

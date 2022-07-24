@@ -145,7 +145,7 @@ export const updateUserPersonalInformation = async (payload, token) => {
 
 export const vote = async (payload, token) => {
   try {
-    const { data } = await api.patch(`/v/${payload.id}/${payload.v}/${payload.type}`, {
+    const { data } = await api.patch(`/v/${payload.id}/${payload.vote}/${payload.type}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data

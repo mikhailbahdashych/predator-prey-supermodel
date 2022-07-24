@@ -169,9 +169,9 @@ router.patch('/u-u-p-i', async (req, res) => {
   }
 });
 
-router.patch('/v/:id/:v/:type', async (req, res) => {
+router.patch('/v/:id/:vote/:type', async (req, res) => {
   try {
-    const { data } = await api.patch(`/vote/${req.params.id}/${req.params.v}/${req.params.type}`, {
+    const { data } = await api.patch(`/vote/${req.params.id}/${req.params.vote}/${req.params.type}`, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)

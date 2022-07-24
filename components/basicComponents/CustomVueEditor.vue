@@ -4,6 +4,7 @@
       <div class="editor">
         <vue-editor
           v-model="innerValue"
+          :editor-toolbar="customToolbar"
         />
       </div>
     </client-only>
@@ -25,6 +26,17 @@ export default {
   data() {
     return {
       innerValue: this.content,
+      customToolbar: [
+        ["bold", "italic", "underline"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [
+          { align: "" },
+          { align: "center" },
+          { align: "right" },
+          { align: "justify" }
+        ],
+        [{ color: [] }]
+      ]
     }
   },
   watch: {
