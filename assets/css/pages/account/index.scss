@@ -42,6 +42,9 @@
     .account__side-bar_buttons {
       margin-top: 10px;
       padding: 5px;
+      .account__side-bar_buttons__item {
+        margin-bottom: 10px;
+      }
     }
     .account__side-bar__social-title {
       margin-top: 15px;
@@ -52,6 +55,17 @@
   }
   .account__last-activity {
     width: 100%;
+    .account__last-activity__header {
+      width: 80%;
+      height: 50px;
+      margin: 0 auto 35px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-around;
+      .account__last-activity__header__item {
+        
+      }
+    }
     .account__last-activity__list {
       display: flex;
     }

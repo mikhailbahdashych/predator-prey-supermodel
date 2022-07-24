@@ -68,18 +68,27 @@
         </div>
 
         <div class="account__side-bar_buttons">
-          <Button
-            v-if="isOwner && !loading"
-            :label="'Edit profile'"
-            :btn-class="'basic-button--transparent'"
-            @click-handler="redirect('/account/settings')"
-          />
-          <Button
-            v-else-if="!isOwner && !loading"
-            :label="'Send message'"
-            :btn-class="'basic-button--transparent'"
-            @click-handler="redirect('/account/settings')"
-          />
+          <div v-if="isOwner && !loading" class="account__side-bar_buttons__item">
+            <Button
+              :label="'Edit profile'"
+              :btn-class="'basic-button--transparent'"
+              @click-handler="redirect('/account/settings')"
+            />
+          </div>
+          <div v-if="isOwner && !loading" class="account__side-bar_buttons__item">
+            <Button
+              :label="'My bookmarks'"
+              :btn-class="'basic-button--transparent'"
+              @click-handler="redirect('/account/bookmarks')"
+            />
+          </div>
+          <div v-else-if="!isOwner && !loading" class="account__side-bar_buttons__item">
+            <Button
+              :label="'Send message'"
+              :btn-class="'basic-button--transparent'"
+              @click-handler="redirect('/account/settings')"
+            />
+          </div>
         </div>
       </div>
 
@@ -104,6 +113,20 @@
             </div>
           </div>
           <p v-else class="account__last-activity__title__title">{{ user.about_me }}</p>
+        </div>
+        <div class="account__last-activity__header">
+          <p
+            class="account__last-activity__header__item"
+            @click="changeSubpage('forum')"
+          >Forum posts</p>
+          <p
+            class="account__last-activity__header__item"
+            @click="changeSubpage('qa')"
+          >Questions and answers</p>
+          <p
+            class="account__last-activity__header__item"
+            @click="changeSubpage('blog')"
+          >Blog posts</p>
         </div>
         <div class="account__last-activity__list">
           <div class="account__last-activity__item account__last-activity__item--border">
@@ -195,6 +218,9 @@ export default {
     async getCurrentUser() {
       this.user = await getUserByPersonalId(this.$route.params.personalId)
       this.isOwner = this.user.personalId === verifyToken(sessionStorage.getItem('_at')).personalId
+    },
+    changeSubpage(subpage) {
+
     },
     redirect(path) {
       return this.$router.push(path)
