@@ -109,6 +109,9 @@ export default {
     showAnswerEditor() {
       this.showWantToAsk = true
     },
+    async addToBookmark() {
+
+    },
     async voteForQuestion(type) {
       const { status } = await vote({
         id: this.question.id, vote: type, type: 'question'

@@ -251,9 +251,9 @@ router.get('/g-b-p', async (req, res) => {
   }
 });
 
-router.get('/g-b-ps/:by', async (req, res) => {
+router.get('/g-b-ps/:sort', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-blog-posts/${req.params.by}`, {
+    const { data } = await api.get(`/get-blog-posts/${req.params.sort}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -304,9 +304,9 @@ router.get('/g-f-t', async (req, res) => {
   }
 })
 
-router.get('/g-f-ts/:by', async (req, res) => {
+router.get('/g-f-ts/:sort', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-forum-threads/${req.params.by}`, {
+    const { data } = await api.get(`/get-forum-threads/${req.params.sort}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD

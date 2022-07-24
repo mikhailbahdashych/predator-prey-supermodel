@@ -95,7 +95,7 @@
       .ask-wrapper__question-title__content__votes {
         @include centers($flex-direction: column, $text-align: center);
         display: flex;
-        width: 90px;
+        width: 100px;
         padding-right: 15px;
         margin: 15px;
         border-right: 1px solid var(--line);
@@ -105,11 +105,20 @@
         .ask-wrapper__question-title__content__vote {
           cursor: pointer;
           transition: .2s;
-          &.ask-wrapper__question-title__content__vote--up:hover {
-            color: var(--success)
+          width: 100%;
+          padding: 5px;
+          border-radius: 5px;
+          &.ask-wrapper__question-title__content__vote--up {
+            border: 1px solid var(--success);
+            &:hover, &.ask-wrapper__question-title__content__vote--up--active {
+              background-color: var(--background-success);
+            }
           }
-          &.ask-wrapper__question-title__content__vote--down:hover {
-            color: var(--error)
+          &.ask-wrapper__question-title__content__vote--down {
+            border: 1px solid var(--error);
+            &:hover, &.ask-wrapper__question-title__content__vote--down--active {
+              background-color: var(--error-border);
+            }
           }
         }
       }

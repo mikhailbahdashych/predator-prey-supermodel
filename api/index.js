@@ -207,9 +207,9 @@ export const getBlogPost = async slug => {
   }
 }
 
-export const getBlogPosts = async by => {
+export const getBlogPosts = async sort => {
   try {
-    const { data } = await api.get(`/g-b-ps/${by}`)
+    const { data } = await api.get(`/g-b-ps/${sort}`)
     return data
   } catch (e) {
     return e.response.data
@@ -249,9 +249,9 @@ export const getForumThread = async slug => {
   }
 }
 
-export const getForumThreads = async by => {
+export const getForumThreads = async sort => {
   try {
-    const { data } = await api.get(`/g-f-ts/${by}`)
+    const { data } = await api.get(`/g-f-ts/${sort}`)
     return data
   } catch (e) {
     return e.response.data
