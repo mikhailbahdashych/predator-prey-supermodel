@@ -51,7 +51,7 @@
         </div>
         <div style='display: flex; justify-content: space-between;'>
           <div style='display: flex'>
-            <p class="question-wrapper__question-content__preview-block">Views: 100</p>
+            <p class="question-wrapper__question-content__preview-block">Views: {{ q.views }}</p>
             <p class="question-wrapper__question-content__preview-block">Answers: {{ q.count || 0 }}</p>
             <p
               class="question-wrapper__question-content__preview-block question-wrapper__question-content__preview-block--answer"
@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import Button from '~/components/basicComponents/Button'
 import { getQuestions } from '~/api'
 export default {
@@ -104,7 +103,6 @@ export default {
     },
     async getQuestions() {
       this.questions = await getQuestions(this.sort)
-      this.questions.forEach(question => { question.created_at = moment(question.created_at).format('YYYY-MM-DD HH:mm:ss') })
     },
     redirect(path) {
       this.$router.push(path)

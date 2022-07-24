@@ -120,8 +120,16 @@
             <div v-if="!userLastActivity.usersQuestions.length">
               <p class="opacity">No Q&A posts yet.</p>
             </div>
-            <div v-else>
-              <p>{{ userLastActivity.usersQuestions }}</p>
+            <div
+              v-for="q in userLastActivity.usersQuestions"
+              v-else
+              :key="q.slug"
+              class="account__last-activity__item__qa"
+              @click="redirect(`/qa/question/${q.slug}`)"
+            >
+              <div>
+                <p>{{ q.title }}</p>
+              </div>
             </div>
           </div>
           <div class="account__last-activity__item">
