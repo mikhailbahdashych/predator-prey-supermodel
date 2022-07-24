@@ -19,7 +19,7 @@
           :input-class="'bi--basic-input__small'"
         />
         <Input
-          v-model="personalInformation.status"
+          v-model="personalInformation.user_status"
           :title="'Status'"
           :input-class="'bi--basic-input__small'"
         />

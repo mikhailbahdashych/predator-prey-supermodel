@@ -5,7 +5,7 @@
       <div class="account__side-bar">
         <div class="account__side-bar__ava">
           <img class="account__side-bar__ava__picture" :src="require('../../assets/img/testava.jpg')" alt="ava">
-          <p v-if="user.status" class="account__side-bar__ava__status">{{ user.status }}</p>
+          <p v-if="user.user_status" class="account__side-bar__ava__status">{{ user.user_status }}</p>
         </div>
 
         <skeleton v-if="loading" />

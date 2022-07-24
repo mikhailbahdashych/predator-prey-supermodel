@@ -37,7 +37,6 @@ import SecuritySettings from '~/components/pageComponents/settings/SecuritySetti
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
 import Notifications from '~/components/pageComponents/settings/Notifications'
-import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Settings',
   components: {
@@ -62,21 +61,7 @@ export default {
   created() {
     this.$nextTick(() => { this.loading = false })
   },
-  mounted() {
-    this.decodeToken()
-  },
   methods: {
-    decodeToken() {
-      const token = sessionStorage.getItem('_at')
-
-      if (!token)
-        return this.$router.push('/signin')
-
-      const tokenData = verifyToken(token)
-
-      if (tokenData.message === 'invalid-token') return this.$router.push('/signin')
-      else this.currentUser = tokenData
-    },
     changeSubsection(item) {
       this.currentSection = item.title
       this.accountHeaderItems.forEach(header => {
