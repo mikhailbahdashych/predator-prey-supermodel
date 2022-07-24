@@ -12,7 +12,12 @@ const router = Router()
 
 router.post('/s-i', async (req, res) => {
   try {
-    const { data } = await api.post('/sign-in', req.body)
+    const { data } = await api.post('/sign-in', req.body, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
 
     res.cookie("_rt", data._rt, { httpOnly: true, secure: false })
     delete data._rt
@@ -25,7 +30,12 @@ router.post('/s-i', async (req, res) => {
 
 router.post('/s-u', async (req, res) => {
   try {
-    const { data } = await api.post('/sign-up', req.body)
+    const { data } = await api.post('/sign-up', req.body, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -90,7 +100,11 @@ router.post('/d-a', async (req, res) => {
 router.get('/g-r-t', async (req, res) => {
   try {
     const { data } = await api.get('/get-refreshed-tokens', {
-      headers: { 'Cookie': req.headers.cookie }
+      headers: { 'Cookie': req.headers.cookie },
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
     })
 
     res.cookie("_rt", data._rt, { httpOnly: true, secure: false })
