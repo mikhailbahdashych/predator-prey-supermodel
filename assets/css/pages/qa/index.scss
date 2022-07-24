@@ -73,14 +73,20 @@
 .ask-wrapper {
   @include wrapper(50%, 0, auto, 0, auto);
   display: block;
-  .ask-wrapper__elem {
-    @include margin($top: 15px, $bottom: 15px);
-    &.ask-wrapper__elem--button {
-      @include margin($left: 5px, $top: 15px, $bottom: 15px);
-    }
-  }
   .ask-wrapper__question-title {
     border-bottom: 1px solid var(--line);
+    .ask-wrapper__question-title__no-answers {
+      p {
+        margin: 0;
+      }
+      margin: 25px 0;
+      font-size: 14px;
+      text-align: center;
+      &.ask-wrapper__question-title__no-answers--btn {
+        width: 200px;
+        margin: 15px auto 0;
+      }
+    }
     .ask-wrapper__question-title__content {
       display: flex;
       .ask-wrapper__question-title__content__votes {

@@ -23,17 +23,35 @@
       </div>
     </div>
 
-    <h3>Post your answer:</h3>
-    <custom-vue-editor
-      v-model="answer"
-    />
+    <div class="ask-wrapper__question-title">
+      <div v-if="!answers.length" class="ask-wrapper__question-title__no-answers">
+        <p v-if="!showWantToAsk" class="source-sans-pro opacity">There are no answers for this question yet.</p>
+        <p v-if="!showWantToAsk" class="source-sans-pro opacity">If you know the answer, go on and post it!</p>
 
-    <div class="ask-wrapper__elem ask-wrapper__elem--button">
-      <Button
-        :label="isQuestionOwner ? 'Yes, I want to answer my own question' : 'Yes, I want to answer'"
-        :btn-class="'min-width150'"
-        @click-handler="answerQuestion"
-      />
+        <div v-if="!showWantToAsk" class="ask-wrapper__question-title__no-answers ask-wrapper__question-title__no-answers--btn">
+          <Button
+            :label="isQuestionOwner ? 'Yes, I know the answer for my own question' : 'Yes, I know the answer'"
+            :btn-class="`basic-button--transparent`"
+            @click-handler="showAnswerEditor"
+          />
+        </div>
+
+        <div v-if="showWantToAsk">
+          <custom-vue-editor
+            v-model="answer"
+          />
+          <div class="ask-wrapper__question-title__no-answers ask-wrapper__question-title__no-answers--btn">
+            <Button
+              :label="'Post answer'"
+              :btn-class="`basic-button--transparent`"
+              @click-handler="answerQuestion"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <div v-else></div>
     </div>
 
   </div>
@@ -59,9 +77,8 @@ export default {
       question: {},
       answers: [],
       answer: null,
-      wantToAsk: false,
-      showWantToAsk: false,
-      isQuestionOwner: false
+      isQuestionOwner: false,
+      showWantToAsk: false
     }
   },
   created() {
@@ -75,6 +92,9 @@ export default {
     this.isQuestionOwner = verifyToken(sessionStorage.getItem('_at')).username === question.username
   },
   methods: {
+    showAnswerEditor() {
+      this.showWantToAsk = true
+    },
     async answerQuestion() {
       await answerQuestion({
         question_id: this.question.id,
