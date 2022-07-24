@@ -49,8 +49,8 @@
           <h3 class="question-wrapper__question-content__question__title-box__hover">{{ q.title }}</h3>
           <p class="opacity">Asked at: {{ q.created_at }}</p>
         </div>
-        <div style='display: flex; justify-content: space-between;'>
-          <div style='display: flex'>
+        <div class="question-wrapper__question-content__question__title-box question-wrapper__question-content__question__title-box--no-baseline">
+          <div class="question-wrapper__question-content__question__title-box">
             <p class="question-wrapper__question-content__preview-block">Views: {{ q.views }}</p>
             <p class="question-wrapper__question-content__preview-block">Answers: {{ q.count || 0 }}</p>
             <p
@@ -58,7 +58,7 @@
               :class="q.is_answered ? 'question-wrapper__question-content__preview-block--answered' : q.votes < 0 ? 'question-wrapper__question-content__preview-block--low-quality-question' : ''"
             >Votes: {{ q.votes  }}</p>
           </div>
-          <div style='display:flex;'>
+          <div class="question-wrapper__question-content__question__title-box">
             <img class="question-wrapper__question-content__avatar-box" :src="require('../../assets/img/testava.jpg')" alt="ava">
           </div>
         </div>

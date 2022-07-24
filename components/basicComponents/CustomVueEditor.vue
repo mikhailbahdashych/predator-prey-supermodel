@@ -51,8 +51,14 @@ export default {
   border: 1px solid rgba(225, 232, 236, .25);
   border-bottom: none;
 }
+::v-deep .ql-toolbar.ql-snow:focus {
+  border: 1px solid rgba(88, 167, 254, .25);
+}
 ::v-deep #quill-container {
   border-radius: 0 0 8px 8px;
   border: 1px solid rgba(225, 232, 236, .25);
+}
+::v-deep #quill-container:focus {
+  border: 1px solid rgba(88, 167, 254, .25);
 }
 </style>

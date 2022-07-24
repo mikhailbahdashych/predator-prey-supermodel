@@ -3,10 +3,24 @@
 
     <div class="ask-wrapper__question-title">
       <h1>{{ question.title }}</h1>
+      <div class="ask-wrapper__question-title__title-box">
+        <p class="ask-wrapper__question-title__preview-block">Views: {{ question.views }}</p>
+        <p
+          class="ask-wrapper__question-title__preview-block ask-wrapper__question-title__preview-block--answer"
+          :class="question.is_answered ? 'ask-wrapper__question-title__preview-block--answered' : question.votes < 0 ? 'ask-wrapper__question-title__preview-block--low-quality-question' : ''"
+        >Votes: {{ question.votes  }}</p>
+      </div>
+      <div class="ask-wrapper__question-title__info">
+        <p class="opacity">Asked at: {{ question.created_at }}</p>
+        <p class="opacity">Asked by: {{ question.username }}</p>
+      </div>
     </div>
 
     <div class="ask-wrapper__question-title">
-      <p v-html="question.content" />
+      <div class="ask-wrapper__question-title__content">
+        <div class="ask-wrapper__question-title__content__votes"></div>
+        <p v-html="question.content" />
+      </div>
     </div>
 
     <h3>Post your answer:</h3>
