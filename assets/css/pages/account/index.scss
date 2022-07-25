@@ -79,6 +79,7 @@
     .account__title {
       height: 230px;
       padding-top: 10px;
+      margin-left: 20px;
       .account__info {
         @include centers($align-items: baseline, $justify-content: space-between);
         display: flex;
@@ -94,6 +95,7 @@
         margin: 0;
         padding: 0;
         opacity: .5;
+        white-space: pre-line
       }
     }
     .account__subpage-item {

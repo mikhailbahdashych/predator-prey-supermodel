@@ -23,6 +23,7 @@
     max-height: 200px;
     height: 120px;
     resize: vertical;
+    white-space: pre-wrap;
     &:focus {
       border: 1px solid var(--main-color-border);
     }
