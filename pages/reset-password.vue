@@ -21,10 +21,10 @@
       <div class="login-inputs__login-inputs-container">
         <h1 class="source-sans-pro bold">Forgot password?</h1>
 
-        <div class="login-inputs__login-inputs-container__options">
-          <p class="login-inputs__login-inputs-container__options__choose" @click="chooseOption('email')">With Email</p>
-          <div class="login-inputs__login-inputs-container__options__vertical-line" />
-          <p class="login-inputs__login-inputs-container__options__choose" @click="chooseOption('phone')">With Phone Number</p>
+        <div class="login-inputs__options">
+          <p class="login-inputs__choose" @click="chooseOption('email')">With Email</p>
+          <div class="login-inputs__vertical-line" />
+          <p class="login-inputs__choose" @click="chooseOption('phone')">With Phone Number</p>
         </div>
 
         <InputWithButton
@@ -45,7 +45,7 @@
         />
 
         <Input :title="'Verification code'" @keyup.enter.native="() => {}" />
-        <div class="login-inputs__login-inputs-container__sign-in-btn">
+        <div class="login-inputs__sign-in-btn">
           <Button
             :label="'Submit'"
             :btn-class="'basic-button--high-height'"

@@ -3,12 +3,12 @@
     <h1 class="account-preferences__header">Site appearance settings</h1>
     <hr>
     <div class="account-preferences__item">
-      <div class="account-preferences__item__item-content">
-        <div class="account-preferences__item__item-content account-preferences__item__item-content--texts">
+      <div class="account-preferences__item-content">
+        <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>Change color theme</h3>
           <p class="opacity">Change theme between dark and light.</p>
         </div>
-        <div class="account-preferences__item__item-content">
+        <div class="account-preferences__item-content">
           <toggle-switch :value="darkTheme" @input="changeTheme" />
         </div>
       </div>

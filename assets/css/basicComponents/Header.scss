@@ -9,19 +9,19 @@
   box-shadow: 0 8px 6px -6px var(--shadow);
   .header__inner-header {
     @include wrapper(75%, 0, auto, 0, auto);
-    .header__inner-header__content {
+    .header__content {
       display: flex;
       height: 100%;
       justify-content: space-between;
       align-items: center;
 
-      .header__inner-header__content__button {
+      .header__button {
         align-items: center;
         display: flex;
         margin-left: 20px;
       }
 
-      .header__inner-header__content__link {
+      .header__link {
         height: 70%;
         cursor: pointer;
         display: flex;
@@ -30,7 +30,7 @@
         transition: .2s;
         margin: 0 5px;
         padding: 0 5px;
-        .header__inner-header__content__link__link-title {
+        .header__link-title {
           p {
             transition: .3s;
             font-size: 14px;
@@ -47,7 +47,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    .header__link-logo__logo {
+    .header__logo {
       font-size: 25px;
       margin-left: 15px;
       transition: .2s;

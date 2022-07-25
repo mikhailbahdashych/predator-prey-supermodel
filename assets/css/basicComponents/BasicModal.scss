@@ -22,7 +22,7 @@
       margin: 15px;
     }
 
-    .settings-modal-container__settings-modal-wrapper__modal-header {
+    .settings-modal-container__modal-header {
       @include size(80px, 100%);
       @include centers($align-items: center, $justify-content: center);
       position: relative;
@@ -39,7 +39,7 @@
         color: var(--on-white);
       }
     }
-    .settings-modal-container__settings-modal-wrapper__modal-description {
+    .settings-modal-container__modal-description {
       letter-spacing: 0;
       color: var(--on-white);
       width: 85%;

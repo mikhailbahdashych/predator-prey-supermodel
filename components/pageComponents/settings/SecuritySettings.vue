@@ -4,8 +4,8 @@
     <h1 class="account-preferences__header">Security settings</h1>
     <hr>
     <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`account-preferences__item ${setting.danger ? 'account-preferences__item--danger' : ''}`">
-      <div v-if="setting.title === 'Set 2FA'" class="account-preferences__item__item-content">
-        <div class="account-preferences__item__item-content account-preferences__item__item-content--texts">
+      <div v-if="setting.title === 'Set 2FA'" class="account-preferences__item-content">
+        <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
           <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description }}</p>
         </div>
@@ -17,8 +17,8 @@
         </div>
       </div>
 
-      <div v-else-if="setting.title === 'Change email'" class="account-preferences__item__item-content">
-        <div class="account-preferences__item__item-content account-preferences__item__item-content--texts">
+      <div v-else-if="setting.title === 'Change email'" class="account-preferences__item-content">
+        <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>{{ setting.title }}</h3>
           <p class="opacity">{{ changeEmailData.status === -1 ? 'You have have changed your email.' : setting.description }}</p>
         </div>
@@ -31,12 +31,12 @@
         </div>
       </div>
 
-      <div v-else-if="setting.title === 'Change password'" class="account-preferences__item__item-content">
-        <div class="account-preferences__item__item-content account-preferences__item__item-content--texts">
+      <div v-else-if="setting.title === 'Change password'" class="account-preferences__item-content">
+        <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>{{ setting.title }}</h3>
           <p class="opacity">{{ securityPassword.status === -5 ? 'You are able to change password in 48 hours after previous change' : setting.description }}</p>
         </div>
-        <div class="account-preferences__item__item-content">
+        <div class="account-preferences__item-content">
           <Button
             :disabled="securityPassword.status === -5"
             :label="setting.buttonTitle"
@@ -45,8 +45,8 @@
         </div>
       </div>
 
-      <div v-else class="account-preferences__item__item-content">
-        <div class="account-preferences__item__item-content account-preferences__item__item-content--texts">
+      <div v-else class="account-preferences__item-content">
+        <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3 :class="`${setting.danger ? 'danger' : ''}`">{{ setting.title }}</h3>
           <p :class="`opacity ${setting.danger ? 'danger' : ''}`">{{ setting.description }}</p>
           <p v-if="setting.title === 'Delete account'" class="link" @click="stateShowDeleteAccMoreInfo">

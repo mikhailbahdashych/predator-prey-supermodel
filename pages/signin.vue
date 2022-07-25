@@ -6,10 +6,10 @@
         <div v-if="!phone.show && !twoFa.show" class="login-inputs__login-inputs-container">
           <h1 class="source-sans-pro bold">Sign In</h1>
 
-          <div class="login-inputs__login-inputs-container__options">
-            <p class="login-inputs__login-inputs-container__options__choose" @click="chooseLogin('email')">With Email</p>
-            <div class="login-inputs__login-inputs-container__options__vertical-line" />
-            <p class="login-inputs__login-inputs-container__options__choose" @click="chooseLogin('phone')">With Phone Number</p>
+          <div class="login-inputs__options">
+            <p class="login-inputs__choose" @click="chooseLogin('email')">With Email</p>
+            <div class="login-inputs__vertical-line" />
+            <p class="login-inputs__choose" @click="chooseLogin('phone')">With Phone Number</p>
           </div>
 
           <Input
@@ -36,7 +36,7 @@
             @keyup.enter.native="signin"
           />
           <p v-if="loginError" class="error">Wrong credentials!</p>
-          <div class="login-inputs__login-inputs-container__sign-in-btn">
+          <div class="login-inputs__sign-in-btn">
             <Button
               :label="'Sign In'"
               :disabled="loginEmail.loginEmailError || loginPassword.loginPasswordError || !loginPassword.password || !loginEmail.email"

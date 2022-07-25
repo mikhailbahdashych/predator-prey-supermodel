@@ -62,21 +62,21 @@
           <p v-if="passwordError.passwordMismatch" class="error">Passwords have to match!</p>
           <p v-if="passwordError.passwordRequirement" class="error">Password are requirement!</p>
 
-          <div v-if="passwordError.passwordRules" class="login-inputs__login-inputs-container__password-requirement">
-            <div v-for="rule in passwordRulesList" :key="rule.text" class="login-inputs__login-inputs-container__password-requirement__password-requirements">
+          <div v-if="passwordError.passwordRules" class="login-inputs__password-requirement">
+            <div v-for="rule in passwordRulesList" :key="rule.text" class="login-inputs__password-requirements">
               <div v-for="(item, i) in Object.entries(rule)" :key="i">
-                <p class="login-inputs__login-inputs-container__password-requirement__password-requirement-item">
+                <p class="login-inputs__password-requirement-item">
                   <span v-if="item[0] === 'text'">{{ item[1] }}</span>
                   <span v-else>
-                  <img v-if="item[1]" class="login-inputs__login-inputs-container__password-requirement__status" src="../assets/img/greencircle.svg" alt="OK" />
-                  <img v-else class="login-inputs__login-inputs-container__password-requirement__status" src="../assets/img/redcircle.svg" alt="NOT OK" />
+                  <img v-if="item[1]" class="login-inputs__status" src="../assets/img/greencircle.svg" alt="OK" />
+                  <img v-else class="login-inputs__status" src="../assets/img/redcircle.svg" alt="NOT OK" />
                 </span>
                 </p>
               </div>
             </div>
           </div>
 
-          <div class="login-inputs__login-inputs-container__sign-in-btn">
+          <div class="login-inputs__sign-in-btn">
             <Checkbox v-model="tac" :input-value="tac" :label="`I have read and accepted <a href='/'>terms and conditions.</a>`" />
             <Button
               :label="'Sign up'"
@@ -154,7 +154,7 @@
               :disabled="loading"
               @click-handler="signUpStepBack"
             />
-            <div class='login-inputs__buttons__btn'>
+            <div class='login-inputs__btn'>
               <Button
                 :label="'Skip'"
                 :btn-class="'basic-button--transparent'"

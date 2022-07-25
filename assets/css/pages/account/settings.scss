@@ -12,10 +12,10 @@
     display: flex;
     transition: .2s;
     cursor: pointer;
-    .account-wrapper__avatar__avatar-box {
+    .account-wrapper__avatar-box {
       @include avatar-box(70px, 70px);
     }
-    .account-wrapper__avatar__avatar-text {
+    .account-wrapper__avatar-text {
       @include padding(10px, 0, 0, 20px);
       h2, p {
         @include margin();
@@ -29,25 +29,25 @@
 
   .account-wrapper__side-bar-wrapper {
     display: flex;
-    .account-wrapper__side-bar-wrapper__side-bar {
+    .account-wrapper__side-bar {
       width: 250px;
       background-color: var(--default-bg);
-      .account-wrapper__side-bar-wrapper__side-bar__box {
+      .account-wrapper__box {
         display: flex;
       }
-      .account-wrapper__side-bar-wrapper__side-bar__vertical-line {
+      .account-wrapper__vertical-line {
         @include size(38px, 5px);
         background-color: var(--main-color);
         border-radius: 5px;
       }
-      .account-wrapper__side-bar-wrapper__side-bar__item {
+      .account-wrapper__item {
         width: 100%;
         margin: 0 10px 10px;
         padding-left: 8px;
         cursor: pointer;
         transition: .2s;
         line-height: 38px;
-        &.account-wrapper__side-bar-wrapper__side-bar__item--item-active {
+        &.account-wrapper__item--item-active {
           background-color: var(--hover);
           border-radius: 5px;
         }
@@ -68,12 +68,12 @@
     display: flex;
     padding-top: 10px;
     float: right;
-    .account-preferences__profile-picture__box {
+    .account-preferences__box {
       position: relative;
-      .account-preferences__profile-picture__box__picture {
+      .account-preferences__picture {
         @include avatar-box(auto, 100%, $max-width: 225px);
       }
-      .account-preferences__profile-picture__box__button {
+      .account-preferences__picture-button {
         @include positions($bottom: 0, $right: 0);
         position: absolute;
       }
@@ -82,14 +82,14 @@
   .account-preferences__fields-wrap {
     display: flex;
     justify-content: space-between;
-    .account-preferences__fields-wrap__fields {
+    .account-preferences__fields {
       width: 400px;
       margin: 0 auto;
-      .account-preferences__fields-wrap__fields__subtitle {
+      .account-preferences__subtitle {
         margin: 35px 0 0 0;
         padding: 0 5px;
       }
-      .account-preferences__fields-wrap__fields__annotation {
+      .account-preferences__annotation {
         margin-top: 5px;
         padding: 0 5px;
         font-size: 12px;
@@ -108,11 +108,11 @@
 
   .account-preferences__item {
     border-bottom: 1px solid var(--line);
-    .account-preferences__item__item-content {
+    .account-preferences__item-content {
       @include centers($justify-content: space-between, $align-items: center);
       display: flex;
       height: 100%;
-      &.account-preferences__item__item-content--texts {
+      &.account-preferences__item-content--texts {
         display: block;
       }
     }

@@ -5,8 +5,8 @@
     <h1 class="account-preferences__header">Public profile</h1>
     <hr>
     <div class="account-preferences__fields-wrap">
-      <div class="account-preferences__fields-wrap__fields">
-        <p class="account-preferences__fields-wrap__fields__subtitle">Personal information</p>
+      <div class="account-preferences__fields">
+        <p class="account-preferences__subtitle">Personal information</p>
         <hr>
         <Input
           v-model="personalInformation.first_name"
@@ -23,7 +23,7 @@
           :title="'Status'"
           :input-class="'bi--basic-input__small'"
         />
-        <div class="account-preferences__fields-wrap__fields__annotation">
+        <div class="account-preferences__annotation">
           <span class="source-sans-pro opacity">
             Your first and last name will be shown only in your profile.
             You can remove it anu time you want.
@@ -43,12 +43,12 @@
           v-model="personalInformation.about_me"
           :title="'About'"
         />
-        <div class="account-preferences__fields-wrap__fields__annotation">
+        <div class="account-preferences__annotation">
           <span class="source-sans-pro opacity">You can
             <span class="source-sans-pro bold">@mention</span>
             your company’s PNB organization to link it.</span>
         </div>
-        <p class="account-preferences__fields-wrap__fields__subtitle">Social media</p>
+        <p class="account-preferences__subtitle">Social media</p>
         <hr>
         <Input
           v-model="personalInformation.website_link"
@@ -75,9 +75,9 @@
       </div>
 
       <div class="account-preferences__profile-picture">
-        <div class="account-preferences__profile-picture__box">
-          <img class="account-preferences__profile-picture__box__picture" :src="require('../../../assets/img/testava.jpg')" alt="ava">
-          <div class="account-preferences__profile-picture__box__button">
+        <div class="account-preferences__box">
+          <img class="account-preferences__picture" :src="require('../../../assets/img/testava.jpg')" alt="ava">
+          <div class="account-preferences__picture-button">
             <Button :label="'Change avatar'" />
           </div>
         </div>

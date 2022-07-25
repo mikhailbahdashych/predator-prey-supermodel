@@ -9,13 +9,13 @@
     @include padding(10px, 10px, 10px, 10px);
     @include display($display: flex, $flex-direction: column);
     background-color: var(--default-bg);
-    .account__side-bar__ava {
+    .account__ava {
       display: flex;
       position: relative;
-      .account__side-bar__ava__picture {
+      .account__picture {
         @include avatar-box(225px, 225px);
       }
-      .account__side-bar__ava__status {
+      .account__status {
         @include positions($bottom: 0, $right: 0);
         position: absolute;
         background-color: var(--header-bg);
@@ -26,27 +26,27 @@
         margin: 0;
       }
     }
-    .account__side-bar__links {
+    .account__links {
       @include centers($align-items: center);
       display: flex;
-      .account__side-bar__links__link {
+      .account__link {
         @include size(30px, 30px);
         @include margin($top: 10px);
       }
     }
-    .account__side-bar__locs {
-      .account__side-bar__locs--item {
+    .account__locs {
+      .account__locs--item {
         display: flex;
       }
     }
     .account__side-bar_buttons {
       margin-top: 10px;
       padding: 5px;
-      .account__side-bar_buttons__item {
+      .account__item {
         margin-bottom: 10px;
       }
     }
-    .account__side-bar__social-title {
+    .account__social-title {
       margin-top: 15px;
       h4 {
         margin: 0;
@@ -55,16 +55,16 @@
   }
   .account__last-activity {
     width: 100%;
-    .account__last-activity__header {
+    .account__header {
       width: 80%;
       height: 40px;
       margin: 0 auto 35px;
       border-bottom: 1px solid var(--line);
       display: flex;
       justify-content: space-around;
-      .account__last-activity__header__box {
+      .account__box {
         margin: 0 auto;
-        .account__last-activity__header__box__item {
+        .account__item {
           cursor: pointer;
           margin: 0;
           color: var(--line);
@@ -81,16 +81,13 @@
         }
       }
     }
-    .account__last-activity__list {
-      display: flex;
-    }
-    .account__last-activity__title {
+    .account__title {
       height: 230px;
       padding-top: 10px;
-      .account__last-activity__title__info {
+      .account__info {
         @include centers($align-items: baseline, $justify-content: space-between);
         display: flex;
-        .account__last-activity__title__info__id {
+        .account__id {
           margin-left: 5px;
         }
         h1 {
@@ -98,31 +95,31 @@
           margin: 0 5px 0 0;
         }
       }
-      .account__last-activity__title__title {
+      .account__about-title {
         margin: 0;
         padding: 0;
         opacity: .5;
       }
     }
-    .account__last-activity__item {
+    .account__subpage-item {
       width: 80%;
       margin: 0 auto;
-      .account__last-activity__item__no-posts {
+      .account__no-posts {
         p, h2 {
           text-align: center;
         }
       }
-      .account__last-activity__item__qa {
+      .account__qa {
         @include size(90px, 100%);
         border-bottom: 1px solid var(--line);
         margin-bottom: 15px;
         transition: .2s;
         cursor: pointer;
-        .account__last-activity__item__qa__title {
+        .account__qa-title {
           @include centers($align-items: baseline, $justify-content: space-between);
           display: flex;
         }
-        .account__last-activity__item__qa__items {
+        .account__qa-items {
           display: flex;
           align-items: baseline;
           p {

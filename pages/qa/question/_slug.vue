@@ -3,45 +3,45 @@
 
     <div class="ask-wrapper__question-title">
       <h1>{{ question.title }}</h1>
-      <div class="ask-wrapper__question-title__title-box">
-        <p class="ask-wrapper__question-title__preview-block">Views: {{ question.views }}</p>
+      <div class="ask-wrapper__title-box">
+        <p class="ask-wrapper__preview-block">Views: {{ question.views }}</p>
         <p
-          class="ask-wrapper__question-title__preview-block ask-wrapper__question-title__preview-block--answer"
-          :class="question.is_answered ? 'ask-wrapper__question-title__preview-block--answered' : question.votes < 0 ? 'ask-wrapper__question-title__preview-block--low-quality-question' : ''"
+          class="ask-wrapper__preview-block ask-wrapper__preview-block--answer"
+          :class="question.is_answered ? 'ask-wrapper__preview-block--answered' : question.votes < 0 ? 'ask-wrapper__preview-block--low-quality-question' : ''"
         >Votes: {{ question.votes  }}</p>
       </div>
-      <div class="ask-wrapper__question-title__info">
+      <div class="ask-wrapper__info">
         <p class="opacity">Asked at: {{ question.created_at }}</p>
         <p class="opacity">Asked by: {{ question.username }}</p>
       </div>
     </div>
 
     <div class="ask-wrapper__question-title">
-      <div class="ask-wrapper__question-title__content">
-        <div class="ask-wrapper__question-title__content__votes">
-          <p class="ask-wrapper__question-title__content__vote ask-wrapper__question-title__content__vote--up"
+      <div class="ask-wrapper__content">
+        <div class="ask-wrapper__votes">
+          <p class="ask-wrapper__vote ask-wrapper__vote--up"
              @click="voteForQuestion('up')"
           >
             Upvote
           </p>
-          <p class="ask-wrapper__question-title__content__vote ask-wrapper__question-title__content__vote--down"
+          <p class="ask-wrapper__vote ask-wrapper__vote--down"
              @click="voteForQuestion('down')"
           >
             Downvote
           </p>
         </div>
-        <div class="ask-wrapper__question-title__content__content">
+        <div class="ask-wrapper__question-title--content">
           <p v-html="question.content" />
         </div>
       </div>
     </div>
 
-    <div class="ask-wrapper__question-title ask-wrapper__question-title--no-border">
-      <div v-if="!answers.length" class="ask-wrapper__question-title__no-answers">
+    <div class="ask-wrapper__question-title ask-wrapper--no-border">
+      <div v-if="!answers.length" class="ask-wrapper__no-answers">
         <p v-if="!showWantToAsk" class="source-sans-pro opacity">There are no answers for this question yet.</p>
         <p v-if="!showWantToAsk" class="source-sans-pro opacity">If you know the answer, go on and post it!</p>
 
-        <div v-if="!showWantToAsk" class="ask-wrapper__question-title__no-answers ask-wrapper__question-title__no-answers--btn">
+        <div v-if="!showWantToAsk" class="ask-wrapper__no-answers ask-wrapper__no-answers--btn">
           <Button
             :label="isQuestionOwner ? 'Yes, I know the answer for my own question' : 'Yes, I know the answer'"
             :btn-class="`basic-button--transparent`"
@@ -53,7 +53,7 @@
           <custom-vue-editor
             v-model="answer"
           />
-          <div class="ask-wrapper__question-title__no-answers ask-wrapper__question-title__no-answers--btn">
+          <div class="ask-wrapper__no-answers ask-wrapper__no-answers--btn">
             <Button
               :label="'Post answer'"
               :btn-class="`basic-button--transparent`"

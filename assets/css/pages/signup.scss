@@ -70,7 +70,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 5px;
-    .login-inputs__buttons__btn {
+    .login-inputs__btn {
       width: 100%;
       @include margin($left: 5px, $right: 5px);
     }
@@ -78,15 +78,12 @@
 
   .login-inputs__login-inputs-container {
     width: 450px;
-    .login-inputs__login-inputs-container__two-fa {
-      text-align: center;
-    }
-    .login-inputs__login-inputs-container__sign-in-btn {
+    .login-inputs__sign-in-btn {
       padding: 5px;
     }
-    .login-inputs__login-inputs-container__options {
+    .login-inputs__options {
       display: flex;
-      .login-inputs__login-inputs-container__options__vertical-line {
+      .login-inputs__vertical-line {
         @include margin(0, 20px, 0, 20px);
         width: 1px;
         background-color: var(--font-color);
@@ -94,7 +91,7 @@
         float: left;
         opacity: .5;
       }
-      .login-inputs__login-inputs-container__options__choose {
+      .login-inputs__choose {
         cursor: pointer;
         transition: .2s;
         color: var(--font-color);
@@ -103,20 +100,20 @@
         }
       }
     }
-    .login-inputs__login-inputs-container__password-requirement {
+    .login-inputs__password-requirement {
       border-radius: 5px;
       border: 1px solid rgba(#fff,.9);
-      .login-inputs__login-inputs-container__password-requirement__password-requirements {
+      .login-inputs__password-requirements {
         display: flex;
       }
-      .login-inputs__login-inputs-container__password-requirement__password-requirement-item {
+      .login-inputs__password-requirement-item {
         @include margin(5px, 0, 5px, 0);
         padding-left: 15px;
         font-size: 14px;
         color: var(--font-color);
         opacity: .9;
       }
-      .login-inputs__login-inputs-container__password-requirement__status {
+      .login-inputs__status {
         @include size(20px, 20px);
       }
     }
