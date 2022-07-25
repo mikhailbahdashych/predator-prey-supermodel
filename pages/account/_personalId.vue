@@ -237,7 +237,7 @@ export default {
   },
   async mounted() {
     await this.getCurrentUser()
-    await this.getUserQuestions()
+    await this.getUserForumPosts()
   },
   methods: {
     async getUserQuestions() {
@@ -246,18 +246,31 @@ export default {
         sort: this.currentSortType.toLowerCase()
       })
     },
+    async getUserForumPosts() {},
+    async getUserBlogPosts() {},
     async getCurrentUser() {
       this.user = await getUserByPersonalId(this.$route.params.personalId)
       this.isOwner = this.user.personalId === verifyToken(sessionStorage.getItem('_at')).personalId
     },
-    sortBy(item) {
+    async sortBy(item) {
       this.sortTypes.forEach(type => { type.active = type.title === item.title })
       this.currentSortType = item.title
-      this.getUserQuestions()
+      await this.getUserQuestions()
     },
-    changeSubpage(subpage) {
+    async changeSubpage(subpage) {
       this.subpageItems.forEach(sub => { sub.active = sub.title === subpage.title })
       this.currentSubpage = subpage.title
+      switch (this.currentSubpage) {
+        case 'Forum posts':
+          await this.getUserForumPosts()
+          break
+        case 'Questions and answers':
+          await this.getUserQuestions()
+          break
+        case 'Blog posts':
+          await this.getUserBlogPosts()
+          break
+      }
     },
     redirect(path) {
       return this.$router.push(path)
