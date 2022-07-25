@@ -83,6 +83,39 @@ export const deleteAccount = async (payload, token) => {
   }
 }
 
+export const createBookmark = async (payload, token) => {
+  try {
+    const { data } = await api.post('b', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getBookmarks = async token => {
+  try {
+    const { data } = await api.get('g-b', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const deleteBookmark = async (id, token) => {
+  try {
+    const { data } = await api.delete(`d-b/${id}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getRefreshedTokens = async () => {
   try {
     const { data } = await api.get('g-r-t')

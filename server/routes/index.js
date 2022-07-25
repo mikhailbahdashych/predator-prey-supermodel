@@ -97,6 +97,39 @@ router.post('/d-a', async (req, res) => {
   }
 });
 
+router.post('/b', async (req, res) => {
+  try {
+    const { data } = await api.post('/bookmark', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.get('/g-b', async (req, res) => {
+  try {
+    const { data } = await api.get('/get-bookmarks', {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.delete('/d-b/:id', async (req, res) => {
+  try {
+    const { data } = await api.delete(`/delete-bookmark/${req.params.id}`, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
 router.get('/g-r-t', async (req, res) => {
   try {
     const { data } = await api.get('/get-refreshed-tokens', {
