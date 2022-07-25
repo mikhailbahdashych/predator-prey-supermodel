@@ -138,14 +138,16 @@
             <p class="opacity">No Q&A posts yet.</p>
           </div>
           <div v-if="userLastActivity.usersQuestions.length" class="account__sort-bar">
-            <p class="account__sort-bar-item">
-              <span class="opacity">Latest</span>
-            </p>
-            <p class="account__sort-bar-item">
-              <span class="opacity">Score</span>
-            </p>
-            <p class="account__sort-bar-item">
-              <span class="opacity">Views</span>
+            <p
+              v-for="item in sortTypes"
+              :key="item.title"
+              class="account__sort-bar-item"
+              :class="item.active ? 'account__sort-bar-item--active' : ''"
+            >
+              <span
+                :class="!item.active ? 'opacity' : ''"
+                @click="sortBy(item)"
+              >{{ item.title }}</span>
             </p>
           </div>
           <div v-if="userLastActivity.usersQuestions.length">
@@ -194,7 +196,6 @@ import Input from '~/components/basicComponents/Input'
 import { getUserByPersonalId, getUserQuestions } from '~/api'
 import { verifyToken } from '~/helpers/crypto'
 import { validateUserPersonalId } from '~/helpers/frontValidator'
-
 export default {
   name: 'PersonalId',
   components: {
@@ -215,12 +216,20 @@ export default {
       loading: true,
       showPopup: false,
       isOwner: false,
+
       subpageItems: [
         { title: 'Forum posts', active: true },
         { title: 'Questions and answers', active: false },
-        { title: 'Blog posts', active: false },
+        { title: 'Blog posts', active: false }
       ],
       currentSubpage: 'Forum posts',
+
+      sortTypes: [
+        { title: 'Latest', active: true },
+        { title: 'Score', active: false },
+        { title: 'Views', active: false }
+      ],
+      currentSortType: 'Latest'
     }
   },
   created() {
@@ -228,18 +237,23 @@ export default {
   },
   async mounted() {
     await this.getCurrentUser()
-    await this.getUserLastActivity()
+    await this.getUserQuestions()
   },
   methods: {
-    async getUserLastActivity() {
+    async getUserQuestions() {
       this.userLastActivity.usersQuestions = await getUserQuestions({
         personalId: this.$route.params.personalId,
-        sort: 'latest'
+        sort: this.currentSortType.toLowerCase()
       })
     },
     async getCurrentUser() {
       this.user = await getUserByPersonalId(this.$route.params.personalId)
       this.isOwner = this.user.personalId === verifyToken(sessionStorage.getItem('_at')).personalId
+    },
+    sortBy(item) {
+      this.sortTypes.forEach(type => { type.active = type.title === item.title })
+      this.currentSortType = item.title
+      this.getUserQuestions()
     },
     changeSubpage(subpage) {
       this.subpageItems.forEach(sub => { sub.active = sub.title === subpage.title })

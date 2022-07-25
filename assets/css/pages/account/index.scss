@@ -114,6 +114,9 @@
           margin: 0;
           transition: .2s;
           cursor: pointer;
+          &.account__sort-bar-item--active {
+            background-color: var(--main-color-hover);
+          }
           &:first-child {
             border-radius: 5px 0 0 5px;
             border-right: none;
