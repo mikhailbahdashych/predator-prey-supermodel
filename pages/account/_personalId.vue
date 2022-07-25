@@ -114,55 +114,55 @@
           </div>
           <p v-else class="account__last-activity__title__title">{{ user.about_me }}</p>
         </div>
+
         <div class="account__last-activity__header">
-          <p
-            class="account__last-activity__header__item"
-            @click="changeSubpage('forum')"
-          >Forum posts</p>
-          <p
-            class="account__last-activity__header__item"
-            @click="changeSubpage('qa')"
-          >Questions and answers</p>
-          <p
-            class="account__last-activity__header__item"
-            @click="changeSubpage('blog')"
-          >Blog posts</p>
-        </div>
-        <div class="account__last-activity__list">
-          <div class="account__last-activity__item account__last-activity__item--border">
-            <h2>Latest forum posts</h2>
-            <div v-if="!userLastActivity.forumPosts.length">
-              <p class="opacity">No forum posts yet.</p>
-            </div>
-            <div v-else>
-              <p>{{ userLastActivity.forumPosts }}</p>
-            </div>
+          <div v-for="item in subpageItems" :key="item.title" :class="[item.active ? 'active' : '']" class="account__last-activity__header__box">
+            <p :class="[item.active ? 'active' : '']" class="account__last-activity__header__box__item" @click="changeSubpage(item)">
+              {{item.title}}
+            </p>
           </div>
-          <div class="account__last-activity__item account__last-activity__item--border">
+        </div>
+
+        <div v-if="currentSubpage === 'Forum posts'" class="account__last-activity__item">
+          <div v-if="!userLastActivity.forumPosts.length" class="account__last-activity__item__no-posts">
+            <h2>Latest forum posts</h2>
+            <p class="opacity">No forum posts yet.</p>
+          </div>
+          <div v-else>
+            <p>{{ userLastActivity.forumPosts }}</p>
+          </div>
+        </div>
+        <div v-else-if="currentSubpage === 'Questions and answers'" class="account__last-activity__item">
+          <div v-if="!userLastActivity.usersQuestions.length" class="account__last-activity__item__no-posts">
             <h2>Latest Q&A posts</h2>
-            <div v-if="!userLastActivity.usersQuestions.length">
-              <p class="opacity">No Q&A posts yet.</p>
-            </div>
-            <div
-              v-for="q in userLastActivity.usersQuestions"
-              v-else
-              :key="q.slug"
-              class="account__last-activity__item__qa"
-              @click="redirect(`/qa/question/${q.slug}`)"
-            >
-              <div>
-                <p>{{ q.title }}</p>
+            <p class="opacity">No Q&A posts yet.</p>
+          </div>
+          <div
+            v-for="q in userLastActivity.usersQuestions"
+            v-else
+            :key="q.slug"
+            @click="redirect(`/qa/question/${q.slug}`)"
+          >
+            <div class="account__last-activity__item__qa">
+              <div class="account__last-activity__item__qa__title">
+                <h3>{{ q.title }}</h3>
+                <p class="opacity">Asked at: {{ q.created_at }}</p>
+              </div>
+              <div class="account__last-activity__item__qa__items">
+                <p>Views: {{ q.views }}</p>
+                <p>Answers: {{ q.count }}</p>
+                <p :class="q.is_answered">Votes: {{ q.votes }}</p>
               </div>
             </div>
           </div>
-          <div class="account__last-activity__item">
+        </div>
+        <div v-else class="account__last-activity__item">
+          <div v-if="!userLastActivity.usersBlogPosts.length" class="account__last-activity__item__no-posts">
             <h2>Latest blog posts</h2>
-            <div v-if="!userLastActivity.usersBlogPosts.length">
-              <p class="opacity">No blog posts yet.</p>
-            </div>
-            <div v-else>
-              <p>{{ userLastActivity.usersBlogPosts }}</p>
-            </div>
+            <p class="opacity">No blog posts yet.</p>
+          </div>
+          <div v-else>
+            <p>{{ userLastActivity.usersBlogPosts }}</p>
           </div>
         </div>
       </div>
@@ -198,7 +198,13 @@ export default {
       },
       loading: true,
       showPopup: false,
-      isOwner: false
+      isOwner: false,
+      subpageItems: [
+        { title: 'Forum posts', active: true },
+        { title: 'Questions and answers', active: false },
+        { title: 'Blog posts', active: false },
+      ],
+      currentSubpage: 'Forum posts',
     }
   },
   created() {
@@ -220,7 +226,8 @@ export default {
       this.isOwner = this.user.personalId === verifyToken(sessionStorage.getItem('_at')).personalId
     },
     changeSubpage(subpage) {
-
+      this.subpageItems.forEach(sub => { sub.active = sub.title === subpage.title })
+      this.currentSubpage = subpage.title
     },
     redirect(path) {
       return this.$router.push(path)

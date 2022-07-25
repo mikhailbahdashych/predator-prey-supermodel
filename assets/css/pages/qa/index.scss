@@ -23,9 +23,8 @@
       transition: .2s;
       cursor: pointer;
       .question-wrapper__question-content__question__title-box {
+        @include centers($align-items: baseline, $justify-content: space-between);
         display: flex;
-        align-items: baseline;
-        justify-content: space-between;
         &.question-wrapper__question-content__question__title-box--no-baseline {
           align-items: normal;
         }
