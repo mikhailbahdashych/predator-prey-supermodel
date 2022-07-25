@@ -101,15 +101,6 @@ export const getUserByPersonalId = async personalId => {
   }
 }
 
-export const getUserLastActivity = async personalId => {
-  try {
-    const { data } = await api.get(`g-u-l-a/${personalId}`)
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
 export const getUserSettings = async (token, type) => {
   try {
     const { data } = await api.get(`/g-u-s/${type}`, {
@@ -165,9 +156,18 @@ export const getQuestion = async slug => {
   }
 }
 
-export const getQuestions = async sort => {
+export const getUserQuestions = async payload => {
   try {
-    const { data } = await api.get(`/g-qs/${sort}`)
+    const { data } = await api.get(`/g-u-q/${payload.personalId}/${payload.sort}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getQuestions = async payload => {
+  try {
+    const { data } = await api.get(`/g-qs/${payload.sort}`)
     return data
   } catch (e) {
     return e.response.data

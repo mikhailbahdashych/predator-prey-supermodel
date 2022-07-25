@@ -102,7 +102,9 @@ export default {
       await this.getQuestions()
     },
     async getQuestions() {
-      this.questions = await getQuestions(this.sort)
+      this.questions = await getQuestions({
+        sort: this.sort
+      })
     },
     redirect(path) {
       this.$router.push(path)

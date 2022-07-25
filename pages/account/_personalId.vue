@@ -137,21 +137,36 @@
             <h2>Latest Q&A posts</h2>
             <p class="opacity">No Q&A posts yet.</p>
           </div>
-          <div
-            v-for="q in userLastActivity.usersQuestions"
-            v-else
-            :key="q.slug"
-            @click="redirect(`/qa/question/${q.slug}`)"
-          >
-            <div class="account__qa">
-              <div class="account__qa-title">
-                <h3>{{ q.title }}</h3>
-                <p class="opacity">Asked at: {{ q.created_at }}</p>
-              </div>
-              <div class="account__qa-items">
-                <p>Views: {{ q.views }}</p>
-                <p>Answers: {{ q.count }}</p>
-                <p :class="q.is_answered">Votes: {{ q.votes }}</p>
+          <div v-if="userLastActivity.usersQuestions.length" class="account__sort-bar">
+            <p class="account__sort-bar-item">
+              <span class="opacity">Latest</span>
+            </p>
+            <p class="account__sort-bar-item">
+              <span class="opacity">Score</span>
+            </p>
+            <p class="account__sort-bar-item">
+              <span class="opacity">Views</span>
+            </p>
+          </div>
+          <div v-if="userLastActivity.usersQuestions.length">
+            <div
+              v-for="q in userLastActivity.usersQuestions"
+              :key="q.slug"
+              @click="redirect(`/qa/question/${q.slug}`)"
+            >
+              <div class="account__qa">
+                <div class="account__qa-title">
+                  <h3>{{ q.title }}</h3>
+                  <p class="opacity">Asked at: {{ q.created_at }}</p>
+                </div>
+                <div class="account__qa-items">
+                  <p class="account__preview-block">Views: {{ q.views }}</p>
+                  <p class="account__preview-block">Answers: {{ q.count || 0 }}</p>
+                  <p
+                    class="account__preview-block account__preview-block--answer"
+                    :class="q.is_answered ? 'account__preview-block--answered' : q.votes < 0 ? 'account__preview-block--low-quality-question' : ''">
+                    Votes: {{ q.votes }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -173,12 +188,13 @@
 
 <script>
 import Skeleton from '~/components/skeleton/Skeleton'
-import Button from "~/components/basicComponents/Button"
-import Popup from "~/components/basicComponents/Popup"
-import Input from "~/components/basicComponents/Input"
-import { getUserByPersonalId, getUserLastActivity } from "~/api"
-import { verifyToken } from "~/helpers/crypto"
+import Button from '~/components/basicComponents/Button'
+import Popup from '~/components/basicComponents/Popup'
+import Input from '~/components/basicComponents/Input'
+import { getUserByPersonalId, getUserQuestions } from '~/api'
+import { verifyToken } from '~/helpers/crypto'
 import { validateUserPersonalId } from '~/helpers/frontValidator'
+
 export default {
   name: 'PersonalId',
   components: {
@@ -216,10 +232,10 @@ export default {
   },
   methods: {
     async getUserLastActivity() {
-      const { forumPosts, usersQuestions, usersBlogPosts } = await getUserLastActivity(this.$route.params.personalId)
-      this.userLastActivity.forumPosts = forumPosts
-      this.userLastActivity.usersQuestions = usersQuestions
-      this.userLastActivity.usersBlogPosts = usersBlogPosts
+      this.userLastActivity.usersQuestions = await getUserQuestions({
+        personalId: this.$route.params.personalId,
+        sort: 'latest'
+      })
     },
     async getCurrentUser() {
       this.user = await getUserByPersonalId(this.$route.params.personalId)

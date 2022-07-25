@@ -130,20 +130,6 @@ router.get('/g-u-b-p-id/:personalId', async (req, res) => {
   }
 });
 
-router.get('/g-u-l-a/:personalId', async (req, res) => {
-  try {
-    const { data } = await api.get(`/get-user-last-activity/${req.params.personalId}`, {
-      auth: {
-        username: process.env.BASIC_AUTH_USERNAME,
-        password: process.env.BASIC_AUTH_PASSWORD
-      }
-    })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-});
-
 router.get('/g-u-s/:type', async (req, res) => {
   try {
     const { data } = await api.get(`/get-user-settings/${req.params.type}`, {
@@ -200,6 +186,20 @@ router.get('/g-q', async (req, res) => {
       params: {
         slug: req.query.slug
       },
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.get('/g-u-q/:personalId/:sort', async (req, res) => {
+  try {
+    const { data } = await api.get(`/get-user-questions/${req.params.personalId}/${req.params.sort}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
