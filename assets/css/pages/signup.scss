@@ -74,6 +74,9 @@
       width: 100%;
       @include margin($left: 5px, $right: 5px);
     }
+    &.login-inputs__buttons--step {
+      margin-top: 10px;
+    }
   }
 
   .login-inputs__login-inputs-container {
@@ -102,7 +105,6 @@
     }
     .login-inputs__password-requirement {
       border-radius: 5px;
-      border: 1px solid rgba(#fff,.9);
       .login-inputs__password-requirements {
         display: flex;
       }

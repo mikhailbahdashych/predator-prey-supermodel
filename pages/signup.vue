@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div v-if="!showPersonalInformationFields" class="login-header">
+      <div v-if="step === 0" class="login-header">
         <h1 class="login-header__login-title" @click="redirect('/')">pNb</h1>
         <div class="login-header__login-header-btn">
           <p>Already have account?
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <div v-if="!showPersonalInformationFields" class="login-inputs">
+      <div v-if="step === 0" class="login-inputs">
         <div class="login-inputs__login-inputs-container">
           <h1 class="source-sans-pro bold">Sign up</h1>
           <Input
@@ -82,13 +82,13 @@
               :label="'Sign up'"
               :disabled="!validFields()"
               :btn-class="'basic-button--high-height'"
-              @click-handler="showPersonalInfoFields"
+              @click-handler="signUpStepUp"
             />
           </div>
         </div>
       </div>
 
-      <div v-if="showPersonalInformationFields" class="login-inputs login-inputs--personal-information">
+      <div v-if="step === 1" class="login-inputs login-inputs--personal-information">
         <div v-if="status !== 1" class="login-inputs__login-inputs-container login-inputs__login-inputs-container--personal-information">
           <h3 class="source-sans-pro bold">Tell us a little about yourself</h3>
           <p>Don't worry, you can skip this step and fill information you want later</p>
@@ -163,8 +163,55 @@
               />
             </div>
             <Button
-              :label="'Sign up'"
+              :label="'Next'"
               :disabled="loading"
+              @click-handler="signUpStepUp"
+            />
+          </div>
+        </div>
+        <div v-else class="login-inputs__login-inputs-container">
+          <h1>Confirmation email has been sent.</h1>
+          <p>Please, follow the instruction in the email to complete registration process.</p>
+          <p>The link will be valid for 24 hours.</p>
+          <Button
+            :label="'Go to sign in'"
+            :btn-class="'basic-button--transparent basic-button--high-height'"
+            @click-handler="redirect('/signin')"
+          />
+        </div>
+      </div>
+
+      <div v-if="step === 2" class="login-inputs login-inputs--personal-information">
+        <div v-if="status !== 1" class="login-inputs__login-inputs-container login-inputs__login-inputs-container--personal-information">
+          <h3 class="source-sans-pro bold">All your location and place of work</h3>
+          <p>Don't worry, you can skip this step and fill information you want later</p>
+          <div class="flex">
+            <Input
+              v-model="personalInformation.location"
+              :title="'Location'"
+              :input-class="'bi--basic-input__small'"
+            />
+            <Input
+              v-model="personalInformation.company"
+              :title="'Company'"
+              :input-class="'bi--basic-input__small'"
+            />
+          </div>
+          <div class="login-inputs__buttons login-inputs__buttons--step">
+            <Button
+              :label="'Go back'"
+              :btn-class="'basic-button--transparent'"
+              @click-handler="signUpStepBack"
+            />
+            <div class='login-inputs__btn'>
+              <Button
+                :label="'Skip'"
+                :btn-class="'basic-button--transparent'"
+                @click-handler="signUpWithoutInfo"
+              />
+            </div>
+            <Button
+              :label="'Sign up'"
               @click-handler="signUpWithInfo"
             />
           </div>
@@ -237,7 +284,7 @@ export default {
         {digitChar: false, text: 'Password should contain at least one digit character'}
       ],
 
-      showPersonalInformationFields: false,
+      step: 0,
       personalInformation: {
         first_name: null,
         last_name: null,
@@ -246,7 +293,9 @@ export default {
         website_link: null,
         twitter: null,
         github: null,
-        show_email: false
+        show_email: false,
+        company: null,
+        location: null
       },
 
       disabledField: false,
@@ -356,12 +405,10 @@ export default {
       this.loading = false
     },
     signUpStepBack() {
-      this.showPersonalInformationFields = false
+      this.step -= 1
     },
-    showPersonalInfoFields() {
-      if (this.validFields()) {
-        this.showPersonalInformationFields = true
-      }
+    signUpStepUp() {
+      this.step += 1
     }
   }
 }

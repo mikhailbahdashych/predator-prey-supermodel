@@ -87,7 +87,7 @@
     @include size(400px, 550px);
     @include positions($top: 70px, $left: 0, $right: 0);
     @include margin($left: auto, $right: auto);
-    z-index: 2;
+    z-index: 98;
     position: absolute;
     background-color: var(--color-header-bg);
     color: var(--color-font-color);

@@ -11,7 +11,6 @@
   }
 
   .toggle-img {
-    z-index: 5;
     @include positions($top: 0, $bottom: 0);
     @include margin(auto, 0, auto, 5px);
     position: absolute;
@@ -22,7 +21,6 @@
   }
 
   .slider {
-    z-index: 4;
     @include positions(0, 0, 0, 0);
     position: absolute;
     cursor: pointer;
