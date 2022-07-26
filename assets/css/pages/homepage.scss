@@ -1,2 +1,42 @@
 @use "../variables" as v;
+@import "../mixins";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;900&display=swap');
 
+.welcome {
+  @include centers($text-align: center, $align-items: center, $justify-content: center);
+  display: flex;
+  height: calc(300px - 50px);
+  .welcome__intro {
+    @include font($font-size: 72px, $font-weight: 100, $font-family: "Lato", $font-family-type: sans-serif);
+    position: relative;
+    display: block;
+    .welcome__intro--bold {
+      font-weight: 900;
+      font-family: "Lato", sans-serif;
+    }
+    &.welcome__intro--pnb {
+      font-size: 48px;
+    }
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      display: block;
+    }
+    &::before {
+      @include size($height: 101%);
+      @include positions($left: -20px, $right: -20px);
+      background: var(--color-default-bg);
+      z-index: -1;
+    }
+    &::after {
+      @include size($width: 100vw, $height: 100%);
+      @include positions($top: 0, $left: 50%);
+      background: #eee;
+      transform: translateX(-50%);
+      z-index: -2;
+    }
+  }
+  &.welcome__pnb {
+    align-items: end;
+  }
+}

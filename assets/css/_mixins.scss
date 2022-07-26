@@ -81,14 +81,37 @@
   }
 }
 
-@mixin font($font-style, $font-size, $font-weight, $font-family, $line-height, $opacity, $color) {
-  color: $color;
-  font-style: $font-style;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  font-family: $font-family;
-  line-height: $line-height;
-  opacity: $opacity;
+@mixin font(
+  $font-style: unset,
+  $font-size: unset,
+  $font-weight: unset,
+  $font-family: unset,
+  $font-family-type: unset,
+  $line-height: unset,
+  $opacity: unset,
+  $color: unset
+  ) {
+  @if $color != unset {
+    color: $color;
+  }
+  @if $font-style != unset {
+    font-style: $font-style;
+  }
+  @if $font-size != unset {
+    font-size: $font-size;
+  }
+  @if $font-weight != unset {
+    font-weight: $font-weight;
+  }
+  @if $line-height != unset {
+    line-height: $line-height;
+}
+  @if $opacity != unset {
+    opacity: $opacity;
+  }
+  @if $font-family != unset {
+    font-family: $font-family $font-family-type;
+  }
 }
 
 @mixin wrapper($width, $top, $right, $bottom, $left, $display: unset) {

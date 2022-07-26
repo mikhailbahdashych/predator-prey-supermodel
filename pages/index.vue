@@ -1,6 +1,13 @@
 <template>
   <div>
-
+    <div class="welcome welcome__pnb">
+      <span class="welcome__intro welcome__intro--pnb">PENTESTERS' NOTES BLOG</span>
+    </div>
+    <div class="welcome">
+      <span class="welcome__intro">
+        WHERE WE MAKE <span class="welcome__intro--bold">IT</span> SECURE
+      </span>
+    </div>
   </div>
 </template>
 
