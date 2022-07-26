@@ -33,7 +33,6 @@ import { createQuestionPost, getRefreshedTokens } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
-import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Ask',
   components: {
@@ -65,18 +64,15 @@ export default {
   created() {
     this.$nextTick(() => { this.loading = false })
   },
-  mounted() {
-    this.decodeToken()
+  async mounted() {
+    await this.checkToken()
   },
   methods: {
-    decodeToken() {
-      const token = sessionStorage.getItem('_at')
+    async checkToken() {
+      const refreshedToken = await getRefreshedTokens()
 
-      if (!token) return this.$router.push('/signin')
-
-      const tokenData = verifyToken(token)
-
-      if (tokenData.message === 'invalid-token') return this.$router.push('/signin')
+      if (refreshedToken.status === 401) return this.$router.push('/signin')
+      else sessionStorage.setItem('_at', refreshedToken._at)
     },
     // async getPostsBySlug() {
     //   if (this.title.length > 0) {
@@ -88,14 +84,6 @@ export default {
     // },
     async postQuestion() {
       this.loading = true
-
-      const tokenData = verifyToken(sessionStorage.getItem('_at'))
-
-      if (tokenData.message === 'invalid-token') {
-        const refreshedToken = await getRefreshedTokens()
-        if (refreshedToken.status === 401) return this.$router.push('/signin')
-        else sessionStorage.setItem('_at', refreshedToken._at)
-      }
 
       const data = await createQuestionPost({
         title: this.title,

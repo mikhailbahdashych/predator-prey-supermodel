@@ -18,6 +18,7 @@
 
 <script>
 import ToggleSwitch from '~/components/basicComponents/ToggleSwitch';
+import { getRefreshedTokens } from "~/api";
 export default {
   name: 'SiteSettings',
   components: {
@@ -32,11 +33,21 @@ export default {
   created() {
     this.$nextTick(() => { this.loading = false })
   },
-  mounted() {
-    const theme = localStorage.getItem('_t')
-    this.darkTheme = theme === '_d'
+  async mounted() {
+    this.checkTheme()
+    await this.checkToken()
   },
   methods: {
+    async checkToken() {
+      const refreshedToken = await getRefreshedTokens()
+
+      if (refreshedToken.status === 401) return this.$router.push('/signin')
+      else sessionStorage.setItem('_at', refreshedToken._at)
+    },
+    checkTheme() {
+      const theme = localStorage.getItem('_t')
+      this.darkTheme = theme === '_d'
+    },
     changeTheme() {
       this.darkTheme = !this.darkTheme
       document.documentElement.setAttribute('data-theme', this.darkTheme ? "dark" : "light");
