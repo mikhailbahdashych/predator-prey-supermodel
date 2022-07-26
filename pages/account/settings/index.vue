@@ -38,7 +38,6 @@ import PersonalInformation from '~/components/pageComponents/settings/PersonalIn
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
 import Notifications from '~/components/pageComponents/settings/Notifications'
 import { verifyToken } from '~/helpers/crypto'
-import { getUserByPersonalId } from '~/api'
 export default {
   name: 'Settings',
   components: {
@@ -63,20 +62,16 @@ export default {
   created() {
     this.$nextTick(() => { this.loading = false })
   },
-  async mounted() {
-    await this.getCurrentUser()
+  mounted() {
+    this.getCurrentUser()
   },
   methods: {
-    async getCurrentUser() {
+    getCurrentUser() {
       const token = sessionStorage.getItem('_at')
-      if (!token) return this.$router.push('/signin')
-
       const tokenData = verifyToken(token)
-      if (tokenData.message === 'invalid-token') {
-        sessionStorage.removeItem('_at')
-        return this.$router.push('/signin')
-      } else {
-        this.currentUser = await getUserByPersonalId(tokenData.personalId)
+      this.currentUser = {
+        personalId: tokenData.personalId,
+        username: tokenData.username,
       }
     },
     changeSubsection(item) {
