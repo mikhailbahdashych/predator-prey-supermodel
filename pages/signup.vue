@@ -59,6 +59,7 @@
             :title="'Repeat password'"
             :type="'password'"
           />
+          <PhoneInput v-model="phone" />
           <p v-if="passwordError.passwordMismatch" class="error">Passwords have to match!</p>
           <p v-if="passwordError.passwordRequirement" class="error">Password are requirement!</p>
 
@@ -238,6 +239,7 @@ import Input from "~/components/basicComponents/Input";
 import Button from "~/components/basicComponents/Button";
 import Checkbox from "~/components/basicComponents/Checkbox";
 import Textarea from "~/components/basicComponents/Textarea";
+import PhoneInput from '~/components/basicComponents/PhoneInput'
 import { validateEmail, validatePassword, validatePasswordRules } from "~/helpers/frontValidator";
 import { signUp } from "~/api";
 export default {
@@ -247,7 +249,8 @@ export default {
     Input,
     Button,
     Checkbox,
-    Textarea
+    Textarea,
+    PhoneInput
   },
   layout: 'empty',
   data() {
@@ -256,21 +259,18 @@ export default {
         username: null,
         usernameError: false
       },
-
       email: {
         email: null,
         emailError: false,
       },
-
       password: {
         password: null,
         passwordRepeat: null,
       },
-
+      phone: null,
       status: null,
       tac: false,
       error: false,
-
       passwordError: {
         passwordMismatch: false,
         passwordRequirement: false,
@@ -283,7 +283,6 @@ export default {
         {specChar: false, text: 'Password should contain at least one special character'},
         {digitChar: false, text: 'Password should contain at least one digit character'}
       ],
-
       step: 0,
       personalInformation: {
         first_name: null,
@@ -297,9 +296,7 @@ export default {
         company: null,
         location: null
       },
-
       disabledField: false,
-
       loading: true,
       showPopup: false,
     }
