@@ -10,7 +10,10 @@
         >{{ f.title }}</p>
       </div>
     </div>
-    <div v-for="b in bookmarks" :key="b" class="bookmarks__content">
+    <skeleton v-if="loading" />
+    <skeleton v-if="loading" />
+    <skeleton v-if="loading" />
+    <div v-for="b in bookmarks" v-else-if="!loading" :key="b.id" class="bookmarks__content">
       <p>{{ b }}</p>
     </div>
   </div>
@@ -18,11 +21,11 @@
 
 <script>
 import { getBookmarks, getRefreshedTokens } from '~/api'
-// import Skeleton from '~/components/skeleton/Skeleton'
+import Skeleton from '~/components/skeleton/Skeleton'
 export default {
   name: 'Bookmarks',
   components: {
-    // Skeleton
+    Skeleton
   },
   layout: 'default',
   data() {
