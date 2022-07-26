@@ -7,7 +7,7 @@
 
   .basic-button {
     @include size(36px, 100%);
-    background-color: var(--main-color);
+    background-color: var(--color-main);
     border-radius: 5px;
     cursor: pointer;
     border: none;
@@ -19,41 +19,41 @@
     }
     &.basic-button--transparent {
       background-color: transparent;
-      color: var(--font-color);
-      border: 1px solid var(--main-color);
+      color: var(--color-font-color);
+      border: 1px solid var(--color-main);
       .basic-button__label {
-        color: var(--font-color);
+        color: var(--color-font-color);
       }
     }
     &.basic-button--min-width {
       min-width: 150px;
     }
     &.basic-button--transparent:hover {
-      background-color: var(--main-color-hover);
+      background-color: var(--color-main-hover);
     }
     &.basic-button--danger {
-      border: 1px solid var(--error-border);
-      color: var(--error);
+      border: 1px solid var(--color-error-border);
+      color: var(--color-error);
     }
     &.basic-button--danger:hover {
-      background-color: var(--error-hover);
+      background-color: var(--color-error-hover);
     }
     &.basic-button--danger-fill {
       border: none;
-      color: var(--font-color);
-      background-color: var(--error);
+      color: var(--color-font-color);
+      background-color: var(--color-error);
     }
     &.basic-button--danger-fill:hover {
-      background-color: var(--error-pale);
+      background-color: var(--color-error-pale);
     }
     &.basic-button--danger-fill:disabled {
       border: none;
-      color: var(--font-color);
-      background-color: var(--error-disabled);
+      color: var(--color-font-color);
+      background-color: var(--color-error-disabled);
     }
     &.basic-button--danger-fill:disabled:hover {
       cursor: auto;
-      background-color: var(--error-disabled);
+      background-color: var(--color-error-disabled);
     }
     &.basic-button--high-height {
       height: 48px;
@@ -62,23 +62,23 @@
       border-radius: 16px
     }
     &:hover {
-      background-color: var(--main-color-pale);
+      background-color: var(--color-main-pale);
     }
     &:active {
-      background-color: var(--main-color-dark);
+      background-color: var(--color-main-dark);
     }
     &:disabled {
-      background-color: var(--main-color-disable);
+      background-color: var(--color-main-disable);
       cursor: auto;
     }
     &:disabled:hover {
-      background-color: var(--main-color-disable);
+      background-color: var(--color-main-disable);
       cursor: auto;
     }
 
     .basic-button__label {
       margin: 0;
-      color: var(--default-bg);
+      color: var(--color-default-bg);
     }
   }
 

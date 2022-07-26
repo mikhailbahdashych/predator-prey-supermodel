@@ -22,7 +22,7 @@
       }
     }
     &:hover {
-      background-color: var(--hover);
+      background-color: var(--color-hover);
       border-radius: 8px;
     }
   }
@@ -31,13 +31,13 @@
     display: flex;
     .account-wrapper__side-bar {
       width: 250px;
-      background-color: var(--default-bg);
+      background-color: var(--color-default-bg);
       .account-wrapper__box {
         display: flex;
       }
       .account-wrapper__vertical-line {
         @include size(38px, 5px);
-        background-color: var(--main-color);
+        background-color: var(--color-main);
         border-radius: 5px;
       }
       .account-wrapper__item {
@@ -48,11 +48,11 @@
         transition: .2s;
         line-height: 38px;
         &.account-wrapper__item--item-active {
-          background-color: var(--hover);
+          background-color: var(--color-hover);
           border-radius: 5px;
         }
         &:hover {
-          background-color: var(--hover);
+          background-color: var(--color-hover);
           border-radius: 5px;
         }
       }
@@ -107,7 +107,7 @@
   }
 
   .account-preferences__item {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--color-line);
     .account-preferences__item-content {
       @include centers($justify-content: space-between, $align-items: center);
       display: flex;
@@ -117,7 +117,7 @@
       }
     }
     &.account-preferences__item--danger {
-      border-bottom: 1px solid var(--error-hover);
+      border-bottom: 1px solid var(--color-error-hover);
     }
   }
   .password-requirements {

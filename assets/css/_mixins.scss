@@ -5,11 +5,21 @@
   $flex-direction: unset,
   $text-align: unset
   ) {
-  align-content: $align-content;
-  align-items: $align-items;
-  justify-content: $justify-content;
-  flex-direction: $flex-direction;
-  text-align: $text-align
+  @if $align-content != unset {
+    align-content: $align-content;
+  }
+  @if $align-items != unset {
+    align-items: $align-items;
+  }
+  @if $justify-content != unset {
+    justify-content: $justify-content;
+  }
+  @if $flex-direction != unset {
+    flex-direction: $flex-direction;
+  }
+  @if $text-align != unset {
+    text-align: $text-align;
+  }
 }
 
 @mixin margin($top: 0, $right: 0, $bottom: 0, $left: 0) {
@@ -31,17 +41,44 @@
   opacity: $opacity;
 }
 
-@mixin size($height: unset, $width: unset, $max-height: unset, $max-width: unset) {
-  height: $height;
-  width: $width;
-  max-height: $max-height;
-  max-width: $max-width;
+@mixin size(
+  $height: unset,
+  $width: unset,
+  $max-height: unset,
+  $max-width: unset,
+  $min-height: unset,
+  $min-width: unset
+  ) {
+  @if $height != unset {
+    height: $height;
+  }
+  @if $width != unset {
+    width: $width;
+  }
+  @if $max-height != unset {
+    max-height: $max-height;
+  }
+  @if $max-width != unset {
+    max-width: $max-width;
+  }
+  @if $min-height != unset {
+    min-height: $min-height;
+  }
+  @if $min-width != unset {
+    min-width: $min-width;
+  }
 }
 
 @mixin display($position: unset, $display: unset, $flex-direction: unset) {
-  position: $position;
-  display: $display;
-  flex-direction: $flex-direction;
+  @if $position != unset {
+    position: $position;
+  }
+  @if $display != unset {
+    display: $display;
+  }
+  @if $flex-direction != unset {
+    flex-direction: $flex-direction;
+  }
 }
 
 @mixin font($font-style, $font-size, $font-weight, $font-family, $line-height, $opacity, $color) {
@@ -57,13 +94,19 @@
 @mixin wrapper($width, $top, $right, $bottom, $left, $display: unset) {
   width: $width;
   margin: $top $right $bottom $left;
-  display: $display;
+  @if $display != unset {
+    display: $display;
+  }
 }
 
 @mixin avatar-box($height: unset, $width: unset, $max-height: unset, $max-width: unset) {
   height: $height;
   width: $width;
-  max-height: $max-height;
-  max-width: $max-width;
+  @if $max-height != unset {
+    max-height: $max-height;
+  }
+  @if $max-width != unset {
+    max-height: $max-width;
+  }
   border-radius: 50%;
 }

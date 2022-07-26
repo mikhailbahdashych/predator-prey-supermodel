@@ -3,10 +3,10 @@
 
 .footer {
   @include size(50px, 100%);
-  background-color: var(--header-bg);
+  background-color: var(--color-header-bg);
   bottom: 0;
   position: absolute;
-  box-shadow: 0 -8px 6px -6px var(--shadow);
+  box-shadow: 0 -8px 6px -6px var(--color-shadow);
   .footer__footer-content {
     @include size(50px, 750px);
     margin: 0 auto;

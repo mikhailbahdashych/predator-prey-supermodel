@@ -26,7 +26,7 @@ a {
 p, h1, h2, h3, h4, h5, li, span {
   font-family: "Inter", sans-serif;
   font-weight: 200;
-  color: var(--font-color);
+  color: var(--color-font-color);
   opacity: .9;
   &.small {
     font-size: 14px;
@@ -38,13 +38,13 @@ p, h1, h2, h3, h4, h5, li, span {
     font-weight: 900;
   }
   &.on-white {
-    color: var(--on-white);
+    color: var(--color-on-white);
   }
   &.error {
-    color: var(--error);
+    color: var(--color-error);
   }
   &.link {
-    color: var(--main-color); cursor: pointer; text-decoration: underline;
+    color: var(--color-main); cursor: pointer; text-decoration: underline;
   }
   &.success {
     color: #3be83b;
@@ -56,7 +56,7 @@ p, h1, h2, h3, h4, h5, li, span {
 
 .nuxt-link {
   text-decoration: none;
-  color: var(--font-color);
+  color: var(--color-font-color);
 }
 
 hr {
@@ -66,12 +66,12 @@ hr {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: var(--main-color);
+  color: var(--color-main);
 }
 
 .page-content {
   position: relative;
   min-height: 100vh;
-  background-color: var(--default-bg);
+  background-color: var(--color-default-bg);
   .content-wrap { padding-bottom: 50px; }
 }

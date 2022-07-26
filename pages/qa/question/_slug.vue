@@ -29,6 +29,11 @@
           >
             Downvote
           </p>
+          <p class="ask-wrapper__vote ask-wrapper__vote--down"
+             @click="addToBookmark"
+          >
+            Bookmark
+          </p>
         </div>
         <div class="ask-wrapper__question-title--content">
           <p v-html="question.content" />

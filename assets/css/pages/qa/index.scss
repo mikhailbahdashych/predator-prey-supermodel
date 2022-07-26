@@ -7,7 +7,7 @@
   .question-wrapper__question-header {
     @include centers($align-items: center, $justify-content: space-between);
     display: flex;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--color-line);
     .question-wrapper__question-header-button {
       width: 150px;
     }
@@ -18,7 +18,7 @@
     display: block;
     .question-wrapper__question {
       @include size(120px, 100%);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--color-line);
       margin-bottom: 15px;
       transition: .2s;
       cursor: pointer;
@@ -33,25 +33,25 @@
         transition: .2s
       }
       &:hover {
-        border-bottom: 1px solid var(--main-color);
+        border-bottom: 1px solid var(--color-main);
         .question-wrapper__hover {
-          color: var(--main-color);
+          color: var(--color-main);
         }
       }
     }
     .question-wrapper__preview-block {
-      border: 1px solid var(--main-color-disable);
+      border: 1px solid var(--color-main-disable);
       border-radius: 5px;
       padding: 5px;
       margin-right: 5px;
       &.question-wrapper__preview-block--answer {
-        border: 1px solid var(--success);
+        border: 1px solid var(--color-success);
       }
       &.question-wrapper__preview-block--answered {
-        background-color: var(--background-success);
+        background-color: var(--color-background-success);
       }
       &.question-wrapper__preview-block--low-quality-question {
-        border: 1px solid var(--error);
+        border: 1px solid var(--color-error);
       }
     }
     .question-wrapper__avatar-box {
@@ -73,7 +73,7 @@
   @include wrapper(50%, 0, auto, 0, auto);
   display: block;
   .ask-wrapper__question-title {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--color-line);
     .ask-wrapper__no-answers {
       p {
         margin: 0;
@@ -97,7 +97,7 @@
         width: 100px;
         padding-right: 15px;
         margin: 15px;
-        border-right: 1px solid var(--line);
+        border-right: 1px solid var(--color-line);
         p {
           margin: 5px 0;
         }
@@ -108,15 +108,21 @@
           padding: 5px;
           border-radius: 5px;
           &.ask-wrapper__vote--up {
-            border: 1px solid var(--success);
+            border: 1px solid var(--color-success);
             &:hover, &.ask-wrapper__vote--up--active {
-              background-color: var(--background-success);
+              background-color: var(--color-background-success);
             }
           }
           &.ask-wrapper__vote--down {
-            border: 1px solid var(--error);
+            border: 1px solid var(--color-error);
             &:hover, &.ask-wrapper__vote--down--active {
-              background-color: var(--error-border);
+              background-color: var(--color-error-border);
+            }
+          }
+          &.ask-wrapper__vote--bookmark {
+            border: 1px solid gold;
+            &:hover, &.ask-wrapper__vote--bookmark--active {
+              background-color: gold;
             }
           }
         }
@@ -130,18 +136,18 @@
       }
     }
     .ask-wrapper__preview-block {
-      border: 1px solid var(--main-color-disable);
+      border: 1px solid var(--color-main-disable);
       border-radius: 5px;
       padding: 5px;
       margin-right: 5px;
       &.ask-wrapper__preview-block--answer {
-        border: 1px solid var(--success);
+        border: 1px solid var(--color-success);
       }
       &.ask-wrapper__preview-block--answered {
-        background-color: var(--background-success);
+        background-color: var(--color-background-success);
       }
       &.ask-wrapper__preview-block--low-quality-question {
-        border: 1px solid var(--error);
+        border: 1px solid var(--color-error);
       }
     }
     .ask-wrapper__title-box {

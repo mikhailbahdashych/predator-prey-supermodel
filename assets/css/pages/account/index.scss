@@ -8,7 +8,7 @@
     @include size(100%, 240px);
     @include padding(10px, 10px, 10px, 10px);
     @include display($display: flex, $flex-direction: column);
-    background-color: var(--default-bg);
+    background-color: var(--color-default-bg);
     .account__ava {
       display: flex;
       position: relative;
@@ -18,10 +18,10 @@
       .account__status {
         @include positions($bottom: 0, $right: 0);
         position: absolute;
-        background-color: var(--header-bg);
+        background-color: var(--color-header-bg);
         border-radius: 8px;
         font-size: 14px;
-        border: 1px solid var(--main-color-border);
+        border: 1px solid var(--color-main-border);
         padding: 10px;
         margin: 0;
       }
@@ -51,10 +51,9 @@
   .account__last-activity {
     width: 100%;
     .account__header {
-      width: 80%;
-      height: 40px;
+      @include size(40px, 80%);
       margin: 0 auto 35px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--color-line);
       display: flex;
       justify-content: space-around;
       .account__box {
@@ -62,17 +61,14 @@
         .account__item {
           cursor: pointer;
           margin: 0;
-          color: var(--line);
+          color: var(--color-line);
           transition: .2s;
-          &.active {
-            color: rgba(#fff, 0.75);
-          }
-          &:hover {
+          &.active, &:hover {
             color: rgba(#fff, 0.75);
           }
         }
         &.active {
-          border-bottom: 3px solid var(--main-color);
+          border-bottom: 3px solid var(--color-main);
         }
       }
     }
@@ -99,8 +95,7 @@
       }
     }
     .account__subpage-item {
-      width: 80%;
-      margin: 0 auto;
+      @include wrapper(80%, 0, auto, 0, auto, block);
       .account__no-posts {
         p, h2 {
           text-align: center;
@@ -111,13 +106,13 @@
         justify-content: center;
         width: 100%;
         .account__sort-bar-item {
-          border: 1px solid var(--main-color);
+          border: 1px solid var(--color-main);
           padding: 5px;
           margin: 0;
           transition: .2s;
           cursor: pointer;
           &.account__sort-bar-item--active {
-            background-color: var(--main-color-hover);
+            background-color: var(--color-main-hover);
           }
           &:first-child {
             border-radius: 5px 0 0 5px;
@@ -128,13 +123,13 @@
             border-radius: 0 5px 5px 0;
           }
           &:hover {
-            background-color: var(--main-color-hover);
+            background-color: var(--color-main-hover);
           }
         }
       }
       .account__qa {
         @include size(100px, 100%);
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid var(--color-line);
         margin-bottom: 15px;
         transition: .2s;
         cursor: pointer;
@@ -148,23 +143,23 @@
             margin: 0;
           }
           .account__preview-block {
-            border: 1px solid var(--main-color-disable);
+            border: 1px solid var(--color-main-disable);
             border-radius: 5px;
             padding: 5px;
             margin-right: 5px;
             &.account__preview-block--answer {
-              border: 1px solid var(--success);
+              border: 1px solid var(--color-success);
             }
             &.account__preview-block--answered {
-              background-color: var(--background-success);
+              background-color: var(--color-background-success);
             }
             &.account__preview-block--low-quality-question {
-              border: 1px solid var(--error);
+              border: 1px solid var(--color-error);
             }
           }
         }
         &:hover {
-          border-bottom: 1px solid var(--main-color);
+          border-bottom: 1px solid var(--color-main);
         }
       }
     }

@@ -10,17 +10,17 @@
   font-size: 32px;
   font-weight: 900;
   outline: none;
-  color: var(--font-color);
-  background-color: var(--default-bg);
+  color: var(--color-font-color);
+  background-color: var(--color-default-bg);
   border-radius: 6px;
   caret-color: transparent;
   border: none;
   text-align: center;
   &:disabled {
-    background-color: var(--disabled);
+    background-color: var(--color-disabled);
   }
   &:focus {
-    border: 1px solid var(--main-color-border);
+    border: 1px solid var(--color-main-border);
   }
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
@@ -34,8 +34,8 @@
 
 .on-white {
   input {
-    border: 1px solid var(--on-white);
+    border: 1px solid var(--color-on-white);
     background-color: rgba(#fff, .5);
-    color: var(--on-white);
+    color: var(--color-on-white);
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div :class="onWhite ? `basic-input-container basic-input-container--on-white` : `basic-input-container`">
+  <div :class="onWhite ? `basic-input-container basic-input-container--color-on-white` : `basic-input-container`">
     <p class="small">{{ title }}</p>
     <input
       ref="name"

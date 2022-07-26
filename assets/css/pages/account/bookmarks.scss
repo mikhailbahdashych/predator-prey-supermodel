@@ -1,2 +1,49 @@
 @use "../../variables" as v;
 @import "../../mixins";
+
+.bookmark-wrapper {
+  @include size($width: 50%, $min-width: 500px);
+  margin: 50px auto 0;
+  height: 300px;
+  .bookmark-wrapper__header {
+    @include size($width: 100%, $height: 50px);
+    display: flex;
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: 15px;
+    align-items: baseline;
+    .bookmark-wrapper__sort-buttons {
+      display: flex;
+      .bookmark-wrapper__button {
+        margin: 0 5px;
+        padding: 5px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .2s;
+        &.bookmark-wrapper__button--all {
+          border: 1px solid var(--color-error);
+          &:hover, &.active {
+            background-color: var(--color-error-hover);
+          }
+        }
+        &.bookmark-wrapper__button--questions {
+          border: 1px solid var(--color-success);
+          &:hover, &.active {
+            background-color: var(--color-background-success);
+          }
+        }
+        &.bookmark-wrapper__button--forum {
+          border: 1px solid var(--color-gold);
+          &:hover, &.active {
+            background-color: var(--color-gold-hover);
+          }
+        }
+        &.bookmark-wrapper__button--blog {
+          border: 1px solid var(--color-main);
+          &:hover, &.active {
+            background-color: var(--color-main-hover);
+          };
+        }
+      }
+    }
+  }
+}

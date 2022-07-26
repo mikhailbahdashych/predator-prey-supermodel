@@ -26,7 +26,7 @@
     @include positions(0, 0, 0, 0);
     position: absolute;
     cursor: pointer;
-    background-color: var(--header-bg-pale);
+    background-color: var(--color-header-bg-pale);
     -webkit-transition: 0.4s;
     transition: 0.4s;
     &:before {
@@ -34,7 +34,7 @@
       @include positions($left: 4px, $bottom: 4px);
       position: absolute;
       content: "";
-      background-color: var(--font-color);
+      background-color: var(--color-font-color);
       -webkit-transition: 0.4s;
       transition: 0.4s;
     }

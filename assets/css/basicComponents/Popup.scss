@@ -5,8 +5,8 @@
   @include margin($right: auto, $left: auto);
   @include positions($top: 10%, $right: 0, $left: 0);
   position: fixed;
-  background-color: var(--header-bg);
-  border: 1px solid var(--line);
+  background-color: var(--color-header-bg);
+  border: 1px solid var(--color-line);
   text-align: center;
   z-index: 3;
   max-width: 280px;

@@ -5,13 +5,13 @@
   @include centers($align-items: center, $justify-content: center);
   @include size(100vh, 100%);
   @include display(fixed, flex);
-  background-color: var(--header-bg);
+  background-color: var(--color-header-bg);
 }
 
 .login-content {
   @include size(100%, 50%);
   @include centers($align-items: center);
-  background-color: var(--default-bg);
+  background-color: var(--color-default-bg);
   display: flex;
   h1 {
     @include margin($left: 130px, $right: 130px);
@@ -52,7 +52,7 @@
     transition: .2s;
     cursor: pointer;
     &:hover {
-      color: var(--main-color)
+      color: var(--color-main)
     }
   }
 }
@@ -86,7 +86,7 @@
       .login-inputs__vertical-line {
         @include margin(0, 20px, 0, 20px);
         width: 1px;
-        background-color: var(--font-color);
+        background-color: var(--color-font-color);
         height: 50px;
         float: left;
         opacity: .5;
@@ -94,9 +94,9 @@
       .login-inputs__choose {
         cursor: pointer;
         transition: .2s;
-        color: var(--font-color);
+        color: var(--color-font-color);
         &:hover {
-          color: var(--main-color);
+          color: var(--color-main);
         }
       }
     }
@@ -110,7 +110,7 @@
         @include margin(5px, 0, 5px, 0);
         padding-left: 15px;
         font-size: 14px;
-        color: var(--font-color);
+        color: var(--color-font-color);
         opacity: .9;
       }
       .login-inputs__status {
@@ -139,7 +139,7 @@
   @include centers($align-items: center, $justify-content: center);
   @include size(100vh, 100%);
   @include display(fixed, flex);
-  background-color: var(--header-bg);
+  background-color: var(--color-header-bg);
   .reopening__reopening-block {
     text-align: center;
     display: block;

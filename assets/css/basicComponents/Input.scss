@@ -5,8 +5,8 @@
 .bi {
   border-radius: 5px;
   outline: none;
-  border: 1px solid var(--line);
-  background-color: var(--input-background);
+  border: 1px solid var(--color-line);
+  background-color: var(--color-input-background);
   padding: 0 16px 0 16px;
   width: 100%;
   box-sizing: border-box;
@@ -14,7 +14,7 @@
   font-size: 16px;
   line-height: 24px;
   transition: .3s;
-  color: var(--font-color);
+  color: var(--color-font-color);
   font-family: "Inter", sans-serif;
   &.bi--textarea {
     padding: 15px;
@@ -25,14 +25,14 @@
     resize: vertical;
     white-space: pre-wrap;
     &:focus {
-      border: 1px solid var(--main-color-border);
+      border: 1px solid var(--color-main-border);
     }
   }
   &.bi--search {
     height: 38px;
     font-size: 14px;
     &:focus {
-      border: 1px solid var(--main-color-border);
+      border: 1px solid var(--color-main-border);
     }
   }
 }
@@ -41,14 +41,14 @@
   width: 100%;
   padding: 0 5px;
 
-  &.basic-input-container--on-white {
+  &.basic-input-container--color-on-white {
     p {
-      color: var(--default-bg);
+      color: var(--color-default-bg);
     }
     .bi--basic-input {
-      border: 1px solid var(--on-white);
+      border: 1px solid var(--color-on-white);
       background-color: rgba(#fff, .5);
-      color: var(--on-white);
+      color: var(--color-on-white);
     }
   }
 
@@ -61,25 +61,25 @@
       margin: 0;
     }
     &.bi--basic-input__error {
-      border: 1px solid var(--error-border);
+      border: 1px solid var(--color-error-border);
       &:focus {
-        border: 1px solid var(--error-border);
+        border: 1px solid var(--color-error-border);
       }
     }
     &.bi--basic-input__pointer {
       cursor: pointer;
     }
     &.bi--basic-input__readonly {
-      border: 1px solid var(--main-color-border);
+      border: 1px solid var(--color-main-border);
     }
     &.bi--basic-input__white-stroke {
-      border: 1px solid var(--stroke);
+      border: 1px solid var(--color-stroke);
     }
     &:focus {
-      border: 1px solid var(--main-color-border);
+      border: 1px solid var(--color-main-border);
     }
     &:disabled {
-      background-color: var(--disabled);
+      background-color: var(--color-disabled);
     }
   }
 
@@ -89,9 +89,9 @@
     @include margin($left: auto, $right: auto);
     z-index: 2;
     position: absolute;
-    background-color: var(--header-bg);
-    color: var(--font-color);
+    background-color: var(--color-header-bg);
+    color: var(--color-font-color);
     border-radius: 8px;
-    border: 1px solid var(--main-color-border);
+    border: 1px solid var(--color-main-border);
   }
 }

@@ -41,7 +41,7 @@
   }
 
   .container input:checked ~ .checkmark {
-    background-color: var(--main-color);
+    background-color: var(--color-main);
   }
 
   .checkmark:after {

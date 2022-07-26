@@ -4,11 +4,11 @@
 .error-page {
   @include display($position: absolute);
   @include size(100%, 100%);
-  background-color: var(--default-bg);
+  background-color: var(--color-default-bg);
   text-align: center;
   .error-page__text {
     font-family: "Lato", sans-serif;
-    color: var(--font-color);
+    color: var(--color-font-color);
     &.error-page__text--head {
       font-size: 78px;
     }
