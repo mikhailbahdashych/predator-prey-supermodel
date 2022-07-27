@@ -133,3 +133,11 @@
   }
   border-radius: 50%;
 }
+
+@mixin hideScrollbars {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

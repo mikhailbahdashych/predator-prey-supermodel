@@ -1,51 +1,64 @@
 <template>
-  <div class="awesome-phone-input" :class="{ disabled }">
+  <div class="awesome-phone-input">
 
-    <transition name="fade" mode="out-in">
-      <div :key="country" class="country" @click="disabled ? null : showDialList = !showDialList">
-        <img v-if="country" :src="flagUrl" alt="Flag" />
-        <img v-else src="../../assets/img/unknown.svg" alt="Unknown" />
+    <div :key="country" class="awesome-phone-input__country" @click="showDialList = !showDialList">
+      <img v-if="country" :src="flagUrl" alt="Flag" />
+      <img v-else src="../../assets/img/unknown.svg" alt="Unknown" />
+    </div>
+
+    <div v-if="showDialList" v-click-outside="clickOutsideList" class="country-container">
+
+      <div class="country-container__dial-filter">
+        <img
+          src="../../assets/img/search.svg"
+          class="country-container__input-loop"
+          alt="Search"
+        />
+        <input
+          ref="phoneInputDialFilter"
+          v-model="dialCodeFilter"
+          class="country-container__input"
+          type="text"
+        />
+        <img
+          v-if="dialCodeFilter"
+          src="../../assets/img/close.svg"
+          alt="Clear"
+          @click="dialCodeFilter = null"
+        />
       </div>
-    </transition>
 
-    <transition name="fade" mode="out-in" :duration="200">
-      <div v-if="showDialList" v-click-outside="clickOutsideList" class="country-container">
-
-        <div class="dial-filter">
-          <img src="../../assets/img/search.svg" alt="Search" />
-          <input
-            ref="phoneInputDialFilter"
-            v-model="dialCodeFilter"
-            type="text"
-            placeholder="Search for country"
-            :disabled="disabled"
+      <ul :key="dialCodeFilter" class="country-container__country-list">
+        <li v-for="c in filteredDialCodes"
+            :key="c.name"
+            :class="{ active: false }"
+            class="country-container__country-list-item"
+            @click="inputSelectedCountry = c; showDialList = false;"
+        >
+          <img
+            class="country-container__flag"
+            :src="getFlagUrlByCode({ code: c.country.toLowerCase() })"
+            alt="Flag"
           />
-          <transition name="fade" mode="out-in" :duration="150">
-            <img
-              v-if="dialCodeFilter"
-              src="../../assets/img/close.svg"
-              alt="Clear"
-              @click="dialCodeFilter = null"
-            />
-          </transition>
-        </div>
+          <span>{{ c.name }}</span>
+          <span>+ {{ c.dial }}</span>
+        </li>
+      </ul>
+    </div>
 
-        <transition name="fade" mode="out-in" :duration="250">
-          <ul :key="dialCodeFilter">
-            <li
-              v-for="c in filteredDialCodes"
-              :key="c.name"
-              :class="{ active: false }"
-              @click="disabled ? null : inputSelectedCountry = c; disabled ? null : showDialList = false;"
-            >
-              <img :src="getFlagUrlByCode({ code: c.country.toLowerCase() })" alt="Flag" />
-              <span>{{ country.name }}</span>
-              <span>+ {{ country.dial }}</span>
-            </li>
-          </ul>
-        </transition>
-      </div>
-    </transition>
+    <client-only>
+      <the-mask
+        v-model="phoneNumber"
+        type="text"
+        class="phone"
+        :name="'Phone Number'"
+        :mask="inputMask"
+        :tokens="numberToken"
+        inputmode="numeric"
+        pattern="[0-9]*"
+      />
+    </client-only>
+
   </div>
 </template>
 
@@ -53,26 +66,10 @@
 import {allCountries} from 'country-telephone-data'
 import vClickOutside from 'v-click-outside'
 import {getAvailableFlags} from '~/api'
-// const MOBILEREG = /^\+[0-9]?()[0-9](\s|\S)(\d[0-9]{1,4})(\s|\S)(\d[0-9]{2,4})(\s|\S)(\d[0-9]{2,4})$/
-// return MOBILEREG.test(value)
 export default {
   name: 'PhoneInput',
   directives: {
     clickOutside: vClickOutside.directive
-  },
-  components: {
-
-  },
-  props: {
-    value: {
-      type: String,
-      required: true,
-      default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
   },
   data () {
     return {

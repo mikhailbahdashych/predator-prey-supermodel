@@ -59,7 +59,9 @@
             :title="'Repeat password'"
             :type="'password'"
           />
-          <PhoneInput v-model="phone" />
+          <PhoneInput
+            v-model="phone"
+          />
           <p v-if="passwordError.passwordMismatch" class="error">Passwords have to match!</p>
           <p v-if="passwordError.passwordRequirement" class="error">Password are requirement!</p>
 
