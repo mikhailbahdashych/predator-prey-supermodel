@@ -10,17 +10,8 @@
       <div v-if="showDialList" v-click-outside="clickOutsideList" class="country-container">
 
         <div class="country-container__dial-filter">
-          <img
-            src="../../assets/img/search.svg"
-            class="country-container__input-loop"
-            alt="Search"
-          />
-          <input
-            ref="phoneInputDialFilter"
-            v-model="dialCodeFilter"
-            class="country-container__input"
-            type="text"
-          />
+          <img src="../../assets/img/search.svg" class="country-container__input-loop" alt="Search" />
+          <input ref="phoneInputDialFilter" v-model="dialCodeFilter" class="country-container__input" type="text" />
           <img
             v-if="dialCodeFilter"
             src="../../assets/img/close.svg"
@@ -31,11 +22,12 @@
         </div>
 
         <ul :key="dialCodeFilter" class="country-container__country-list">
-          <li v-for="c in filteredDialCodes"
-              :key="c.name"
-              :class="{ active: false }"
-              class="country-container__country-list-item"
-              @click="inputSelectedCountry = c; showDialList = false;"
+          <li
+            v-for="c in filteredDialCodes"
+            :key="c.name"
+            :class="{ active: false }"
+            class="country-container__country-list-item"
+            @click="inputSelectedCountry = c; showDialList = false;"
           >
             <img
               class="country-container__flag"
@@ -80,8 +72,9 @@ export default {
       country: null,
       availableFlags: [],
       flagUrl: null,
+      error: false,
 
-      phoneNumber: null,
+      phoneNumber: '',
 
       inputSelectedCountry: null,
       showDialList: false,
@@ -97,11 +90,6 @@ export default {
   },
   computed: {
     inputMask () {
-      if (this.phoneNumber && this.phoneNumber.slice(0, 2) === '86') {
-        return ['+NN NNN NNNN NNNN']
-      } else if (this.phoneNumber && this.phoneNumber.slice(0, 2) === '49') {
-        return ['+NN NNN NNNNNNNN']
-      }
       return this.inputSelectedCountry && this.inputSelectedCountry.format ? [this.inputSelectedCountry.format.replace(/\./g, 'N')] : ['+NNNNNNNNNNNNNNN']
     },
     dialCodes () {
@@ -175,56 +163,40 @@ export default {
       this.availableFlags = await getAvailableFlags()
     },
     checkDial () {
-      try {
-        for (const dialCountry of this.dialCodes) {
-          const {
-            country,
-            dial
-          } = dialCountry
+      for (const dialCountry of this.dialCodes) {
+        const { country, dial } = dialCountry
 
-          const len = dial.length
+        const len = dial.length
 
-          if (this.phoneNumber.length >= len) {
-            const slice = this.phoneNumber.slice(0, len)
-
-            if (dial === slice) {
-              if (this.checkIfFlagExist({countryCode: country})) {
-                this.country = country
-                this.flagUrl = this.baseSrc + this.country + '.svg'
-
-                this.errors.remove('dialCode')
-
-                if (!this.errors.length) {
-                  this.$emit('input', '+' + this.phoneNumber)
-                } else {
-                  this.$emit('input', null)
-                }
-                return
-              } else {
-                this.setError()
-              }
-            } else {
-              this.setError()
-            }
-          } else {
-            this.country = null
-            this.flagUrl = '../../assets/img/unknown.svg'
-          }
+        if (this.phoneNumber.length < len) {
+          this.country = null
+          this.flagUrl = '../../assets/img/unknown.svg'
         }
-      } catch (e) {
 
+        const slice = this.phoneNumber.slice(0, len)
+
+        if (dial !== slice) this.setError()
+
+        if (this.checkIfFlagExist({countryCode: country})) {
+          this.country = country
+          this.flagUrl = this.baseSrc + this.country + '.svg'
+          this.error = true
+          if (!this.error) {
+            this.$emit('input', '+' + this.phoneNumber)
+          } else {
+            this.$emit('input', null)
+          }
+          return
+        } else {
+          this.setError()
+        }
       }
     },
     setError () {
       this.$emit('input', null)
-
-      this.errors.add({
-        field: 'dialCode',
-        msg: 'Dial code does not exist'
-      })
-
+      this.error = true
       this.country = null
-      this.flagUrl = '../../assets/img/unknown.svg'
+      this.flagUrl = '../assets/img/unknown.svg'
     }
   }
 }
