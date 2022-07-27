@@ -10,7 +10,7 @@
             <span
               class="small link tooltip"
               data-tool-tip="You can set up only 2FA or mobile phone as an additional way to secure your account"
-            >more
+            >(i)
               </span>
           </h3>
           <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description }}</p>
