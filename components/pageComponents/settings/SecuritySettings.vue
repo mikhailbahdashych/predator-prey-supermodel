@@ -8,7 +8,7 @@
         <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}
             <span
-              class="link tooltip"
+              class="small link tooltip"
               data-tool-tip="You can set up only 2FA or mobile phone as an additional way to secure your account"
             >more
               </span>
