@@ -46,6 +46,25 @@ p, h1, h2, h3, h4, h5, li, span {
   &.link {
     color: var(--color-main); cursor: pointer; text-decoration: underline;
   }
+  &.tooltip[data-tool-tip] {
+    position: relative;
+    &::after {
+      content: attr(data-tool-tip);
+      display: block;
+      position: absolute;
+      background-color: black;
+      padding: 4px;
+      color: white;
+      bottom: 100%;
+      left: 0;
+      white-space: nowrap;
+      border-radius: 5px;
+      //transform: scale(0);
+    }
+    //&:hover::after {
+    //  transform: scale(1);
+    //}
+  }
   &.success {
     color: #3be83b;
   }

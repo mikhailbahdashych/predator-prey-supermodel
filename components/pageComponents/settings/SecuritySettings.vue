@@ -6,7 +6,13 @@
     <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`account-preferences__item ${setting.danger ? 'account-preferences__item--danger' : ''}`">
       <div v-if="setting.title === 'Set 2FA'" class="account-preferences__item-content">
         <div class="account-preferences__item-content account-preferences__item-content--texts">
-          <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}</h3>
+          <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}
+            <span
+              class="link tooltip"
+              data-tool-tip="You can set up only 2FA or mobile phone as an additional way to secure your account"
+            >more
+              </span>
+          </h3>
           <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description }}</p>
         </div>
         <div class="item-content">
