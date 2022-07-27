@@ -103,11 +103,11 @@
         Be careful! This action will decrease your account security. We recommend to have 2FA either mobile phone for security propoese."
       @close="deleteModal('Disable 2FA')"
     >
-      <div v-if="securityTwoFa.status === 2" class="center">
+      <div v-if="securityTwoFa.status === 2" class="account-preferences__flex">
         <p class="on-white">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
 
         <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 0" @returnTwoFa="returnTwoFa" />
-        <Button :label="'Confirm 2FA disable'" :btn-class="'danger-fill high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
+        <Button :label="'Confirm 2FA disable'" :btn-class="'basic-button--danger-fill basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
 
         <p v-if="securityTwoFa.disableStatus === 0" class="success">2FA has been successfully disabled!</p>
         <p v-else-if="securityTwoFa.disableStatus === -1" class="error">Wrong code!</p>
@@ -121,6 +121,8 @@
       @close="deleteModal('Set mobile phone')"
     >
       <p class="on-white">Provide your mobile phone in input field below and get one-time code to verify your phone.</p>
+      <phone-input v-model="phone" :onwhite="true" />
+      <Button :label="'Send SMS code'" :btn-class="'basic-button--high-height'" @click-handler="sendSmsCode" />
     </basic-modal>
 
     <basic-modal
@@ -131,6 +133,7 @@
       @close="deleteModal('Disable mobile phone')"
     >
       <p class="on-white">You have set up your mobile phone, receive code and provide it in input field below, if you want to disable ir</p>
+      <Button :label="'Send SMS code'" :btn-class="'basic-button--high-height'" @click-handler="sendSmsCode" />
     </basic-modal>
 
     <basic-modal
@@ -246,6 +249,7 @@ import BasicModal from '~/components/basicComponents/BasicModal'
 import InputTwoFa from '~/components/basicComponents/InputTwoFa'
 import Input from '~/components/basicComponents/Input'
 import Popup from '~/components/basicComponents/Popup'
+import PhoneInput from '~/components/basicComponents/PhoneInput'
 import { verifyToken } from "~/helpers/crypto";
 import { validatePassword, validatePasswordLength, validatePasswordRules } from '~/helpers/frontValidator'
 import {
@@ -263,7 +267,8 @@ export default {
     BasicModal,
     InputTwoFa,
     Input,
-    Popup
+    Popup,
+    PhoneInput
   },
   data() {
     return {
@@ -357,6 +362,8 @@ export default {
         normalCode: null,
         action: null
       },
+
+      phone: ''
     }
   },
   watch: {
@@ -426,6 +433,9 @@ export default {
     returnTwoFaConfirmAction(twoFa) {
       if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
       this.confirmActionTwoFa.normalCode = twoFa.join('')
+    },
+    async sendSmsCode() {
+
     },
     async setTwoFa() {
       const { status } = await setTwoFa({

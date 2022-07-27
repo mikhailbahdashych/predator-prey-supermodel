@@ -7,7 +7,11 @@
         <img v-else src="../../assets/img/unknown.svg" alt="Unknown" />
       </div>
 
-      <div v-if="showDialList" v-click-outside="clickOutsideList" class="country-container">
+      <div
+        v-if="showDialList"
+        v-click-outside="clickOutsideList"
+        :class="onwhite ? 'country-container country-container--on-white' : 'country-container'"
+      >
 
         <div class="country-container__dial-filter">
           <img src="../../assets/img/search.svg" class="country-container__input-loop" alt="Search" />
@@ -38,13 +42,14 @@
             <span>+ {{ c.dial }}</span>
           </li>
         </ul>
+
       </div>
 
       <client-only>
         <the-mask
           v-model="phoneNumber"
           type="text"
-          class="phone-input__phone"
+          :class="onwhite ? 'phone-input__phone phone-input__phone--on-white' : 'phone-input__phone'"
           :name="'Phone Number'"
           :mask="inputMask"
           :tokens="numberToken"
@@ -65,6 +70,12 @@ export default {
   name: 'PhoneInput',
   directives: {
     clickOutside: vClickOutside.directive
+  },
+  props: {
+    onwhite: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -168,27 +179,31 @@ export default {
 
         const len = dial.length
 
-        if (this.phoneNumber.length < len) {
-          this.country = null
-          this.flagUrl = '../../assets/img/unknown.svg'
-        }
+        if (this.phoneNumber.length >= len) {
+          const slice = this.phoneNumber.slice(0, len)
 
-        const slice = this.phoneNumber.slice(0, len)
+          if (dial === slice) {
+            if (this.checkIfFlagExist({countryCode: country})) {
+              this.country = country
+              this.flagUrl = this.baseSrc + this.country + '.svg'
 
-        if (dial !== slice) this.setError()
+              this.error = false
 
-        if (this.checkIfFlagExist({countryCode: country})) {
-          this.country = country
-          this.flagUrl = this.baseSrc + this.country + '.svg'
-          this.error = true
-          if (!this.error) {
-            this.$emit('input', '+' + this.phoneNumber)
+              if (!this.error) {
+                this.$emit('input', '+' + this.phoneNumber)
+              } else {
+                this.$emit('input', null)
+              }
+              return
+            } else {
+              this.setError()
+            }
           } else {
-            this.$emit('input', null)
+            this.setError()
           }
-          return
         } else {
-          this.setError()
+          this.country = null
+          this.flagUrl = '../assets/img/unknown.svg'
         }
       }
     },

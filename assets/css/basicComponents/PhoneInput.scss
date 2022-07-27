@@ -2,16 +2,16 @@
 @import "../mixins";
 
 .phone-input__wrapper {
-  margin: 0 5px;
+  margin-bottom: 10px;
+  @include size($height: 48px, $width: 100%);
   .phone-input {
-    @include size($height: 48px, $width: 100%);
     position: relative;
     border-radius: 6px;
     outline: none;
-    background-color: var(--color-input-background);
 
     .phone-input__phone {
       @include size($height: 48px, $width: 100%);
+      background-color: var(--color-input-background);
       font-family: "Inter", sans-serif;
       border: 1px solid var(--color-line);
       color: var(--color-font-color);
@@ -19,8 +19,12 @@
       outline: none;
       font-size: 16px;
       padding: 7px 10px 7px 56px;
-      background-color: rgba(0,0,0,0);
       transition: .2s;
+      &.phone-input__phone--on-white {
+        border: 1px solid var(--color-on-white);
+        background-color: rgba(#fff, .5);
+        color: var(--color-on-white);
+      }
       &:focus {
         border: 1px solid var(--color-main-border);
       }
@@ -49,7 +53,7 @@
 
   .country-container {
     position: absolute;
-    z-index: 97;
+    z-index: 101;
     width: 100%;
     left: 0;
     bottom: calc(100% + 10px);
@@ -126,6 +130,10 @@
           background-color: #EBEBEB;
         }
       }
+    }
+    &.country-container--on-white {
+      background-color: white;
+      border: 1px solid var(--color-on-white);
     }
   }
 }
