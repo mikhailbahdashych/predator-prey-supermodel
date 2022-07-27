@@ -59,9 +59,6 @@
             :title="'Repeat password'"
             :type="'password'"
           />
-          <PhoneInput
-            v-model="phone"
-          />
           <p v-if="passwordError.passwordMismatch" class="error">Passwords have to match!</p>
           <p v-if="passwordError.passwordRequirement" class="error">Password are requirement!</p>
 
@@ -241,7 +238,6 @@ import Input from "~/components/basicComponents/Input";
 import Button from "~/components/basicComponents/Button";
 import Checkbox from "~/components/basicComponents/Checkbox";
 import Textarea from "~/components/basicComponents/Textarea";
-import PhoneInput from '~/components/basicComponents/PhoneInput'
 import { validateEmail, validatePassword, validatePasswordRules } from "~/helpers/frontValidator";
 import { signUp } from "~/api";
 export default {
@@ -252,7 +248,6 @@ export default {
     Button,
     Checkbox,
     Textarea,
-    PhoneInput
   },
   layout: 'empty',
   data() {
@@ -269,7 +264,6 @@ export default {
         password: null,
         passwordRepeat: null,
       },
-      phone: null,
       status: null,
       tac: false,
       error: false,

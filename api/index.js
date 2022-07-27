@@ -50,6 +50,28 @@ export const changeEmail = async (payload, token) => {
   }
 }
 
+export const setMobilePhone = async (payload, token) => {
+  try {
+    const { data } = await api.post('s-m-p', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const disableMobilePhone = async (payload, token) => {
+  try {
+    const { data } = await api.post('d-m-p', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const setTwoFa = async (payload, token) => {
   try {
     const { data } = await api.post('s-2fa', payload, {

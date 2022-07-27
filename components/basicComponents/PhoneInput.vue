@@ -1,8 +1,8 @@
 <template>
-  <div class="awesome-phone-input__wrapper">
-    <div class="awesome-phone-input">
+  <div class="phone-input__wrapper">
+    <div class="phone-input">
 
-      <div :key="country" class="awesome-phone-input__country" @click="showDialList = !showDialList">
+      <div :key="country" class="phone-input__country" @click="showDialList = !showDialList">
         <img v-if="country" :src="flagUrl" alt="Flag" />
         <img v-else src="../../assets/img/unknown.svg" alt="Unknown" />
       </div>
@@ -44,7 +44,7 @@
         <the-mask
           v-model="phoneNumber"
           type="text"
-          class="awesome-phone-input__phone"
+          class="phone-input__phone"
           :name="'Phone Number'"
           :mask="inputMask"
           :tokens="numberToken"

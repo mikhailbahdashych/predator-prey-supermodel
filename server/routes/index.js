@@ -64,6 +64,28 @@ router.post('/c-e', async (req, res) => {
   }
 })
 
+router.post('/s-m-p', async (req, res) => {
+  try {
+    const { data } = await api.post('/set-mobile-phone', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.post('/d-m-p', async (req, res) => {
+  try {
+    const { data } = await api.post('/disable-mobile-phone', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 router.post('/s-2fa', async (req, res) => {
   try {
     const { data } = await api.post('/set-2fa', req.body, {

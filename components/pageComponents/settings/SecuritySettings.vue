@@ -100,7 +100,7 @@
       v-if="securityShowModal['Disable 2FA']"
       header="Disable 2FA"
       description="You are about deactivate your Two-factor authentication.
-        Be careful! This action will decrease your account security"
+        Be careful! This action will decrease your account security. We recommend to have 2FA either mobile phone for security propoese."
       @close="deleteModal('Disable 2FA')"
     >
       <div v-if="securityTwoFa.status === 2" class="center">
@@ -112,6 +112,25 @@
         <p v-if="securityTwoFa.disableStatus === 0" class="success">2FA has been successfully disabled!</p>
         <p v-else-if="securityTwoFa.disableStatus === -1" class="error">Wrong code!</p>
       </div>
+    </basic-modal>
+
+    <basic-modal
+      v-if="securityShowModal['Set mobile phone']"
+      header="Set phone number"
+      description="Secure your account with phone number, instead of using 2FA."
+      @close="deleteModal('Set mobile phone')"
+    >
+      <p class="on-white">Provide your mobile phone in input field below and get one-time code to verify your phone.</p>
+    </basic-modal>
+
+    <basic-modal
+      v-if="securityShowModal['Disable mobile phone']"
+      header="Set phone number"
+      description="Secure your account with phone number, instead of using 2FA.
+        Be careful! This action will decrease your account security. We recommend to have 2FA either mobile phone for security propose."
+      @close="deleteModal('Disable mobile phone')"
+    >
+      <p class="on-white">You have set up your mobile phone, receive code and provide it in input field below, if you want to disable ir</p>
     </basic-modal>
 
     <basic-modal
@@ -260,6 +279,12 @@ export default {
           danger: false
         },
         {
+          title: 'Set mobile phone',
+          description: 'Alternative way to secure your account. Used instead of 2FA',
+          buttonTitle: 'Set mobile phone',
+          danger: false
+        },
+        {
           title: 'Change password',
           description: 'Change your password by providing current password and new password.',
           buttonTitle: 'Change password',
@@ -281,11 +306,12 @@ export default {
 
       securityShowModal: {
         'Set 2FA': false,
+        'Disable 2FA': false,
+        'Set mobile phone': false,
+        'Disable mobile phone': false,
         'Delete account': false,
         'Change email': false,
-        'Change password': false,
-        'Disable 2FA': false,
-        twoFa: false
+        'Change password': false
       },
 
       securityTwoFa: {
