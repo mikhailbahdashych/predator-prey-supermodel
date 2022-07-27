@@ -1,196 +1,127 @@
 @use "../variables" as v;
 @import "../mixins";
 
-.awesome-phone-input {
-  width: 100%;
-  position: relative;
-  height: 47px;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  background-color: var(--color-input-background);
-  font-family: "Barlow", sans-serif;
-
-  > input[type=text].phone {
-    width: 100%;
-    height: 47px;
-    border: 1px solid var(--color-line);
-    outline: none;
-    border-radius: 6px;
-    font-size: 15px;
-    color: #A3A5A9;
-    padding: 7px 10px 7px 52px;
-    background-color: rgba(0,0,0,0);
-  }
-
-  > input[type=text].code {
-    width: 100%;
-    height: 47px;
-    box-shadow: none;
-    font-size: 15px;
-    font-weight: 400;
-    color: #A3A5A9;
-    padding: 7px 10px 7px 10px;
-  }
-
-  > p {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: #A3A5A9;
-    position: absolute;
-    top: 50%;
-    left: 45px;
-    transform: translate(0, -55%);
-  }
-
-  .awesome-phone-input__country {
-    height: 100%;
-    width: 48px;
-    position: absolute;
-    display: grid;
-    place-content: center;
-    cursor: pointer;
-    left: 0;
-    top: 50%;
-    border-right: 1px solid var(--color-line);
-    border-radius: 6px 0 0 6px;
-    transition: background-color .2s ease-in-out;
-    transform: translate(0, -50%);
-    &:hover {
-      background-color: var(--color-hover);
-    }
-    img {
-      width: 20px;
-      height: 16px;
-    }
-  }
-
-  > span {
-    position: absolute;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    top: calc(100% + 3px);
-    left: 0;
-    font-size: 11px;
-    font-weight: 400;
-    color: #f63563;
-  }
-}
-
-.country-container {
-  position: absolute;
-  z-index: 97;
-  width: 100%;
-  left: 0;
-  bottom: calc(100% + 10px);
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: min-content;
-  border-radius: 6px;
-  border: 1px solid var(--color-line);
-  background-color: var(--color-header-bg);
-
-  .country-container__dial-filter {
-    width: 100%;
+.awesome-phone-input__wrapper {
+  margin: 0 5px;
+  .awesome-phone-input {
+    @include size($height: 48px, $width: 100%);
     position: relative;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    background-color: var(--color-input-background);
 
-    .country-container__input {
-      margin: 20px 18px 10px 12px;
-      outline: none;
-      width: calc(100% - 24px);
-      height: 53px;
-      border: 1px solid #00000019;
+    .awesome-phone-input__phone {
+      @include size($height: 48px, $width: 100%);
+      border: 1px solid var(--color-line);
+      font-family: "Inter", sans-serif;
+      color: var(--color-font-color);
       border-radius: 6px;
-      box-shadow: none;
-      font-size: 18px;
-      font-weight: 400;
-      color: #A3A5A9;
-      padding: 15px 42px 15px 45px;
-      background-color: var(--color-input-background);
+      outline: none;
+      font-size: 16px;
+      padding: 7px 10px 7px 56px;
+      background-color: rgba(0,0,0,0);
     }
 
-    .country-container__input-loop {
+    .awesome-phone-input__country {
+      @include size($width: 48px, $height: 100%);
+      @include positions($left: 0, $top: 50%);
       position: absolute;
-      top: calc(5px + 50%);
-      left: 40px;
-      transform: translate(-50%, -50%);
-      width: 16px;
-      height: 16px;
-    }
-
-    > img:first-of-type {
-      position: absolute;
-
-      top: calc(5px + 50%);
-      left: 40px;
-
-      transform: translate(-50%, -50%);
-
-      width: 16px;
-      height: 16px;
-    }
-
-    > img:last-of-type {
-      position: absolute;
-
-      top: calc(5px + 50%);
-      right: 25px;
-
-      transform: translate(-50%, -50%);
-      cursor: pointer;
-
-      width: 16px;
-      height: 16px;
-
-      opacity: .8;
-
-      @media only screen and (max-width: 425px) {
-        width: 12px;
-        right: 30px;
-      }
-    }
-  }
-
-  .country-container__country-list {
-    width: 100%;
-    max-height: 160px;
-    height: 160px;
-    overflow-x: scroll;
-    padding-left: 0;
-    margin-bottom: 0;
-
-    @include hideScrollbars();
-
-    .country-container__country-list-item {
-      width: 100%;
-
       display: grid;
-      grid-template-columns: min-content 1fr max-content;
-      grid-template-rows: min-content;
-
-      align-items: center;
-
-      column-gap: 15px;
-      padding: 14px 18px;
-
+      place-content: center;
       cursor: pointer;
-
-      transition: background-color .15s ease-in-out;
-
-      .country-container__flag {
-        width: 20px;
-        height: 16px;
-      }
-
+      border-right: 1px solid var(--color-line);
+      border-radius: 6px 0 0 6px;
+      transition: background-color .2s ease-in-out;
+      transform: translate(0, -50%);
       &:hover {
         background-color: var(--color-hover);
       }
+      img {
+        width: 20px;
+        height: 16px;
+      }
+    }
+  }
 
-      &.active {
-        background-color: #EBEBEB;
+  .country-container {
+    position: absolute;
+    z-index: 97;
+    width: 100%;
+    left: 0;
+    bottom: calc(100% + 10px);
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: min-content;
+    border-radius: 6px;
+    border: 1px solid var(--color-line);
+    background-color: var(--color-header-bg);
+
+    .country-container__dial-filter {
+      width: 100%;
+      position: relative;
+
+      .country-container__input {
+        margin: 20px 18px 10px 12px;
+        outline: none;
+        width: calc(100% - 24px);
+        height: 53px;
+        border: 1px solid #00000019;
+        border-radius: 6px;
+        box-shadow: none;
+        font-size: 18px;
+        font-weight: 400;
+        color: #A3A5A9;
+        padding: 15px 42px 15px 45px;
+        background-color: var(--color-input-background);
+      }
+
+      .country-container__input-loop {
+        @include size($width: 16px, $height: 16px);
+        position: absolute;
+        top: calc(5px + 50%);
+        left: 40px;
+        transform: translate(-50%, -50%);
+      }
+
+      .country-container__input-country {
+        @include size($width: 16px, $height: 16px);
+        position: absolute;
+        top: calc(5px + 50%);
+        left: 40px;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .country-container__country-list {
+      @include hideScrollbars();
+      @include size($width: 100%, $height: 160px, $max-height: 160px);
+      overflow-x: scroll;
+      padding-left: 0;
+      margin-bottom: 0;
+
+      .country-container__country-list-item {
+        width: 100%;
+        display: grid;
+        grid-template-columns: min-content 1fr max-content;
+        grid-template-rows: min-content;
+        align-items: center;
+        column-gap: 15px;
+        padding: 14px 18px;
+        cursor: pointer;
+        transition: background-color .15s ease-in-out;
+
+        .country-container__flag {
+          @include size($width: 20px, $height: 16px);
+        }
+
+        &:hover {
+          background-color: var(--color-hover);
+        }
+
+        &.active {
+          background-color: #EBEBEB;
+        }
       }
     }
   }

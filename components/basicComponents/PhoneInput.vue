@@ -1,64 +1,67 @@
 <template>
-  <div class="awesome-phone-input">
+  <div class="awesome-phone-input__wrapper">
+    <div class="awesome-phone-input">
 
-    <div :key="country" class="awesome-phone-input__country" @click="showDialList = !showDialList">
-      <img v-if="country" :src="flagUrl" alt="Flag" />
-      <img v-else src="../../assets/img/unknown.svg" alt="Unknown" />
-    </div>
-
-    <div v-if="showDialList" v-click-outside="clickOutsideList" class="country-container">
-
-      <div class="country-container__dial-filter">
-        <img
-          src="../../assets/img/search.svg"
-          class="country-container__input-loop"
-          alt="Search"
-        />
-        <input
-          ref="phoneInputDialFilter"
-          v-model="dialCodeFilter"
-          class="country-container__input"
-          type="text"
-        />
-        <img
-          v-if="dialCodeFilter"
-          src="../../assets/img/close.svg"
-          alt="Clear"
-          @click="dialCodeFilter = null"
-        />
+      <div :key="country" class="awesome-phone-input__country" @click="showDialList = !showDialList">
+        <img v-if="country" :src="flagUrl" alt="Flag" />
+        <img v-else src="../../assets/img/unknown.svg" alt="Unknown" />
       </div>
 
-      <ul :key="dialCodeFilter" class="country-container__country-list">
-        <li v-for="c in filteredDialCodes"
-            :key="c.name"
-            :class="{ active: false }"
-            class="country-container__country-list-item"
-            @click="inputSelectedCountry = c; showDialList = false;"
-        >
+      <div v-if="showDialList" v-click-outside="clickOutsideList" class="country-container">
+
+        <div class="country-container__dial-filter">
           <img
-            class="country-container__flag"
-            :src="getFlagUrlByCode({ code: c.country.toLowerCase() })"
-            alt="Flag"
+            src="../../assets/img/search.svg"
+            class="country-container__input-loop"
+            alt="Search"
           />
-          <span>{{ c.name }}</span>
-          <span>+ {{ c.dial }}</span>
-        </li>
-      </ul>
+          <input
+            ref="phoneInputDialFilter"
+            v-model="dialCodeFilter"
+            class="country-container__input"
+            type="text"
+          />
+          <img
+            v-if="dialCodeFilter"
+            src="../../assets/img/close.svg"
+            class="country-container__input-country"
+            alt="Clear"
+            @click="dialCodeFilter = null"
+          />
+        </div>
+
+        <ul :key="dialCodeFilter" class="country-container__country-list">
+          <li v-for="c in filteredDialCodes"
+              :key="c.name"
+              :class="{ active: false }"
+              class="country-container__country-list-item"
+              @click="inputSelectedCountry = c; showDialList = false;"
+          >
+            <img
+              class="country-container__flag"
+              :src="getFlagUrlByCode({ code: c.country.toLowerCase() })"
+              alt="Flag"
+            />
+            <span>{{ c.name }}</span>
+            <span>+ {{ c.dial }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <client-only>
+        <the-mask
+          v-model="phoneNumber"
+          type="text"
+          class="awesome-phone-input__phone"
+          :name="'Phone Number'"
+          :mask="inputMask"
+          :tokens="numberToken"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+      </client-only>
+
     </div>
-
-    <client-only>
-      <the-mask
-        v-model="phoneNumber"
-        type="text"
-        class="phone"
-        :name="'Phone Number'"
-        :mask="inputMask"
-        :tokens="numberToken"
-        inputmode="numeric"
-        pattern="[0-9]*"
-      />
-    </client-only>
-
   </div>
 </template>
 
