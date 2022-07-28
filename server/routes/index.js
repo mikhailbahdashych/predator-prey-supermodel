@@ -252,7 +252,7 @@ router.get('/q', async (req, res) => {
   }
 })
 
-router.get('/g/:sort', async (req, res) => {
+router.get('/q/:sort', async (req, res) => {
   try {
     const { data } = await api.get(`/question/${req.params.sort}`, {
       auth: {
