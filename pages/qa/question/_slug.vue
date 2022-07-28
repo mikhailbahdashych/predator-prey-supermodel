@@ -4,15 +4,21 @@
     <div class="ask-wrapper">
 
       <div class="ask-wrapper__question-title">
-        <h1>{{ question.title }}</h1>
-        <div class="ask-wrapper__title-box">
+        <div class="ask-wrapper__back-btn" @click="goBack">
+          <img :src="require('../../../assets/img/backarrow.svg')" alt='Back' width='32' height='32'>
+        </div>
+        <skeleton v-if="loading" />
+        <h1 v-else>{{ question.title }}</h1>
+        <skeleton v-if="loading" />
+        <div v-else class="ask-wrapper__title-box">
           <p class="ask-wrapper__preview-block">Views: {{ question.views }}</p>
           <p
             class="ask-wrapper__preview-block ask-wrapper__preview-block--answer"
             :class="question.is_answered ? 'ask-wrapper__preview-block--answered' : question.votes < 0 ? 'ask-wrapper__preview-block--low-quality-question' : ''"
           >Votes: {{ question.votes  }}</p>
         </div>
-        <div class="ask-wrapper__info">
+        <skeleton v-if="loading" />
+        <div v-else class="ask-wrapper__info">
           <p class="opacity">Asked at: {{ question.created_at }}</p>
           <p class="opacity">Asked by: {{ question.username }}</p>
         </div>
@@ -84,11 +90,13 @@ import { validateSlug } from '~/helpers/frontValidator'
 import { verifyToken } from '~/helpers/crypto'
 import Button from '~/components/basicComponents/Button'
 import Popup from '~/components/basicComponents/Popup'
+import Skeleton from '~/components/skeleton/Skeleton'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
 export default {
   name: 'Slug',
   components: {
     CustomVueEditor,
+    Skeleton,
     Button,
     Popup
   },
@@ -118,6 +126,9 @@ export default {
     this.isQuestionOwner = verifyToken(sessionStorage.getItem('_at')).username === question.username
   },
   methods: {
+    goBack() {
+      this.$router.push('/qa')
+    },
     showAnswerEditor() {
       this.showWantToAsk = true
     },

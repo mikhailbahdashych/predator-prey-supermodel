@@ -4,7 +4,8 @@
     <div class="account-wrapper__avatar" @click="redirect(`/account/${currentUser.personalId}`)">
       <img class='account-wrapper__avatar-box' :src="require('../../../assets/img/testava.jpg')" alt="ava">
       <div class="account-wrapper__avatar-text">
-        <h2>{{ currentUser.username }}</h2>
+        <skeleton v-if="loading" />
+        <h2 v-else>{{ currentUser.username }}</h2>
         <p class="opacity">Public profile</p>
       </div>
     </div>
@@ -37,6 +38,7 @@ import SecuritySettings from '~/components/pageComponents/settings/SecuritySetti
 import PersonalInformation from '~/components/pageComponents/settings/PersonalInformation'
 import SiteSettings from '~/components/pageComponents/settings/SiteSettings'
 import Notifications from '~/components/pageComponents/settings/Notifications'
+import Skeleton from '~/components/skeleton/Skeleton'
 import { verifyToken } from '~/helpers/crypto'
 export default {
   name: 'Settings',
@@ -44,7 +46,8 @@ export default {
     SecuritySettings,
     PersonalInformation,
     SiteSettings,
-    Notifications
+    Notifications,
+    Skeleton
   },
   data() {
     return {
