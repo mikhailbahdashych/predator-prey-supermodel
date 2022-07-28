@@ -213,7 +213,6 @@ export const getQuestion = async slug => {
 
 export const getQuestions = async payload => {
   try {
-    console.log('payload.sort', payload.sort)
     const { data } = await api.get(`q/${payload.sort}`)
     return data
   } catch (e) {
