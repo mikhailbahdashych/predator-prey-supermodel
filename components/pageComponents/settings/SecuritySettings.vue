@@ -444,6 +444,9 @@ export default {
       if (userSettings.twoFa)
         this.securityTwoFa.status = 2
 
+      if (userSettings.phone)
+        this.securityPhone.status = 2
+
       if (userSettings.changedEmail)
         this.changeEmailData.status = -1
 
@@ -471,22 +474,16 @@ export default {
       this.confirmActionTwoFa.normalCode = twoFa.join('')
     },
     async sendSmsCode(type) {
-      let response
-
-      const payload = { phone: this.securityPhone.number }
+      const payload = {}
       if (this.securityPhone.code) payload.code = this.securityPhone.code
+      if (this.securityPhone.number) payload.phone = this.securityPhone.number
 
-      switch (type) {
-        case 'activate':
-          response = await setMobilePhone(payload, sessionStorage.getItem('_at'))
-          break
-        case 'disable':
-          response = await disableMobilePhone(payload, sessionStorage.getItem('_at'))
-          break
-      }
-
-      if (response.status) {
-        //
+      if (type === 'activate') {
+        const { status } = await setMobilePhone(payload, sessionStorage.getItem('_at'))
+        this.securityPhone.status = status
+      } else {
+        const { status } = await disableMobilePhone(payload, sessionStorage.getItem('_at'))
+        this.securityPhone.status = status
       }
     },
     async setTwoFa() {
