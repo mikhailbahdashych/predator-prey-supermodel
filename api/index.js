@@ -12,7 +12,7 @@ const api = axios.create({
 
 export const signIn = async payload => {
   try {
-    const { data } = await api.post('s-i', payload)
+    const { data } = await api.post('u/s-i', payload)
     return data
   } catch (e) {
     return e.response.data
@@ -21,7 +21,27 @@ export const signIn = async payload => {
 
 export const signUp = async payload => {
   try {
-    const { data } = await api.post('s-u', payload)
+    const { data } = await api.post('u/s-u', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getUserByPersonalId = async personalId => {
+  try {
+    const { data } = await api.get(`u/${personalId}`)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const getUserSettings = async (token, type) => {
+  try {
+    const { data } = await api.get(`/u/s/${type}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
     return data
   } catch (e) {
     return e.response.data
@@ -30,7 +50,7 @@ export const signUp = async payload => {
 
 export const changePassword = async (payload, token) => {
   try {
-    const { data } = await api.post('c-p', payload, {
+    const { data } = await api.patch('u/p', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -41,29 +61,7 @@ export const changePassword = async (payload, token) => {
 
 export const changeEmail = async (payload, token) => {
   try {
-    const { data } = await api.post('c-e', payload, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const setMobilePhone = async (payload, token) => {
-  try {
-    const { data } = await api.post('s-m-p', payload, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const disableMobilePhone = async (payload, token) => {
-  try {
-    const { data } = await api.post('d-m-p', payload, {
+    const { data } = await api.patch('u/e', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -74,7 +72,7 @@ export const disableMobilePhone = async (payload, token) => {
 
 export const setTwoFa = async (payload, token) => {
   try {
-    const { data } = await api.post('s-2fa', payload, {
+    const { data } = await api.patch('u/2fa/s', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -85,7 +83,29 @@ export const setTwoFa = async (payload, token) => {
 
 export const disableTwoFa = async (payload, token) => {
   try {
-    const { data } = await api.post('d-2fa', payload, {
+    const { data } = await api.patch('u/2fa/d', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const setMobilePhone = async (payload, token) => {
+  try {
+    const { data } = await api.patch('u/m-p/s', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const disableMobilePhone = async (payload, token) => {
+  try {
+    const { data } = await api.patch('u/m-p/d', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -96,7 +116,18 @@ export const disableTwoFa = async (payload, token) => {
 
 export const deleteAccount = async (payload, token) => {
   try {
-    const { data } = await api.post('d-a', payload, {
+    const { data } = await api.patch('u/d-a', payload, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
+export const updateUserPersonalInformation = async (payload, token) => {
+  try {
+    const { data } = await api.patch(`u/p-i`, payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -118,7 +149,7 @@ export const createBookmark = async (payload, token) => {
 
 export const getBookmarks = async token => {
   try {
-    const { data } = await api.get('g-b', {
+    const { data } = await api.get('b', {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -129,7 +160,7 @@ export const getBookmarks = async token => {
 
 export const deleteBookmark = async (id, token) => {
   try {
-    const { data } = await api.delete(`d-b/${id}`, {
+    const { data } = await api.delete(`b/${id}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -140,27 +171,7 @@ export const deleteBookmark = async (id, token) => {
 
 export const getRefreshedTokens = async () => {
   try {
-    const { data } = await api.get('g-r-t')
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const getUserByPersonalId = async personalId => {
-  try {
-    const { data } = await api.get(`g-u-b-p-id/${personalId}`)
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const getUserSettings = async (token, type) => {
-  try {
-    const { data } = await api.get(`/g-u-s/${type}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
+    const { data } = await api.get('r-t')
     return data
   } catch (e) {
     return e.response.data
@@ -169,19 +180,8 @@ export const getUserSettings = async (token, type) => {
 
 export const search = async slug => {
   try {
-    const { data } = await api.get('/s', {
+    const { data } = await api.get('s', {
       params: { slug }
-    })
-    return data
-  } catch (e) {
-    return e.response.data
-  }
-}
-
-export const updateUserPersonalInformation = async (payload, token) => {
-  try {
-    const { data } = await api.patch(`u-u-p-i`, payload, {
-      headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
   } catch (e) {
@@ -191,7 +191,7 @@ export const updateUserPersonalInformation = async (payload, token) => {
 
 export const vote = async (payload, token) => {
   try {
-    const { data } = await api.patch(`/v/${payload.id}/${payload.vote}/${payload.type}`, {
+    const { data } = await api.patch(`v/${payload.id}/${payload.vote}/${payload.type}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -202,7 +202,7 @@ export const vote = async (payload, token) => {
 
 export const getQuestion = async slug => {
   try {
-    const { data } = await api.get(`/g-q`, {
+    const { data } = await api.get(`q`, {
       params: { slug }
     })
     return data
@@ -211,18 +211,18 @@ export const getQuestion = async slug => {
   }
 }
 
-export const getUserQuestions = async payload => {
+export const getQuestions = async payload => {
   try {
-    const { data } = await api.get(`/g-u-q/${payload.personalId}/${payload.sort}`)
+    const { data } = await api.get(`q/${payload.sort}`)
     return data
   } catch (e) {
     return e.response.data
   }
 }
 
-export const getQuestions = async payload => {
+export const getUserQuestions = async payload => {
   try {
-    const { data } = await api.get(`/g-qs/${payload.sort}`)
+    const { data } = await api.get(`u/${payload.personalId}/q/${payload.sort}`)
     return data
   } catch (e) {
     return e.response.data
@@ -231,7 +231,7 @@ export const getQuestions = async payload => {
 
 export const createQuestionPost = async (payload, token) => {
   try {
-    const { data } = await api.post('/c-q', payload, {
+    const { data } = await api.post('q', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -242,7 +242,7 @@ export const createQuestionPost = async (payload, token) => {
 
 export const answerQuestion = async (payload, token) => {
   try {
-    const { data } = await api.post('/a-q', payload, {
+    const { data } = await api.patch('q/a', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -253,7 +253,7 @@ export const answerQuestion = async (payload, token) => {
 
 export const getBlogPost = async slug => {
   try {
-    const { data } = await api.get(`/g-b-p`, {
+    const { data } = await api.get(`b-p`, {
       params: { slug }
     })
     return data
@@ -264,7 +264,7 @@ export const getBlogPost = async slug => {
 
 export const getBlogPosts = async sort => {
   try {
-    const { data } = await api.get(`/g-b-ps/${sort}`)
+    const { data } = await api.get(`b-p/${sort}`)
     return data
   } catch (e) {
     return e.response.data
@@ -273,7 +273,7 @@ export const getBlogPosts = async sort => {
 
 export const createBlogPost = async (payload, token) => {
   try {
-    const { data } = await api.post('/c-b-p', payload, {
+    const { data } = await api.post('b-p', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -284,7 +284,7 @@ export const createBlogPost = async (payload, token) => {
 
 export const commentBlogPost = async (payload, token) => {
   try {
-    const { data } = await api.post('/comment-b-p', payload, {
+    const { data } = await api.patch('b-p/c', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -295,7 +295,7 @@ export const commentBlogPost = async (payload, token) => {
 
 export const getForumThread = async slug => {
   try {
-    const { data } = await api.get(`/g-f-t`, {
+    const { data } = await api.get(`f-t`, {
       params: { slug }
     })
     return data
@@ -306,7 +306,7 @@ export const getForumThread = async slug => {
 
 export const getForumThreads = async sort => {
   try {
-    const { data } = await api.get(`/g-f-ts/${sort}`)
+    const { data } = await api.get(`f-t/${sort}`)
     return data
   } catch (e) {
     return e.response.data
@@ -315,7 +315,7 @@ export const getForumThreads = async sort => {
 
 export const createForumPost = async (payload, token) => {
   try {
-    const { data } = await api.post('/c-f-t', payload, {
+    const { data } = await api.post('f-t', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data
@@ -326,7 +326,7 @@ export const createForumPost = async (payload, token) => {
 
 export const commentForumThread = async (payload, token) => {
   try {
-    const { data } = await api.post('/comment-f-t', payload, {
+    const { data } = await api.patch('f-t/c', payload, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     return data

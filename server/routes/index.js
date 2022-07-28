@@ -10,9 +10,9 @@ const api = axios.create({
 
 const router = Router()
 
-router.post('/s-i', async (req, res) => {
+router.post('/u/s-i', async (req, res) => {
   try {
-    const { data } = await api.post('/sign-in', req.body, {
+    const { data } = await api.post('/user/sign-in', req.body, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -28,9 +28,9 @@ router.post('/s-i', async (req, res) => {
   }
 });
 
-router.post('/s-u', async (req, res) => {
+router.post('/u/s-u', async (req, res) => {
   try {
-    const { data } = await api.post('/sign-up', req.body, {
+    const { data } = await api.post('/user/sign-up', req.body, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -42,9 +42,23 @@ router.post('/s-u', async (req, res) => {
   }
 });
 
-router.post('/c-p', async (req, res) => {
+router.get('/u/:personalId', async (req, res) => {
   try {
-    const { data } = await api.post('/change-password', req.body, {
+    const { data } = await api.get(`/user/${req.params.personalId}`,{
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.get('/u/s/:type', async (req, res) => {
+  try {
+    const { data } = await api.get(`/user/settings/${req.params.type}`, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -53,42 +67,9 @@ router.post('/c-p', async (req, res) => {
   }
 });
 
-router.post('/c-e', async (req, res) => {
+router.patch('/u/p', async (req, res) => {
   try {
-    const { data } = await api.post('/change-email', req.body, {
-      headers: { 'Authorization': req.headers.authorization }
-    })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-})
-
-router.post('/s-m-p', async (req, res) => {
-  try {
-    const { data } = await api.post('/set-mobile-phone', req.body, {
-      headers: { 'Authorization': req.headers.authorization }
-    })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-})
-
-router.post('/d-m-p', async (req, res) => {
-  try {
-    const { data } = await api.post('/disable-mobile-phone', req.body, {
-      headers: { 'Authorization': req.headers.authorization }
-    })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-})
-
-router.post('/s-2fa', async (req, res) => {
-  try {
-    const { data } = await api.post('/set-2fa', req.body, {
+    const { data } = await api.patch('/user/password', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -97,9 +78,20 @@ router.post('/s-2fa', async (req, res) => {
   }
 });
 
-router.post('/d-2fa', async (req, res) => {
+router.patch('/u/e', async (req, res) => {
   try {
-    const { data } = await api.post('/disable-2fa', req.body, {
+    const { data } = await api.patch('/user/email', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.patch('/u/2fa/s', async (req, res) => {
+  try {
+    const { data } = await api.patch('/user/2fa/set', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -108,9 +100,53 @@ router.post('/d-2fa', async (req, res) => {
   }
 });
 
-router.post('/d-a', async (req, res) => {
+router.patch('/u/2fa/d', async (req, res) => {
   try {
-    const { data } = await api.post('/delete-account', req.body, {
+    const { data } = await api.patch('/user/2fa/disable', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.patch('/u/m-p/s', async (req, res) => {
+  try {
+    const { data } = await api.patch('/user/mobile-phone/set', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.patch('/u/m-p/d', async (req, res) => {
+  try {
+    const { data } = await api.patch('/user/mobile-phone/disable', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
+router.patch('/u/d-a', async (req, res) => {
+  try {
+    const { data } = await api.patch('/user/delete-account', req.body, {
+      headers: { 'Authorization': req.headers.authorization }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+});
+
+router.patch('/u/p-i', async (req, res) => {
+  try {
+    const { data } = await api.patch('/user/personal-information', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -130,9 +166,9 @@ router.post('/b', async (req, res) => {
   }
 });
 
-router.get('/g-b', async (req, res) => {
+router.get('/b', async (req, res) => {
   try {
-    const { data } = await api.get('/get-bookmarks', {
+    const { data } = await api.get('/bookmark', {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -141,9 +177,9 @@ router.get('/g-b', async (req, res) => {
   }
 });
 
-router.delete('/d-b/:id', async (req, res) => {
+router.delete('/b/:id', async (req, res) => {
   try {
-    const { data } = await api.delete(`/delete-bookmark/${req.params.id}`, {
+    const { data } = await api.delete(`/bookmark/${req.params.id}`, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -152,9 +188,9 @@ router.delete('/d-b/:id', async (req, res) => {
   }
 });
 
-router.get('/g-r-t', async (req, res) => {
+router.get('/r-t', async (req, res) => {
   try {
-    const { data } = await api.get('/get-refreshed-tokens', {
+    const { data } = await api.get('/refresh-tokens', {
       headers: { 'Cookie': req.headers.cookie },
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
@@ -165,31 +201,6 @@ router.get('/g-r-t', async (req, res) => {
     res.cookie("_rt", data._rt, { httpOnly: true, secure: false })
     delete data._rt
 
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-});
-
-router.get('/g-u-b-p-id/:personalId', async (req, res) => {
-  try {
-    const { data } = await api.get(`/get-user-by-personal-id/${req.params.personalId}`,{
-      auth: {
-        username: process.env.BASIC_AUTH_USERNAME,
-        password: process.env.BASIC_AUTH_PASSWORD
-      }
-    })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-});
-
-router.get('/g-u-s/:type', async (req, res) => {
-  try {
-    const { data } = await api.get(`/get-user-settings/${req.params.type}`, {
-      headers: { 'Authorization': req.headers.authorization }
-    })
     res.json(data)
   } catch (e) {
     return res.status(e.response.status).json(e.response.data)
@@ -213,17 +224,6 @@ router.get('/s', async (req, res) => {
   }
 })
 
-router.patch('/u-u-p-i', async (req, res) => {
-  try {
-    const { data } = await api.patch('/update-user-personal-information', req.body, {
-      headers: { 'Authorization': req.headers.authorization }
-    })
-    res.json(data)
-  } catch (e) {
-    return res.status(e.response.status).json(e.response.data)
-  }
-});
-
 router.patch('/v/:id/:vote/:type', async (req, res) => {
   try {
     const { data } = await api.patch(`/vote/${req.params.id}/${req.params.vote}/${req.params.type}`, {
@@ -235,9 +235,9 @@ router.patch('/v/:id/:vote/:type', async (req, res) => {
   }
 })
 
-router.get('/g-q', async (req, res) => {
+router.get('/q', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-question`, {
+    const { data } = await api.get(`/question`, {
       params: {
         slug: req.query.slug
       },
@@ -252,9 +252,9 @@ router.get('/g-q', async (req, res) => {
   }
 })
 
-router.get('/g-u-q/:personalId/:sort', async (req, res) => {
+router.get('/g/:sort', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-user-questions/${req.params.personalId}/${req.params.sort}`, {
+    const { data } = await api.get(`/question/${req.params.sort}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -266,9 +266,9 @@ router.get('/g-u-q/:personalId/:sort', async (req, res) => {
   }
 })
 
-router.get('/g-qs/:sort', async (req, res) => {
+router.get('/u/:personalId/q/:sort', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-questions/${req.params.sort}`, {
+    const { data } = await api.get(`/user/${req.params.personalId}/question/${req.params.sort}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -280,9 +280,9 @@ router.get('/g-qs/:sort', async (req, res) => {
   }
 })
 
-router.post('/c-q', async (req, res) => {
+router.post('/q', async (req, res) => {
   try {
-    const { data } = await api.post('/create-question', req.body, {
+    const { data } = await api.post('/question', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -292,9 +292,9 @@ router.post('/c-q', async (req, res) => {
 })
 
 
-router.post('/a-q', async (req, res) => {
+router.patch('/q/a', async (req, res) => {
   try {
-    const { data } = await api.post('/answer-question', req.body, {
+    const { data } = await api.patch('/question/answer', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -303,9 +303,9 @@ router.post('/a-q', async (req, res) => {
   }
 })
 
-router.get('/g-b-p', async (req, res) => {
+router.get('/b-p', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-blog-post`, {
+    const { data } = await api.get(`/blog-post`, {
       params: {
         slug: req.query.slug
       },
@@ -320,9 +320,9 @@ router.get('/g-b-p', async (req, res) => {
   }
 });
 
-router.get('/g-b-ps/:sort', async (req, res) => {
+router.get('/b-p/:sort', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-blog-posts/${req.params.sort}`, {
+    const { data } = await api.get(`/blog-posts/${req.params.sort}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -334,9 +334,9 @@ router.get('/g-b-ps/:sort', async (req, res) => {
   }
 })
 
-router.post('/c-b-p', async (req, res) => {
+router.post('/b-p', async (req, res) => {
   try {
-    const { data } = await api.post('/create-blog-post', req.body, {
+    const { data } = await api.post('/blog-post', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -345,9 +345,9 @@ router.post('/c-b-p', async (req, res) => {
   }
 })
 
-router.post('/comment-b-p', async (req, res) => {
+router.patch('/b-p/c', async (req, res) => {
   try {
-    const { data } = await api.post('/comment-blog-post', req.body, {
+    const { data } = await api.patch('/blog-post/comment', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -356,9 +356,9 @@ router.post('/comment-b-p', async (req, res) => {
   }
 })
 
-router.get('/g-f-t', async (req, res) => {
+router.get('/f-t', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-forum-thread`, {
+    const { data } = await api.get(`/forum-thread`, {
       params: {
         slug: req.query.slug
       },
@@ -373,9 +373,9 @@ router.get('/g-f-t', async (req, res) => {
   }
 })
 
-router.get('/g-f-ts/:sort', async (req, res) => {
+router.get('/f-t/:sort', async (req, res) => {
   try {
-    const { data } = await api.get(`/get-forum-threads/${req.params.sort}`, {
+    const { data } = await api.get(`/forum-thread/${req.params.sort}`, {
       auth: {
         username: process.env.BASIC_AUTH_USERNAME,
         password: process.env.BASIC_AUTH_PASSWORD
@@ -387,9 +387,9 @@ router.get('/g-f-ts/:sort', async (req, res) => {
   }
 })
 
-router.post('/c-f-t', async (req, res) => {
+router.post('/f-t', async (req, res) => {
   try {
-    const { data } = await api.post('/create-forum-thread', req.body, {
+    const { data } = await api.post('/forum-thread', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
@@ -398,9 +398,9 @@ router.post('/c-f-t', async (req, res) => {
   }
 })
 
-router.post('/comment-f-t', async (req, res) => {
+router.patch('/f-t/c', async (req, res) => {
   try {
-    const { data } = await api.post('/comment-forum-thread', req.body, {
+    const { data } = await api.patch('/forum-thread/comment', req.body, {
       headers: { 'Authorization': req.headers.authorization }
     })
     res.json(data)
