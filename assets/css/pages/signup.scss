@@ -89,7 +89,7 @@
       .login-inputs__vertical-line {
         @include margin(0, 20px, 0, 20px);
         width: 1px;
-        background-color: var(--color-font-color);
+        background-color: var(--color-font);
         height: 50px;
         float: left;
         opacity: .5;
@@ -97,7 +97,7 @@
       .login-inputs__choose {
         cursor: pointer;
         transition: .2s;
-        color: var(--color-font-color);
+        color: var(--color-font);
         &:hover {
           color: var(--color-main);
         }
@@ -112,7 +112,7 @@
         @include margin(5px, 0, 5px, 0);
         padding-left: 15px;
         font-size: 14px;
-        color: var(--color-font-color);
+        color: var(--color-font);
         opacity: .9;
       }
       .login-inputs__status {

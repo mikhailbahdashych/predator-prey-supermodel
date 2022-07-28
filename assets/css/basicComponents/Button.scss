@@ -19,10 +19,10 @@
     }
     &.basic-button--transparent {
       background-color: transparent;
-      color: var(--color-font-color);
+      color: var(--color-font);
       border: 1px solid var(--color-main);
       .basic-button__label {
-        color: var(--color-font-color);
+        color: var(--color-font);
       }
     }
     &.basic-button--min-width {
@@ -40,7 +40,7 @@
     }
     &.basic-button--danger-fill {
       border: none;
-      color: var(--color-font-color);
+      color: var(--color-font);
       background-color: var(--color-error);
     }
     &.basic-button--danger-fill:hover {
@@ -48,7 +48,7 @@
     }
     &.basic-button--danger-fill:disabled {
       border: none;
-      color: var(--color-font-color);
+      color: var(--color-font);
       background-color: var(--color-error-disabled);
     }
     &.basic-button--danger-fill:disabled:hover {

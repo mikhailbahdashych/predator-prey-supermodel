@@ -4,14 +4,19 @@
     <h1 class="account-preferences__header">Security settings</h1>
     <hr>
     <div v-for="setting in securitySettingsOptions" :key="setting.title" :class="`account-preferences__item ${setting.danger ? 'account-preferences__item--danger' : ''}`">
+
       <div v-if="setting.title === 'Set 2FA'" class="account-preferences__item-content">
         <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>{{ securityTwoFa.status === 2 ? 'Disable 2FA' : setting.title }}
             <span
-              class="small link tooltip"
+              v-if="securityTwoFa.status !== 2"
+              class="small tooltip"
               data-tool-tip="You can set up only 2FA or mobile phone as an additional way to secure your account"
-            >(i)
-              </span>
+            >
+              <img :src="require('../../../assets/img/info.svg')" alt='info' width='15' height='15'>
+            </span>
+            <span v-if="securityTwoFa.status === 2" class="activated" data-tool-tip="Active" />
+            <span v-else-if="securityTwoFa.status === 0" class="activated activated--deactivated" data-tool-tip="Deactivated" />
           </h3>
           <p class="opacity">{{ securityTwoFa.status === 2 ? 'You have set up Two-factor authentication (2FA) for your account.' : setting.description }}</p>
         </div>
@@ -23,12 +28,30 @@
         </div>
       </div>
 
+      <div v-else-if="setting.title === 'Set mobile phone'" class="account-preferences__item-content">
+        <div class="account-preferences__item-content account-preferences__item-content--texts">
+          <h3>{{ securityPhone.status === 2 ? 'Disable mobile phone' : setting.title }}
+            <span v-if="securityPhone.status === 2" class="activated" data-tool-tip="Active" />
+            <span v-else-if="securityPhone.status === 0" class="activated activated--deactivated" data-tool-tip="Deactivated" />
+          </h3>
+          <p class="opacity">{{ securityPhone.status === 2 ? '' : setting.description}}</p>
+        </div>
+        <div>
+          <Button
+            :disabled="securityTwoFa.status === 2"
+            :label="securityPhone.status === 2 ? 'Disable mobile phone' : setting.buttonTitle"
+            :btn-class="`basic-button--transparent basic-button--min-width`"
+            @click-handler="openModal(securityPhone.status === 2 ? 'Disable mobile phone' : setting.title)"
+          />
+        </div>
+      </div>
+
       <div v-else-if="setting.title === 'Change email'" class="account-preferences__item-content">
         <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>{{ setting.title }}</h3>
           <p class="opacity">{{ changeEmailData.status === -1 ? 'You have have changed your email.' : setting.description }}</p>
         </div>
-        <div class="item-content">
+        <div>
           <Button
             :disabled="changeEmailData.status === -1"
             :label="changeEmailData.status === -1 ? 'Email has been changed' : setting.buttonTitle"
@@ -59,7 +82,7 @@
             {{ !deleteAccountMoreInfo ? 'Show more' : 'Show less' }}
           </p>
         </div>
-        <div class="item-content">
+        <div>
           <Button
             :label="setting.buttonTitle"
             :btn-class="`basic-button--transparent basic-button--min-width ${setting.danger ? 'basic-button--danger' : ''}`"
@@ -75,6 +98,7 @@
         </ul>
         <p>For more information see <span class="link" @click="redirect('tac')">terms and conditions</span>.</p>
       </div>
+
     </div>
 
     <basic-modal
@@ -86,7 +110,7 @@
         Once it is done, click the button below to start."
       @close="deleteModal('Set 2FA')"
     >
-      <Button v-if="!securityTwoFa.qr && !([0, 1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" :btn-class="'basic-button--high-height'" @click-handler="generateTwoFa" />
+      <Button v-if="!securityTwoFa.qr && !([1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" :btn-class="'basic-button--high-height'" @click-handler="generateTwoFa" />
       <div v-if="securityTwoFa.qr" class="account-preferences__flex">
         <img :src="securityTwoFa.qr" alt="2fa">
 
@@ -127,8 +151,8 @@
       @close="deleteModal('Set mobile phone')"
     >
       <p class="on-white">Provide your mobile phone in input field below and get one-time code to verify your phone.</p>
-      <phone-input v-model="phone" :onwhite="true" />
-      <Button :label="'Send SMS code'" :btn-class="'basic-button--high-height'" @click-handler="sendSmsCode" />
+      <phone-input v-model="securityPhone.number" :onwhite="true" />
+      <Button :label="'Send SMS code'" :btn-class="'basic-button--high-height'" @click-handler="sendSmsCode('activate')" />
     </basic-modal>
 
     <basic-modal
@@ -139,7 +163,7 @@
       @close="deleteModal('Disable mobile phone')"
     >
       <p class="on-white">You have set up your mobile phone, receive code and provide it in input field below, if you want to disable ir</p>
-      <Button :label="'Send SMS code'" :btn-class="'basic-button--high-height'" @click-handler="sendSmsCode" />
+      <Button :label="'Send SMS code'" :btn-class="'basic-button--high-height'" @click-handler="sendSmsCode('disable')" />
     </basic-modal>
 
     <basic-modal
@@ -264,7 +288,10 @@ import {
   deleteAccount,
   disableTwoFa,
   setTwoFa,
-  getUserSettings, getRefreshedTokens
+  getUserSettings,
+  getRefreshedTokens,
+  setMobilePhone,
+  disableMobilePhone
 } from '~/api'
 export default {
   name: 'SecuritySettings',
@@ -291,7 +318,7 @@ export default {
         },
         {
           title: 'Set mobile phone',
-          description: 'Alternative way to secure your account. Used instead of 2FA',
+          description: 'Alternative way to secure your account. Used instead of 2FA.',
           buttonTitle: 'Set mobile phone',
           danger: false
         },
@@ -329,10 +356,15 @@ export default {
         code: [],
         normalCode: null,
         qr: null,
-        status: null,
+        status: 0,
         disableStatus: null,
         secret: null,
         disabledButton: true
+      },
+      securityPhone: {
+        number: null,
+        code: null,
+        status: 0,
       },
 
       deleteAcc: { currentPassword: null, status: null },
@@ -368,8 +400,6 @@ export default {
         normalCode: null,
         action: null
       },
-
-      phone: ''
     }
   },
   watch: {
@@ -440,8 +470,24 @@ export default {
       if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
       this.confirmActionTwoFa.normalCode = twoFa.join('')
     },
-    async sendSmsCode() {
+    async sendSmsCode(type) {
+      let response
 
+      const payload = { phone: this.securityPhone.number }
+      if (this.securityPhone.code) payload.code = this.securityPhone.code
+
+      switch (type) {
+        case 'activate':
+          response = await setMobilePhone(payload, sessionStorage.getItem('_at'))
+          break
+        case 'disable':
+          response = await disableMobilePhone(payload, sessionStorage.getItem('_at'))
+          break
+      }
+
+      if (response.status) {
+        //
+      }
     },
     async setTwoFa() {
       const { status } = await setTwoFa({

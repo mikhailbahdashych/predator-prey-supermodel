@@ -14,7 +14,7 @@
   font-size: 16px;
   line-height: 24px;
   transition: .3s;
-  color: var(--color-font-color);
+  color: var(--color-font);
   font-family: "Inter", sans-serif;
   &.bi--textarea {
     padding: 15px;
@@ -90,7 +90,7 @@
     z-index: 98;
     position: absolute;
     background-color: var(--color-header-bg);
-    color: var(--color-font-color);
+    color: var(--color-font);
     border-radius: 8px;
     border: 1px solid var(--color-main-border);
   }
