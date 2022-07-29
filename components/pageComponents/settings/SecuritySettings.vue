@@ -522,13 +522,13 @@ export default {
         this.confirmActionTwoFa.show = true
         this.confirmActionTwoFa.action = 'changePassword'
       } else {
-        const { status } = await changePassword({
+        const data = await changePassword({
           password: this.securityPassword.currentPassword,
           newPassword: this.securityPassword.newPassword,
           newPasswordRepeat: this.securityPassword.newPasswordRepeat,
           twoFa: this.confirmActionTwoFa.normalCode
         }, sessionStorage.getItem('_at'))
-        this.securityPassword.status = status
+        this.securityPassword.status = data.statusCode || data.error ? data.error.statusCode : null
       }
     },
     async changeEmail() {
