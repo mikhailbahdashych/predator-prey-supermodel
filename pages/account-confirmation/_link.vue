@@ -5,6 +5,7 @@
 <script>
 export default {
   name: 'Link',
+  layout: 'empty',
   data() {
     return {
 

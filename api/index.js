@@ -39,6 +39,15 @@ export const logout = async token => {
   }
 }
 
+export const confirmAccount = async payload => {
+  try {
+    const { data } = await api.post('u/l', payload)
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getUserByPersonalId = async personalId => {
   try {
     const { data } = await api.get(`u/${personalId}`)

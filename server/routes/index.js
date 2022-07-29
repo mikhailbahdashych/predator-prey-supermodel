@@ -57,6 +57,20 @@ router.post('/u/l', async (req, res) => {
   }
 })
 
+router.post('/u/c-a', async (req, res) => {
+  try {
+    const { data } = await api.post('/user/confirm-account', req.body, {
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 router.get('/u/:personalId', async (req, res) => {
   try {
     const { data } = await api.get(`/user/${req.params.personalId}`,{
