@@ -1,8 +1,7 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const { Router } = require('express')
 const axios = require('axios')
-const dotenv = require('dotenv')
-dotenv.config()
+require('dotenv').config()
 
 const api = axios.create({
   baseURL: process.env.NODE_ENV === "development" ? process.env.PNB_API_DEV : process.env.PNB_API_PROD,
@@ -19,7 +18,11 @@ router.post('/u/s-i', async (req, res) => {
       }
     })
 
-    res.cookie("_rt", data._rt, { httpOnly: true, secure: false })
+    res.cookie("_rt", data._rt, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    })
     delete data._rt
 
     return res.json(data)
@@ -41,6 +44,18 @@ router.post('/u/s-u', async (req, res) => {
     return res.status(e.response.status).json(e.response.data)
   }
 });
+
+router.post('/u/l', async (req, res) => {
+  try {
+    const { data } = await api.post('/user/logout', {},{
+      headers: { 'Cookie': req.headers.cookie },
+    })
+    res.clearCookie("_rt")
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
 
 router.get('/u/:personalId', async (req, res) => {
   try {
@@ -198,7 +213,11 @@ router.get('/r-t', async (req, res) => {
       }
     })
 
-    res.cookie("_rt", data._rt, { httpOnly: true, secure: false })
+    res.cookie("_rt", data._rt, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    })
     delete data._rt
 
     res.json(data)

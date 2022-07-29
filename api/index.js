@@ -28,6 +28,15 @@ export const signUp = async payload => {
   }
 }
 
+export const logout = async () => {
+  try {
+    const { data } = await api.post('u/l')
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getUserByPersonalId = async personalId => {
   try {
     const { data } = await api.get(`u/${personalId}`)

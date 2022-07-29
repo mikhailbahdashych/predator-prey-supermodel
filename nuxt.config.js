@@ -1,6 +1,5 @@
 // eslint-disable-next-line nuxt/no-cjs-in-config
-const dotenv = require('dotenv');
-dotenv.config()
+require('dotenv').config();
 
 // eslint-disable-next-line nuxt/no-cjs-in-config
 module.exports = {
