@@ -78,6 +78,7 @@ import Button from '~/components/basicComponents/Button'
 import Skeleton from '~/components/skeleton/Skeleton'
 import InputSearch from '~/components/basicComponents/InputSearch'
 import { verifyToken } from '~/helpers/crypto'
+import { logout } from '~/api'
 export default {
   name: 'Header',
   components: {
@@ -117,7 +118,8 @@ export default {
     redirect(path) {
       return this.$router.push(path)
     },
-    logout() {
+    async logout() {
+      await logout(sessionStorage.getItem('_at') )
       sessionStorage.removeItem('_at')
       return this.$router.push('/')
     },

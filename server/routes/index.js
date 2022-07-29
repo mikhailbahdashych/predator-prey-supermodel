@@ -48,7 +48,7 @@ router.post('/u/s-u', async (req, res) => {
 router.post('/u/l', async (req, res) => {
   try {
     const { data } = await api.post('/user/logout', {},{
-      headers: { 'Cookie': req.headers.cookie },
+      headers: { 'Authorization': req.headers.authorization }
     })
     res.clearCookie("_rt")
     res.json(data)

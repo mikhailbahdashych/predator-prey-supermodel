@@ -28,9 +28,11 @@ export const signUp = async payload => {
   }
 }
 
-export const logout = async () => {
+export const logout = async token => {
   try {
-    const { data } = await api.post('u/l')
+    const { data } = await api.post('u/l',{},{
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
     return data
   } catch (e) {
     return e.response.data
