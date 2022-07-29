@@ -528,7 +528,7 @@ export default {
           newPasswordRepeat: this.securityPassword.newPasswordRepeat,
           twoFa: this.confirmActionTwoFa.normalCode
         }, sessionStorage.getItem('_at'))
-        this.securityPassword.status = data.statusCode || data.error ? data.error.statusCode : null
+        this.securityPassword.status = data.statusCode || data.error?.statusCode
       }
     },
     async changeEmail() {

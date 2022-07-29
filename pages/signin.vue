@@ -160,12 +160,12 @@ export default {
 
         const { error, _at, reopening, twoFa, phone } = await signIn(payload)
 
-        if (error && error.statusCode === -1) {
+        if (error?.statusCode === -1) {
           this.loginError = true
           this.loading = false
           return
         }
-        if (error && error.statusCode === -2) {
+        if (error?.statusCode === -2) {
           this.twoFa.error = true
           this.loading = false
           return
