@@ -359,16 +359,16 @@ export default {
     async signUpWithInfo() {
       this.loading = true
 
-      const { status } = await signUp({
+      const data = await signUp({
         email: this.email.email,
         password: this.password.password,
         username: this.username.username,
         personalInformation: this.personalInformation
       })
 
-      if (status) this.status = status
-      if (status === 1) this.disabledField = true
-      if (status === -1 || status === -2) {
+      if (data.statusCode || data.error.statusCode) this.status = data.statusCode || data.error.statusCode
+      if (data.statusCode === 1) this.disabledField = true
+      if (data.error.statusCode === -1 || data.error.statusCode === -2) {
         this.showPopup = true
         setTimeout(() => {
           this.showPopup = false
@@ -380,15 +380,15 @@ export default {
     async signUpWithoutInfo() {
       this.loading = true
 
-      const { status } = await signUp({
+      const data = await signUp({
         email: this.email.email,
         password: this.password.password,
         username: this.username.username
       })
 
-      if (status) this.status = status
-      if (status === 1) this.disabledField = true
-      if (status === -1 || status === -2) {
+      if (data.statusCode || data.error.statusCode) this.status = data.statusCode || data.error.statusCode
+      if (data.statusCode === 1) this.disabledField = true
+      if (data.error.statusCode === -1 || data.error.statusCode === -2) {
         this.showPopup = true
         setTimeout(() => {
           this.showPopup = false
