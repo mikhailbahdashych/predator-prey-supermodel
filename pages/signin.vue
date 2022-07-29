@@ -158,32 +158,32 @@ export default {
         if (this.loginPhone.phone) payload.phone = this.loginPhone.phone
         if (this.twoFa.normalCode) payload.twoFa = this.twoFa.normalCode
 
-        const res = await signIn(payload)
+        const { error, _at, reopening, twoFa, phone } = await signIn(payload)
 
-        if (res.status === -1) {
+        if (error && error.statusCode === -1) {
           this.loginError = true
           this.loading = false
           return
         }
-        if (res.status === -2) {
+        if (error && error.statusCode === -2) {
           this.twoFa.error = true
           this.loading = false
           return
         }
 
-        if (res.twoFa)
+        if (twoFa)
           this.twoFa.show = true
-        else if (res.phone)
+        else if (phone)
           this.phone.show = true
-        else if (!res.status) {
-          sessionStorage.setItem('_at', res._at)
+        else if (!error) {
+          sessionStorage.setItem('_at', _at)
           this.loading = false
-          const { personalId } = verifyToken(res._at)
+          const { personalId } = verifyToken(_at)
           this.personalId = personalId
 
-          if (res.reopening) {
+          if (reopening) {
             this.showReopeningScreen.status = true
-            this.showReopeningScreen.username = res.reopening
+            this.showReopeningScreen.username = reopening
             return
           }
 

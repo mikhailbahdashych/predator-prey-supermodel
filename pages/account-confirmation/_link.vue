@@ -1,8 +1,11 @@
 <template>
-  <div></div>
+  <div class="confirmation">
+
+  </div>
 </template>
 
 <script>
+import { confirmAccount } from '~/api'
 export default {
   name: 'Link',
   layout: 'empty',
@@ -10,6 +13,11 @@ export default {
     return {
 
     }
+  },
+  async mounted() {
+    await confirmAccount({
+      activationLink: this.$route.params.link
+    })
   },
   methods: {
 
