@@ -137,11 +137,11 @@ export default {
     async updatePersonalInfo() {
       this.loading = true
 
-      const { status } = await updateUserPersonalInformation({
+      const { message } = await updateUserPersonalInformation({
         ...this.personalInformation
       }, sessionStorage.getItem('_at'))
 
-      if (status === 1) {
+      if (message === 'success') {
         this.showPopup = true
 
         setTimeout(() => {

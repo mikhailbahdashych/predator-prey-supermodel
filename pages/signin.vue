@@ -160,12 +160,12 @@ export default {
 
         const { error, _at, reopening, twoFa, phone } = await signIn(payload)
 
-        if (error?.statusCode === -1) {
+        if (error?.errorMessage === 'wrong-credentials') {
           this.loginError = true
           this.loading = false
           return
         }
-        if (error?.statusCode === -2) {
+        if (error?.errorMessage === 'wrong-2fa') {
           this.twoFa.error = true
           this.loading = false
           return

@@ -133,6 +133,7 @@ export default {
       this.showWantToAsk = true
     },
     async addToBookmark() {
+      // @TODO Is there even sense to validate it on front end?
       const token = sessionStorage.getItem('_at')
 
       if (!token) {
@@ -143,11 +144,11 @@ export default {
           return this.$router.push('/signin')
       }
 
-      const { status } = await createBookmark({
+      const { message } = await createBookmark({
         type: 'question',
         id: this.question.id
       }, sessionStorage.getItem('_at'))
-      if (status === 1) {
+      if (message === 'success') {
         this.showPopup = true
         setTimeout(() => {
           this.showPopup = false

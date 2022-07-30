@@ -49,12 +49,12 @@
       <div v-else-if="setting.title === 'Change email'" class="account-preferences__item-content">
         <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>{{ setting.title }}</h3>
-          <p class="opacity">{{ changeEmailData.status === -1 ? 'You have have changed your email.' : setting.description }}</p>
+          <p class="opacity">{{ changeEmailData.status === 'email-already-changed' ? 'You have have changed your email.' : setting.description }}</p>
         </div>
         <div>
           <Button
-            :disabled="changeEmailData.status === -1"
-            :label="changeEmailData.status === -1 ? 'Email has been changed' : setting.buttonTitle"
+            :disabled="changeEmailData.status === 'email-already-changed'"
+            :label="changeEmailData.status === 'email-already-changed' ? 'Email has been changed' : setting.buttonTitle"
             :btn-class="`basic-button--transparent basic-button--min-width`"
             @click-handler="openModal(setting.title)" />
         </div>
@@ -63,11 +63,11 @@
       <div v-else-if="setting.title === 'Change password'" class="account-preferences__item-content">
         <div class="account-preferences__item-content account-preferences__item-content--texts">
           <h3>{{ setting.title }}</h3>
-          <p class="opacity">{{ securityPassword.status === -5 ? 'You are able to change password in 48 hours after previous change' : setting.description }}</p>
+          <p class="opacity">{{ securityPassword.status === 'last-change' ? 'You are able to change password in 48 hours after previous change' : setting.description }}</p>
         </div>
         <div class="account-preferences__item-content">
           <Button
-            :disabled="securityPassword.status === -5"
+            :disabled="securityPassword.status === 'last-change'"
             :label="setting.buttonTitle"
             :btn-class="`basic-button--transparent basic-button--min-width`"
             @click-handler="openModal(setting.title)" />
@@ -118,11 +118,11 @@
         <input id="secret" :value="`${securityTwoFa.secret}`" type="hidden" />
         <p class="link" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
 
-        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 1" @returnTwoFa="returnTwoFa" />
-        <Button :label="'Confirm 2FA code'" :btn-class="'basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 1" @click-handler="setTwoFa" />
+        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 'success'" @returnTwoFa="returnTwoFa" />
+        <Button :label="'Confirm 2FA code'" :btn-class="'basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 'success'" @click-handler="setTwoFa" />
 
-        <p v-if="securityTwoFa.status === 1" class="success">2FA has been successfully set!</p>
-        <p v-else-if="securityTwoFa.status === -1" class="error">Wrong code!</p>
+        <p v-if="securityTwoFa.status === 'success'" class="success">2FA has been successfully set!</p>
+        <p v-else-if="securityTwoFa.status === 'wrong-2fa'" class="error">Wrong code!</p>
       </div>
     </basic-modal>
 
@@ -136,11 +136,11 @@
       <div v-if="securityTwoFa.status === 2" class="account-preferences__flex">
         <p class="on-white">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
 
-        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 0" @returnTwoFa="returnTwoFa" />
-        <Button :label="'Confirm 2FA disable'" :btn-class="'basic-button--danger-fill basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 0" @click-handler="disableTwoFa" />
+        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 'success'" @returnTwoFa="returnTwoFa" />
+        <Button :label="'Confirm 2FA disable'" :btn-class="'basic-button--danger-fill basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 'success'" @click-handler="disableTwoFa" />
 
-        <p v-if="securityTwoFa.disableStatus === 0" class="success">2FA has been successfully disabled!</p>
-        <p v-else-if="securityTwoFa.disableStatus === -1" class="error">Wrong code!</p>
+        <p v-if="securityTwoFa.disableStatus === 'success'" class="success">2FA has been successfully disabled!</p>
+        <p v-else-if="securityTwoFa.disableStatus === 'wrong-2fa'" class="error">Wrong code!</p>
       </div>
     </basic-modal>
 
@@ -196,10 +196,10 @@
       />
 
       <div class="account-preferences__button account-preferences__button--modal">
-        <p v-if="securityPassword.status === 1" class="success">Password has been successfully changed!</p>
-        <p v-else-if="securityPassword.status === -2" class="error">Wrong password!</p>
-        <p v-else-if="securityPassword.status === -3" class="error">Wrong 2FA code!</p>
-        <p v-else-if="securityPassword.status === -4" class="error">New password can't be the same as current one!</p>
+        <p v-if="securityPassword.status === 'success'" class="success">Password has been successfully changed!</p>
+        <p v-else-if="securityPassword.status === 'passwords-dont-match'" class="error">Wrong password!</p>
+        <p v-else-if="securityPassword.status === 'wrong-2fa'" class="error">Wrong 2FA code!</p>
+        <p v-else-if="securityPassword.status === 'same-password'" class="error">New password can't be the same as current one!</p>
       </div>
 
       <p v-if="passwordError.passwordMismatch" class="error">Passwords have to match!</p>
@@ -255,8 +255,8 @@
         :type="'password'"
       />
       <Button :label="'Delete account'" :btn-class="'danger-fill high-height'" :disabled="!deleteAcc.currentPassword" @click-handler="deleteAccount" />
-      <p v-if="deleteAcc.status === -2" class="error">Wrong 2FA code!</p>
-      <p v-else-if="deleteAcc.status === -3" class="error">Invalid password!</p>
+      <p v-if="deleteAcc.status === 'wrong-2fa'" class="error">Wrong 2FA code!</p>
+      <p v-else-if="deleteAcc.status === 'passwords-dont-match'" class="error">Invalid password!</p>
     </basic-modal>
 
     <basic-modal
@@ -432,6 +432,7 @@ export default {
       const token = sessionStorage.getItem('_at')
       let userSettings = await getUserSettings(token, 'security')
 
+      // @TODO Handle corrupted tokens
       if (userSettings.status === 401) {
         const refreshedToken = await getRefreshedTokens()
 
@@ -448,7 +449,7 @@ export default {
         this.securityPhone.status = 2
 
       if (userSettings.changedEmail)
-        this.changeEmailData.status = -1
+        this.changeEmailData.status = 'email-already-changed'
 
       if (userSettings.changedPasswordAt) {
         this.securityPassword.status = -5
@@ -487,31 +488,32 @@ export default {
       }
     },
     async setTwoFa() {
-      const { status } = await setTwoFa({
+      const data = await setTwoFa({
         twoFaCode: this.securityTwoFa.normalCode,
         twoFaToken: this.securityTwoFa.secret
       }, sessionStorage.getItem('_at'))
-      this.securityTwoFa.status = status
+      this.securityTwoFa.status = data.message || data.error?.errorMessage
     },
     async disableTwoFa() {
-      const { status } = await disableTwoFa({
+      const data = await disableTwoFa({
         twoFa: this.securityTwoFa.normalCode
       }, sessionStorage.getItem('_at'))
-      this.securityTwoFa.disableStatus = (status === 1 ? 0 : -1)
+      this.securityTwoFa.disableStatus = data.message || data.error?.errorMessage
     },
     async deleteAccount() {
       if (this.securityTwoFa.status === 2 && !this.confirmActionTwoFa.normalCode) {
         this.confirmActionTwoFa.show = true
         this.confirmActionTwoFa.action = 'deleteAccount'
       } else {
-        const { status } = await deleteAccount({
+        const data = await deleteAccount({
           password: this.deleteAcc.currentPassword,
           twoFa: this.confirmActionTwoFa.normalCode,
         }, sessionStorage.getItem('_at'))
-        this.deleteAcc.status = status
+
+        this.deleteAcc.status = data.message || data.error?.errorMessage
         this.deleteAcc.currentPassword = null
 
-        if (status === 1) {
+        if (data.message === 'success') {
           sessionStorage.removeItem('_at')
           return this.$router.push('/')
         }
@@ -528,7 +530,7 @@ export default {
           newPasswordRepeat: this.securityPassword.newPasswordRepeat,
           twoFa: this.confirmActionTwoFa.normalCode
         }, sessionStorage.getItem('_at'))
-        this.securityPassword.status = data.statusCode || data.error?.statusCode
+        this.securityPassword.status = data.message || data.error?.errorMessage
       }
     },
     async changeEmail() {
@@ -536,11 +538,11 @@ export default {
         this.confirmActionTwoFa.show = true
         this.confirmActionTwoFa.action = 'changeEmail'
       } else {
-        const { status } = await changeEmail({
+        const data = await changeEmail({
           twoFa: this.confirmActionTwoFa.normalCode,
           email: this.changeEmailData.newEmail
         }, sessionStorage.getItem('_at'))
-        this.changeEmailData.status = status
+        this.changeEmailData.status = data.message || data.error?.errorMessage
       }
     },
     generateTwoFa() {

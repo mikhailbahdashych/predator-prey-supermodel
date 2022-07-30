@@ -2,7 +2,7 @@
   <div>
     <Popup
       v-if="showPopup"
-      :content="status === -1 ? 'User with this email already exists!' : 'User with this username already exists!'"
+      :content="status === 'email-exists' ? 'User with this email already exists!' : 'User with this username already exists!'"
     />
 
     <div class="login">
@@ -89,7 +89,7 @@
       </div>
 
       <div v-if="step === 1" class="login-inputs login-inputs--personal-information">
-        <div v-if="status !== 1" class="login-inputs__login-inputs-container login-inputs__login-inputs-container--personal-information">
+        <div v-if="status !== 'success'" class="login-inputs__login-inputs-container login-inputs__login-inputs-container--personal-information">
           <h3 class="source-sans-pro bold">Tell us a little about yourself</h3>
           <p>Don't worry, you can skip this step and fill information you want later</p>
           <div class="flex">
@@ -182,7 +182,7 @@
       </div>
 
       <div v-if="step === 2" class="login-inputs login-inputs--personal-information">
-        <div v-if="status !== 1" class="login-inputs__login-inputs-container login-inputs__login-inputs-container--personal-information">
+        <div v-if="status !== 'success'" class="login-inputs__login-inputs-container login-inputs__login-inputs-container--personal-information">
           <h3 class="source-sans-pro bold">All your location and place of work</h3>
           <p>Don't worry, you can skip this step and fill information you want later</p>
           <div class="flex">
@@ -366,9 +366,12 @@ export default {
         personalInformation: this.personalInformation
       })
 
-      if (data.statusCode || data.error?.statusCode) this.status = data.statusCode || data.error?.statusCode
-      if (data.statusCode === 1) this.disabledField = true
-      if (data.error?.statusCode === -1 || data.error?.statusCode === -2) {
+      this.status = data.message || data.error?.errorMessage
+      if (data.message === 'success') this.disabledField = true
+      if (
+        data.error?.errorMessage === 'email-exists' ||
+        data.error?.errorMessage === 'nickname-exists'
+      ) {
         this.showPopup = true
         setTimeout(() => {
           this.showPopup = false
@@ -386,9 +389,12 @@ export default {
         username: this.username.username
       })
 
-      if (data.statusCode || data.error?.statusCode) this.status = data.statusCode || data.error?.statusCode
-      if (data.statusCode === 1) this.disabledField = true
-      if (data.error?.statusCode === -1 || data.error?.statusCode === -2) {
+      this.status = data.message || data.error?.errorMessage
+      if (data.message === 'success') this.disabledField = true
+      if (
+        data.error?.errorMessage === 'email-exists' ||
+        data.error?.errorMessage === 'nickname-exists'
+      ) {
         this.showPopup = true
         setTimeout(() => {
           this.showPopup = false
