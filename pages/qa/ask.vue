@@ -29,10 +29,11 @@
 </template>
 
 <script>
-import { createQuestionPost, getRefreshedTokens, logout } from '~/api'
+import { createQuestionPost, getRefreshedTokens } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
+import logout from '~/mixins/logout'
 export default {
   name: 'Ask',
   components: {
@@ -40,6 +41,7 @@ export default {
     Button,
     CustomVueEditor
   },
+  mixins: [logout],
   layout: 'default',
   data() {
     return {
@@ -68,11 +70,6 @@ export default {
     await this.checkToken()
   },
   methods: {
-    async logout() {
-      await logout(sessionStorage.getItem('_at') )
-      sessionStorage.removeItem('_at')
-      return this.$router.push('/')
-    },
     async checkToken() {
       const refreshedToken = await getRefreshedTokens()
 

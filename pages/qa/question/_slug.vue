@@ -92,6 +92,7 @@ import Button from '~/components/basicComponents/Button'
 import Popup from '~/components/basicComponents/Popup'
 import Skeleton from '~/components/skeleton/Skeleton'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
+import logout from '~/mixins/logout'
 export default {
   name: 'Slug',
   components: {
@@ -100,6 +101,7 @@ export default {
     Button,
     Popup
   },
+  mixins: [logout],
   layout: 'default',
   validate({ params }) { return validateSlug(params.slug) },
   data() {
@@ -133,22 +135,19 @@ export default {
       this.showWantToAsk = true
     },
     async addToBookmark() {
-      // @TODO Is there even sense to validate it on front end?
       const token = sessionStorage.getItem('_at')
 
-      if (!token) {
-        return this.$router.push('/signin')
-      } else {
-        const tokenData = verifyToken(token)
-        if (tokenData.message === 'invalid-token')
-          return this.$router.push('/signin')
-      }
+      if (!token) return this.$router.push('/signin')
 
-      const { message } = await createBookmark({
+      const tokenData = verifyToken(token)
+      if (tokenData.error?.errorMessage === 'invalid-token') return await this.logout()
+
+      const data = await createBookmark({
         type: 'question',
         id: this.question.id
       }, sessionStorage.getItem('_at'))
-      if (message === 'success') {
+
+      if (data.message === 'success') {
         this.showPopup = true
         setTimeout(() => {
           this.showPopup = false

@@ -96,9 +96,9 @@ import Popup from "~/components/basicComponents/Popup";
 import {
   updateUserPersonalInformation,
   getRefreshedTokens,
-  getUserSettings,
-  logout
+  getUserSettings
 } from '~/api'
+import logout from '~/mixins/logout'
 export default {
   name: 'PersonalInformation',
   components: {
@@ -108,6 +108,7 @@ export default {
     Button,
     Popup
   },
+  mixins: [logout],
   data() {
     return {
       personalInformation: {},
@@ -122,11 +123,6 @@ export default {
     await this.getUserPersonalSettings()
   },
   methods: {
-    async logout() {
-      await logout(sessionStorage.getItem('_at') )
-      sessionStorage.removeItem('_at')
-      return this.$router.push('/')
-    },
     async getUserPersonalSettings() {
       const token = sessionStorage.getItem('_at')
       this.personalInformation = await getUserSettings(token, 'personal')
@@ -139,7 +135,7 @@ export default {
 
         this.personalInformation = await getUserSettings(refreshedToken._at, 'personal')
       } else if (this.personalInformation.error?.errorMessage === 'invalid-token') {
-        await this.logout()
+        return await this.logout()
       }
     },
     async updatePersonalInfo() {

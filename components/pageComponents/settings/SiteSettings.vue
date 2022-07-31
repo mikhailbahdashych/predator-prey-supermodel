@@ -18,12 +18,14 @@
 
 <script>
 import ToggleSwitch from '~/components/basicComponents/ToggleSwitch';
-import { getRefreshedTokens, logout } from '~/api'
+import { getRefreshedTokens } from '~/api'
+import logout from '~/mixins/logout'
 export default {
   name: 'SiteSettings',
   components: {
     ToggleSwitch
   },
+  mixins: [logout],
   data() {
     return {
       loading: true,
@@ -38,11 +40,6 @@ export default {
     await this.checkToken()
   },
   methods: {
-    async logout() {
-      await logout(sessionStorage.getItem('_at') )
-      sessionStorage.removeItem('_at')
-      return this.$router.push('/')
-    },
     async checkToken() {
       const refreshedToken = await getRefreshedTokens()
 

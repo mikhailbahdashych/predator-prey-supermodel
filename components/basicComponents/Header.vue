@@ -108,12 +108,9 @@ export default {
         return
       }
 
-      // @TODO Temporary solution. Figure out on how to change query of components mount
-      setTimeout(() => {
-        const tokenData = verifyToken(token)
-        this.userData.status = tokenData.message === 'invalid-token' ? -1 : 1;
-        this.accountRedirect = tokenData.message === 'invalid-token' ? '/signin' : `/account/${tokenData.personalId}`;
-      }, 1000)
+      const tokenData = verifyToken(token)
+      this.userData.status = tokenData.message ? -1 : 1;
+      this.accountRedirect = tokenData.message ? '/signin' : `/account/${tokenData.personalId}`;
     },
     redirect(path) {
       return this.$router.push(path)

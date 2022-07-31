@@ -20,13 +20,15 @@
 </template>
 
 <script>
-import { getBookmarks, getRefreshedTokens, logout } from '~/api'
+import { getBookmarks, getRefreshedTokens } from '~/api'
 import Skeleton from '~/components/skeleton/Skeleton'
+import logout from '~/mixins/logout'
 export default {
   name: 'Bookmarks',
   components: {
     Skeleton
   },
+  mixins: [logout],
   layout: 'default',
   data() {
     return {
@@ -51,11 +53,6 @@ export default {
     filterBookmarks(filter) {
       this.filters.forEach(f => { f.active = f.value === filter.value })
       this.filter = filter
-    },
-    async logout() {
-      await logout(sessionStorage.getItem('_at') )
-      sessionStorage.removeItem('_at')
-      return this.$router.push('/')
     },
     async getBookmarks() {
       const token = sessionStorage.getItem('_at')

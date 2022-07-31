@@ -291,9 +291,9 @@ import {
   getUserSettings,
   getRefreshedTokens,
   setMobilePhone,
-  disableMobilePhone,
-  logout
+  disableMobilePhone
 } from '~/api'
+import logout from '~/mixins/logout'
 export default {
   name: 'SecuritySettings',
   components: {
@@ -304,6 +304,7 @@ export default {
     Popup,
     PhoneInput
   },
+  mixins: [logout],
   data() {
     return {
       loading: true,
@@ -429,11 +430,6 @@ export default {
     await this.getUserSecuritySettings()
   },
   methods: {
-    async logout() {
-      await logout(sessionStorage.getItem('_at') )
-      sessionStorage.removeItem('_at')
-      return this.$router.push('/')
-    },
     async getUserSecuritySettings() {
       const token = sessionStorage.getItem('_at')
       let userSettings = await getUserSettings(token, 'security')
@@ -446,7 +442,7 @@ export default {
 
         userSettings = await getUserSettings(refreshedToken._at, 'security')
       } else if (userSettings.error?.errorMessage === 'invalid-token') {
-        await this.logout()
+        return await this.logout()
       }
 
       if (userSettings.twoFa)
