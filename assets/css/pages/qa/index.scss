@@ -183,4 +183,10 @@
       }
     }
   }
+  .ask-wrapper__elem {
+    &.ask-wrapper__elem--button {
+      width: 150px;
+      margin: 15px auto 0;
+    }
+  }
 }

@@ -231,6 +231,17 @@ export const getQuestion = async slug => {
   }
 }
 
+export const getSimilarQuestions = async keywords => {
+  try {
+    const { data } = await api.get('q/s', {
+      params: { keywords }
+    })
+    return data
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 export const getQuestions = async payload => {
   try {
     const { data } = await api.get(`q/${payload.sort}`)

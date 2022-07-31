@@ -258,6 +258,7 @@ export default {
       await this.getUserQuestions()
     },
     async changeSubpage(subpage) {
+      if (subpage.title === this.currentSubpage) return
       this.subpageItems.forEach(sub => { sub.active = sub.title === subpage.title })
       this.currentSubpage = subpage.title
       switch (this.currentSubpage) {

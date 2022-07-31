@@ -8,6 +8,11 @@
         :input-class="'small white-stroke'"
         :title="'Question title'"
       />
+      <div v-if="showSimilarQuestions">
+        <div v-for="sq in similarQuestions" :key="sq.slug">
+          {{ sq }}
+        </div>
+      </div>
     </div>
 
     <div class="ask-wrapper__elem">
@@ -29,7 +34,7 @@
 </template>
 
 <script>
-import { createQuestionPost, getRefreshedTokens } from '~/api'
+import { createQuestionPost, getRefreshedTokens, getSimilarQuestions } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
@@ -59,9 +64,9 @@ export default {
     title() {
       this.titleLength = this.title.split(' ')
     },
-    // 'titleLength.length': async function () {
-    //   await this.getPostsBySlug()
-    // }
+    'titleLength.length': async function () {
+      await this.getPostsBySlug()
+    }
   },
   created() {
     this.$nextTick(() => { this.loading = false })
@@ -76,14 +81,20 @@ export default {
       if (refreshedToken.error?.errorMessage === 'invalid-token') return await this.logout()
       else sessionStorage.setItem('_at', refreshedToken._at)
     },
-    // async getPostsBySlug() {
-    //   if (this.title.length > 0) {
-    //     this.similarQuestions = await getQuestion(this.title.split(' ').join('+').toLowerCase())
-    //     this.showSimilarQuestions = true
-    //   } else {
-    //     this.showSimilarQuestions = false
-    //   }
-    // },
+    async getPostsBySlug() {
+      if (this.title.length > 0) {
+        const slug = this.title
+          .toLowerCase()
+          .trim()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/[\s_-]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        this.similarQuestions = await getSimilarQuestions(slug)
+        this.showSimilarQuestions = true
+      } else {
+        this.showSimilarQuestions = false
+      }
+    },
     async postQuestion() {
       this.loading = true
 
@@ -92,7 +103,7 @@ export default {
         content: this.content,
       }, sessionStorage.getItem('_at'))
 
-      if (data.status === 1)
+      if (data.message === 'success')
         return this.$router.push(`/qa/question/${data.slug}`)
 
       this.loading = false

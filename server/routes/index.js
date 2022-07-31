@@ -285,6 +285,23 @@ router.get('/q', async (req, res) => {
   }
 })
 
+router.get('/q/s', async (req, res) => {
+  try {
+    const { data } = await api.get('/question/similar', {
+      params: {
+        keywords: req.query.keywords
+      },
+      auth: {
+        username: process.env.BASIC_AUTH_USERNAME,
+        password: process.env.BASIC_AUTH_PASSWORD
+      }
+    })
+    res.json(data)
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data)
+  }
+})
+
 router.get('/q/:sort', async (req, res) => {
   try {
     const { data } = await api.get(`/question/${req.params.sort}`, {
