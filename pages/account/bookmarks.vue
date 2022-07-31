@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { getBookmarks, getRefreshedTokens } from '~/api'
+import { getBookmarks, getRefreshedTokens, logout } from '~/api'
 import Skeleton from '~/components/skeleton/Skeleton'
 export default {
   name: 'Bookmarks',
@@ -52,14 +52,19 @@ export default {
       this.filters.forEach(f => { f.active = f.value === filter.value })
       this.filter = filter
     },
+    async logout() {
+      await logout(sessionStorage.getItem('_at') )
+      sessionStorage.removeItem('_at')
+      return this.$router.push('/')
+    },
     async getBookmarks() {
       const token = sessionStorage.getItem('_at')
       this.bookmarks = await getBookmarks(token)
 
-      if (this.bookmarks.status === 401) {
+      if (this.bookmarks.error?.errorMessage === 'token-expired') {
         const refreshedToken = await getRefreshedTokens()
 
-        if (refreshedToken.status === 401) return this.$router.push('/signin')
+        if (refreshedToken.error?.errorMessage === 'invalid-token') return await this.logout()
         else sessionStorage.setItem('_at', refreshedToken._at)
 
         this.bookmarks = await getBookmarks(refreshedToken._at)

@@ -18,7 +18,7 @@
 
 <script>
 import ToggleSwitch from '~/components/basicComponents/ToggleSwitch';
-import { getRefreshedTokens } from "~/api";
+import { getRefreshedTokens, logout } from '~/api'
 export default {
   name: 'SiteSettings',
   components: {
@@ -38,10 +38,15 @@ export default {
     await this.checkToken()
   },
   methods: {
+    async logout() {
+      await logout(sessionStorage.getItem('_at') )
+      sessionStorage.removeItem('_at')
+      return this.$router.push('/')
+    },
     async checkToken() {
       const refreshedToken = await getRefreshedTokens()
 
-      if (refreshedToken.status === 401) return this.$router.push('/signin')
+      if (refreshedToken.error?.errorMessage === 'invalid-token') return await this.logout()
       else sessionStorage.setItem('_at', refreshedToken._at)
     },
     checkTheme() {

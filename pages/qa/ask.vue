@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { createQuestionPost, getRefreshedTokens } from '~/api'
+import { createQuestionPost, getRefreshedTokens, logout } from '~/api'
 import Input from '~/components/basicComponents/Input'
 import Button from '~/components/basicComponents/Button'
 import CustomVueEditor from '~/components/basicComponents/CustomVueEditor'
@@ -68,10 +68,15 @@ export default {
     await this.checkToken()
   },
   methods: {
+    async logout() {
+      await logout(sessionStorage.getItem('_at') )
+      sessionStorage.removeItem('_at')
+      return this.$router.push('/')
+    },
     async checkToken() {
       const refreshedToken = await getRefreshedTokens()
 
-      if (refreshedToken.status === 401) return this.$router.push('/signin')
+      if (refreshedToken.error?.errorMessage === 'invalid-token') return await this.logout()
       else sessionStorage.setItem('_at', refreshedToken._at)
     },
     // async getPostsBySlug() {
