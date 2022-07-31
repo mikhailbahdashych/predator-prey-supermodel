@@ -43,7 +43,7 @@
     @include wrapper(70%, 15px, auto, 0, auto);
     display: block;
     .question-wrapper__question {
-      @include size(120px, 100%);
+      @include size(auto, 100%);
       border-bottom: 1px solid var(--color-line);
       margin-bottom: 15px;
       transition: .2s;
