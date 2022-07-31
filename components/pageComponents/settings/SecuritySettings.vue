@@ -291,7 +291,8 @@ import {
   getUserSettings,
   getRefreshedTokens,
   setMobilePhone,
-  disableMobilePhone
+  disableMobilePhone,
+  logout
 } from '~/api'
 export default {
   name: 'SecuritySettings',
@@ -428,18 +429,25 @@ export default {
     await this.getUserSecuritySettings()
   },
   methods: {
+    async logout() {
+      await logout(sessionStorage.getItem('_at') )
+      sessionStorage.removeItem('_at')
+      return this.$router.push('/')
+    },
     async getUserSecuritySettings() {
       const token = sessionStorage.getItem('_at')
       let userSettings = await getUserSettings(token, 'security')
+      console.log('userSettings', userSettings)
 
-      // @TODO Handle corrupted tokens
-      if (userSettings.status === 401) {
+      if (userSettings.error?.errorMessage === 'token-expired') {
         const refreshedToken = await getRefreshedTokens()
 
-        if (refreshedToken.status === 401) return this.$router.push('/signin')
+        if (refreshedToken.error?.errorMessage === 'invalid-token') return await this.logout()
         else sessionStorage.setItem('_at', refreshedToken._at)
 
         userSettings = await getUserSettings(refreshedToken._at, 'security')
+      } else if (userSettings.error?.errorMessage === 'invalid-token') {
+        await this.logout()
       }
 
       if (userSettings.twoFa)

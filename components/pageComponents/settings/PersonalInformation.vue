@@ -96,8 +96,9 @@ import Popup from "~/components/basicComponents/Popup";
 import {
   updateUserPersonalInformation,
   getRefreshedTokens,
-  getUserSettings
-} from "~/api";
+  getUserSettings,
+  logout
+} from '~/api'
 export default {
   name: 'PersonalInformation',
   components: {
@@ -121,17 +122,25 @@ export default {
     await this.getUserPersonalSettings()
   },
   methods: {
+    async logout() {
+      await logout(sessionStorage.getItem('_at') )
+      sessionStorage.removeItem('_at')
+      return this.$router.push('/')
+    },
     async getUserPersonalSettings() {
       const token = sessionStorage.getItem('_at')
       this.personalInformation = await getUserSettings(token, 'personal')
+      console.log('this.personalInformation', this.personalInformation)
 
-      if (this.personalInformation.status === 401) {
+      if (this.personalInformation.error?.errorMessage === 'token-expired') {
         const refreshedToken = await getRefreshedTokens()
 
-        if (refreshedToken.status === 401) return this.$router.push('/signin')
+        if (refreshedToken.error?.errorMessage === 'invalid-token') return await this.logout()
         else sessionStorage.setItem('_at', refreshedToken._at)
 
         this.personalInformation = await getUserSettings(refreshedToken._at, 'personal')
+      } else if (this.personalInformation.error?.errorMessage === 'invalid-token') {
+        await this.logout()
       }
     },
     async updatePersonalInfo() {
