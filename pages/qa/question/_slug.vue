@@ -162,8 +162,8 @@ export default {
     },
     async answerQuestion() {
       await answerQuestion({
-        question_id: this.question.id,
-        answer_text: this.answer
+        questionId: this.question.id,
+        answerText: this.answer
       }, sessionStorage.getItem('_at'))
     }
   }
