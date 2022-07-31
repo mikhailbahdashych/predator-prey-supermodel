@@ -12,35 +12,18 @@
       </div>
     </div>
 
-    <div class="question-wrapper__question-content question-wrapper__question-content--sort">
-      <div class="question-wrapper__item">
-        <Button
-          :label="'Latest'"
-          :btn-class="`${sortType.latest ? 'basic-button--rounded': 'mrl basic-button--rounded basic-button--transparent'}`"
-          @click-handler="sortBy('latest')"
-        />
-      </div>
-      <div class="question-wrapper__item">
-        <Button
-          :label="'Hottest'"
-          :btn-class="`${sortType.hottest ? 'basic-button--rounded': 'mrl basic-button--rounded basic-button--transparent'}`"
-          @click-handler="sortBy('hottest')"
-        />
-      </div>
-      <div class="question-wrapper__item">
-        <Button
-          :label="'Top week'"
-          :btn-class="`${sortType.week ? 'basic-button--rounded': 'mrl basic-button--rounded basic-button--transparent'}`"
-          @click-handler="sortBy('topOfTheWeek')"
-        />
-      </div>
-      <div class="question-wrapper__item">
-        <Button
-          :label="'Top month'"
-          :btn-class="`${sortType.month ? 'basic-button--rounded': 'mrl basic-button--rounded basic-button--transparent'}`"
-          @click-handler="sortBy('topOfTheMonth')"
-        />
-      </div>
+    <div class="question-wrapper__question-header-filter">
+      <p
+        v-for="item in sortTypes"
+        :key="item.title"
+        class="question-wrapper__sort-bar-item"
+        :class="item.active ? 'question-wrapper__sort-bar-item--active' : ''"
+      >
+          <span
+            :class="!item.active ? 'opacity' : ''"
+            @click="sortBy(item)"
+          >{{ item.title }}</span>
+      </p>
     </div>
 
     <div class="question-wrapper__question-content">
@@ -79,12 +62,12 @@ export default {
   data() {
     return {
       loading: true,
-      sortType: {
-        latest: true,
-        hottest: false,
-        week: false,
-        month: false
-      },
+      sortTypes: [
+        { title: 'Latest', active: true },
+        { title: 'Hottest', active: false },
+        { title: 'Week', active: false },
+        { title: 'Month', active: false },
+      ],
       sort: 'latest',
       questions: []
     }
@@ -96,9 +79,9 @@ export default {
     await this.getQuestions()
   },
   methods: {
-    async sortBy(type) {
-      Object.entries(this.sortType).forEach(item => { this.sortType[item[0]] = item[0] === type })
-      this.sort = type
+    async sortBy(item) {
+      this.sortTypes.forEach(type => { type.active = type.title === item.title })
+      this.sort = item.title
       await this.getQuestions()
     },
     async getQuestions() {
