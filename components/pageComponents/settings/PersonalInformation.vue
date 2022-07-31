@@ -130,7 +130,6 @@ export default {
     async getUserPersonalSettings() {
       const token = sessionStorage.getItem('_at')
       this.personalInformation = await getUserSettings(token, 'personal')
-      console.log('this.personalInformation', this.personalInformation)
 
       if (this.personalInformation.error?.errorMessage === 'token-expired') {
         const refreshedToken = await getRefreshedTokens()

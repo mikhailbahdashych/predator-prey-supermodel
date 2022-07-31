@@ -437,7 +437,6 @@ export default {
     async getUserSecuritySettings() {
       const token = sessionStorage.getItem('_at')
       let userSettings = await getUserSettings(token, 'security')
-      console.log('userSettings', userSettings)
 
       if (userSettings.error?.errorMessage === 'token-expired') {
         const refreshedToken = await getRefreshedTokens()
