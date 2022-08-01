@@ -108,7 +108,7 @@
         This will increase the security of you account.
         Before it, you should download Google Authenticator application.
         Once it is done, click the button below to start."
-      @close="deleteModal('Set 2FA')"
+      @close="hideModal('Set 2FA')"
     >
       <Button v-if="!securityTwoFa.qr && !([1, 2].includes(securityTwoFa.status))" :label="'Generate 2FA'" :btn-class="'basic-button--high-height'" @click-handler="generateTwoFa" />
       <div v-if="securityTwoFa.qr" class="account-preferences__flex">
@@ -131,7 +131,7 @@
       header="Disable 2FA"
       description="You are about deactivate your Two-factor authentication.
         Be careful! This action will decrease your account security. We recommend to have 2FA either mobile phone for security propoese."
-      @close="deleteModal('Disable 2FA')"
+      @close="hideModal('Disable 2FA')"
     >
       <div v-if="securityTwoFa.status === 'set'" class="account-preferences__flex">
         <p class="on-white">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
@@ -148,7 +148,7 @@
       v-if="securityShowModal['Set mobile phone']"
       header="Set phone number"
       description="Secure your account with phone number, instead of using 2FA."
-      @close="deleteModal('Set mobile phone')"
+      @close="hideModal('Set mobile phone')"
     >
       <p class="on-white">Provide your mobile phone in input field below and get one-time code to verify your phone.</p>
       <phone-input v-model="securityPhone.number" :onwhite="true" />
@@ -160,7 +160,7 @@
       header="Set phone number"
       description="Secure your account with phone number, instead of using 2FA.
         Be careful! This action will decrease your account security. We recommend to have 2FA either mobile phone for security propose."
-      @close="deleteModal('Disable mobile phone')"
+      @close="hideModal('Disable mobile phone')"
     >
       <p class="on-white">You have set up your mobile phone, receive code and provide it in input field below, if you want to disable ir</p>
       <Button :label="'Send SMS code'" :btn-class="'basic-button--high-height'" @click-handler="sendSmsCode('disable')" />
@@ -171,7 +171,7 @@
       header="Change password"
       description="Change your password by providing current password and new password.
         Be careful! After that, because of security reasons, you won't be able to change password for 48 hours."
-      @close="deleteModal('Change password')"
+      @close="hideModal('Change password')"
     >
       <Input
         v-model="securityPassword.currentPassword"
@@ -238,7 +238,7 @@
       v-if="securityShowModal['Change email']"
       header="Change email"
       description="Be careful! You are able to change email only one time."
-      @close="deleteModal('Change email')"
+      @close="hideModal('Change email')"
     >
     </basic-modal>
 
@@ -246,7 +246,7 @@
       v-if="securityShowModal['Delete account']"
       header="Delete account"
       description="We are very sorry about this :( You can get back any time you want. Hope, to see you again."
-      @close="deleteModal('Delete account')"
+      @close="hideModal('Delete account')"
     >
       <Input
         v-model="deleteAcc.currentPassword"
@@ -463,7 +463,7 @@ export default {
         if (item[0] === option) this.securityShowModal[item[0]] = true
       })
     },
-    deleteModal(option) {
+    hideModal(option) {
       Object.entries(this.securityShowModal).forEach(item => {
         if (item[0] === option) this.securityShowModal[item[0]] = false
       })

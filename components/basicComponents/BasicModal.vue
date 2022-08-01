@@ -1,6 +1,6 @@
 <template>
-  <div class="settings-modal-container">
-    <div class="settings-modal-container__settings-modal-wrapper">
+  <div class="settings-modal-container" @click="$emit('close')">
+    <div class="settings-modal-container__settings-modal-wrapper" @click.stop>
       <div class="settings-modal-container__modal-header">
         <img :src="require('../../assets/img/backarrowmodal.svg')" alt="Back" @click="$emit('close')">
         <h3>{{header}}</h3>

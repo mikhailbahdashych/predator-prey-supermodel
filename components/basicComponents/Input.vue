@@ -5,7 +5,9 @@
       ref="name"
       class="bi bi--basic-input"
       :class="[
-        (onError && innerValue && innerValue.length > 0 ? `bi--basic-input__error ${inputClass}` : readonly ? `bi--basic-input__readonly ${inputClass}` : inputClass)]"
+        (onError && innerValue && innerValue.length > 0 ?
+         `bi--basic-input__error ${inputClass}` : readonly ? `bi--basic-input__readonly ${inputClass}` :
+          inputClass)]"
       :type="type"
       :disabled="disabled"
       :readonly="readonly"
