@@ -7,23 +7,23 @@
           <h1 class="source-sans-pro bold">Sign In</h1>
 
           <div class="login-inputs__options">
-            <p class="login-inputs__choose" @click="chooseLogin('email')">With Email</p>
+            <p class="login-inputs__choose" @click="emailLogin = true">With Email</p>
             <div class="login-inputs__vertical-line" />
-            <p class="login-inputs__choose" @click="chooseLogin('phone')">With Phone Number</p>
+            <p class="login-inputs__choose" @click="emailLogin = false">With Phone Number</p>
           </div>
 
           <Input
             v-model="loginEmail.email"
             :on-error="loginEmail.loginEmailError"
-            :style="[!loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
-            :focus="loginEmail.emailFocus"
+            :focus="emailLogin"
+            :style="[!emailLogin ? {'display': 'none'} : {'': ''}]"
             :title="'Email'"
             :type="'email'"
           />
           <Input
             v-model="loginPhone.phone"
-            :style="[loginEmail.loginWithEmail ? {'display': 'none'} : {'': ''}]"
-            :focus="loginPhone.phoneFocus"
+            :focus="!emailLogin"
+            :style="[emailLogin ? {'display': 'none'} : {'': ''}]"
             :title="'Phone number'"
             :type="'email'"
           />
@@ -107,10 +107,9 @@ export default {
   layout: 'empty',
   data() {
     return {
+      emailLogin: true,
       loginEmail: {
         email: null,
-        loginWithEmail: null,
-        emailFocus: false,
         loginEmailError: false,
       },
       loginPassword: {
@@ -118,7 +117,6 @@ export default {
         password: null,
       },
       loginPhone: {
-        phoneFocus: false,
         phone: null,
       },
       loginError: false,
@@ -142,12 +140,14 @@ export default {
         this.loginPassword.loginPasswordError = !validatePasswordLength(this.loginPassword.password)
       }
     },
+    'twoFa.code': {
+      handler: async function() {
+        if (this.twoFa.code.length === 6) await this.signin()
+      }
+    }
   },
   created() {
     this.$nextTick(() => { this.loading = false })
-  },
-  mounted() {
-    this.chooseLogin('email')
   },
   methods: {
     async signin() {
@@ -195,34 +195,6 @@ export default {
     redirect(path) {
       return this.$router.push(path)
     },
-    chooseLogin(option) {
-      if (option === 'email') this.setEmailFocusLogin()
-      else this.setPhoneFocusLogin()
-    },
-    setEmailFocusLogin() {
-      this.loginEmail = {
-        email: null,
-        loginWithEmail: true,
-        emailFocus: true,
-        loginEmailError: false,
-      }
-      this.loginPhone = {
-        phoneFocus: false,
-        phone: null,
-      }
-    },
-    setPhoneFocusLogin() {
-      this.loginEmail = {
-        email: null,
-        loginWithEmail: false,
-        emailFocus: false,
-        loginEmailError: false,
-      }
-      this.loginPhone = {
-        phoneFocus: true,
-        phone: null,
-      }
-    }
   }
 }
 </script>

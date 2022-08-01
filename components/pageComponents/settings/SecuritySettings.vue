@@ -119,7 +119,7 @@
         <p class="link" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
 
         <InputTwoFa :return-two-fa.sync="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 'success'" />
-        <Button :label="'Confirm 2FA code'" :btn-class="'basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 'success'" @click-handler="setTwoFa" />
+        <Button :label="'Confirm 2FA code'" :btn-class="'basic-button--high-height'" :disabled="securityTwoFa.code.length !== 6 || securityTwoFa.status === 'success'" @click-handler="setTwoFa" />
 
         <p v-if="securityTwoFa.status === 'success'" class="success">2FA has been successfully set!</p>
         <p v-else-if="securityTwoFa.status === 'wrong-2fa'" class="error">Wrong code!</p>
@@ -137,7 +137,7 @@
         <p class="on-white">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
 
         <InputTwoFa :return-two-fa.sync="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 'success'" />
-        <Button :label="'Confirm 2FA disable'" :btn-class="'basic-button--danger-fill basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 'success'" @click-handler="disableTwoFa" />
+        <Button :label="'Confirm 2FA disable'" :btn-class="'basic-button--danger-fill basic-button--high-height'" :disabled="securityTwoFa.code.length !== 6 || securityTwoFa.disableStatus === 'success'" @click-handler="disableTwoFa" />
 
         <p v-if="securityTwoFa.disableStatus === 'success'" class="success">2FA has been successfully disabled!</p>
         <p v-else-if="securityTwoFa.disableStatus === 'wrong-2fa'" class="error">Wrong code!</p>
@@ -355,13 +355,12 @@ export default {
       },
 
       securityTwoFa: {
-        code: null,
+        code: '',
         normalCode: null,
         qr: null,
         status: 'not-set',
         disableStatus: null,
         secret: null,
-        disabledButton: true
       },
       securityPhone: {
         number: null,
@@ -467,15 +466,6 @@ export default {
       Object.entries(this.securityShowModal).forEach(item => {
         if (item[0] === option) this.securityShowModal[item[0]] = false
       })
-    },
-    returnTwoFa(twoFa) {
-      this.securityTwoFa.disabledButton = !(twoFa.join('').length === 6)
-      if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
-      this.securityTwoFa.normalCode = twoFa.join('')
-    },
-    returnTwoFaConfirmAction(twoFa) {
-      if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
-      this.confirmActionTwoFa.normalCode = twoFa.join('')
     },
     async sendSmsCode(type) {
       const payload = {}

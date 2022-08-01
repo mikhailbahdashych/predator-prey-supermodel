@@ -143,7 +143,6 @@ export default {
   },
   methods: {
     returnTwoFa() {
-      if (this.twoFaCode.join('').length !== 6) return
       const normalCode = this.twoFaCode.join('')
       this.$emit('update:returnTwoFa', normalCode)
     },
