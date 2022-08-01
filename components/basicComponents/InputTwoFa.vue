@@ -3,7 +3,7 @@
     <input
       :id="`n1`"
       ref="n1"
-      v-model="i1"
+      v-model="n1"
       :class="disabled ? `input-two-fa disabled`: `input-two-fa`"
       type="number"
       :disabled="disabled"
@@ -12,11 +12,12 @@
       autocomplete="off"
       autofocus
       oninput="this.nextElementSibling.focus()"
+      @keyup.delete="clearTwoFa"
     >
     <input
       :id="`n2`"
       ref="n2"
-      v-model="i2"
+      v-model="n2"
       :class="disabled ? `input-two-fa disabled`: `input-two-fa`"
       type="number"
       :disabled="disabled"
@@ -25,12 +26,12 @@
       autocomplete="off"
       autofocus
       oninput="this.nextElementSibling.focus()"
-      @keyup.delete="handleDeleteClick('n1')"
+      @keyup.delete="clearTwoFa"
     >
     <input
       :id="`n3`"
       ref="n3"
-      v-model="i3"
+      v-model="n3"
       :class="disabled ? `input-two-fa disabled`: `input-two-fa`"
       type="number"
       :disabled="disabled"
@@ -39,12 +40,12 @@
       autocomplete="off"
       autofocus
       oninput="this.nextElementSibling.focus()"
-      @keyup.delete="handleDeleteClick('n2')"
+      @keyup.delete="clearTwoFa"
     >
     <input
       :id="`n4`"
       ref="n4"
-      v-model="i4"
+      v-model="n4"
       :class="disabled ? `input-two-fa disabled`: `input-two-fa`"
       type="number"
       :disabled="disabled"
@@ -53,12 +54,12 @@
       autocomplete="off"
       autofocus
       oninput="this.nextElementSibling.focus()"
-      @keyup.delete="handleDeleteClick('n3')"
+      @keyup.delete="clearTwoFa"
     >
     <input
       :id="`n5`"
       ref="n5"
-      v-model="i5"
+      v-model="n5"
       :class="disabled ? `input-two-fa disabled`: `input-two-fa`"
       type="number"
       :disabled="disabled"
@@ -67,12 +68,12 @@
       autocomplete="off"
       autofocus
       oninput="this.nextElementSibling.focus()"
-      @keyup.delete="handleDeleteClick('n4')"
+      @keyup.delete="clearTwoFa"
     >
     <input
       :id="`n6`"
       ref="n6"
-      v-model="i6"
+      v-model="n6"
       :class="disabled ? `input-two-fa disabled`: `input-two-fa`"
       type="number"
       :disabled="disabled"
@@ -80,8 +81,7 @@
       max="9"
       autocomplete="off"
       autofocus
-      oninput="this.nextElementSibling.focus()"
-      @keyup.delete="handleDeleteClick('n5')"
+      @keyup.delete="clearTwoFa"
     >
   </div>
 </template>
@@ -102,29 +102,59 @@ export default {
   },
   data() {
     return {
-      i1: '', i2: '', i3: '', i4: '', i5: '', i6: '',
+      code: [
+        { n1: '' }, { n2: '' }, { n3: '' }, { n4: '' }, { n5: '' }, { n6: '' }
+      ],
+      n1: '', n2: '', n3: '', n4: '', n5: '', n6: '',
       twoFaCode: ['', '', '', '', '', '']
     }
   },
   watch: {
-    i1() { this.i1 = validate2fa(this.i1); this.twoFaCode[0] = this.i1; this.returnTwoFa() },
-    i2() { this.i2 = validate2fa(this.i2); this.twoFaCode[1] = this.i2; this.returnTwoFa() },
-    i3() { this.i3 = validate2fa(this.i3); this.twoFaCode[2] = this.i3; this.returnTwoFa() },
-    i4() { this.i4 = validate2fa(this.i4); this.twoFaCode[3] = this.i4; this.returnTwoFa() },
-    i5() { this.i5 = validate2fa(this.i5); this.twoFaCode[4] = this.i5; this.returnTwoFa() },
-    i6() { this.i6 = validate2fa(this.i6); this.twoFaCode[5] = this.i6; this.returnTwoFa() },
+    n1() {
+      this.n1 = validate2fa(this.n1);
+      this.twoFaCode[0] = this.n1;
+      this.returnTwoFa()
+    },
+    n2() {
+      this.n2 = validate2fa(this.n2);
+      this.twoFaCode[1] = this.n2;
+      this.returnTwoFa()
+    },
+    n3() {
+      this.n3 = validate2fa(this.n3);
+      this.twoFaCode[2] = this.n3;
+      this.returnTwoFa()
+    },
+    n4() {
+      this.n4 = validate2fa(this.n4);
+      this.twoFaCode[3] = this.n4;
+      this.returnTwoFa()
+    },
+    n5() {
+      this.n5 = validate2fa(this.n5);
+      this.twoFaCode[4] = this.n5;
+      this.returnTwoFa()
+    },
+    n6() {
+      this.n6 = validate2fa(this.n6);
+      this.twoFaCode[5] = this.n6;
+      this.returnTwoFa()
+    }
   },
   methods: {
     returnTwoFa() {
-      this.$emit('returnTwoFa', this.twoFaCode)
+      if (this.twoFaCode.join('').length !== 6) return
+      const normalCode = this.twoFaCode.join('')
+      this.$emit('update:returnTwoFa', normalCode)
     },
-    handleDeleteClick(ref) {
-      if (document.getElementById(`${ref}`).value && ref !== 'n5') {
-        this.$refs[ref].focus()
-        document.getElementById(`${ref}`).value = ''
-      } else if (ref === 'n5') {
-        this.$refs[ref].focus()
-      }
+    clearTwoFa() {
+      this.n1 = ''
+      this.n2 = ''
+      this.n3 = ''
+      this.n4 = ''
+      this.n5 = ''
+      this.n6 = ''
+      this.$refs.n1.focus()
     }
   }
 }

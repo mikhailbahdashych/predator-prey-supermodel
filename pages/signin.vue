@@ -52,7 +52,7 @@
           <div class="two-fa">
             <h1>Two-Factor authentication</h1>
             <p class="paragraph">Please, provide Google Authenticator code to continue</p>
-            <InputTwoFa :twofa="twoFa.code" @returnTwoFa="returnTwoFa" />
+            <InputTwoFa :return-two-fa.sync="twoFa.code" />
             <p v-if="twoFa.error" class="error">Wrong code!</p>
             <p class="paragraph link">Unable to login with 2FA?</p>
           </div>
@@ -122,7 +122,7 @@ export default {
         phone: null,
       },
       loginError: false,
-      twoFa: { code: [], show: false, error: false, normalCode: null },
+      twoFa: { code: null, show: false, error: false, normalCode: null },
       phone: { phone: null, show: false, error: false },
 
       showReopeningScreen: { status: false, username: null },
@@ -194,11 +194,6 @@ export default {
     },
     redirect(path) {
       return this.$router.push(path)
-    },
-    async returnTwoFa(twoFa) {
-      if (twoFa.length !== 6 || twoFa.join('').length !== 6) return
-      this.twoFa.normalCode = twoFa.join('')
-      await this.signin()
     },
     chooseLogin(option) {
       if (option === 'email') this.setEmailFocusLogin()

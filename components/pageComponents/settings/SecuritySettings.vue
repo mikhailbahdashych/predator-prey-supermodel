@@ -118,7 +118,7 @@
         <input id="secret" :value="`${securityTwoFa.secret}`" type="hidden" />
         <p class="link" @click="copy('secret')">{{ securityTwoFa.secret }}</p>
 
-        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 'success'" @returnTwoFa="returnTwoFa" />
+        <InputTwoFa :return-two-fa.sync="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.status === 'success'" />
         <Button :label="'Confirm 2FA code'" :btn-class="'basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.status === 'success'" @click-handler="setTwoFa" />
 
         <p v-if="securityTwoFa.status === 'success'" class="success">2FA has been successfully set!</p>
@@ -136,7 +136,7 @@
       <div v-if="securityTwoFa.status === 'set'" class="account-preferences__flex">
         <p class="on-white">You have set up your 2FA, provide the code in input below, if you want to deactivate it.</p>
 
-        <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 'success'" @returnTwoFa="returnTwoFa" />
+        <InputTwoFa :return-two-fa.sync="securityTwoFa.code" :onwhite="true" :disabled="securityTwoFa.disableStatus === 'success'" />
         <Button :label="'Confirm 2FA disable'" :btn-class="'basic-button--danger-fill basic-button--high-height'" :disabled="securityTwoFa.disabledButton || securityTwoFa.disableStatus === 'success'" @click-handler="disableTwoFa" />
 
         <p v-if="securityTwoFa.disableStatus === 'success'" class="success">2FA has been successfully disabled!</p>
@@ -265,7 +265,7 @@
       description="Confirm action by providing 2FA code in the box below."
       @close="deleteConfirmTwoFa"
     >
-      <InputTwoFa :twofa="securityTwoFa.code" :onwhite="true" @returnTwoFa="returnTwoFaConfirmAction" />
+      <InputTwoFa :return-two-fa.sync="securityTwoFa.code" :onwhite="true" />
       <Button :label="'Confirm action'" :btn-class="'danger-fill high-height'" @click-handler="confirmAction" />
     </basic-modal>
 
@@ -355,7 +355,7 @@ export default {
       },
 
       securityTwoFa: {
-        code: [],
+        code: null,
         normalCode: null,
         qr: null,
         status: 'not-set',
