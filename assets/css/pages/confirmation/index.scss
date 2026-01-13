@@ -1,7 +1,0 @@
-@use "../../variables" as v;
-@import "../../mixins";
-
-.confirmation {
-  @include size(100vh, 100%);
-  background-color: var(--color-header-bg);
-}
