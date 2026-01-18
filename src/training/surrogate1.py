@@ -32,12 +32,12 @@ def get_lotka_volterra_prior() -> Prior:
     """
     Get prior distribution for Lotka-Volterra parameters.
 
-    Ground truth: α=1.0, β=0.1, δ=0.075, γ=1.5
+    Ground truth: alpha=1.0, beta=0.1, delta=0.075, gamma=1.5
     Prior is centered around reasonable ranges.
     """
     return Prior(
-        low=np.array([0.5, 0.05, 0.025, 0.5]),    # [α_min, β_min, δ_min, γ_min]
-        high=np.array([2.0, 0.2, 0.15, 3.0])      # [α_max, β_max, δ_max, γ_max]
+        low=np.array([0.5, 0.05, 0.025, 0.5]),    # [alpha_min, beta_min, delta_min, gamma_min]
+        high=np.array([2.0, 0.2, 0.15, 3.0])      # [alpha_max, beta_max, delta_max, gamma_max]
     )
 
 
@@ -89,7 +89,7 @@ def train_surrogate1(
         print(f"Training Surrogate 1 with budget = {budget} evaluations...")
 
     prior = get_lotka_volterra_prior()
-    model_fn = create_model_fn(y0, t_span)
+    model_fn = create_model_fn(y0, t_span, n_points=50)
 
     result = abc_rejection(
         model_fn=model_fn,
@@ -105,8 +105,8 @@ def train_surrogate1(
     params = LotkaVolterraParams.from_array(result.best_params)
 
     if verbose:
-        print(f"  Best parameters: α={params.alpha:.4f}, β={params.beta:.4f}, "
-              f"δ={params.delta:.4f}, γ={params.gamma:.4f}")
+        print(f"  Best parameters: alpha={params.alpha:.4f}, beta={params.beta:.4f}, "
+              f"delta={params.delta:.4f}, gamma={params.gamma:.4f}")
         print(f"  Best distance: {result.best_distance:.6f}")
         print(f"  Total evaluations: {result.n_evaluations}")
 

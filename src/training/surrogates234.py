@@ -57,7 +57,7 @@ def train_submodels(
         print(f"Total pretraining budget: {n_submodels * budget_per_submodel}")
 
     prior = get_lotka_volterra_prior()
-    model_fn = create_model_fn(y0, t_span)
+    model_fn = create_model_fn(y0, t_span, n_points=50)
 
     submodels = []
     total_budget = 0
@@ -77,15 +77,15 @@ def train_submodels(
             epsilon=None,
             n_accept=50,
             seed=seed,
-            verbose=False
+            verbose=verbose
         )
 
         params = LotkaVolterraParams.from_array(result.best_params)
         total_budget += result.n_evaluations
 
         if verbose:
-            print(f"    Parameters: α={params.alpha:.4f}, β={params.beta:.4f}, "
-                  f"δ={params.delta:.4f}, γ={params.gamma:.4f}")
+            print(f"    Parameters: alpha={params.alpha:.4f}, beta={params.beta:.4f}, "
+                  f"delta={params.delta:.4f}, gamma={params.gamma:.4f}")
             print(f"    Best distance: {result.best_distance:.6f}")
 
         submodels.append(TrainedSurrogate(
@@ -99,7 +99,7 @@ def train_submodels(
         print("\n  Parameter diversity across submodels:")
         for s in submodels:
             p = s.params
-            print(f"    {s.name}: α={p.alpha:.4f}, β={p.beta:.4f}, δ={p.delta:.4f}, γ={p.gamma:.4f}")
+            print(f"    {s.name}: alpha={p.alpha:.4f}, beta={p.beta:.4f}, delta={p.delta:.4f}, gamma={p.gamma:.4f}")
 
     return SubmodelsResult(
         submodels=submodels,

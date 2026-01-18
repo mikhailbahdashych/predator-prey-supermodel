@@ -22,7 +22,7 @@ from src.training.surrogate1 import train_surrogate1
 from src.training.surrogates234 import train_submodels
 from src.training.supermodel_training import train_supermodel_coupling
 from src.evaluation.compare import compare_models
-from src.utils.plotting import generate_all_plots
+from src.utils.plotting import generate_all_plots, export_all_csv
 
 
 def main():
@@ -149,7 +149,7 @@ def main():
     print(f"  Submodel pretraining: {submodels_result.total_budget_used}")
     print(f"  Coupling training: {supermodel.training_budget}")
     print(f"  Supermodel total: {supermodel.total_budget}")
-    print(f"  Budget constraint (≤ {SURROGATE1_BUDGET}): {'SATISFIED' if supermodel.total_budget <= SURROGATE1_BUDGET else 'VIOLATED'}")
+    print(f"  Budget constraint (<= {SURROGATE1_BUDGET}): {'SATISFIED' if supermodel.total_budget <= SURROGATE1_BUDGET else 'VIOLATED'}")
 
     # Step 6: Generate visualizations
     print("\n" + "-" * 70)
@@ -169,13 +169,29 @@ def main():
         output_dir=output_dir
     )
 
+    export_all_csv(
+        train_truth=train_truth,
+        test_truth=test_truth,
+        observations=observations,
+        surrogate1=surrogate1,
+        submodels=submodels_result.submodels,
+        supermodel=supermodel,
+        results=results,
+        y0=Y0,
+        output_dir=output_dir
+    )
+
     print("\n" + "=" * 70)
     print("PIPELINE COMPLETE")
     print("=" * 70)
     print(f"\nOutputs saved to: {output_dir.absolute()}")
     print("\nGenerated files:")
+    print("  Plots:")
     for f in sorted(output_dir.glob("*.png")):
-        print(f"  - {f.name}")
+        print(f"    - {f.name}")
+    print("  Data:")
+    for f in sorted(output_dir.glob("*.csv")):
+        print(f"    - {f.name}")
 
 
 if __name__ == "__main__":

@@ -70,8 +70,8 @@ def plot_phase_portrait(
     _, y_surr1 = solve_lotka_volterra(surrogate1.params, t_span, y0, t_eval)
     ax.plot(y_surr1[0], y_surr1[1], 'b--', linewidth=2, label='Surrogate 1 (Full Training)', alpha=0.8)
 
-    # Supermodel
-    _, y_super = supermodel.solve(t_span, y0, t_eval)
+    # Supermodel (use returned t values since they may differ due to early termination)
+    t_super, y_super = supermodel.solve(t_span, y0, t_eval)
     ax.plot(y_super[0], y_super[1], 'r-', linewidth=2, label='Supermodel (Coupled)', alpha=0.8)
 
     # Observations
@@ -130,8 +130,8 @@ def plot_time_series(
     # Surrogate 1
     _, y_surr1 = solve_lotka_volterra(surrogate1.params, t_span, y0, t_eval)
 
-    # Supermodel
-    _, y_super = supermodel.solve(t_span, y0, t_eval)
+    # Supermodel (use returned t values since they may differ due to early termination)
+    t_super, y_super = supermodel.solve(t_span, y0, t_eval)
 
     # Training/test boundary
     t_boundary = train_truth.t[-1]
@@ -143,7 +143,7 @@ def plot_time_series(
 
     ax.plot(full_t, full_prey, 'k-', linewidth=2.5, label='Ground Truth')
     ax.plot(t_eval, y_surr1[0], 'b--', linewidth=2, label='Surrogate 1')
-    ax.plot(t_eval, y_super[0], 'r-', linewidth=2, label='Supermodel')
+    ax.plot(t_super, y_super[0], 'r-', linewidth=2, label='Supermodel')
     ax.scatter(observations.t, observations.prey, c='green', s=80, marker='o',
                label='Observations', zorder=5, edgecolors='black')
 
@@ -159,7 +159,7 @@ def plot_time_series(
 
     ax.plot(full_t, full_pred, 'k-', linewidth=2.5, label='Ground Truth')
     ax.plot(t_eval, y_surr1[1], 'b--', linewidth=2, label='Surrogate 1')
-    ax.plot(t_eval, y_super[1], 'r-', linewidth=2, label='Supermodel')
+    ax.plot(t_super, y_super[1], 'r-', linewidth=2, label='Supermodel')
     ax.scatter(observations.t, observations.predator, c='green', s=80, marker='o',
                label='Observations', zorder=5, edgecolors='black')
 
@@ -379,3 +379,153 @@ def generate_all_plots(
     )
 
     print(f"\nAll plots saved to: {output_dir}")
+
+
+def export_trajectories_csv(
+    train_truth: TrajectoryData,
+    test_truth: TrajectoryData,
+    surrogate1: TrainedSurrogate,
+    supermodel: Supermodel,
+    y0: np.ndarray,
+    output_dir: Path
+):
+    """Export trajectory data to CSV files."""
+    import csv
+
+    # Ground truth trajectory
+    full_t = np.concatenate([train_truth.t, test_truth.t])
+    full_prey = np.concatenate([train_truth.prey, test_truth.prey])
+    full_pred = np.concatenate([train_truth.predator, test_truth.predator])
+
+    with open(output_dir / "ground_truth_trajectory.csv", 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['time', 'prey', 'predator'])
+        for t, x, y in zip(full_t, full_prey, full_pred):
+            writer.writerow([t, x, y])
+
+    # Surrogate 1 trajectory
+    t_span = (train_truth.t[0], test_truth.t[-1])
+    t_eval = np.linspace(t_span[0], t_span[1], 400)
+    _, y_surr1 = solve_lotka_volterra(surrogate1.params, t_span, y0, t_eval)
+
+    with open(output_dir / "surrogate1_trajectory.csv", 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['time', 'prey', 'predator'])
+        for t, x, y in zip(t_eval, y_surr1[0], y_surr1[1]):
+            writer.writerow([t, x, y])
+
+    # Supermodel trajectory
+    t_super, y_super = supermodel.solve(t_span, y0, t_eval)
+
+    with open(output_dir / "supermodel_trajectory.csv", 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['time', 'prey', 'predator'])
+        for t, x, y in zip(t_super, y_super[0], y_super[1]):
+            writer.writerow([t, x, y])
+
+    print(f"  Saved: {output_dir}/ground_truth_trajectory.csv")
+    print(f"  Saved: {output_dir}/surrogate1_trajectory.csv")
+    print(f"  Saved: {output_dir}/supermodel_trajectory.csv")
+
+
+def export_observations_csv(
+    observations: Observations,
+    output_dir: Path
+):
+    """Export observations to CSV."""
+    import csv
+
+    with open(output_dir / "observations.csv", 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['time', 'prey', 'predator'])
+        for t, x, y in zip(observations.t, observations.prey, observations.predator):
+            writer.writerow([t, x, y])
+
+    print(f"  Saved: {output_dir}/observations.csv")
+
+
+def export_model_comparison_csv(
+    results: ComparisonResults,
+    output_dir: Path
+):
+    """Export model comparison results to CSV."""
+    import csv
+
+    with open(output_dir / "model_comparison.csv", 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['model', 'mse_train', 'mse_test', 'rmse_train', 'rmse_test', 'budget_used'])
+
+        for m in [results.baseline, results.surrogate1] + results.submodels + [results.supermodel]:
+            writer.writerow([m.name, m.mse_train, m.mse_test, m.rmse_train, m.rmse_test, m.budget_used])
+
+    print(f"  Saved: {output_dir}/model_comparison.csv")
+
+
+def export_parameters_csv(
+    surrogate1: TrainedSurrogate,
+    submodels: list[TrainedSurrogate],
+    supermodel: Supermodel,
+    output_dir: Path
+):
+    """Export model parameters to CSV."""
+    import csv
+
+    # Lotka-Volterra parameters
+    with open(output_dir / "model_parameters.csv", 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['model', 'alpha', 'beta', 'delta', 'gamma'])
+
+        # Ground truth
+        writer.writerow(['Ground Truth', 1.0, 0.1, 0.075, 1.5])
+
+        # Surrogate 1
+        p = surrogate1.params
+        writer.writerow([surrogate1.name, p.alpha, p.beta, p.delta, p.gamma])
+
+        # Submodels
+        for s in submodels:
+            p = s.params
+            writer.writerow([s.name, p.alpha, p.beta, p.delta, p.gamma])
+
+    # Coupling coefficients
+    c = supermodel.coupling
+    with open(output_dir / "coupling_coefficients.csv", 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['coefficient', 'value'])
+        writer.writerow(['Cx_12', c.Cx_12])
+        writer.writerow(['Cx_13', c.Cx_13])
+        writer.writerow(['Cx_21', c.Cx_21])
+        writer.writerow(['Cx_23', c.Cx_23])
+        writer.writerow(['Cx_31', c.Cx_31])
+        writer.writerow(['Cx_32', c.Cx_32])
+        writer.writerow(['Cy_12', c.Cy_12])
+        writer.writerow(['Cy_13', c.Cy_13])
+        writer.writerow(['Cy_21', c.Cy_21])
+        writer.writerow(['Cy_23', c.Cy_23])
+        writer.writerow(['Cy_31', c.Cy_31])
+        writer.writerow(['Cy_32', c.Cy_32])
+
+    print(f"  Saved: {output_dir}/model_parameters.csv")
+    print(f"  Saved: {output_dir}/coupling_coefficients.csv")
+
+
+def export_all_csv(
+    train_truth: TrajectoryData,
+    test_truth: TrajectoryData,
+    observations: Observations,
+    surrogate1: TrainedSurrogate,
+    submodels: list[TrainedSurrogate],
+    supermodel: Supermodel,
+    results: ComparisonResults,
+    y0: np.ndarray,
+    output_dir: Path
+):
+    """Export all data to CSV files."""
+    print("\nExporting CSV data...")
+
+    export_trajectories_csv(train_truth, test_truth, surrogate1, supermodel, y0, output_dir)
+    export_observations_csv(observations, output_dir)
+    export_model_comparison_csv(results, output_dir)
+    export_parameters_csv(surrogate1, submodels, supermodel, output_dir)
+
+    print(f"\nAll CSV files saved to: {output_dir}")

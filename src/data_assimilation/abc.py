@@ -7,6 +7,7 @@ Implements rejection-ABC algorithm for learning parameters of dynamical systems.
 import numpy as np
 from dataclasses import dataclass, field
 from typing import Callable
+from tqdm import tqdm
 
 from src.utils.data_generation import Observations
 
@@ -96,7 +97,7 @@ def abc_rejection(
     1. Sample parameters from prior distribution
     2. Simulate model with sampled parameters
     3. Compute distance to observations
-    4. Accept if distance < threshold ε (or keep best n_accept)
+    4. Accept if distance < threshold epsilon (or keep best n_accept)
     5. Repeat until budget exhausted
 
     Args:
@@ -119,8 +120,12 @@ def abc_rejection(
     accepted_distances = []
     all_distances = []
     all_params = []
+    best_so_far = np.inf
 
-    for i in range(n_particles):
+    iterator = tqdm(range(n_particles), desc="ABC", disable=not verbose,
+                    bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, best={postfix}]')
+
+    for i in iterator:
         # Sample from prior
         params = prior.sample(1)[0]
 
@@ -132,6 +137,11 @@ def abc_rejection(
             distance = compute_distance(y_sim, observations, t_sim)
             all_distances.append(distance)
             all_params.append(params)
+
+            # Track best distance
+            if distance < best_so_far:
+                best_so_far = distance
+                iterator.set_postfix_str(f"{best_so_far:.6f}")
 
             # Accept/reject based on epsilon
             if epsilon is not None:
@@ -146,10 +156,6 @@ def abc_rejection(
             # Simulation failed (e.g., unstable parameters)
             all_distances.append(np.inf)
             all_params.append(params)
-
-        if verbose and (i + 1) % 1000 == 0:
-            best_so_far = min(all_distances)
-            print(f"  ABC: {i + 1}/{n_particles} evaluations, best distance: {best_so_far:.6f}")
 
     # Convert to arrays
     all_params = np.array(all_params)
@@ -223,7 +229,8 @@ def abc_smc(
     params_list = []
     distances = []
 
-    for _ in range(particles_per_gen):
+    init_iter = tqdm(range(particles_per_gen), desc="ABC-SMC Gen 0", disable=not verbose)
+    for _ in init_iter:
         params = prior.sample(1)[0]
         try:
             t_sim, y_sim = model_fn(params)
@@ -243,7 +250,7 @@ def abc_smc(
     weights = np.ones(len(params_array)) / len(params_array)
 
     if verbose:
-        print(f"  ABC-SMC Gen 0: {total_evaluations} evals, best: {distances[sorted_idx[0]]:.6f}")
+        print(f"  Gen 0 complete: best distance = {distances[sorted_idx[0]]:.6f}")
 
     # Subsequent generations
     for gen in range(1, n_generations):
@@ -255,6 +262,7 @@ def abc_smc(
         # Perturbation kernel (covariance from current particles)
         cov = 2 * np.cov(params_array.T) + 1e-6 * np.eye(prior.n_params)
 
+        gen_iter = tqdm(total=particles_per_gen, desc=f"ABC-SMC Gen {gen}", disable=not verbose)
         attempts = 0
         while len(new_params) < particles_per_gen and attempts < particles_per_gen * 10:
             # Sample from weighted particles
@@ -277,10 +285,13 @@ def abc_smc(
                 if dist < epsilon:
                     new_params.append(params)
                     new_distances.append(dist)
+                    gen_iter.update(1)
             except Exception:
                 total_evaluations += 1
 
             attempts += 1
+
+        gen_iter.close()
 
         if new_params:
             params_array = np.array(new_params)
@@ -289,7 +300,7 @@ def abc_smc(
 
         if verbose:
             best_dist = np.min(distances) if len(distances) > 0 else np.inf
-            print(f"  ABC-SMC Gen {gen}: {total_evaluations} evals, best: {best_dist:.6f}")
+            print(f"  Gen {gen} complete: best distance = {best_dist:.6f}")
 
     # Return best
     if len(distances) > 0:

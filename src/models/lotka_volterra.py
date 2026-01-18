@@ -2,16 +2,16 @@
 Lotka-Volterra (Predator-Prey) ODE Model
 
 Classic predator-prey dynamics:
-    dx/dt = αx - βxy   (prey growth - predation)
-    dy/dt = δxy - γy   (predator growth from predation - death)
+    dx/dt = alphax - betaxy   (prey growth - predation)
+    dy/dt = deltaxy - gammay   (predator growth from predation - death)
 
 Where:
     x = prey population
     y = predator population
-    α = prey birth rate
-    β = predation rate
-    δ = predator efficiency (conversion of prey to predator)
-    γ = predator death rate
+    alpha = prey birth rate
+    beta = predation rate
+    delta = predator efficiency (conversion of prey to predator)
+    gamma = predator death rate
 """
 
 import numpy as np

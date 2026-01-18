@@ -21,20 +21,29 @@ from src.training.surrogate1 import TrainedSurrogate
 from src.utils.data_generation import Observations
 
 
-def get_coupling_prior(c_range: float = 1.0) -> Prior:
+def get_coupling_prior(c_range: float = 1.0, positive_only: bool = True) -> Prior:
     """
     Get prior distribution for coupling coefficients.
 
     Args:
-        c_range: Range for uniform prior [-c_range, c_range]
+        c_range: Range for uniform prior
+        positive_only: If True, constrain to [0, c_range] for stability.
+                      Positive coupling = diffusive/synchronizing = stable.
+                      Negative coupling can cause instability/divergence.
 
     Returns:
         Prior for 12 coupling coefficients
     """
-    return Prior(
-        low=np.full(12, -c_range),
-        high=np.full(12, c_range)
-    )
+    if positive_only:
+        return Prior(
+            low=np.full(12, 0.0),
+            high=np.full(12, c_range)
+        )
+    else:
+        return Prior(
+            low=np.full(12, -c_range),
+            high=np.full(12, c_range)
+        )
 
 
 def create_supermodel_fn(
@@ -102,8 +111,8 @@ def train_supermodel_coupling(
         print(f"  Pretraining budget: {pretraining_budget}")
         print(f"  Total supermodel budget: {budget + pretraining_budget}")
 
-    prior = get_coupling_prior(c_range)
-    model_fn = create_supermodel_fn(submodels, y0, t_span)
+    prior = get_coupling_prior(c_range=0.5, positive_only=True)  # Positive coupling for stability
+    model_fn = create_supermodel_fn(submodels, y0, t_span, n_points=50)
 
     result = abc_rejection(
         model_fn=model_fn,

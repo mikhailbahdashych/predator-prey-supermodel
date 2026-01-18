@@ -5,8 +5,8 @@ The supermodel couples 3 partially-trained submodels through connection terms
 that synchronize their dynamics. The coupling coefficients are learned via ABC.
 
 Coupled ODE system for 3 submodels (k = 1, 2, 3):
-    dx_k/dt = f_x(x_k, y_k, θ_k) + Σ_{j≠k} C^x_{kj}(x_j - x_k)
-    dy_k/dt = f_y(x_k, y_k, θ_k) + Σ_{j≠k} C^y_{kj}(y_j - y_k)
+    dx_k/dt = f_x(x_k, y_k, theta_k) + sum_{j!=k} C^x_{kj}(x_j - x_k)
+    dy_k/dt = f_y(x_k, y_k, theta_k) + sum_{j!=k} C^y_{kj}(y_j - y_k)
 
 Supermodel output (consensus):
     x_s = (x_1 + x_2 + x_3) / 3
@@ -142,14 +142,30 @@ def solve_supermodel(
     # Initial state: all submodels start at same point
     state0 = np.array([y0[0], y0[1], y0[0], y0[1], y0[0], y0[1]])
 
+    # Event to stop integration if solution blows up
+    def blowup_event(t, state):
+        max_val = np.max(np.abs(state))
+        return 1e6 - max_val  # Stops when any value exceeds 1e6
+
+    blowup_event.terminal = True
+    blowup_event.direction = -1
+
     sol = solve_ivp(
         fun=lambda t, state: supermodel_ode(t, state, submodel_params, coupling),
         t_span=t_span,
         y0=state0,
         t_eval=t_eval,
-        method='RK45',
-        dense_output=True
+        method='LSODA',  # Auto-switches between stiff and non-stiff
+        events=blowup_event
     )
+
+    # Handle case where solution didn't complete (blew up)
+    if sol.y.shape[1] == 0:
+        # Return inf values
+        n_points = len(t_eval) if t_eval is not None else 100
+        return t_eval if t_eval is not None else np.linspace(t_span[0], t_span[1], n_points), \
+               np.full((2, n_points), np.inf), \
+               np.full((6, n_points), np.inf)
 
     # Extract consensus (average of submodels)
     x1, y1, x2, y2, x3, y3 = sol.y
